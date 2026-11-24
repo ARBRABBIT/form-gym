@@ -15,7 +15,7 @@ async function openHome(page: Page, connected = true) {
   await page.getByRole("button", { name: "Explore the sample journal" }).click();
 }
 
-test("all three compact health cards fit above mobile navigation with one value each", async ({ page }) => {
+test("recovery graph and complementary health cards fit mobile widths", async ({ page }) => {
   await page.setViewportSize({ width: 425, height: 851 });
   await openHome(page);
   const overview = page.getByRole("region", { name: "Your health overview" });
@@ -29,10 +29,25 @@ test("all three compact health cards fit above mobile navigation with one value 
     await page.setViewportSize({ width, height });
     await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
     expect(await page.evaluate(() => scrollY)).toBe(0);
-    const grid = (await page.locator(".health-summary-cards").boundingBox())!;
-    const nav = (await page.locator(".bottom-nav").boundingBox())!;
-    expect(grid.y).toBeGreaterThan(0);
-    expect(grid.y + grid.height).toBeLessThanOrEqual(nav.y);
+    const body = page.getByRole("article", { name: "Overall body", exact: true });
+    const chart = body.getByRole("img", { name: /Sample recovery graph/ });
+    await expect(chart).toBeVisible();
+    await expect(body).toContainText("HRV 62.4 ms");
+    const card = (await body.boundingBox())!;
+    const blood = (await page.getByRole("article", { name: "Blood health", exact: true }).boundingBox())!;
+    expect(Math.abs(card.width - blood.width)).toBeLessThan(1);
+    expect(Math.abs(card.height - card.width)).toBeLessThan(1);
+    expect(card.x).toBeGreaterThanOrEqual(0);
+    expect(card.x + card.width).toBeLessThanOrEqual(width);
+    const graph = (await chart.boundingBox())!;
+    expect(graph.height).toBeGreaterThan(20);
+    const bars = chart.locator('g:has(title)');
+    await expect(bars).toHaveCount(28);
+    for (const bar of await bars.all()) {
+      expect(await bar.locator('rect').count()).toBeLessThanOrEqual(14);
+    }
+    expect(graph.x).toBeGreaterThan(card.x);
+    expect(graph.x + graph.width).toBeLessThan(card.x + card.width);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     await page.screenshot({ path: `.impeccable/review/compact-health-home-${width}.png` });
   }

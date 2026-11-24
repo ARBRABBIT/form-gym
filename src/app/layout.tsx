@@ -1,10 +1,27 @@
 import type { Metadata } from "next";
+import localFont from "next/font/local";
 import "./globals.css";
 import "./reference-theme.css";
 import "./onboarding.css";
 import "./health.css";
 import "./whoop-connection.css";
 import "./water-card.css";
+import "./mobile-nav.css";
+import "./date-strip.css";
+import "./recovery-card.css";
+
+const urbanist = localFont({
+  src: "../../public/fonts/Urbanist-Variable.ttf",
+  variable: "--font-urbanist",
+  weight: "100 900",
+  display: "swap",
+});
+const matricha = localFont({
+  src: "../../public/fonts/Matricha-Regular.woff",
+  variable: "--font-matricha",
+  weight: "400",
+  display: "swap",
+});
 export const metadata: Metadata = {
   title: "Form — Your daily practice",
   manifest: "/manifest.webmanifest",
@@ -19,7 +36,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${urbanist.variable} ${matricha.variable}`}>
       <body>{children}</body>
     </html>
   );

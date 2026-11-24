@@ -42,7 +42,7 @@
   --layout-gap: 12px;
   --utility-size: 44px;
   --shadow-card: none;
-  --font-ui: ui-rounded, "SF Pro Rounded", system-ui, Helvetica, sans-serif;
+  --font-ui: var(--font-urbanist), Arial, sans-serif;
   --focus-ink: var(--neutral-950);
   --duration-feedback: 120ms;
   --duration-state: 180ms;
@@ -119,10 +119,10 @@ small {
   padding: 0 14px;
 }
 .wordmark {
-  font-family: var(--font-ui);
+  font-family: var(--font-display);
   font-size: 39px;
   letter-spacing: -1.5px;
-  font-weight: 800;
+  font-weight: 400;
 }
 .wordmark span {
   color: #0a0a0a;
@@ -299,9 +299,10 @@ main {
   color: var(--text-muted);
 }
 .footer-brand {
+  font-family: var(--font-display);
   color: var(--text-primary);
   font-size: 20px;
-  font-weight: 800;
+  font-weight: 400;
 }
 .demo-note {
   font-size: 10px;

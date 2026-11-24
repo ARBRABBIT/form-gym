@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @theme inline {
-  --font-sans: Helvetica, Arial, sans-serif;
+  --font-sans: var(--font-urbanist), Arial, sans-serif;
+  --font-display: var(--font-matricha), var(--font-urbanist), sans-serif;
   --color-ink: #181818;
   --color-paper: #ffffff;
 }
@@ -23,10 +24,7 @@ body {
   margin: 0;
   background: var(--paper);
   color: var(--ink);
-  font:
-    14px/1.5 Helvetica,
-    Arial,
-    sans-serif;
+  font: 14px/1.5 var(--font-sans);
   -webkit-font-smoothing: antialiased;
 }
 a {

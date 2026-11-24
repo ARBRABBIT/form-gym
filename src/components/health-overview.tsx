@@ -19,6 +19,7 @@ import type { ScreenProps } from "./journal-app";
 import { Button, Sheet } from "./ui";
 import DatePicker from "./date-picker";
 import WearableConnect from "./wearable-connect";
+import RecoveryCard from "./recovery-card";
 import {
   MorningCheckIn,
   MorningReminders,
@@ -185,9 +186,11 @@ export default function HealthOverview(p: ScreenProps & { detail?: HealthSection
                 event.preventDefault();
                 p.navigate(`health-${card.key}`);
               }}>
+                {card.key === "body" ? <RecoveryCard health={currentHealth} sample={!!p.data.sampleData} /> : <>
                 <span className="health-summary-title"><card.icon size={17} aria-hidden="true" /><span>{card.title}</span><ArrowUpRight size={15} aria-hidden="true" /></span>
                 <span className="health-summary-value">{display(card.value, card.digits)}{card.value != null && <small>{card.unit}</small>}</span>
                 <span className="health-summary-label">{card.label}</span>
+                </>}
               </a>
             </article>
           ))}

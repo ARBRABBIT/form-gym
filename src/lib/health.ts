@@ -16,6 +16,8 @@ export type HealthMetrics = {
   energyKcal: number | null;
   workoutCount: number | null;
   workoutMinutes: number | null;
+  recoveryHistory?: { date: string; value: number }[];
+  hrvBaseline?: number;
 };
 export const emptyHealth = (
   date: string,
@@ -78,5 +80,10 @@ export function scaleReading(
 /** Illustrative values used only in the explicitly labeled sample journal. */
 export function sampleHealth(date: string): HealthMetrics {
   const variation = Number(date.slice(-2)) % 4;
-  return { ...emptyHealth(date), recovery: 78 + variation, hrv: 62.4 + variation, restingHeartRate: 56 + variation, spo2: 97.2, skinTemperature: 33.4, respiratoryRate: 15.2, sleepHours: 7.6, sleepPerformance: 91, strain: 10.4, steps: 8640 + variation * 120, energyKcal: 2180, workoutCount: 1, workoutMinutes: 55 };
+  const recoveryHistory = [95, 94, 93, 16, 12, 10, 23, 28, 25, 15, 12, 10, 50, 53, 48, 67, 65, 62, 86, 84, 81, 74, 72, 69, 25, 22, 20, 18, 15, 12, 8, 10, 9, 12, 10, 8, 82, 81, 80, 79, 79, 78 + variation].map((value, index) => {
+    const day = new Date(`${date}T12:00:00Z`);
+    day.setUTCDate(day.getUTCDate() - 41 + index);
+    return { date: day.toISOString().slice(0, 10), value };
+  });
+  return { ...emptyHealth(date), recovery: 78 + variation, hrv: 62.4 + variation, restingHeartRate: 56 + variation, spo2: 97.2, skinTemperature: 33.4, respiratoryRate: 15.2, sleepHours: 7.6, sleepPerformance: 91, strain: 10.4, steps: 8640 + variation * 120, energyKcal: 2180, workoutCount: 1, workoutMinutes: 55, recoveryHistory, hrvBaseline: 58.2 };
 }

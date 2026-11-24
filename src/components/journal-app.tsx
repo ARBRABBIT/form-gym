@@ -18,7 +18,6 @@ import {
   Dumbbell,
   Flag,
   House,
-  LayoutGrid,
   LibraryBig,
   Leaf,
   Menu,
@@ -55,6 +54,7 @@ import {
 import { Trainer, WorkoutScreen } from "./workouts";
 import WorkoutLibrary from "./workout-library";
 import Onboarding, { AccountEntry } from "./onboarding";
+import MobileNavIcon from "./mobile-nav-icon";
 export type ScreenProps = {
   data: Store;
   update: (fn: (s: Store) => Store, message?: string) => void;
@@ -356,7 +356,7 @@ export default function JournalApp() {
   return (
     <>
       <div className="app-shell" ref={shell}>
-        <aside className={`sidebar ${menu ? "mobile-open" : ""}`}>
+        <aside id="journal-navigation" className={`sidebar ${menu ? "mobile-open" : ""}`}>
           <div className="sidebar-top">
             <a
               className="wordmark"
@@ -547,25 +547,34 @@ export default function JournalApp() {
             {
               id: trainer ? "trainer" : "overview",
               label: trainer ? "Members" : "Today",
-              icon: trainer ? Users : House,
             },
-            { id: "workout", label: "Workout", icon: Dumbbell },
-            { id: "nutrition", label: "Nutrition", icon: Leaf },
-            { id: "menu", label: "Journal", icon: LayoutGrid },
+            { id: "nutrition", label: "Nutrition" },
+            { id: "workout", label: "Workout" },
+            { id: "menu", label: "Journal" },
           ]
             .filter((i) => !trainer || i.id === "trainer" || i.id === "menu")
-            .map((item) => (
-              <button
-                key={item.id}
-                onClick={() =>
-                  item.id === "menu" ? setMenu(true) : navigate(item.id)
-                }
-                className={view === item.id || (item.id === "overview" && healthSection) ? "selected" : ""}
-              >
-                <item.icon size={21} />
-                <span>{item.label}</span>
-              </button>
-            ))}
+            .map((item) => {
+              const selected = item.id === "menu"
+                ? menu || (!["overview", "workout", "nutrition", "trainer"].includes(view) && !healthSection)
+                : !menu && (view === item.id || (item.id === "overview" && !!healthSection));
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  aria-label={item.label}
+                  aria-current={selected && item.id !== "menu" ? "page" : undefined}
+                  aria-expanded={item.id === "menu" ? menu : undefined}
+                  aria-controls={item.id === "menu" ? "journal-navigation" : undefined}
+                  onClick={() =>
+                    item.id === "menu" ? setMenu(true) : navigate(item.id)
+                  }
+                  className={selected ? "selected" : ""}
+                >
+                  <MobileNavIcon name={item.id} active={selected} />
+                  <span className="bottom-nav-label">{item.label}</span>
+                </button>
+              );
+            })}
         </nav>
         {toast && (
           <div className="toast" role="status">
