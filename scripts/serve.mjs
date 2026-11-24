@@ -1,0 +1,11 @@
+import { spawn } from 'node:child_process';
+import { createRequire } from 'node:module';
+const require = createRequire(import.meta.url);
+const mode = process.argv[2] === 'start' ? 'start' : 'dev';
+const app = spawn(process.execPath, [require.resolve('next/dist/bin/next'), mode, '--hostname', '0.0.0.0', ...process.argv.slice(3)], { stdio: 'inherit' });
+const worker = spawn(process.execPath, ['scripts/reminder-worker.mjs'], { stdio: 'inherit' });
+let stopping = false;
+const stop = code => { if (stopping) return; stopping = true; app.kill('SIGTERM'); worker.kill('SIGTERM'); process.exitCode = code; };
+for (const signal of ['SIGINT','SIGTERM']) process.on(signal, () => stop(0));
+app.on('exit', code => stop(code || 0));
+worker.on('exit', code => { if (!stopping) { process.stderr.write('Reminder worker stopped; restart the app to resume delivery.\n'); stop(code || 1); } });

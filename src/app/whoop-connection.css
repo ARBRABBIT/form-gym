@@ -1,0 +1,55 @@
+.whoop-screen {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: #fff;
+  color: var(--text-primary);
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+.whoop-screen::backdrop { background: #fff; }
+.whoop-screen-content {
+  width: min(100%, 520px);
+  min-height: 100%;
+  margin: 0 auto;
+  padding: max(18px, env(safe-area-inset-top)) 24px max(20px, env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+}
+.whoop-screen-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.whoop-screen-back { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; padding: 0 8px 0 0; background: transparent; border: 0; font-size: 14px; color: inherit; cursor: pointer; }
+.whoop-screen-brand { font-size: 14px; font-weight: 650; letter-spacing: -.02em; }
+.whoop-screen-brand > span { margin: 0 10px; font-weight: 400; color: var(--text-secondary); }
+.whoop-screen-intro { text-align: center; margin-top: clamp(20px, 4vh, 40px); position: relative; z-index: 1; }
+.whoop-screen-intro h1 { margin: 0; font-size: clamp(30px, 7.8vw, 40px); line-height: 1.12; font-weight: 600; letter-spacing: -.04em; text-wrap: balance; }
+.whoop-screen-intro p { max-width: 300px; margin: 14px auto 0; font-size: 14px; line-height: 1.6; color: var(--text-secondary); text-wrap: balance; }
+.whoop-device-stage { position: relative; display: grid; place-items: center; min-height: 265px; flex: 1; isolation: isolate; margin: 8px -24px 0; overflow: hidden; }
+.whoop-signal-field { position: absolute; width: 315px; height: 315px; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: -1; }
+.whoop-signal-field > span { position: absolute; inset: 0; border: 1px solid #e0eacb; border-radius: 50%; background: radial-gradient(circle, #eef7dd88 0%, #f7faef66 55%, #fff0 72%); animation: whoop-signal 7s cubic-bezier(.16,1,.3,1) infinite; }
+.whoop-signal-field > span:nth-child(2) { animation-delay: -2.33s; }
+.whoop-signal-field > span:nth-child(3) { animation-delay: -4.66s; }
+.whoop-device-image { width: auto; height: clamp(235px, 35dvh, 370px); max-width: 83%; object-fit: contain; transform: rotate(-13deg); filter: drop-shadow(0 18px 15px #162d3414); }
+.whoop-device-status { position: absolute; left: 50%; bottom: 12px; transform: translateX(-50%); display: inline-flex; align-items: center; gap: 7px; padding: 8px 12px; border-radius: 24px; background: #fff; color: #526140; font-size: 11px; white-space: nowrap; box-shadow: 0 3px 16px #253c1710; }
+.whoop-status-dot { width: 6px; height: 6px; border-radius: 50%; background: #8cad41; }
+.whoop-device-status.is-connected { background: var(--lime-100); color: var(--text-primary); }
+.whoop-screen-footer { position: relative; z-index: 1; text-align: center; padding-top: 14px; }
+.whoop-screen-metrics { display: flex; justify-content: center; gap: 24px; font-size: 12px; }
+.whoop-screen-metrics > span { display: inline-flex; align-items: center; gap: 6px; }
+.whoop-screen-explainer { max-width: 350px; margin: 18px auto 20px; font-size: 13px; line-height: 1.65; color: var(--text-secondary); text-wrap: pretty; }
+.whoop-screen-primary { display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; min-height: 54px; border: 0; border-radius: 30px; padding: 14px 20px; background: var(--text-primary); color: #fff; font-size: 15px; font-weight: 550; cursor: pointer; transition: transform 160ms ease, background-color 160ms ease; }
+.whoop-screen-primary:active:not(:disabled) { transform: scale(.985); }
+.whoop-screen-primary:disabled { opacity: .55; cursor: wait; }
+.whoop-screen-back:focus-visible, .whoop-screen-primary:focus-visible { outline: 2px solid #769b2c; outline-offset: 4px; }
+.whoop-screen-privacy { display: flex; justify-content: center; align-items: center; gap: 6px; font-size: 11px; line-height: 1.5; margin: 14px 0 0; color: var(--text-secondary); }
+.whoop-screen-message { margin: 0 0 16px; padding: 12px 14px; border-radius: 12px; background: var(--neutral-50); font-size: 13px; line-height: 1.5; color: var(--text-primary); }
+@keyframes whoop-signal { 0% { transform: scale(.58); opacity: 0; } 22% { opacity: .8; } 100% { transform: scale(1.35); opacity: 0; } }
+@media (hover: hover) { .whoop-screen-primary:hover:not(:disabled) { background: #30352b; } }
+@media (min-width: 800px) { .whoop-screen-content { padding-top: 28px; padding-bottom: 28px; } }
+@media (max-height: 710px) { .whoop-screen-intro { margin-top: 12px; } .whoop-device-stage { min-height: 220px; } .whoop-device-image { height: 220px; } .whoop-screen-explainer { margin: 12px auto 16px; } }
+@media (prefers-reduced-motion: reduce) { .whoop-signal-field > span { animation: none; opacity: .45; } .whoop-signal-field > span:nth-child(2) { transform: scale(.78); } .whoop-signal-field > span:nth-child(3) { transform: scale(1.18); } .whoop-screen-primary { transition: none; } }

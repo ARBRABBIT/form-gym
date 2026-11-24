@@ -1,0 +1,20 @@
+node_modules
+.next
+out
+*.tsbuildinfo
+.env*.local
+.impeccable/review
+test-results
+playwright-report
+
+.form-data/
+.env.local
+
+/public/ocr/
+
+# Local environment, system files, and temporary artifacts
+.env
+.env.*
+!.env.example
+.DS_Store
+tmp/

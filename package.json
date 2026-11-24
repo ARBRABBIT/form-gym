@@ -1,0 +1,39 @@
+{
+  "name": "form-gym-journal",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "node scripts/serve.mjs dev",
+    "build": "next build",
+    "start": "node scripts/serve.mjs start",
+    "typecheck": "tsc --noEmit",
+    "test": "playwright test",
+    "reminders": "node scripts/reminder-worker.mjs",
+    "test:health": "node --test checks/health.test.mjs",
+    "prepare:ocr": "node scripts/prepare-ocr.mjs",
+    "postinstall": "npm run prepare:ocr"
+  },
+  "dependencies": {
+    "@tesseract.js-data/eng": "^1.0.0",
+    "gsap": "3.15.1",
+    "lucide-react": "1.74.0",
+    "next": "16.4.6",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "tesseract.js": "^7.0.0",
+    "web-push": "^4.0.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.65.1",
+    "@tailwindcss/postcss": "4.3.5",
+    "@types/node": "26.6.6",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@types/web-push": "^3.6.4",
+    "tailwindcss": "4.3.5",
+    "typescript": "7.0.2"
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  }
+}

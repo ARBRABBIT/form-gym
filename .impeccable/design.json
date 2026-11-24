@@ -1,0 +1,452 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-17T16:17:23.151298+00:00",
+  "title": "Design System: Form",
+  "extensions": {
+    "colorMeta": {
+      "ink": {
+        "role": "primary",
+        "displayName": "Ink",
+        "tonalRamp": [
+          "#181818",
+          "#3d3d3d",
+          "#545454",
+          "#707070",
+          "#aaaaaa",
+          "#cecece",
+          "#e3e3e3",
+          "#f4f4f4"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted",
+        "tonalRamp": [
+          "#181818",
+          "#3d3d3d",
+          "#545454",
+          "#707070",
+          "#aaaaaa",
+          "#cecece",
+          "#e3e3e3",
+          "#f4f4f4"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Line",
+        "tonalRamp": [
+          "#181818",
+          "#3d3d3d",
+          "#545454",
+          "#707070",
+          "#aaaaaa",
+          "#cecece",
+          "#e3e3e3",
+          "#f4f4f4"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "tonalRamp": [
+          "#181818",
+          "#3d3d3d",
+          "#545454",
+          "#707070",
+          "#aaaaaa",
+          "#cecece",
+          "#e3e3e3",
+          "#f4f4f4"
+        ]
+      },
+      "soft": {
+        "role": "neutral",
+        "displayName": "Soft",
+        "tonalRamp": [
+          "#181818",
+          "#3d3d3d",
+          "#545454",
+          "#707070",
+          "#aaaaaa",
+          "#cecece",
+          "#e3e3e3",
+          "#f4f4f4"
+        ]
+      },
+      "rail": {
+        "role": "primary",
+        "displayName": "Rail",
+        "tonalRamp": [
+          "#181818",
+          "#3d3d3d",
+          "#545454",
+          "#707070",
+          "#aaaaaa",
+          "#cecece",
+          "#e3e3e3",
+          "#f4f4f4"
+        ]
+      },
+      "primary-hover": {
+        "role": "neutral",
+        "displayName": "Primary Hover",
+        "tonalRamp": [
+          "#181818",
+          "#3d3d3d",
+          "#545454",
+          "#707070",
+          "#aaaaaa",
+          "#cecece",
+          "#e3e3e3",
+          "#f4f4f4"
+        ]
+      },
+      "secondary-text": {
+        "role": "neutral",
+        "displayName": "Secondary Text",
+        "tonalRamp": [
+          "#181818",
+          "#3d3d3d",
+          "#545454",
+          "#707070",
+          "#aaaaaa",
+          "#cecece",
+          "#e3e3e3",
+          "#f4f4f4"
+        ]
+      },
+      "secondary-border": {
+        "role": "neutral",
+        "displayName": "Secondary Border",
+        "tonalRamp": [
+          "#181818",
+          "#3d3d3d",
+          "#545454",
+          "#707070",
+          "#aaaaaa",
+          "#cecece",
+          "#e3e3e3",
+          "#f4f4f4"
+        ]
+      },
+      "control-hover": {
+        "role": "neutral",
+        "displayName": "Control Hover",
+        "tonalRamp": [
+          "#181818",
+          "#3d3d3d",
+          "#545454",
+          "#707070",
+          "#aaaaaa",
+          "#cecece",
+          "#e3e3e3",
+          "#f4f4f4"
+        ]
+      },
+      "ghost-text": {
+        "role": "neutral",
+        "displayName": "Ghost Text",
+        "tonalRamp": [
+          "#181818",
+          "#3d3d3d",
+          "#545454",
+          "#707070",
+          "#aaaaaa",
+          "#cecece",
+          "#e3e3e3",
+          "#f4f4f4"
+        ]
+      },
+      "label": {
+        "role": "neutral",
+        "displayName": "Label",
+        "tonalRamp": [
+          "#181818",
+          "#3d3d3d",
+          "#545454",
+          "#707070",
+          "#aaaaaa",
+          "#cecece",
+          "#e3e3e3",
+          "#f4f4f4"
+        ]
+      },
+      "field-border": {
+        "role": "neutral",
+        "displayName": "Field Border",
+        "tonalRamp": [
+          "#181818",
+          "#3d3d3d",
+          "#545454",
+          "#707070",
+          "#aaaaaa",
+          "#cecece",
+          "#e3e3e3",
+          "#f4f4f4"
+        ]
+      },
+      "field-focus": {
+        "role": "neutral",
+        "displayName": "Field Focus",
+        "tonalRamp": [
+          "#181818",
+          "#3d3d3d",
+          "#545454",
+          "#707070",
+          "#aaaaaa",
+          "#cecece",
+          "#e3e3e3",
+          "#f4f4f4"
+        ]
+      },
+      "focus": {
+        "role": "neutral",
+        "displayName": "Focus",
+        "tonalRamp": [
+          "#181818",
+          "#3d3d3d",
+          "#545454",
+          "#707070",
+          "#aaaaaa",
+          "#cecece",
+          "#e3e3e3",
+          "#f4f4f4"
+        ]
+      },
+      "caption": {
+        "role": "neutral",
+        "displayName": "Caption",
+        "tonalRamp": [
+          "#181818",
+          "#3d3d3d",
+          "#545454",
+          "#707070",
+          "#aaaaaa",
+          "#cecece",
+          "#e3e3e3",
+          "#f4f4f4"
+        ]
+      },
+      "section-rule": {
+        "role": "neutral",
+        "displayName": "Section Rule",
+        "tonalRamp": [
+          "#181818",
+          "#3d3d3d",
+          "#545454",
+          "#707070",
+          "#aaaaaa",
+          "#cecece",
+          "#e3e3e3",
+          "#f4f4f4"
+        ]
+      },
+      "tag-border": {
+        "role": "neutral",
+        "displayName": "Tag Border",
+        "tonalRamp": [
+          "#181818",
+          "#3d3d3d",
+          "#545454",
+          "#707070",
+          "#aaaaaa",
+          "#cecece",
+          "#e3e3e3",
+          "#f4f4f4"
+        ]
+      },
+      "row-hover": {
+        "role": "neutral",
+        "displayName": "Row Hover",
+        "tonalRamp": [
+          "#181818",
+          "#3d3d3d",
+          "#545454",
+          "#707070",
+          "#aaaaaa",
+          "#cecece",
+          "#e3e3e3",
+          "#f4f4f4"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Desktop journal weekday."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Standard page headings."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Shared section headings."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Default reading and entry text."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Field labels and compact controls."
+      }
+    },
+    "shadows": [
+      {
+        "name": "sheet",
+        "value": "0 20px 70px #2929292e",
+        "purpose": "Modal sheet separation."
+      },
+      {
+        "name": "toast",
+        "value": "0 8px 30px #22222225",
+        "purpose": "Floating status feedback."
+      }
+    ],
+    "motion": [
+      {
+        "name": "control-transition",
+        "value": "background 0.15s, color 0.15s, border-color 0.15s",
+        "purpose": "Button feedback."
+      },
+      {
+        "name": "sheet-entry",
+        "value": "y: 28\u21920; opacity: 0\u21921; duration: 0.28; ease: power3.out",
+        "purpose": "GSAP sheet entry; skipped for reduced motion."
+      },
+      {
+        "name": "completed-mark",
+        "value": "mark-in 0.16s ease-out",
+        "purpose": "Completion feedback; reduced motion suppresses animation."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "wide",
+        "value": "1500px"
+      },
+      {
+        "name": "compact-desktop",
+        "value": "1180px"
+      },
+      {
+        "name": "single-column",
+        "value": "1000px"
+      },
+      {
+        "name": "mobile",
+        "value": "760px"
+      },
+      {
+        "name": "narrow-phone",
+        "value": "375px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Shared primary action variant.",
+      "html": "<button class=\"ds-btn-primary\">Save journal</button>",
+      "css": ".ds-btn-primary { font-family:Helvetica,Arial,sans-serif;transition:background .15s,color .15s,border-color .15s;display:inline-flex;align-items:center;justify-content:center;gap:12px;padding:0 20px;font-weight:500;\n  min-height: 44px;\n  border-radius: 3px;\n  font-size: 12px;\n  white-space: nowrap;background: #1c1c1c;\n  color: #ffffff;\n  border: 1px solid #1c1c1c; } .ds-btn-primary:hover {background: #3d3d3d;\n  border-color: #3d3d3d; } .ds-btn-primary:focus-visible { outline: 2px solid #777777; outline-offset: 4px; } .ds-btn-primary:disabled { opacity:.4;cursor:not-allowed; }"
+    },
+    {
+      "name": "Secondary button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Shared secondary action variant.",
+      "html": "<button class=\"ds-btn-secondary\">Save journal</button>",
+      "css": ".ds-btn-secondary { font-family:Helvetica,Arial,sans-serif;transition:background .15s,color .15s,border-color .15s;display:inline-flex;align-items:center;justify-content:center;gap:12px;padding:0 20px;font-weight:500;\n  min-height: 44px;\n  border-radius: 3px;\n  font-size: 12px;\n  white-space: nowrap;background: #ffffff;\n  color: #252525;\n  border: 1px solid #cecece; } .ds-btn-secondary:hover {background: #f3f3f3; } .ds-btn-secondary:focus-visible { outline: 2px solid #777777; outline-offset: 4px; } .ds-btn-secondary:disabled { opacity:.4;cursor:not-allowed; }"
+    },
+    {
+      "name": "Ghost button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Shared ghost action variant.",
+      "html": "<button class=\"ds-btn-ghost\">Save journal</button>",
+      "css": ".ds-btn-ghost { font-family:Helvetica,Arial,sans-serif;transition:background .15s,color .15s,border-color .15s;display:inline-flex;align-items:center;justify-content:center;gap:12px;padding:0 20px;font-weight:500;\n  min-height: 44px;\n  border-radius: 3px;\n  font-size: 12px;\n  white-space: nowrap;background: none;\n  color: #545454;\n  padding: 0 7px;\n  min-height: 44px; } .ds-btn-ghost:hover {background: #f3f3f3; } .ds-btn-ghost:focus-visible { outline: 2px solid #777777; outline-offset: 4px; } .ds-btn-ghost:disabled { opacity:.4;cursor:not-allowed; }"
+    },
+    {
+      "name": "Labeled field",
+      "kind": "input",
+      "refersTo": "field",
+      "description": "Persistent label and numeric field.",
+      "html": "<label class=\"ds-field\"><span>Weight (kg)</span><input value=\"72.5\" inputmode=\"decimal\" /></label>",
+      "css": ".ds-field { display:flex;flex-direction:column;gap:8px;font:14px/1.5 Helvetica,Arial,sans-serif;color:var(--ink); } .ds-field span {font-size: 12px;\n  color: #555555;} .ds-field input {width: 100%;\n  min-height: 46px;\n  padding: 12px 13px;\n  border: 1px solid #cdcdcd;\n  border-radius: 3px;\n  background: #ffffff;\n  font-size: 14px;\n  transition: border-color 0.15s;color:var(--ink);font-family:inherit;font-variant-numeric:tabular-nums;} .ds-field input:focus {border-color: #565656;\n  outline: 1px solid #565656;\n  outline-offset: 0;}"
+    },
+    {
+      "name": "Role tabs",
+      "kind": "nav",
+      "refersTo": "view-tabs",
+      "description": "Persistent role selection with underlined active state.",
+      "html": "<nav class=\"ds-tabs\" aria-label=\"Journal view\"><button class=\"ds-selected\">Member view</button><button>Trainer view</button></nav>",
+      "css": ".ds-tabs {display: flex;\n  align-self: stretch;\n  gap: 21px;font-family:Helvetica,Arial,sans-serif;} .ds-tabs button {background:transparent;border:0;display: flex;\n  align-items: center;\n  justify-content: center;\n  gap: 7px;\n  padding: 0 1px;\n  min-height: 47px;\n  font-size: 12px;\n  color: #737373;\n  border-bottom: 2px solid transparent;} .ds-tabs button.ds-selected {color: #181818;\n  border-color: #181818;} .ds-tabs button:hover {color: #111111;} .ds-tabs button:focus-visible { outline: 2px solid #777777; outline-offset: 4px; }"
+    },
+    {
+      "name": "Rail destination",
+      "kind": "nav",
+      "refersTo": "nav-item",
+      "description": "Desktop journal navigation destination.",
+      "html": "<nav class=\"ds-rail\"><button class=\"ds-destination\">Today</button></nav>",
+      "css": ".ds-rail {background:#1c1c1c;padding:21px;} .ds-destination {border:0;background:transparent;font-family:Helvetica,Arial,sans-serif;display: flex;\n  align-items: center;\n  gap: 12px;\n  width: 100%;\n  padding: 0 11px;\n  min-height: 43px;\n  text-align: left;\n  font-size: 12px;\n  color: #bfbfbf;\n  border-radius: 3px;} .ds-destination:hover {background: #303030;\n  color: #ffffff;} .ds-destination:focus-visible { outline: 2px solid #777777; outline-offset: 4px; }"
+    },
+    {
+      "name": "Status tag",
+      "kind": "chip",
+      "refersTo": "tag",
+      "description": "Informational outlined status label.",
+      "html": "<span class=\"ds-tag\">Assigned workout</span>",
+      "css": ".ds-tag {font-family:Helvetica,Arial,sans-serif;display: inline-block;\n  border: 1px solid #dbdbdb;\n  padding: 6px 10px;\n  font-size: 10px;\n  color: #737373;\n  white-space: nowrap;\n  border-radius: 2px;}"
+    },
+    {
+      "name": "Ruled section",
+      "kind": "card",
+      "refersTo": "ruled-section",
+      "description": "Shared flat section container; no rounded card enclosure.",
+      "html": "<section class=\"ds-section\"><h2>Monthly goals</h2><p>Train four days each week.</p></section>",
+      "css": ".ds-section {font:14px/1.5 Helvetica,Arial,sans-serif;color:var(--ink);margin-bottom: 29px;\n  padding: 26px 0;\n  border-top: 1px solid #262626;\n  min-width: 0;} .ds-section h2 {font-size:18px;font-weight:500;margin:0 0 23px;} .ds-section p {margin:0;}"
+    },
+    {
+      "name": "Exercise row",
+      "kind": "custom",
+      "refersTo": "exercise-row",
+      "description": "Numbered workout row with aligned sets, reps and kg.",
+      "html": "<button class=\"ds-row\"><span class=\"ds-exercise\"><span>01</span><strong>Barbell squat</strong></span><span>3</span><span>8</span><span>60</span></button>",
+      "css": ".ds-row {font-family:Helvetica,Arial,sans-serif;background:transparent;border:0;color:var(--ink);display: grid;\n  grid-template-columns: minmax(0, 1fr) 48px 48px 48px;\n  gap: 12px;\n  align-items: center;display: grid;\n  grid-template-columns: minmax(0, 1fr) 48px 48px 48px;\n  gap: 12px;\n  align-items: center;} .ds-row>span:not(:first-child){text-align:right;} .ds-exercise {display: flex;\n  align-items: center;\n  gap: 17px;\n  min-width: 0;} .ds-exercise>span {font-size: 10px;\n  color: #737373;} .ds-exercise>strong {font-size: 13px;\n  font-weight: 400;\n  line-height: 1.5;} .ds-row:hover {background: #f7f7f7;} .ds-row:focus-visible { outline: 2px solid #777777; outline-offset: 4px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The training journal",
+    "overview": "Form treats the screen as a working training journal: readable records, aligned numbers and ruled sections. Helvetica, white paper and dark ink establish a restrained, practical identity. The user rejected a generic card-heavy interface; the implemented replacement gives dates, exercise rows and daily records the hierarchy.\n\nThe interface is mobile-first. Familiar controls, persistent role tabs and compact labels support repeated entry. Sample records use Indian names, including Arjun Sharma, Meera Iyer, Rohan Patel and coach Kabir Mehta.",
+    "keyCharacteristics": [
+      "Flat ruled sections and aligned ledgers.",
+      "Helvetica throughout, with large date and training headings.",
+      "Grayscale state changes and sharp controls.",
+      "Persistent Member view / Trainer view navigation."
+    ],
+    "rules": [
+      {
+        "name": "The Grayscale Rule",
+        "body": "Use the implemented monochrome palette for hierarchy and state; introduce no accent hue.",
+        "section": "colors"
+      }
+    ],
+    "dos": [
+      "Do use Helvetica with Arial and sans-serif fallbacks.",
+      "Do align numeric workout data and retain tabular numerals.",
+      "Do preserve persistent field labels, keyboard focus and reduced-motion behavior.",
+      "Do use ruled sections and restrained grayscale to organize records.",
+      "Do retain visible Member view and Trainer view tabs across viewport sizes."
+    ],
+    "donts": [
+      "Don't introduce accent colors, gradients or additional typefaces.",
+      "Don't return to a generic grid of rounded dashboard cards.",
+      "Don't apply sheet rounding or floating shadows to ordinary journal sections.",
+      "Don't use placeholder-only labels or rely on color alone to identify the active role."
+    ]
+  }
+}
