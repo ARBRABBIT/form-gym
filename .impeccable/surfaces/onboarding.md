@@ -46,3 +46,10 @@ Home handoff: use four compact linked health cards, not the earlier full metric 
 ## WHOOP connection presentation - 24 November 2026
 
 Mode: Operate. Scoped extension of the existing white/rounded/black/lime theme. Connect WHOOP opens a full-screen white native dialog, using an official WHOOP 5.0 CloudKnit product image. Centered heading, realistic device and pale animated signal rings lead to metric labels, a short consent explanation and Continue to WHOOP. Separate-tab OAuth remains intact; verified status alone controls the connected screen. Back/Escape restore focus and preserve setup. Reduced motion uses static rings. Source provenance is stored beside the locally bundled WebP. Existing DESIGN.md and its tokens are unchanged.
+
+
+Monthly goal selection: Six optional suggested goals use full-row native checkboxes with the existing lime selected state. Suggestions and inline custom goals share the four-goal limit and selection count. One empty custom field is available while capacity remains; filled custom goals can be removed. Back navigation preserves both kinds of goals. Reviewed phone and desktop captures; 11 onboarding tests and typecheck pass. Existing live theme remains the visual authority over older DESIGN.md detector advisories.
+
+Challenge continuity: Step two displays the current monthly goals, including custom entries, as optional radio choices. Choosing one fills the editable 100-day intention. Going back updates the displayed choices without overwriting an independently edited intention. Selected options use lime with no dark border; keyboard focus remains visible. Reviewed the phone capture; all 12 onboarding tests and typecheck pass.
+
+Habit suggestions: Step four offers three habits to build and three habits to break as optional checkbox rows. Selection adds a real habit with its build/break direction; deselection removes it. Custom habits retain the existing name and direction controls. Reuses lime selection without dark borders. Reviewed the phone layout and verified suggested/custom habits survive back navigation and appear in the journal after completion. All 13 onboarding scenarios pass, and typecheck passes.

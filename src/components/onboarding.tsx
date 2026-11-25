@@ -28,6 +28,24 @@ import {
 } from "@/lib/model";
 import type { ScreenProps } from "./journal-app";
 
+const suggestedGoals = [
+  "Move my body three times a week",
+  "Make more time for sleep",
+  "Build strength",
+  "Take a walk every day",
+  "Drink more water",
+  "Eat more balanced meals",
+];
+
+const suggestedHabits = [
+  { name: "Take a daily walk", kind: "build" },
+  { name: "Stretch for five minutes", kind: "build" },
+  { name: "Read before bed", kind: "build" },
+  { name: "Late-night scrolling", kind: "break" },
+  { name: "Skipping meals", kind: "break" },
+  { name: "Sitting for long stretches", kind: "break" },
+] as const;
+
 const steps = [
   "Monthly goals",
   "100-day challenge",
@@ -477,12 +495,12 @@ export default function Onboarding({
                 <p className="setup-description">
                   {
                     [
-                      "Write up to four goals for " +
+                      "Pick up to four goals for " +
                         monthLabel(data.month) +
-                        ". Big or small, they’re yours to choose. This is completely optional.",
+                        ". Choose a few below or write your own. This is completely optional.",
                       "Choose something you want to show up for. Every checkmark is a little promise kept.",
                       "An approximate weight is absolutely fine. This is a starting point, not a judgement.",
-                      "Build a good habit or work on a bad one. Give it a name and decide what you’d like to change.",
+                      "Choose a habit to build or one to break. Pick a few below, or add your own.",
                       "Connect WHOOP for a fuller picture of your health. This is optional — your journal works beautifully on its own, too.",
                       "A few details to help you see how far you’ll go. You can update them in Starting point & results anytime.",
                     ][step]
@@ -504,36 +522,80 @@ export default function Onboarding({
                 >
                   {step === 0 && (
                     <div className="setup-goals">
-                      {draft.goals.map((g, i) => (
-                        <div className="setup-goal-row" key={i}>
-                          <span aria-hidden="true">
-                            {String(i + 1).padStart(2, "0")}
-                          </span>
-                          <Field
-                            label={`Monthly goal ${i + 1}`}
-                            value={g}
-                            placeholder={
-                              [
-                                "e.g. Move my body three times a week",
-                                "e.g. Make more time for sleep",
-                                "e.g. Feel stronger on the stairs",
-                                "e.g. Take a walk after lunch",
-                              ][i]
-                            }
-                            onChange={(v) =>
-                              patch({
-                                goals: draft.goals.map((a, j) =>
-                                  i === j ? v : a,
-                                ),
-                              })
-                            }
-                          />
-                        </div>
-                      ))}
+                      <fieldset className="setup-goal-options">
+                        <legend>What would you like to focus on?</legend>
+                        {suggestedGoals.map((goal) => {
+                          const selected = draft.goals.includes(goal);
+                          const full = draft.goals.filter((g) => g.trim()).length >= 4;
+                          return (
+                            <label className={`setup-goal-option${selected ? " selected" : ""}`} key={goal}>
+                              <input
+                                type="checkbox"
+                                checked={selected}
+                                disabled={!selected && full}
+                                onChange={() => patch({
+                                  goals: selected
+                                    ? draft.goals.map((g) => g === goal ? "" : g)
+                                    : draft.goals.map((g, i) => i === draft.goals.findIndex((g) => !g.trim()) ? goal : g),
+                                })}
+                              />
+                              <span>{goal}</span>
+                            </label>
+                          );
+                        })}
+                      </fieldset>
+                      <p className="setup-goal-count" role="status">
+                        {draft.goals.filter((g) => g.trim()).length} of 4 selected
+                        {draft.goals.every((g) => g.trim()) && " · Remove a goal to choose another."}
+                      </p>
+                      <div className="setup-custom-goals">
+                        {draft.goals.map((goal, i) => {
+                          if (suggestedGoals.includes(goal) || (!goal.trim() && i !== draft.goals.findIndex((g) => !g.trim()))) return null;
+                          return (
+                            <div className="setup-custom-goal" key={i}>
+                              <Field
+                                label={`Custom goal ${i + 1}`}
+                                value={goal}
+                                placeholder="e.g. Feel stronger on the stairs"
+                                onChange={(value) => patch({ goals: draft.goals.map((g, j) => i === j ? value : g) })}
+                              />
+                              {goal.trim() && (
+                                <button
+                                  type="button"
+                                  className="setup-goal-remove"
+                                  aria-label={`Remove custom goal ${i + 1}`}
+                                  onClick={() => patch({ goals: draft.goals.map((g, j) => i === j ? "" : g) })}
+                                >
+                                  <Trash2 size={17} aria-hidden="true" />
+                                </button>
+                              )}
+                            </div>
+                          );
+                        })}
+                      </div>
                     </div>
                   )}
                   {step === 1 && (
                     <>
+                      {draft.goals.some((goal) => goal.trim()) && (
+                        <fieldset className="setup-goal-options setup-challenge-goals">
+                          <legend>Your monthly goals · Pick one for your challenge</legend>
+                          {draft.goals.filter((goal) => goal.trim()).map((goal, i) => (
+                            <label
+                              className={`setup-goal-option${draft.target === goal.trim() ? " selected" : ""}`}
+                              key={i}
+                            >
+                              <input
+                                type="radio"
+                                name="challenge-goal"
+                                checked={draft.target === goal.trim()}
+                                onChange={() => patch({ target: goal.trim() })}
+                              />
+                              <span>{goal.trim()}</span>
+                            </label>
+                          ))}
+                        </fieldset>
+                      )}
                       <Field
                         label="My 100-day intention"
                         value={draft.target}
@@ -594,8 +656,32 @@ export default function Onboarding({
                   )}
                   {step === 3 && (
                     <>
+                      <div className="setup-habit-suggestions">
+                        {(["build", "break"] as const).map((kind) => (
+                          <fieldset className="setup-goal-options" key={kind}>
+                            <legend>{kind === "build" ? "Habits to build" : "Habits to break"}</legend>
+                            {suggestedHabits.filter((habit) => habit.kind === kind).map((habit) => {
+                              const selected = draft.habits.some((h) => h.name === habit.name && h.kind === kind);
+                              return (
+                                <label className={`setup-goal-option${selected ? " selected" : ""}`} key={habit.name}>
+                                  <input
+                                    type="checkbox"
+                                    checked={selected}
+                                    onChange={() => patch({
+                                      habits: selected
+                                        ? draft.habits.filter((h) => !(h.name === habit.name && h.kind === kind))
+                                        : [...draft.habits, { id: uid(), ...habit, marks: [] }],
+                                    })}
+                                  />
+                                  <span>{habit.name}</span>
+                                </label>
+                              );
+                            })}
+                          </fieldset>
+                        ))}
+                      </div>
                       <div className="setup-habits">
-                        {draft.habits.map((h, i) => (
+                        {draft.habits.map((h, i) => suggestedHabits.some((habit) => habit.name === h.name && habit.kind === h.kind) ? null : (
                           <div className="setup-habit" key={h.id}>
                             <Field
                               label={`Habit ${i + 1}`}

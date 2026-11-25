@@ -62,7 +62,7 @@ function SaveJournal({
 }) {
   return (
     <div className="form-actions">
-      <span>Only you can see this journal.</span>
+      <span>Your trainer can review these journal entries.</span>
       <Button
         onClick={() =>
           p.update((s) => ({ ...s }), "Journal saved on this browser")

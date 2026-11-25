@@ -40,7 +40,7 @@ test("signup, optional goals, challenge, weight and habits carry into the curren
     "text",
   );
   await page.getByRole("button", { name: "Create my journal" }).click();
-  await page.getByLabel("Monthly goal 1").fill("Train three times per week");
+  await page.getByLabel("Custom goal 1", { exact: true }).fill("Train three times per week");
   await page.screenshot({
     path: ".impeccable/review/goals-desktop.png",
     fullPage: true,
@@ -447,7 +447,7 @@ test("old browser journal data is removed and setup never writes browser storage
   await page.getByLabel("Email address").fill("riya@example.com");
   await page.getByLabel("Password", { exact: true }).fill("temporary-password");
   await page.getByRole("button", { name: "Create my journal" }).click();
-  await page.getByLabel("Monthly goal 1").fill("Go for a walk");
+  await page.getByLabel("Custom goal 1", { exact: true }).fill("Go for a walk");
   await page.getByRole("button", { name: "Continue", exact: true }).click();
   await expect(page.getByRole("heading", { name: /A hundred days/ })).toBeVisible();
   expect(await page.evaluate(() => ({
@@ -509,4 +509,100 @@ test("mobile weight dial supports dragging, typing, keyboard and the top-right d
   await page.getByRole("button", { name: "Continue", exact: true }).click();
   await page.getByRole("button", { name: "Back", exact: true }).click();
   await expect(input).toHaveValue("72.5");
+});
+
+
+test("monthly goals mix suggestions and custom text with a shared four-goal limit", async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 851 });
+  await page.goto("/");
+  await page.getByLabel("Your name", { exact: true }).fill("Riya");
+  await page.getByLabel("Email address").fill("riya@example.com");
+  await page.getByLabel("Password", { exact: true }).fill("demo-password");
+  await page.getByRole("button", { name: "Create my journal" }).click();
+  await page.screenshot({ path: ".impeccable/review/goal-options-mobile.png", fullPage: true });
+  const move = page.getByRole("checkbox", { name: "Move my body three times a week" });
+  await move.check();
+  await page.getByRole("checkbox", { name: "Build strength", exact: true }).check();
+  await page.getByRole("checkbox", { name: "Drink more water", exact: true }).check();
+  await page.getByLabel("Custom goal 4", { exact: true }).fill("Walk with my family");
+  await expect(page.getByRole("status")).toContainText("4 of 4 selected");
+  await expect(page.getByRole("checkbox", { name: "Make more time for sleep" })).toBeDisabled();
+  await page.getByRole("button", { name: "Continue", exact: true }).click();
+  await page.getByRole("button", { name: "Back", exact: true }).click();
+  await expect(move).toBeChecked();
+  await expect(page.getByLabel("Custom goal 4", { exact: true })).toHaveValue("Walk with my family");
+  await move.uncheck();
+  await expect(page.getByRole("checkbox", { name: "Make more time for sleep" })).toBeEnabled();
+  await page.getByRole("button", { name: "Remove custom goal 4" }).click();
+  await expect(page.getByRole("status")).toHaveText("2 of 4 selected");
+  for (const width of [320, 375, 425, 1440]) {
+    await page.setViewportSize({ width, height: 851 });
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  }
+  await page.screenshot({ path: ".impeccable/review/goal-options-desktop.png", fullPage: true });
+});
+
+test("challenge reflects monthly goals and lets a selected goal become the intention", async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 851 });
+  await page.goto("/");
+  await page.getByLabel("Your name", { exact: true }).fill("Riya");
+  await page.getByLabel("Email address").fill("riya@example.com");
+  await page.getByLabel("Password", { exact: true }).fill("demo-password");
+  await page.getByRole("button", { name: "Create my journal" }).click();
+  await page.getByRole("checkbox", { name: "Build strength", exact: true }).check();
+  await page.getByLabel("Custom goal 2", { exact: true }).fill("Walk with my family");
+  await page.getByRole("button", { name: "Continue", exact: true }).click();
+  await expect(page.getByRole("radio", { name: "Build strength", exact: true })).toBeVisible();
+  const family = page.getByRole("radio", { name: "Walk with my family", exact: true });
+  await expect(family).toBeVisible();
+  await expect(page.getByRole("radio")).toHaveCount(2);
+  await family.check();
+  const intention = page.getByLabel("My 100-day intention");
+  await expect(intention).toHaveValue("Walk with my family");
+  await page.screenshot({ path: ".impeccable/review/challenge-monthly-goals-mobile.png", fullPage: true });
+  await intention.fill("Walk together for 20 minutes daily");
+  await expect(family).not.toBeChecked();
+  await page.getByRole("button", { name: "Back", exact: true }).click();
+  await page.getByRole("checkbox", { name: "Build strength", exact: true }).uncheck();
+  await page.getByRole("button", { name: "Continue", exact: true }).click();
+  await expect(page.getByRole("radio")).toHaveCount(1);
+  await expect(intention).toHaveValue("Walk together for 20 minutes daily");
+});
+
+test("habit suggestions support build, break and custom habits through setup", async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 851 });
+  await page.goto("/");
+  await page.getByLabel("Your name", { exact: true }).fill("Riya");
+  await page.getByLabel("Email address").fill("riya@example.com");
+  await page.getByLabel("Password", { exact: true }).fill("demo-password");
+  await page.getByRole("button", { name: "Create my journal" }).click();
+  for (let step = 0; step < 3; step++) {
+    await page.getByRole("button", { name: "Continue", exact: true }).click();
+  }
+  const walk = page.getByRole("checkbox", { name: "Take a daily walk", exact: true });
+  const scrolling = page.getByRole("checkbox", { name: "Late-night scrolling", exact: true });
+  await walk.check();
+  await scrolling.check();
+  await page.getByRole("button", { name: "Add a habit", exact: true }).click();
+  await page.getByLabel("Habit 3", { exact: true }).fill("Pack my gym bag");
+  await page.screenshot({ path: ".impeccable/review/habit-suggestions-mobile.png", fullPage: true });
+  await page.getByRole("button", { name: "Back", exact: true }).click();
+  await page.getByRole("button", { name: "Continue", exact: true }).click();
+  await expect(walk).toBeChecked();
+  await expect(scrolling).toBeChecked();
+  await expect(page.getByLabel("Habit 3", { exact: true })).toHaveValue("Pack my gym bag");
+  await walk.uncheck();
+  await expect(walk).not.toBeChecked();
+  await walk.check();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await page.getByRole("button", { name: "Continue", exact: true }).click();
+  await page.getByRole("button", { name: "Continue", exact: true }).click();
+  await page.getByRole("button", { name: "Make it mine", exact: true }).click();
+  await page.getByRole("button", { name: "Go to app", exact: true }).click();
+  await page.evaluate(() => { window.location.hash = "habits"; });
+  const habitNames = page.getByRole("textbox", { name: "Habit name", exact: true });
+  await expect(habitNames).toHaveCount(3);
+  expect(await habitNames.evaluateAll((inputs) => inputs.map((input) => (input as HTMLInputElement).value))).toEqual(
+    expect.arrayContaining(["Take a daily walk", "Late-night scrolling", "Pack my gym bag"]),
+  );
 });

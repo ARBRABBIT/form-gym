@@ -3324,3 +3324,54 @@ main {
 .onboarding-top {
   justify-content: flex-end;
 }
+
+
+/* Read-only trainer access to the linked member journal. */
+.trainer-journal-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 20px 0;
+}
+.trainer-journal-links button {
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  background: var(--surface-card);
+  color: var(--text-primary);
+  font: inherit;
+  cursor: pointer;
+}
+.trainer-journal-links button:hover { background: var(--bg-canvas); }
+.trainer-member-journal { min-width: 0; }
+.trainer-member-journal > div[id] { scroll-margin-top: 90px; }
+.trainer-journal-records { margin: 0; }
+.trainer-journal-records > div {
+  display: grid;
+  grid-template-columns: minmax(100px, 1fr) minmax(0, 2fr);
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.trainer-journal-records dt { color: var(--text-secondary); }
+.trainer-journal-records dd { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.trainer-journal-list { padding-left: 20px; margin: 0; }
+.trainer-journal-list li { padding: 8px 0; overflow-wrap: anywhere; }
+.trainer-journal-habit, .trainer-journal-entry { padding: 16px 0; border-bottom: 1px solid var(--border-subtle); }
+.trainer-journal-habit h3, .trainer-journal-entry h3 { margin: 0 0 8px; font-size: 16px; font-weight: 500; }
+.trainer-journal-habit p { margin: 6px 0; line-height: 1.6; overflow-wrap: anywhere; }
+.trainer-measurements-scroll { overflow-x: auto; }
+.trainer-measurements { width: 100%; border-collapse: collapse; font-size: 13px; }
+.trainer-measurements th, .trainer-measurements td { padding: 12px 8px; text-align: left; border-bottom: 1px solid var(--border-subtle); }
+.trainer-measurements th { font-weight: 500; }
+
+.trainer-member-filters { flex-wrap: wrap; }
+.trainer-member-filters .segmented { flex-wrap: wrap; border-radius: 20px; }
+.trainer-member-filters .segmented button { min-height: 44px; }
+
+.trainer-assignment-dates { flex-wrap: nowrap; overflow-x: auto; max-width: 100%; padding-bottom: 8px; }
+.trainer-assignment-dates button { flex-shrink: 0; }
+
+.trainer-journal-entry summary { display: flex; justify-content: space-between; gap: 16px; align-items: center; min-height: 44px; cursor: pointer; }
+.trainer-journal-entry summary strong { white-space: nowrap; font-weight: 500; }

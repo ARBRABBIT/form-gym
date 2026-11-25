@@ -12,7 +12,7 @@ Latest stable Next.js, Tailwind CSS, Lucide React and GSAP, requested by the use
 
 ## Users and purpose
 
-Gym members plan monthly goals, develop habits, and log training, nutrition and measurements. Trainers assign workouts and review member actuals against their plans.
+Gym members plan monthly goals, develop habits, and log training, nutrition and measurements. Trainers assign workouts and review member actuals against their plans, plus the linked member’s full journal: goals, habits, challenge, weight, measurements, profile, planner, monthly reviews and available health readings.
 
 ## Confirmed scope
 

@@ -44,6 +44,7 @@ import {
   Sheet,
 } from "./ui";
 import WorkoutTemplatePicker from "./workout-template-picker";
+import TrainerMemberJournal from "./trainer-member-journal";
 function newActual(plan?: Workout): Workout {
   return {
     ...emptyWorkout(),
@@ -273,7 +274,7 @@ export function Trainer(p: ScreenProps) {
     [draft, setDraft] = useState<Workout>(emptyWorkout),
     [query, setQuery] = useState(""),
     [saving, setSaving] = useState(false),
-    [tab, setTab] = useState<"plan" | "log" | "nutrition">("plan");
+    [tab, setTab] = useState<"plan" | "log" | "nutrition" | "journal">("plan");
   const member = members.find((m) => m.id === selected),
     key = `${selected}:${date}`,
     plan = data.plans[key],
@@ -298,12 +299,17 @@ export function Trainer(p: ScreenProps) {
     .map((k) => k.split(":")[1]);
   const memberNutritionDates =
     selected === "alex"
-      ? Object.keys(data.nutrition)
+      ? Object.keys(data.nutrition).filter((key) => !key.includes(":"))
       : Object.keys(data.nutrition)
           .filter((k) => k.startsWith(selected + ":"))
           .map((k) => k.split(":")[1]);
   const memberDates = Array.from(
-    new Set([...memberPlanLogDates, ...memberNutritionDates, TODAY]),
+    new Set([...memberPlanLogDates, ...memberNutritionDates, ...(selected === "alex" ? [
+      ...data.weights.map((entry) => entry.date),
+      ...Object.keys(data.planner),
+      ...data.habits.flatMap((habit) => habit.marks),
+      ...Object.keys({ ...data.goalsByMonth, ...data.measurements, ...data.reviews }).map((month) => `${month}-01`),
+    ] : []), TODAY]),
   ).sort();
   const beginEdit = () => {
     setDraft(plan ? structuredClone(plan) : emptyWorkout());
@@ -335,7 +341,7 @@ export function Trainer(p: ScreenProps) {
       <>
         <PageHeading
           title="Members"
-          description="Manage workout assignments and review submitted sessions."
+          description="Review member journals, progress, nutrition and workout sessions."
         />
         <div className="trainer-stats">
           <div>
@@ -356,7 +362,7 @@ export function Trainer(p: ScreenProps) {
         </div>
         <Section
           title="Your members"
-          action={<span className="muted">Workouts & nutrition access</span>}
+          action={<span className="muted">Full member journal access</span>}
         >
           <label className="search-field">
             <Search size={17} />
@@ -403,7 +409,7 @@ export function Trainer(p: ScreenProps) {
                         {count} {count === 1 ? "plan" : "plans"} · {logs}{" "}
                         {logs === 1 ? "log" : "logs"}
                       </span>
-                      <span className="pill">View workouts</span>
+                      <span className="pill">View member</span>
                     </div>
                     <ArrowUpRight size={20} />
                   </button>
@@ -423,8 +429,8 @@ export function Trainer(p: ScreenProps) {
         <div className="trainer-scope">
           <Check size={16} />
           <p>
-            Your space connects workout plans, member logs, and daily nutrition & wellness. Other journal
-            entries stay in the member’s space.
+            Review each member’s workouts, nutrition, goals, habits, challenge, measurements,
+            planner, monthly review and available health readings in their detail view.
           </p>
         </div>
       </>
@@ -442,9 +448,11 @@ export function Trainer(p: ScreenProps) {
         All members
       </button>
       <PageHeading
-        title={`${selected === "alex" ? data.profile.Name : member?.name}’s ${tab === "nutrition" ? "nutrition & wellness" : "workouts"}`}
+        title={`${selected === "alex" ? data.profile.Name : member?.name}’s ${tab === "journal" ? "journal" : tab === "nutrition" ? "nutrition & wellness" : "workouts"}`}
         description={
-          tab === "nutrition"
+          tab === "journal"
+            ? "Goals, habits, progress, planner, reviews and health readings from the member’s journal."
+            : tab === "nutrition"
             ? "Meals, daily nutrition totals, and wellness check-in for this member."
             : "Assigned workouts and member logs, organized by date."
         }
@@ -457,9 +465,9 @@ export function Trainer(p: ScreenProps) {
           ) : undefined
         }
       />
-      <div className="filter-bar">
+      <div className="filter-bar trainer-member-filters">
         <Field
-          label={tab === "nutrition" ? "Journal date" : "Workout date"}
+          label={tab === "nutrition" || tab === "journal" ? "Journal date" : "Workout date"}
           type="date"
           value={date}
           onChange={(v) => {
@@ -497,9 +505,15 @@ export function Trainer(p: ScreenProps) {
           >
             Nutrition & wellness {hasNutrition && <Check size={13} />}
           </button>
+          <button
+            className={tab === "journal" ? "selected" : ""}
+            onClick={() => { setTab("journal"); setEditing(false); }}
+          >
+            Member journal
+          </button>
         </div>
       </div>
-      <div className="assignment-dates">
+      <div className="assignment-dates trainer-assignment-dates">
         {memberDates.map((d) => {
           const hasCheck =
             tab === "nutrition"
@@ -508,6 +522,8 @@ export function Trainer(p: ScreenProps) {
                     ? data.nutrition[d]
                     : data.nutrition[`${selected}:${d}`],
                 )
+              : tab === "journal"
+                ? selected === "alex" && Boolean(data.planner[d] || data.weights.some((entry) => entry.date === d) || data.habits.some((habit) => habit.marks.includes(d)))
               : tab === "log"
                 ? Boolean(data.logs[`${selected}:${d}`])
                 : Boolean(data.plans[`${selected}:${d}`]);
@@ -630,6 +646,8 @@ export function Trainer(p: ScreenProps) {
             </p>
           </Section>
         )
+      ) : tab === "journal" ? (
+        <TrainerMemberJournal data={data} date={date} memberId={selected} />
       ) : (
         <TrainerNutritionView
           memberId={selected}
