@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { Bell, Camera, Check, ImagePlus, RotateCcw } from "lucide-react";
+import { Bell, Camera, Check, ImagePlus, RotateCcw } from "./icons";
 import { Button, Field, Sheet, TextArea } from "./ui";
 import DatePicker from "./date-picker";
 import { dateKey, uid } from "@/lib/model";
@@ -441,10 +441,13 @@ export function MorningReminders({
     );
   };
   return (
-    <Sheet title="Your morning nudge" onClose={onClose}>
+    <Sheet title="Your morning nudge" onClose={onClose} className="reminder-sheet">
       <div className="health-sheet">
-        <Bell size={28} />
-        <p className="health-intro">A friendly reminder. Always your choice.</p>
+        <div className="reminder-intro">
+          <span className="reminder-bell"><Bell size={26} /></span>
+          <p className="health-intro">A friendly reminder. Always your choice.</p>
+        </div>
+        <div className="reminder-schedule">
         <Field
           label="Remind me at"
           type="time"
@@ -474,9 +477,10 @@ export function MorningReminders({
             ))}
           </select>
         </label>
+        </div>
         <fieldset className="reminder-tone">
           <legend>Choose the mood</legend>
-          <label>
+          <label className={settings.tone === "friendly" ? "selected" : ""}>
             <input
               type="radio"
               name="reminder-tone"
@@ -485,7 +489,7 @@ export function MorningReminders({
             />
             Friendly & discreet
           </label>
-          <label>
+          <label className={settings.tone === "playful" ? "selected" : ""}>
             <input
               type="radio"
               name="reminder-tone"
@@ -496,7 +500,7 @@ export function MorningReminders({
           </label>
         </fieldset>
         <div className="reminder-preview">
-          <strong>Form · Morning check-in</strong>
+          <div className="reminder-preview-title"><Bell size={16} /><strong>Form · Morning check-in</strong></div>
           <p>
             {settings.tone === "playful"
               ? "Bathroom business done? Scale selfie next."

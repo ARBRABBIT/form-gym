@@ -15,7 +15,7 @@ import {
   Flag,
   Sparkles,
   TrendingUp,
-} from "lucide-react";
+} from "./icons";
 import type { ScreenProps } from "./journal-app";
 import {
   TODAY,
@@ -158,7 +158,7 @@ function PlannerContent({ p }: { p: ScreenProps }) {
                 key={i}
               >
                 <span className="monthly-goal-icon" aria-hidden="true">
-                  <Icon size={23} strokeWidth={1.6} />
+                  <Icon size={23} />
                 </span>
                 <TextArea
                   label={`Goal ${i + 1}`}
@@ -827,7 +827,8 @@ export function NutritionScreen(p: ScreenProps) {
         <div className="water-entry">
           <div>
             <strong>Water</strong>
-            <span>{n.water} L logged · 1 mark = 1 L</span>
+            <span>{n.water.toLocaleString("en-IN", { maximumFractionDigits: 2 })} L logged · 1 mark = 1 L</span>
+            <button type="button" className="water-tracker-link" onClick={() => p.navigate("water")}>Open water tracker <ArrowRight size={14} /></button>
           </div>
           <div className="water-drops">
             {Array.from({ length: 6 }, (_, i) => (

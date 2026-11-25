@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
-import { Activity, ArrowLeft, ArrowUpRight, Check, HeartPulse, Moon, ShieldCheck } from "lucide-react";
+import { Activity, ArrowLeft, ArrowUpRight, Check, HeartPulse, Moon, ShieldCheck } from "./icons";
 import { lockModalBackground } from "./modal-environment";
 
 export default function WhoopConnectionScreen({ connected, busy, message, onConnect, onClose }: {

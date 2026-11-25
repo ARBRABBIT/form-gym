@@ -1,7 +1,7 @@
 "use client";
 
 import { useId, useState, type KeyboardEvent, type PointerEvent } from "react";
-import { Minus, Plus } from "lucide-react";
+import { Minus, Plus } from "./icons";
 
 const point = (angle: number, radius: number) => ({
   x: 160 + Math.sin((angle * Math.PI) / 180) * radius,

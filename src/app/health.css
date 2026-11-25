@@ -467,6 +467,14 @@
 
 /* Home shows three WHOOP entry points; readings and actions live on detail pages. */
 .health-summary-cards {
+  --health-card-title-size: 16px;
+  --health-card-reading-size: 36px;
+  --health-card-unit-size: 13px;
+  --health-card-label-size: 11px;
+  --health-card-caption-size: 10px;
+  --health-card-status-size: 11px;
+  --health-card-secondary-size: 14px;
+  font-family: var(--font-urbanist), Arial, sans-serif;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
@@ -628,10 +636,29 @@
   .health-detail-cards .health-card:not(.health-body-card) > dl { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 375px) {
+  .health-summary-cards {
+    --health-card-title-size: 14px;
+    --health-card-reading-size: 30px;
+    --health-card-unit-size: 12px;
+    --health-card-label-size: 10px;
+    --health-card-caption-size: 9px;
+    --health-card-status-size: 10px;
+  }
   .health-summary .health-overview-heading h2 { font-size: 18px; }
   .health-summary-card > a { padding: 12px; }
   .health-summary-title { gap: 5px; }
   .health-summary-value { font-size: 32px; }
+}
+@media (min-width: 761px) {
+  .health-summary-cards {
+    --health-card-title-size: 18px;
+    --health-card-reading-size: 44px;
+    --health-card-unit-size: 15px;
+    --health-card-label-size: 12px;
+    --health-card-caption-size: 11px;
+    --health-card-status-size: 12px;
+    --health-card-secondary-size: 16px;
+  }
 }
 @media (max-width: 340px) {
   .health-summary-title > svg:first-child { display: none; }

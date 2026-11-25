@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "./icons";
 import gsap from "gsap";
 import { TODAY, daysInMonth, formatDate } from "@/lib/model";
 
@@ -41,10 +41,9 @@ export default function DateStrip({ value, onChange, hasPlan }: {
     if (!el) return;
 
     const centerSelection = (smooth: boolean) => {
-      const first = el.querySelector<HTMLElement>(".week-day");
-      if (!first) return;
-      const step = first.offsetWidth + parseFloat(getComputedStyle(el).columnGap);
-      const target = Math.max(0, selected - 3) * step;
+      const day = el.querySelectorAll<HTMLElement>(".week-day")[selected];
+      if (!day) return;
+      const target = day.offsetLeft - (el.clientWidth - day.offsetWidth) / 2;
       const maxScroll = el.scrollWidth - el.clientWidth;
       const clamped = Math.max(0, Math.min(maxScroll, target));
 
@@ -153,7 +152,7 @@ export default function DateStrip({ value, onChange, hasPlan }: {
     }
   };
 
-  return <div className="week-strip scrollable-date-strip">
+  return <div className="week-strip scrollable-date-strip" data-nav-tone="dark">
     <button className="icon-button" aria-label="Earlier dates" disabled={edges.first} onClick={() => scroll(-1)}><ChevronLeft size={18}/></button>
     <div className="date-strip-window" data-first={edges.first} data-last={edges.last}>
     <div className="date-strip-track" ref={track} role="group" aria-label={`Dates for ${formatDate(value, { month:"long", year:"numeric" })}`} onScroll={updateEdges}
@@ -189,6 +188,8 @@ export default function DateStrip({ value, onChange, hasPlan }: {
       {Array.from({length:count}, (_, i) => {
         const key = keyFor(i);
         return <button key={key} type="button" className={`week-day ${value === key ? "selected" : ""}`} disabled={key > TODAY}
+          data-distance={Math.min(Math.abs(i - selected), 3)}
+          title={hasPlan(key) ? "Workout planned" : undefined}
           aria-label={formatDate(key)} aria-current={key === TODAY ? "date" : undefined} aria-pressed={value === key} tabIndex={value === key ? 0 : -1}
           onClick={() => onChange(key)}
           onKeyDown={event => {
@@ -201,12 +202,12 @@ export default function DateStrip({ value, onChange, hasPlan }: {
               track.current?.querySelectorAll<HTMLButtonElement>(".week-day")[next]?.focus({preventScroll:true});
             }
           }}>
-          <span>{formatDate(key, {weekday:"short"})}</span><strong>{i + 1}</strong><i className={hasPlan(key) ? "has-plan" : ""}/>
+          <span>{formatDate(key, {weekday:"short"})}</span><strong>{String(i + 1).padStart(2, "0")}</strong><i className={hasPlan(key) ? "has-plan" : ""}/>
         </button>;
       })}
     </div>
     </div>
     <button className="icon-button" aria-label="Later dates" disabled={edges.last} onClick={() => scroll(1)}><ChevronRight size={18}/></button>
-    <span className="week-month">{formatDate(value,{month:"long",year:"numeric"})}</span>
+    <span className="week-month">{formatDate(value,{weekday:"long"})} · {formatDate(value,{month:"long",year:"numeric"})}</span>
   </div>;
 }

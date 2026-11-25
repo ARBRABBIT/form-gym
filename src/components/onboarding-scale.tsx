@@ -104,7 +104,7 @@ export default function OnboardingScale({
                       y="65"
                       textAnchor="middle"
                       fill="#343029"
-                      fontFamily="Helvetica, Arial, sans-serif"
+                      fontFamily="var(--font-ui)"
                       fontSize="24"
                     >
                       {(index / 40) * capacity}
@@ -121,7 +121,7 @@ export default function OnboardingScale({
               y="120"
               textAnchor="middle"
               fill="#292923"
-              fontFamily="Helvetica, Arial, sans-serif"
+              fontFamily="var(--font-ui)"
               fontSize="31"
               fontWeight="500"
               className="scale-live-reading"

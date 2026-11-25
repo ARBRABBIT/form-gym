@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, type ReactNode } from "react";
-import { X, ArrowLeft, ArrowUpRight, Plus } from "lucide-react";
+import { X, ArrowLeft, ArrowUpRight, Plus } from "./icons";
 import gsap from "gsap";
 import { createPortal } from "react-dom";
 import { lockModalBackground, useModalViewport } from "./modal-environment";
@@ -175,10 +175,12 @@ export function Sheet({
   title,
   children,
   onClose,
+  className = "",
 }: {
   title: string;
   children: ReactNode;
   onClose: () => void;
+  className?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
@@ -241,7 +243,7 @@ export function Sheet({
         role="dialog"
         aria-modal="true"
         aria-label={title}
-        className="sheet"
+        className={`sheet ${className}`}
         onClick={(e) => e.stopPropagation()}
       >
         <div className="sheet-handle" />

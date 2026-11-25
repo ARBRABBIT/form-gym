@@ -1,0 +1,48 @@
+.workout-muscle-card { overflow: hidden; padding: 26px; margin: 24px 0; border: 1px solid #fff; border-radius: 30px; background: radial-gradient(ellipse at 0% 0%, #d9d9eb, transparent 70%), radial-gradient(ellipse at 100% 100%, #c5e4d5, transparent 70%), #e4ecef; box-shadow: inset 0 0 10px 3px rgb(255 255 255 / 85%); color: #34475c; }
+.muscle-map-heading { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+.muscle-map-eyebrow { color: #718094; font-size: 11px; }
+.muscle-map-heading h2 { font-size: 27px; font-weight: 500; letter-spacing: -.7px; margin-top: 8px; }
+.muscle-map-badge { flex-shrink: 0; padding: 8px 12px; border: 1px solid #fff; border-radius: 999px; background: rgb(255 255 255 / 35%); font-size: 10px; }
+.muscle-map-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .8fr); gap: 28px; align-items: center; margin-top: 20px; }
+.muscle-viewer { min-width: 0; }
+.muscle-stage { position: relative; height: 460px; overflow: hidden; border: 1px solid rgb(255 255 255 / 65%); border-radius: 26px; background: radial-gradient(ellipse at 50% 20%, #536269, transparent 80%), linear-gradient(150deg, #33454c, #1f3039); box-shadow: inset 0 0 12px rgb(255 255 255 / 12%); }
+.muscle-framing-controls { display: flex; gap: 5px; width: fit-content; padding: 4px; border: 1px solid #fff; border-radius: 999px; margin: 0 auto 12px; background: rgb(255 255 255 / 20%); }
+.muscle-framing-controls > button { min-height: 44px; padding: 8px 14px; border-radius: 999px; color: #607888; font-size: 11px; }
+.muscle-framing-controls > button[aria-pressed="true"] { background: #fff; color: #34475c; }
+.muscle-stage::after { content: ""; position: absolute; bottom: 25px; left: 24%; width: 52%; height: 15px; background: rgb(61 83 78 / 15%); filter: blur(10px); border-radius: 50%; pointer-events: none; }
+.muscle-stage > canvas { display: block; width: 100%; height: 100%; position: relative; z-index: 1; touch-action: none; cursor: grab; }
+.muscle-stage > canvas:active { cursor: grabbing; }
+.muscle-stage > canvas:focus-visible { outline: 2px solid #678c82; outline-offset: -4px; }
+.muscle-viewer-loading { min-height: 340px; display: grid; place-items: center; color: #728495; font-size: 13px; padding: 24px; text-align: center; }
+.muscle-stage > .muscle-viewer-loading { position: absolute; z-index: 2; inset: 0; min-height: 0; background: rgb(229 239 237 / 70%); pointer-events: none; }
+.muscle-viewer-fallback { position: absolute; z-index: 2; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; background: #e5edeb; padding: 20px; text-align: center; font-size: 12px; }
+.muscle-viewer-fallback img { height: 300px; max-width: 100%; object-fit: contain; mix-blend-mode: multiply; }
+.muscle-view-controls { display: flex; align-items: center; justify-content: center; gap: 6px; margin: 14px 0 10px; }
+.muscle-view-controls > button { display: grid; place-items: center; min-height: 44px; min-width: 44px; padding: 8px 12px; border: 1px solid #fff; border-radius: 999px; background: rgb(255 255 255 / 30%); color: #607888; font-size: 12px; }
+.muscle-view-controls > button[aria-pressed="true"] { color: #34475c; background: #fff; box-shadow: 0 2px 6px rgb(54 75 87 / 8%); }
+.muscle-view-hint { font-size: 10px; line-height: 1.6; text-align: center; color: #738695; }
+.muscle-map-total { display: flex; align-items: center; gap: 16px; margin-bottom: 22px; }
+.muscle-map-total > strong { font: 400 62px/1 var(--font-matricha), monospace; color: #526c71; }
+.muscle-map-total > span { font-size: 12px; color: #6b7d8f; line-height: 1.7; }
+.muscle-map-description { font-size: 14px; line-height: 1.7; margin-bottom: 18px; }
+.muscle-map-key { display: flex; flex-wrap: wrap; gap: 12px; color: #6d8090; font-size: 10px; margin-bottom: 16px; }
+.muscle-map-key > span { display: inline-flex; align-items: center; gap: 5px; }
+.muscle-map-key i { width: 7px; height: 7px; border-radius: 50%; background: #5bce7c; }
+.muscle-map-key > span:nth-child(2) i { background: #b0d9bd; }
+.muscle-map-key > span:nth-child(3) i { background: #bac6cb; }
+.muscle-group-list { display: flex; flex-wrap: wrap; gap: 9px; }
+.muscle-group-list > button { display: flex; flex-direction: column; gap: 5px; align-items: flex-start; min-height: 56px; padding: 10px 14px; border: 1px solid rgb(255 255 255 / 90%); border-radius: 19px; background: rgb(255 255 255 / 35%); color: #4d6b64; text-align: left; }
+.muscle-group-list > button[data-role="primary"] { background: linear-gradient(130deg, rgb(206 241 210 / 65%), rgb(229 244 236 / 50%)); }
+.muscle-group-list > button[aria-pressed="true"] { background: #fff; border-color: #83b795; box-shadow: 0 0 0 2px rgb(115 180 137 / 15%); }
+.muscle-group-list > button > span { font-size: 13px; font-weight: 500; }
+.muscle-group-list > button > small { font-size: 10px; color: #718779; }
+.muscle-selected-note { font-size: 12px; line-height: 1.6; margin-top: 16px; color: #58796b; }
+.muscle-map-footnote, .muscle-map-unmapped { font-size: 10px; line-height: 1.8; color: #718392; margin-top: 20px; }
+.muscle-map-unmapped { color: #7a6a78; }
+.muscle-model-credits { border-top: 1px solid rgb(255 255 255 / 70%); margin-top: 22px; padding-top: 8px; color: #738293; }
+.muscle-model-credits summary { font-size: 10px; min-height: 44px; display: flex; align-items: center; cursor: pointer; }
+.muscle-model-credits p { font-size: 10px; line-height: 1.8; }
+.muscle-model-credits a { text-decoration: underline; }
+@media (max-width: 1000px) { .muscle-map-layout { grid-template-columns: minmax(0, 1fr); gap: 22px; } .muscle-stage { height: 430px; } }
+@media (max-width: 760px) { .workout-muscle-card { padding: 22px 18px; border-radius: 27px; } .muscle-map-heading { align-items: flex-start; } .muscle-map-heading h2 { font-size: 24px; } .muscle-map-badge { font-size: 9px; padding: 7px 9px; } .muscle-stage { height: 400px; } .muscle-map-layout { margin-top: 20px; } .muscle-map-total > strong { font-size: 52px; } }
+@media (max-width: 375px) { .workout-muscle-card { padding-inline: 14px; } .muscle-map-heading h2 { font-size: 22px; } .muscle-view-controls { gap: 4px; } .muscle-view-controls > button { padding-inline: 10px; } }

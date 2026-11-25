@@ -308,6 +308,7 @@ test("dashboard centers today and prevents future date selection", async ({
   page,
 }) => {
   await page.goto("/");
+  await page.getByRole("button", { name: "Explore the sample journal" }).click();
   const picker = page.getByLabel("Dashboard date", { exact: true });
   await expect(picker).toBeAttached();
   const today = (await picker.getAttribute("data-date"))!;
@@ -315,19 +316,18 @@ test("dashboard centers today and prevents future date selection", async ({
   const track = page.locator(".date-strip-track");
   const current = page.locator('.week-day[aria-current="date"]');
   await expect(current).toHaveAttribute("aria-pressed", "true");
-  const visibleCount = () => track.evaluate(el => {
-    const bounds=el.getBoundingClientRect();
-    return [...el.querySelectorAll('.week-day')].filter(day=>{
-      const r=day.getBoundingClientRect();
-      return r.left>=bounds.left-1 && r.right<=bounds.right+1;
-    }).length;
+  const selectedOffset = () => track.evaluate(el => {
+    const bounds = el.getBoundingClientRect();
+    const selected = el.querySelector('.week-day.selected')!.getBoundingClientRect();
+    return Math.abs(selected.left + selected.width / 2 - bounds.left - bounds.width / 2);
   });
-  await expect.poll(visibleCount).toBe(6);
+  await expect.poll(selectedOffset).toBeLessThan(1);
+  await expect(page.locator('.scrollable-date-strip > .week-month')).toBeVisible();
   for (const day of await days.all()) {
     const isFuture = Number(await day.locator('strong').innerText()) > Number(today.slice(8));
     if (isFuture) await expect(day).toBeDisabled(); else await expect(day).toBeEnabled();
   }
-  await expect(page.getByRole("button", {name:"Later dates",exact:true})).toBeDisabled();
+  await expect(page.getByRole("button", {name:"Later dates",exact:true})).toBeEnabled();
   await picker.click();
   const calendar = page.getByRole("dialog", {
     name: "Choose date",
@@ -357,7 +357,6 @@ test("dashboard centers today and prevents future date selection", async ({
   await expect.poll(()=>track.evaluate(el=>el.scrollLeft)).toBe(0);
   await expect(picker).toHaveAttribute('data-date',today);
   await expect(days.first()).toBeInViewport();
-  await expect.poll(visibleCount).toBe(6);
   await later.click();
   await expect.poll(()=>track.evaluate(el=>el.scrollLeft)).toBeGreaterThan(0);
   await current.focus();
@@ -365,6 +364,7 @@ test("dashboard centers today and prevents future date selection", async ({
   await expect(picker).toHaveAttribute('data-date',today.slice(0,8)+'01');
   await expect(days.first()).toHaveAttribute('aria-pressed','true');
   await expect(earlier).toBeDisabled();
+  await expect.poll(selectedOffset).toBeLessThan(1);
 });
 
 test("member set checkboxes sync live to trainer and preserve plans and logs", async ({

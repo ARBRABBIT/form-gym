@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
 import gsap from "gsap";
-import { MoveHorizontal, RotateCcw } from "lucide-react";
+import { MoveHorizontal, RotateCcw } from "./icons";
 import { measurements, monthLabel } from "@/lib/model";
 import { baselineValue, measurementChange, measurementUnit, previousMeasurementMonth } from "@/lib/measurement-comparison";
 import type { ScreenProps } from "./journal-app";

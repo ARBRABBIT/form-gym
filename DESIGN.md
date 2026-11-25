@@ -1,6 +1,6 @@
 ---
 name: Form — gym journal
-description: A flat, ruled training journal in Helvetica and grayscale.
+description: A training journal using Urbanist for interface text and Matricha for the Form wordmark.
 colors:
   ink: "#181818"
   muted: "#707070"
@@ -23,28 +23,28 @@ colors:
   row-hover: "#f7f7f7"
 typography:
   display:
-    fontFamily: "Helvetica, Arial, sans-serif"
+    fontFamily: "Urbanist, Arial, sans-serif"
     fontSize: "44px"
     fontWeight: 500
     lineHeight: 1.1
     letterSpacing: "-1.5px"
   headline:
-    fontFamily: "Helvetica, Arial, sans-serif"
+    fontFamily: "Urbanist, Arial, sans-serif"
     fontSize: "40px"
     fontWeight: 500
     lineHeight: 1.1
     letterSpacing: "-1.4px"
   title:
-    fontFamily: "Helvetica, Arial, sans-serif"
+    fontFamily: "Urbanist, Arial, sans-serif"
     fontSize: "18px"
     fontWeight: 500
   body:
-    fontFamily: "Helvetica, Arial, sans-serif"
+    fontFamily: "Urbanist, Arial, sans-serif"
     fontSize: "14px"
     fontWeight: 400
     lineHeight: 1.5
   label:
-    fontFamily: "Helvetica, Arial, sans-serif"
+    fontFamily: "Urbanist, Arial, sans-serif"
     fontSize: "12px"
 rounded:
   tag: "2px"
@@ -116,14 +116,14 @@ components:
 
 **Creative North Star: "The training journal"**
 
-Form treats the screen as a working training journal: readable records, aligned numbers and ruled sections. Helvetica, white paper and dark ink establish a restrained, practical identity. The user rejected a generic card-heavy interface; the implemented replacement gives dates, exercise rows and daily records the hierarchy.
+Form treats the screen as a working training journal: readable records, aligned numbers and ruled sections. Urbanist, white paper and dark ink establish a restrained, practical identity. The user rejected a generic card-heavy interface; the implemented replacement gives dates, exercise rows and daily records the hierarchy.
 
 The interface is mobile-first. Familiar controls, persistent role tabs and compact labels support repeated entry. Sample records use Indian names, including Arjun Sharma, Meera Iyer, Rohan Patel and coach Kabir Mehta.
 
 **Key Characteristics:**
 
 - Flat ruled sections and aligned ledgers.
-- Helvetica throughout, with large date and training headings.
+- Urbanist throughout the interface, with Matricha for the Form wordmark.
 - Grayscale state changes and sharp controls.
 - Persistent Member view / Trainer view navigation.
 
@@ -148,7 +148,7 @@ A monochrome paper-and-ink palette, with restrained gray distinctions for suppor
 
 ## Typography
 
-Display and body share Helvetica with Arial and sans-serif fallbacks. Weight, scale and spacing establish hierarchy without a second font.
+Headings and body use Urbanist with Arial and sans-serif fallbacks. Matricha Regular supplies the Form wordmark and footer branding. Both fonts are self-hosted through next/font/local; Urbanist supports weights 100–900.
 
 - **Display:** the desktop journal weekday. Its date companion is lighter (400) and smaller (40px). At the mobile breakpoint the weekday becomes (36px) and its date companion (30px); the narrow-phone override uses (33px) and (28px).
 - **Headline:** standard page headings. Mobile page headings use (34px), with tighter tracking (-1px).
@@ -156,6 +156,24 @@ Display and body share Helvetica with Arial and sans-serif fallbacks. Weight, sc
 - **Body:** the document default. Supporting descriptions may use line height (1.9) and maximum measure (70ch).
 - **Label:** fields and common controls. Dense annotations use smaller type, commonly (10–11px).
 - Numeric inputs and exercise rows use tabular numerals. Training titles use (35px), weight (500), line height (1.18), increasing to (40px) on wide screens.
+
+## Interface icons
+
+The interface uses **Hugeicons Stroke Rounded**, selected against the supplied icon reference on 25 November 2026. Rounded endpoints, soft corners, open silhouettes, and a single outline weight establish the app's icon language. Selection is a visual judgment based on the reference; the image does not establish the original icon vendor.
+
+| Library researched | Relevant capabilities | Decision for Form |
+| --- | --- | --- |
+| [Hugeicons](https://hugeicons.com/docs/integrations/react/quick-start) | Free Stroke Rounded set; React renderer; adjustable size and stroke. [Free-set MIT license](https://hugeicons.com/docs/faqs/license-questions). | Chosen for the closest rounded geometry and coverage of health, training, nutrition, camera, and navigation symbols. |
+| [Phosphor](https://github.com/phosphor-icons/react) | Six weights including light, regular, bold, fill, and duotone; React support and tree shaking. | Strong choice when a product needs several weights; this app uses one outline family. |
+| [Lucide](https://lucide.dev/guide/react/) | Optimized inline SVG components, configurable strokes, TypeScript, and tree shaking. | Existing library; replaced alongside custom navigation glyphs to give the entire app the selected rounded family. |
+| [Tabler](https://docs.tabler.io/icons/libraries/react) | React components with configurable size, color, and stroke; per-icon tree shaking. | Broad utility coverage; Hugeicons is the closer visual match for this reference. |
+| [Iconoir](https://iconoir.com/docs/packages/iconoir-react) | 24px grid, 1.5 default stroke, React provider, and MIT license. | A useful lighter alternative; Hugeicons better matches the reference's soft, substantial outlines. |
+
+Use named imports from `src/components/icons.tsx` for every interface symbol. This module statically imports individual Hugeicons assets, sets a default 1.8 stroke on the 24px grid, forwards SVG props and refs, and hides decorative icons from assistive technology. Labeled symbols receive an image role. Keep accessible names on icon-only buttons.
+
+Use 16–20px icons for compact controls and 24–30px icons in primary navigation. Inherit foreground color from the control; use its existing selected surface and label for active state. Keep the Home, utensils, dumbbell, and profile navigation meanings. Do not introduce another icon family or hand-drawn interface glyphs. Charts, interactive measurement dials, and fillable water graphics remain data visualizations with their own SVG geometry.
+
+Installed packages: `@hugeicons/react` 1.1.10 and `@hugeicons/core-free-icons` 4.4.0. Use the MIT-licensed free pack; its license ships in the dependency. No Pro assets are required.
 
 ## Layout
 
@@ -213,7 +231,7 @@ Sheets support labeled forms, a close action, focus trapping, Escape dismissal a
 
 ### Do:
 
-- **Do** use Helvetica with Arial and sans-serif fallbacks.
+- **Do** use Urbanist for interface text and Matricha Regular for the Form wordmark.
 - **Do** align numeric workout data and retain tabular numerals.
 - **Do** preserve persistent field labels, keyboard focus and reduced-motion behavior.
 - **Do** use ruled sections and restrained grayscale to organize records.

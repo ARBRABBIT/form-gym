@@ -1,0 +1,129 @@
+{
+  "model": {
+    "url": "/anatomy/male.glb",
+    "title": "Male Muscular Anatomy – 3D Model",
+    "author": "dakarmirajendra (https://sketchfab.com/dakarmirajendra)",
+    "source": "https://sketchfab.com/3d-models/male-muscular-anatomy-3d-model-627f19e053d44e60ad5e4274235b63cb",
+    "license": "SKETCHFAB Standard (https://sketchfab.com/licenses)"
+  },
+  "mapping": "Manually traced bilateral muscle contours on a single continuous surface, with local limb depth. Surface annotations are not artist-authored anatomical segmentation.",
+  "regions": [
+    {
+      "muscle": "chest",
+      "meshNames": [
+        "chest"
+      ]
+    },
+    {
+      "muscle": "hamstrings",
+      "meshNames": [
+        "hamstrings"
+      ]
+    },
+    {
+      "muscle": "forearms",
+      "meshNames": [
+        "forearms"
+      ]
+    },
+    {
+      "muscle": "traps",
+      "meshNames": [
+        "traps"
+      ]
+    },
+    {
+      "muscle": "glutes",
+      "meshNames": [
+        "glutes"
+      ]
+    },
+    {
+      "muscle": "abdominals",
+      "meshNames": [
+        "abdominals"
+      ]
+    },
+    {
+      "muscle": "lowerback",
+      "meshNames": [
+        "lowerback"
+      ]
+    },
+    {
+      "muscle": "traps-middle",
+      "meshNames": [
+        "traps-middle"
+      ]
+    },
+    {
+      "muscle": "adductors",
+      "meshNames": [
+        "adductors"
+      ]
+    },
+    {
+      "muscle": "lats",
+      "meshNames": [
+        "lats"
+      ]
+    },
+    {
+      "muscle": "quads",
+      "meshNames": [
+        "quads"
+      ]
+    },
+    {
+      "muscle": "obliques",
+      "meshNames": [
+        "obliques"
+      ]
+    },
+    {
+      "muscle": "calves",
+      "meshNames": [
+        "calves"
+      ]
+    },
+    {
+      "muscle": "front-shoulders",
+      "meshNames": [
+        "front-shoulders"
+      ]
+    },
+    {
+      "muscle": "rear-shoulders",
+      "meshNames": [
+        "rear-shoulders"
+      ]
+    },
+    {
+      "muscle": "tibialis",
+      "meshNames": [
+        "tibialis"
+      ]
+    },
+    {
+      "muscle": "triceps",
+      "meshNames": [
+        "triceps"
+      ]
+    },
+    {
+      "muscle": "biceps",
+      "meshNames": [
+        "biceps"
+      ]
+    }
+  ],
+  "form": {
+    "sourceSha256": "7032210a4e6c5d35c931f15feeaf4e6dcb4c1d30afb396c1660efb7b70f8d53e",
+    "sourceBytes": 7577664,
+    "bytes": 3070512,
+    "sourceTriangles": 90154,
+    "triangles": 211978,
+    "regionCount": 18,
+    "changes": "World transforms baked; centered at origin and normalized to 2 units tall; source surface preserved; annotation boundary triangles subdivided for smooth edges; partitioned by traced muscle contours with fascia and joints left neutral; Meshopt compressed."
+  }
+}
