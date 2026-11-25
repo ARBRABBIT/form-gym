@@ -1,0 +1,10 @@
+Form workout muscle viewer
+
+Active model: Male Muscular Anatomy – 3D Model
+Source SHA-256: 7032210a4e6c5d35c931f15feeaf4e6dcb4c1d30afb396c1660efb7b70f8d53e
+
+Manually traced bilateral muscle contours on a single continuous surface, with local limb depth. Surface annotations are not artist-authored anatomical segmentation.
+World transforms baked; centered at origin and normalized to 2 units tall; source surface preserved; annotation boundary triangles subdivided for smooth edges; partitioned by traced muscle contours with fascia and joints left neutral; Meshopt compressed.
+
+Primary muscles are green; assisting muscles are lighter green. Planned focus is previewed before any sets are recorded; completed sets determine the map after recording begins. Planned previews never count as completed sets.
+See NOTICE.txt and LICENSE.txt for the supplied model attribution.

@@ -4,11 +4,23 @@
   position: relative;
   overflow: hidden;
   border-radius: 26px;
-  color: #f4ffe9;
+  color: #fffaf8;
   background:
-    radial-gradient(ellipse at 100% 100%, #d0f58a 0%, transparent 48%),
-    radial-gradient(ellipse at 100% 0%, #7bed58 0%, transparent 52%),
-    linear-gradient(145deg, #3eba3e 0%, #086a36 48%, #006038 76%);
+    radial-gradient(ellipse 85% 70% at 50% 5%, #e78cdb 0%, #dea0c7 44%, transparent 100%),
+    radial-gradient(ellipse 70% 100% at 0% 48%, #e4bda7 0%, transparent 85%),
+    radial-gradient(ellipse 70% 100% at 100% 48%, #e9bdaf 0%, transparent 85%),
+    linear-gradient(180deg, #ead0dd 0%, #7b6b60 55%, #344b43 100%);
+  box-shadow: inset 0 0 8px 2px rgb(255 255 255 / 86%), inset 0 0 26px 7px rgb(255 249 245 / 55%);
+}
+
+.health-summary-body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  border-radius: inherit;
+  box-shadow: inset 0 1px 3px rgb(255 255 255 / 95%), inset 0 -1px 4px rgb(255 255 255 / 65%);
 }
 
 .health-summary-body::after {
@@ -29,31 +41,134 @@
   min-height: 0;
   aspect-ratio: auto;
   height: 100%;
+  padding: 20px 22px;
   gap: 0;
   color: inherit;
 }
 
 .health-summary-body > a:hover { background: transparent; }
-.recovery-card-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 16px; font-weight: 500; line-height: 1.3; }
-.recovery-card-badge { flex-shrink: 0; border-radius: 999px; padding: 4px 9px; background: rgb(255 255 255 / 10%); color: #edffdd; font-size: 11px; font-weight: 400; }
-.health-summary-body .recovery-card-score { display: flex; align-items: center; gap: 7px; margin-top: 20px; font-size: clamp(40px, 4.5vw, 62px); line-height: 1; color: inherit; }
+.recovery-card-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: var(--health-card-title-size); font-weight: 500; line-height: 1.25; }
+.recovery-card-badge { flex-shrink: 0; border-radius: 999px; padding: 4px 9px; background: rgb(255 255 255 / 6%); color: rgb(255 255 255 / 80%); font-size: var(--health-card-status-size); font-weight: 400; }
+.health-summary-body .recovery-card-score { display: flex; align-items: center; gap: 7px; margin-top: 20px; font-size: var(--health-card-reading-size); line-height: 1; color: inherit; }
 .recovery-card-score > span { font-family: var(--font-matricha), monospace; font-weight: 400; letter-spacing: -1px; }
-.health-summary-body .recovery-card-score > small { margin: 0; font-size: 19px; font-weight: 500; }
+.health-summary-body .recovery-card-score > small { margin: 0; font-size: var(--health-card-unit-size); font-weight: 400; }
 .recovery-card-chart { display: flex; align-items: flex-end; flex: 1; min-height: 0; margin-top: 14px; }
-.recovery-card-chart > svg { display: block; width: 100%; max-height: 100%; color: #d9f7bd; overflow: visible; }
 .recovery-chart-empty { padding-block: 24px; font-size: 13px; line-height: 1.5; color: #d4ecca; }
-.recovery-card-footer { display: flex; flex-wrap: wrap; align-items: baseline; gap: 5px; margin-top: 13px; color: #efffe2; font-size: 12px; line-height: 1.4; }
+.recovery-card-footer { display: flex; flex-wrap: wrap; align-items: baseline; gap: 5px; margin-top: 13px; color: #efffe2; font-size: var(--health-card-label-size); line-height: 1.25; }
 .recovery-card-footer strong { font-weight: 600; }
-.recovery-card-unit, .recovery-card-baseline { color: #d4ecca; }
+.recovery-card-unit, .recovery-card-baseline { color: rgb(255 255 255 / 80%); }
+.recovery-card-baseline { font-size: var(--health-card-caption-size); font-weight: 400; }
 
-/* Scale the contents with the original card column, including narrow phones. */
-.recovery-card-heading { font-size: clamp(10px, 4.5cqw, 17px); gap: 5px; }
-.recovery-card-badge { font-size: clamp(7px, 3cqw, 11px); padding: 3px clamp(4px, 2cqw, 8px); }
-.health-summary-body .recovery-card-score { font-size: clamp(27px, 17cqw, 62px); margin-top: clamp(5px, 4cqw, 15px); gap: 4px; }
-.health-summary-body .recovery-card-score > small { font-size: clamp(10px, 5cqw, 19px); }
-.recovery-card-chart { margin-top: clamp(3px, 2cqw, 8px); }
-.recovery-card-chart > svg { height: 100%; min-height: 0; }
-.recovery-card-footer { font-size: clamp(7px, 3cqw, 12px); gap: 0 3px; margin-top: clamp(4px, 3cqw, 11px); }
-.recovery-card-footer > span:first-child { font-size: clamp(14px, 5cqw, 18px); font-weight: 500; color: #fff; }
+/* Spacing follows the card; type sizes are shared by all three health cards. */
+.recovery-card-heading { gap: 5px; }
+.recovery-card-badge { padding: 2px clamp(4px, 2cqw, 8px); }
+.health-summary-body .recovery-card-score { margin-top: clamp(7px, 4.5cqw, 16px); gap: 4px; }
+.recovery-card-chart { margin-top: clamp(6px, 3cqw, 12px); }
+.recovery-card-footer { gap: 0 6px; margin-top: clamp(4px, 3cqw, 11px); }
+.recovery-card-footer > span:first-child { font-size: var(--health-card-secondary-size); font-weight: 500; color: #fff; }
 .recovery-card-footer > span:first-child .recovery-card-unit { color: inherit; }
-.recovery-chart-empty { padding-block: 5px; font-size: clamp(9px, 3.5cqw, 13px); }
+.recovery-chart-empty { padding-block: 5px; font-size: var(--health-card-label-size); }
+
+/* Rounded translucent columns, with the reference's soft fade at the baseline. */
+.recovery-bar-chart {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  color: #f6ffed;
+}
+.recovery-chart-plot {
+  position: absolute;
+  inset: 30px 23px 16px 0;
+  display: flex;
+  align-items: flex-end;
+}
+.recovery-chart-bar {
+  display: block;
+  flex: 0 0 auto;
+  min-width: 0;
+  max-width: 9px;
+  border-radius: 999px 999px 0 0;
+  background: linear-gradient(to bottom, rgb(255 255 255 / 48%), rgb(255 255 255 / 22%) 62%, rgb(255 255 255 / 2%) 100%);
+  transition: background 160ms ease;
+}
+.recovery-chart-bar.is-active {
+  background: linear-gradient(to bottom, #fff, rgb(255 255 255 / 85%) 48%, rgb(255 255 255 / 4%) 100%);
+}
+.recovery-chart-tooltip {
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: max-content;
+  padding: 5px 8px;
+  border: 1px solid rgb(255 255 255 / 10%);
+  border-radius: 10px;
+  color: #fff;
+  background: rgb(255 255 255 / 22%);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  font-size: var(--health-card-caption-size);
+  line-height: 1.2;
+  white-space: nowrap;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+.recovery-chart-tooltip::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: calc(50% - 4px);
+  width: 8px;
+  height: 8px;
+  background: rgb(255 255 255 / 22%);
+  transform: rotate(45deg);
+}
+.recovery-chart-tooltip strong { font-weight: 600; }
+.recovery-chart-tooltip > span { color: rgb(255 255 255 / 78%); font-size: inherit; }
+.recovery-chart-y-labels {
+  position: absolute;
+  inset: 30px 0 16px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: var(--health-card-caption-size);
+  line-height: 1;
+  color: rgb(255 255 255 / 58%);
+}
+.recovery-chart-x-labels {
+  position: absolute;
+  inset: auto 23px 0 0;
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--health-card-caption-size);
+  line-height: 1;
+  color: rgb(255 255 255 / 70%);
+}
+@container (max-width: 220px) {
+  .recovery-chart-plot { top: 2px; right: 16px; bottom: 12px; }
+  .recovery-chart-y-labels { top: 2px; bottom: 12px; font-size: var(--health-card-caption-size); }
+  .recovery-chart-x-labels { right: 16px; font-size: var(--health-card-caption-size); }
+  .recovery-chart-tooltip { display: none; top: 0; bottom: auto !important; padding: 4px 6px; border-radius: 7px; }
+  .recovery-bar-chart[data-inspecting="true"] .recovery-chart-tooltip { display: flex; }
+}
+@container (max-width: 160px) {
+  .recovery-chart-tooltip { padding: 3px 5px; }
+  .recovery-chart-tooltip > span { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .recovery-chart-bar { transition: none; }
+}
+
+@container (max-width: 160px) {
+  .recovery-card-baseline { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+}
+
+@media (max-width: 760px) {
+  .health-summary-body > a { padding: 16px 18px; }
+}
+@media (max-width: 375px) {
+  .health-summary-body > a { padding: 12px; }
+}

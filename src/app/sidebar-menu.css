@@ -1,0 +1,71 @@
+/* The mobile journal drawer shares the cards' soft glass and muted gradients. */
+@media (max-width: 760px) {
+  .sidebar {
+    width: min(340px, calc(100vw - 24px));
+    padding: max(26px, env(safe-area-inset-top)) 18px max(18px, env(safe-area-inset-bottom));
+    border: 1px solid rgb(255 255 255 / 85%);
+    border-left: 0;
+    border-radius: 0 30px 30px 0;
+    color: #303b50;
+    background:
+      radial-gradient(ellipse at 0% 0%, rgb(234 216 238 / 95%), transparent 60%),
+      radial-gradient(ellipse at 100% 90%, rgb(199 231 225 / 95%), transparent 65%),
+      linear-gradient(160deg, rgb(244 242 249 / 97%), rgb(221 232 240 / 96%));
+    box-shadow: inset -2px 0 8px rgb(255 255 255 / 85%), 12px 0 45px rgb(46 53 76 / 15%);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: #bac7d0 transparent;
+  }
+  .sidebar .sidebar-top { padding-inline: 8px; gap: 12px; }
+  .sidebar .wordmark, .sidebar .wordmark span { color: #344057; }
+  .sidebar .icon-button {
+    width: 44px;
+    min-width: 44px;
+    height: 44px;
+    min-height: 44px;
+    border: 1px solid rgb(255 255 255 / 80%);
+    color: #344057;
+    background: rgb(255 255 255 / 30%);
+    box-shadow: inset 0 1px 4px rgb(255 255 255 / 90%);
+  }
+  .sidebar .icon-button:hover { background: rgb(255 255 255 / 55%); }
+  .sidebar .workspace {
+    margin: 26px 0 25px;
+    padding: 18px 16px;
+    gap: 12px;
+    border: 1px solid rgb(255 255 255 / 75%);
+    border-radius: 24px;
+    background: linear-gradient(125deg, rgb(255 255 255 / 50%), rgb(220 238 234 / 40%));
+    box-shadow: inset 0 1px 7px rgb(255 255 255 / 75%);
+  }
+  .sidebar .workspace-icon { width: 36px; height: 36px; flex-shrink: 0; display: grid; place-items: center; border-radius: 13px; color: #52657b; background: rgb(255 255 255 / 45%); }
+  .sidebar .workspace strong { font-size: 14px; font-weight: 500; color: #344057; }
+  .sidebar .workspace span { font-size: 12px; color: #667286; }
+  .sidebar .side-section-label { padding-inline: 14px; font-size: 10px; letter-spacing: 1.5px; color: #6c7386; margin-bottom: 14px; }
+  .sidebar nav { gap: 5px; }
+  .sidebar .nav-item { min-height: 52px; padding: 10px 16px; gap: 13px; border: 1px solid transparent; border-radius: 18px; color: #48566c; font-size: 14px; font-weight: 400; }
+  .sidebar .nav-item svg { width: 20px; height: 20px; flex-shrink: 0; }
+  .sidebar .nav-item.active {
+    color: #fff;
+    font-weight: 500;
+    border-color: rgb(255 255 255 / 80%);
+    background: radial-gradient(ellipse at 100% 110%, #39726f, transparent 75%), linear-gradient(130deg, #79617f, #3c5269);
+    box-shadow: inset 0 1px 5px rgb(255 255 255 / 65%), inset 0 -1px 5px rgb(217 244 236 / 25%), 0 3px 9px rgb(49 64 85 / 10%);
+  }
+  .sidebar .nav-item:hover:not(.active) { background: rgb(255 255 255 / 35%); border-color: rgb(255 255 255 / 65%); color: #303b50; }
+  .sidebar .nav-dot { background: #e2f8f2; }
+  .sidebar .sidebar-bottom { padding-top: 25px; }
+  .sidebar .setup-card { border: 1px solid rgb(255 255 255 / 80%); border-radius: 22px; padding: 18px 16px; background: linear-gradient(130deg, #ead7e9, #e1e6ec 70%, #d5e9e2); box-shadow: inset 0 1px 6px rgb(255 255 255 / 75%); }
+  .sidebar .setup-link { color: #4f536d; font-size: 13px; }
+  .sidebar .profile { padding: 22px 8px 8px; border-top: 1px solid rgb(255 255 255 / 70%); margin-top: 14px; }
+  .sidebar .avatar { color: #fff; border: 1px solid rgb(255 255 255 / 85%); background: linear-gradient(140deg, #79617f, #477c7b); box-shadow: inset 0 1px 4px rgb(255 255 255 / 60%); }
+  .sidebar .profile strong { color: #344057; font-size: 13px; font-weight: 500; }
+  .sidebar .profile div > span { color: #667286; font-size: 11px; }
+  .sidebar .profile > svg { color: #52657b; }
+  .sidebar :is(button,a):focus-visible { outline: 2px solid #51445f; outline-offset: 2px; }
+  .sidebar .nav-item.active:focus-visible { outline-color: #fff; outline-offset: -4px; }
+  .nav-scrim { background: rgb(41 48 68 / 20%); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); }
+  .breadcrumb > .icon-button[aria-controls="journal-navigation"] { background: linear-gradient(135deg, rgb(233 220 240 / 65%), rgb(213 236 233 / 55%)); color: #303b50; border: 1px solid #fff; box-shadow: inset 0 1px 5px #fff; }
+}

@@ -8,7 +8,7 @@ import {
   LibraryBig,
   Plus,
   Search,
-} from "lucide-react";
+} from "./icons";
 import type { ScreenProps } from "./journal-app";
 import {
   copyWorkoutPlan,

@@ -1,0 +1,94 @@
+/* Frosted date selection, shared by every daily journal entry point. */
+.date-picker-backdrop {
+  background: rgb(38 42 65 / 24%);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+}
+
+.date-picker-dialog {
+  --calendar-ink: #303b50;
+  --calendar-muted: #60697b;
+  --calendar-selection: radial-gradient(ellipse at 95% 110%, #39726f, transparent 78%), linear-gradient(135deg, #655172, #34485f);
+  width: 390px;
+  padding: 22px;
+  border: 1px solid rgb(255 255 255 / 90%);
+  border-radius: 28px;
+  color: var(--calendar-ink);
+  background:
+    radial-gradient(ellipse at 0% 0%, #efdeee 0%, transparent 62%),
+    radial-gradient(ellipse at 100% 95%, #cce7e2 0%, transparent 66%),
+    linear-gradient(145deg, #f4f0f6, #e4ebf3 58%, #e7f1ee);
+  box-shadow: inset 0 0 10px 3px rgb(255 255 255 / 90%), inset 0 0 30px rgb(255 255 255 / 45%), 0 18px 65px rgb(39 46 72 / 22%);
+}
+
+.date-picker-dialog .month-picker-heading { margin-bottom: 20px; }
+.date-picker-dialog .month-picker-heading h2 { font-size: 21px; font-weight: 500; letter-spacing: -.6px; color: var(--calendar-ink); }
+.date-picker-dialog .icon-button {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  color: var(--calendar-ink);
+  border: 1px solid rgb(255 255 255 / 80%);
+  background: rgb(255 255 255 / 38%);
+  box-shadow: inset 0 1px 4px rgb(255 255 255 / 90%);
+}
+.date-picker-dialog .icon-button:hover:not(:disabled) { background: rgb(255 255 255 / 70%); }
+.date-picker-dialog .icon-button:disabled { opacity: .35; background: transparent; }
+.date-picker-dialog .date-picker-month {
+  gap: 4px;
+  padding: 5px;
+  margin-bottom: 14px;
+  border: 1px solid rgb(255 255 255 / 65%);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 22%);
+}
+.date-picker-dialog .date-picker-month-label { min-width: 0; padding: 6px; gap: 5px; font-size: 16px; font-weight: 500; color: var(--calendar-ink); }
+.date-picker-dialog .date-picker-month-label:hover { background: rgb(255 255 255 / 35%); }
+.date-picker-dialog .date-picker-weekdays { color: var(--calendar-muted); font-size: 12px; }
+.date-picker-dialog .date-picker-days { gap: 3px; }
+.date-picker-dialog .date-picker-days > button {
+  min-height: 44px;
+  border: 1px solid transparent;
+  border-radius: 16px;
+  background: transparent;
+  color: var(--calendar-ink);
+  font-size: 15px;
+  font-weight: 500;
+}
+.date-picker-dialog .date-picker-days > button:hover:not(:disabled) { background: rgb(255 255 255 / 55%); border-color: rgb(255 255 255 / 80%); }
+.date-picker-dialog .date-picker-days > button.selected,
+.date-picker-dialog .date-picker-days > button.selected:hover,
+.date-picker-dialog .month-picker-grid > button.selected {
+  color: #fff;
+  background: var(--calendar-selection);
+  border: 1px solid rgb(255 255 255 / 80%);
+  box-shadow: inset 0 1px 5px rgb(255 255 255 / 65%), 0 3px 9px rgb(57 66 91 / 16%);
+  font-weight: 600;
+}
+.date-picker-dialog .date-picker-days > button.outside-month:not(.selected) { color: var(--calendar-muted); }
+.date-picker-dialog .date-picker-days > button:disabled { color: #737e90; opacity: .4; }
+.date-picker-dialog .date-picker-days > button.is-today:not(.selected)::after { background: #476b71; width: 4px; height: 4px; left: calc(50% - 2px); }
+.date-picker-dialog .month-picker-year { background: rgb(255 255 255 / 30%); border: 1px solid rgb(255 255 255 / 70%); }
+.date-picker-dialog .month-picker-year input { color: var(--calendar-ink); }
+.date-picker-dialog .month-picker-grid > button { border: 1px solid rgb(255 255 255 / 70%); border-radius: 16px; color: var(--calendar-ink); background: rgb(255 255 255 / 30%); }
+.date-picker-dialog .month-picker-grid > button:hover:not(.selected):not(:disabled) { background: rgb(255 255 255 / 65%); }
+.date-picker-dialog .month-picker-grid > button:disabled { opacity: .4; }
+.date-picker-dialog .month-picker-error { color: var(--calendar-muted); }
+.date-picker-dialog .month-picker-footer { margin-top: 18px; padding-top: 14px; border-color: rgb(255 255 255 / 75%); }
+.date-picker-dialog .month-picker-footer > button { padding-inline: 15px; font-size: 13px; color: var(--calendar-muted); }
+.date-picker-dialog .month-picker-footer > button:hover { background: rgb(255 255 255 / 45%); }
+.date-picker-dialog .month-picker-footer > .month-picker-current { color: #fff; background: var(--calendar-selection); border: 1px solid rgb(255 255 255 / 80%); box-shadow: inset 0 1px 4px rgb(255 255 255 / 60%); }
+.date-picker-dialog :is(button,input):focus-visible { outline: 2px solid #51445f; outline-offset: 2px; }
+
+@media (max-width: 760px) {
+  .date-picker-dialog { width: 100%; padding: 12px 20px max(20px, env(safe-area-inset-bottom)); border-radius: 30px 30px 0 0; }
+  .date-picker-dialog .month-picker-handle { width: 36px; height: 4px; background: rgb(68 82 105 / 25%); margin-bottom: 18px; }
+  .date-picker-dialog .month-picker-heading h2 { font-size: 23px; }
+  .date-picker-dialog .date-picker-days > button { font-size: 16px; }
+}
+@media (max-width: 375px) {
+  .date-picker-dialog { padding-inline: 12px; }
+  .date-picker-dialog .date-picker-days { gap: 2px; }
+  .date-picker-dialog .date-picker-month-label { font-size: 15px; }
+}

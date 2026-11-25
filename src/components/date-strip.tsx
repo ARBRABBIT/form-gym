@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "./icons";
 import gsap from "gsap";
 import { TODAY, daysInMonth, formatDate } from "@/lib/model";
 
@@ -152,7 +152,7 @@ export default function DateStrip({ value, onChange, hasPlan }: {
     }
   };
 
-  return <div className="week-strip scrollable-date-strip">
+  return <div className="week-strip scrollable-date-strip" data-nav-tone="dark">
     <button className="icon-button" aria-label="Earlier dates" disabled={edges.first} onClick={() => scroll(-1)}><ChevronLeft size={18}/></button>
     <div className="date-strip-window" data-first={edges.first} data-last={edges.last}>
     <div className="date-strip-track" ref={track} role="group" aria-label={`Dates for ${formatDate(value, { month:"long", year:"numeric" })}`} onScroll={updateEdges}

@@ -1,0 +1,75 @@
+.health-summary-blood {
+  container-type: inline-size;
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 75%);
+  border-radius: 26px;
+  color: #f9ffff;
+  background:
+    radial-gradient(ellipse at 36% 108%, rgb(175 240 237 / 92%), transparent 64%),
+    radial-gradient(ellipse at 102% 70%, rgb(180 139 167 / 75%), transparent 64%),
+    radial-gradient(ellipse at 50% 75%, #28778b, transparent 66%),
+    #102332;
+  box-shadow: inset 0 0 12px 2px rgb(255 255 255 / 70%), inset 0 0 35px rgb(231 251 255 / 22%);
+}
+.health-summary-blood::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  border-radius: inherit;
+  box-shadow: inset 0 1px 4px rgb(255 255 255 / 90%), inset 0 -1px 4px rgb(255 255 255 / 45%);
+}
+.health-summary-blood::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .13;
+  mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath filter='url(%23n)' d='M0 0h160v160H0z'/%3E%3C/svg%3E");
+}
+.blood-card-inner { position: absolute; inset: 0; display: flex; flex-direction: column; min-height: 0; padding: 20px 22px; }
+.blood-card-link { display: block; flex-shrink: 0; color: inherit; border-radius: 6px; }
+.blood-card-heading { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 6px; font-size: var(--health-card-title-size); font-weight: 500; line-height: 1.25; }
+.blood-card-open { position: absolute; top: 0; right: 0; display: flex; align-items: center; justify-content: center; flex: 0 0 auto; width: clamp(18px, 10cqw, 32px); height: clamp(18px, 10cqw, 32px); border: 1px solid rgb(255 255 255 / 16%); border-radius: 50%; }
+.blood-card-open > svg { width: 45%; height: 45%; stroke-width: 1.3; }
+.blood-card-value.health-summary-value { display: flex; align-items: baseline; gap: 2px; margin-top: clamp(7px, 4.5cqw, 16px); font-size: var(--health-card-reading-size); font-weight: 400; line-height: 1; color: #fff; }
+.blood-card-value > small { margin: 0; font-size: var(--health-card-unit-size); font-weight: 400; }
+.blood-card-reading-label { margin-left: auto; max-width: 50px; font-size: var(--health-card-caption-size); line-height: 1.2; font-weight: 400; letter-spacing: 0; color: rgb(255 255 255 / 65%); }
+.blood-card-plot { position: relative; flex: 1; min-height: 0; margin: 6px 0 3px; }
+.blood-card-plot > svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.blood-card-grid { fill: none; stroke: rgb(255 255 255 / 18%); stroke-width: .6; stroke-dasharray: 1 3; vector-effect: non-scaling-stroke; }
+.blood-card-curve { fill: none; stroke-width: 1; vector-effect: non-scaling-stroke; }
+.blood-card-curve-dotted { stroke: rgb(255 255 255 / 28%); stroke-dasharray: 1 2; }
+.blood-card-guide { fill: none; stroke: rgb(255 255 255 / 50%); stroke-width: .7; stroke-dasharray: 1 2; vector-effect: non-scaling-stroke; }
+.blood-card-marker { position: absolute; display: grid; place-items: center; width: clamp(12px, 8cqw, 30px); aspect-ratio: 1; border-radius: 50%; border: 1px solid rgb(255 255 255 / 40%); background: rgb(230 245 255 / 12%); box-shadow: inset 0 1px 3px rgb(255 255 255 / 14%); transform: translate(-50%, -50%); pointer-events: none; }
+.blood-card-marker > span { width: 3px; height: 3px; border-radius: 50%; background: #fff; }
+.blood-card-days { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); flex-shrink: 0; gap: 2px; }
+.blood-card-days > button { display: grid; place-items: center; min-width: 0; height: clamp(22px, 11cqw, 38px); padding: 0; color: rgb(255 255 255 / 65%); background: transparent; border: 0; }
+.blood-card-days > button > span { display: grid; place-items: center; width: clamp(13px, 8.5cqw, 30px); aspect-ratio: 1; border: 1px solid rgb(255 255 255 / 12%); border-radius: 50%; font-size: var(--health-card-caption-size); font-weight: 400; }
+.blood-card-days > button[aria-pressed="true"] { color: #25353b; }
+.blood-card-days > button[aria-pressed="true"] > span { background: #fff; border-color: #fff; box-shadow: 0 0 12px rgb(255 255 255 / 12%); }
+.blood-card-days > button:disabled { opacity: .35; }
+.blood-card-week { display: flex; justify-content: center; align-items: center; gap: clamp(2px, 2cqw, 8px); margin-top: clamp(4px, 2.5cqw, 10px); flex-shrink: 0; color: rgb(255 255 255 / 82%); }
+.blood-card-week > span { white-space: nowrap; font-size: var(--health-card-caption-size); font-weight: 400; line-height: 1.2; }
+.blood-card-week > button { display: grid; place-items: center; width: clamp(16px, 7cqw, 28px); height: clamp(18px, 7cqw, 28px); padding: 0; border: 0; color: rgb(255 255 255 / 80%); background: transparent; }
+.blood-card-week > button > svg { width: 65%; height: 65%; stroke-width: 1.5; }
+.blood-card-week > button:disabled { opacity: .3; }
+.blood-card-empty { display: grid; place-items: center; height: 100%; font-size: var(--health-card-label-size); text-align: center; line-height: 1.4; color: rgb(255 255 255 / 70%); }
+.blood-card-link:focus-visible, .blood-card-inner button:focus-visible { outline: 1px solid #fff; outline-offset: 2px; }
+@media (max-width: 760px) {
+  .blood-card-inner { padding: 16px 18px; }
+  .health-summary-blood { border-radius: 20px; }
+}
+@media (max-width: 375px) {
+  .blood-card-inner { padding: 12px; }
+  .blood-card-plot { margin: 3px -4px 0; }
+}
+
+.blood-card-digits { font-family: var(--font-matricha), monospace; font-weight: 400; letter-spacing: -1px; }
+@container (max-width: 220px) {
+  .blood-card-reading-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+}

@@ -14,6 +14,8 @@
 .water-card-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 34px; }
 .water-card-heading h2 { display: flex; align-items: center; gap: 7px; margin: 0; color: #fff; font-size: 17px; font-weight: 550; }
 .water-card-heading > span { font-size: 11px; color: #d8edf1; }
+.water-card-open { display: inline-flex; align-items: center; gap: 5px; min-height: 32px; padding: 3px 0; border: 0; color: #e1f8ff; background: transparent; font-size: 11px; }
+.water-tracker-link { display: inline-flex; align-items: center; gap: 5px; margin-top: 6px; padding: 0; border: 0; color: var(--text-primary); background: transparent; font-size: 12px; text-decoration: underline; text-underline-offset: 3px; }
 .water-liquid { position: absolute; z-index: 0; bottom: 0; left: 0; right: 0; height: var(--water-level); transition: height 900ms cubic-bezier(.16,1,.3,1); }
 .water-liquid::before { content: ""; position: absolute; z-index: 1; top: -24px; right: -8%; width: 74%; height: 75px; border-radius: 50%; background: radial-gradient(ellipse, #87f3ffb3 0%, #00c6ef80 35%, #00b6dd00 72%); filter: blur(17px); opacity: .7; transform: rotate(-7deg); animation: water-reflection 18s ease-in-out infinite alternate; }
 .water-wave { position: absolute; left: 0; top: -58px; width: 200%; height: calc(100% + 90px); animation: water-drift 14s linear infinite; will-change: transform; }

@@ -1,0 +1,133 @@
+/* Journal surfaces only: existing health, date, water, and navigation designs retain their own styles. */
+.home-dashboard {
+  --home-ink: #303b50;
+  --home-muted: #626a7a;
+  --home-rim: inset 0 0 10px 3px rgb(255 255 255 / 85%), inset 0 0 30px 8px rgb(255 255 255 / 30%);
+  --home-selected: radial-gradient(ellipse at 95% 110%, #39726f, transparent 78%), linear-gradient(135deg, #655172, #34485f);
+}
+.home-dashboard .journal-heading { min-height: 90px; margin-bottom: 22px; }
+.home-dashboard .journal-heading h1 { color: var(--home-ink); font-weight: 500; letter-spacing: -1px; }
+.home-dashboard .journal-heading .date-control { color: var(--home-ink); background: linear-gradient(135deg, #eee4f0, #daeae9); border: 1px solid #fff; box-shadow: inset 0 1px 5px #fff; min-height: 44px; }
+.home-dashboard .journal-year { color: var(--home-muted); }
+.home-dashboard .journal-columns { gap: 22px; margin-top: 24px; }
+.home-dashboard :is(.journal-main,.journal-aside) { gap: 22px; }
+.home-dashboard :is(.training-section,.daily-habits-section,.daily-nutrition-section,.wellness-section,.month-section,.goals-section,.challenge-section,.journal-index) {
+  min-width: 0;
+  border: 1px solid rgb(255 255 255 / 85%);
+  border-radius: 28px;
+  color: var(--home-ink);
+  box-shadow: var(--home-rim);
+}
+.home-dashboard :is(.daily-habits-section,.daily-nutrition-section,.wellness-section,.month-section,.goals-section,.challenge-section,.journal-index) { padding: 24px; }
+.home-dashboard .journal-section-header { margin-bottom: 16px; }
+.home-dashboard :is(.journal-section-header h2,.journal-index h2) { font-size: 19px; font-weight: 500; letter-spacing: -.5px; color: inherit; }
+.home-dashboard .journal-section-header .text-link { font-size: 12px; color: inherit; opacity: .85; min-height: 44px; }
+.home-dashboard .journal-section-header > .icon-button,
+.home-dashboard .round-action { width: 44px; height: 44px; min-width: 44px; min-height: 44px; border: 1px solid rgb(255 255 255 / 70%); color: inherit; background: rgb(255 255 255 / 18%); box-shadow: inset 0 1px 5px rgb(255 255 255 / 60%); }
+.home-dashboard .journal-section-header > .icon-button:hover,
+.home-dashboard .round-action:hover { background: rgb(255 255 255 / 30%); }
+
+/* One continuous training card, with prescribed values kept in readable rows. */
+.home-dashboard .training-section {
+  color: var(--home-ink);
+  overflow: hidden;
+  background: radial-gradient(ellipse at 100% 100%, #c5e5df, transparent 70%), radial-gradient(ellipse at 0% 0%, #e0d5eb, transparent 65%), #dbe4ee;
+}
+.home-dashboard :is(.training-summary,.training-details) { border: 0; border-radius: 0; box-shadow: none; background: transparent; padding: 26px; margin: 0; }
+.home-dashboard .training-summary { padding-bottom: 22px; }
+.home-dashboard .training-details { padding-top: 0; }
+.home-dashboard .training-title h3 { color: inherit; font-weight: 500; font-size: clamp(28px, 3vw, 38px); letter-spacing: -.8px; }
+.home-dashboard :is(.entry-status,.training-byline,.training-bottom > p,.training-empty,.prescribed-head,.exercise-title > span) { color: #59677a; }
+.home-dashboard .entry-status { padding: 6px 9px; border: 1px solid rgb(255 255 255 / 75%); border-radius: 999px; background: rgb(255 255 255 / 30%); }
+.home-dashboard .entry-status > span { background: #48776d; }
+.home-dashboard .training-byline > span + span { border-color: rgb(76 100 119 / 25%); }
+.home-dashboard .training-start .btn { color: var(--home-ink); border: 1px solid rgb(255 255 255 / 85%); background: rgb(255 255 255 / 35%); box-shadow: inset 0 1px 5px rgb(255 255 255 / 70%); border-radius: 999px; font-weight: 500; }
+.home-dashboard .training-start .btn:hover { background: rgb(255 255 255 / 55%); }
+.home-dashboard :is(.prescribed-head,.prescribed-row) { border-color: rgb(255 255 255 / 65%); }
+.home-dashboard .prescribed-row { color: var(--home-ink); }
+.home-dashboard .prescribed-row:hover { background: rgb(255 255 255 / 25%); }
+.home-dashboard .training-bottom > p { font-size: 12px; }
+
+.home-dashboard .daily-habits-section { background: radial-gradient(ellipse at 0% 0%, #e3d9ec, transparent 70%), linear-gradient(145deg, #eef4ed, #c4e2d8); }
+.home-dashboard .journal-section-header h2 > span { background: rgb(255 255 255 / 45%); border: 1px solid rgb(255 255 255 / 70%); color: #405761; }
+.home-dashboard .habit-row { color: var(--home-ink); border-color: rgb(255 255 255 / 60%); min-height: 60px; }
+.home-dashboard .habit-row:hover { background: rgb(255 255 255 / 22%); }
+.home-dashboard .check-box { width: 24px; height: 24px; border-color: #7b9b9a; background: rgb(255 255 255 / 30%); }
+.home-dashboard .checked .check-box { background: var(--home-selected); border-color: rgb(255 255 255 / 80%); color: #fff; }
+.home-dashboard .habit-row.checked > span:nth-child(2) { color: #4b6465; }
+.home-dashboard .habit-status { color: #576c70; }
+
+.home-dashboard .daily-nutrition-section { background: radial-gradient(ellipse at 0% 0%, #efcee0, transparent 70%), linear-gradient(135deg, #f6e3e3, #edcdb2); }
+.home-dashboard .nutrition-ledger { gap: 18px 0; padding: 8px 0 6px; }
+.home-dashboard .nutrition-ledger > div { border-color: rgb(255 255 255 / 60%); }
+.home-dashboard .nutrition-ledger > div > span { color: #76586a; font-size: 12px; }
+.home-dashboard .nutrition-ledger > div:not(:first-child) > span::before { background: #a2698c; }
+.home-dashboard .nutrition-ledger > div:nth-child(3) > span::before { background: #9b795c; }
+.home-dashboard .nutrition-ledger > div:nth-child(4) > span::before { background: #7e779b; }
+.home-dashboard .nutrition-ledger strong { font-family: var(--font-matricha), monospace; font-size: 32px; font-weight: 400; letter-spacing: -1px; color: #674555; }
+.home-dashboard .nutrition-ledger small { display: block; font-family: var(--font-urbanist), sans-serif; font-size: 12px; color: #76586a; margin: 7px 0 0; }
+
+.home-dashboard .wellness-section { background: radial-gradient(ellipse at 0% 0%, #e6d3ec, transparent 75%), linear-gradient(145deg, #e4e4f3, #cfdee9); }
+.home-dashboard .wellness-ledger { gap: 0; padding: 8px 0 4px; }
+.home-dashboard .wellness-ledger > button { border-color: rgb(255 255 255 / 65%); }
+.home-dashboard .wellness-ledger > button > div { color: #62627c; font-size: 12px; }
+.home-dashboard .wellness-ledger > button:hover { background: rgb(255 255 255 / 20%); border-radius: 14px; }
+.home-dashboard .wellness-ledger strong { font-family: var(--font-matricha), monospace; font-weight: 400; font-size: 30px; color: #4f506e; }
+.home-dashboard .wellness-ledger small { display: block; font-family: var(--font-urbanist), sans-serif; font-size: 11px; color: #62627c; margin: 7px 0 0; }
+
+.home-dashboard .month-section { background: radial-gradient(ellipse at 0% 0%, #e3d8ed, transparent 70%), linear-gradient(160deg, #e6eaf4, #c6e4e3); }
+.home-dashboard .month-section .calendar-weekdays { color: #657086; }
+.home-dashboard .mini-calendar .calendar-cells button { color: #46556a; border-radius: 12px; }
+.home-dashboard .mini-calendar .calendar-cells button.selected { background: var(--home-selected); color: #fff; box-shadow: inset 0 1px 4px rgb(255 255 255 / 70%); }
+.home-dashboard .mini-calendar .calendar-cells button:hover:not(.selected) { background: rgb(255 255 255 / 40%); }
+.home-dashboard .mini-calendar .calendar-cells button.today { border-color: #829aa8; }
+.home-dashboard .planner-note { background: rgb(255 255 255 / 30%); border: 1px solid rgb(255 255 255 / 65%); color: #46556a; }
+.home-dashboard .planner-note-date { background: rgb(255 255 255 / 50%); }
+.home-dashboard .planner-note > svg { color: inherit; }
+
+.home-dashboard .goals-section { background: radial-gradient(ellipse at 0% 0%, #e7b9df, transparent 75%), linear-gradient(160deg, #efd7e6, #e5d3cb); }
+.home-dashboard .goal-list > button { border-color: rgb(255 255 255 / 55%); min-height: 60px; }
+.home-dashboard .goal-list > button > span { width: 30px; height: 30px; color: #7e5872; background: rgb(255 255 255 / 35%); border: 1px solid rgb(255 255 255 / 55%); }
+.home-dashboard .goal-list p { color: #65495f; font-size: 13px; }
+
+.home-dashboard .challenge-section { color: var(--home-ink); background: radial-gradient(ellipse at 95% 100%, #bce4da, transparent 80%), radial-gradient(ellipse at 0% 0%, #dfd3eb, transparent 75%), #d6e7eb; }
+.home-dashboard .challenge-count > strong { font-family: var(--font-matricha), monospace; font-size: 58px; font-weight: 400; }
+.home-dashboard :is(.challenge-count > span,.challenge-description,.challenge-section .text-link) { color: #526979; }
+.home-dashboard .challenge-mini > span { background: rgb(255 255 255 / 42%); border-radius: 50%; }
+.home-dashboard .challenge-mini > .marked { background: #547b80; box-shadow: inset 0 1px 3px rgb(255 255 255 / 45%); }
+.home-dashboard .challenge-section .text-link { min-height: 44px; font-size: 12px; }
+.home-dashboard .journal-index { background: linear-gradient(135deg, #eee1ef, #dde8e9); }
+.home-dashboard .journal-index button { min-height: 52px; color: #4d546b; border-color: rgb(255 255 255 / 65%); font-size: 13px; }
+.home-dashboard .journal-index button > svg { color: inherit; }
+.home-dashboard .journal-columns :is(button,a):focus-visible { outline-color: #51445f; outline-offset: 3px; }
+
+@media (max-width: 760px) {
+  .home-dashboard .journal-heading { min-height: 64px; padding: 0; margin: 8px 0 20px; text-align: left; justify-content: space-between; gap: 12px; }
+  .home-dashboard .journal-heading h1 { font-size: 28px; line-height: 1.2; align-items: flex-start; overflow-wrap: anywhere; }
+  .home-dashboard .journal-heading-actions { position: static; flex-shrink: 0; }
+  .home-dashboard .journal-heading .date-control { width: 44px; padding: 0; justify-content: center; }
+  .home-dashboard .journal-heading .date-control > span:not(.sr-only) { display: none; }
+  .home-dashboard .journal-year { display: none; }
+  .home-dashboard .journal-columns { margin-top: 20px; }
+  .home-dashboard :is(.journal-columns,.journal-main,.journal-aside) { gap: 18px; }
+  .home-dashboard :is(.daily-habits-section,.daily-nutrition-section,.wellness-section,.month-section,.goals-section,.challenge-section,.journal-index,.training-summary,.training-details) { padding: 22px; }
+  .home-dashboard .training-details { padding-top: 0; }
+  .home-dashboard :is(.journal-section-header h2,.journal-index h2) { font-size: 18px; }
+  .home-dashboard .training-title h3 { font-size: 30px; }
+  .home-dashboard .wellness-ledger > button { padding-inline: 10px; }
+  .home-dashboard .wellness-ledger > button:first-child { padding-left: 0; }
+  .home-dashboard .wellness-ledger > button:last-child { padding-right: 0; }
+  .home-dashboard .wellness-ledger strong { font-size: 27px; }
+}
+@media (max-width: 520px) {
+  .home-dashboard .nutrition-ledger { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 24px; }
+  .home-dashboard .nutrition-ledger > div { padding-inline: 16px; }
+  .home-dashboard .nutrition-ledger > div:nth-child(odd) { padding-left: 0; border-left: 0; }
+}
+@media (max-width: 375px) {
+  .home-dashboard :is(.daily-habits-section,.daily-nutrition-section,.wellness-section,.month-section,.goals-section,.challenge-section,.journal-index,.training-summary,.training-details) { padding-inline: 18px; }
+  .home-dashboard .journal-section-header { gap: 6px; flex-wrap: wrap; }
+  .home-dashboard .wellness-ledger strong { font-size: 23px; }
+  .home-dashboard .wellness-ledger > button > div { font-size: 11px; }
+  .home-dashboard .training-title h3 { font-size: 28px; }
+}

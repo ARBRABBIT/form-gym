@@ -9,7 +9,7 @@ import {
   Scale,
   Moon,
   Footprints,
-} from "lucide-react";
+} from "./icons";
 import type { ScreenProps } from "./journal-app";
 import {
   TODAY,
@@ -57,7 +57,7 @@ export default function Dashboard({
       .sort((a, b) => b.date.localeCompare(a.date))[0]?.weight ||
     data.profile["Starting weight (kg)"];
   return (
-    <>
+    <div className="home-dashboard">
       <div className="journal-heading">
         <div>
           <h1>
@@ -245,7 +245,7 @@ export default function Dashboard({
               ))}
             </div>
           </section>
-          <WaterCard />
+          <WaterCard liters={n.water} onOpen={() => navigate("water")} onChange={water => update(store => ({ ...store, nutrition: { ...store.nutrition, [date]: { ...(store.nutrition[date] ?? emptyNutrition()), water } } }))} />
           <section className="wellness-section">
             <header className="journal-section-header">
               <h2>Daily check-in</h2>
@@ -394,7 +394,7 @@ export default function Dashboard({
           </div>
         </aside>
       </div>
-    </>
+    </div>
   );
 }
 export function MiniCalendar({

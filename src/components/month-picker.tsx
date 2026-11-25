@@ -15,7 +15,7 @@ import {
   CalendarDays,
   ChevronDown,
   X,
-} from "lucide-react";
+} from "./icons";
 import PickerWheel from "./picker-wheel";
 import { TODAY, monthLabel } from "@/lib/model";
 

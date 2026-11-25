@@ -11,7 +11,7 @@ import {
   Flag,
   Plus,
   Trash2,
-} from "lucide-react";
+} from "./icons";
 import { Button, Field } from "./ui";
 import DatePicker from "./date-picker";
 import WeightDial from "./weight-dial";

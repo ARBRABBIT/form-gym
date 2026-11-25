@@ -15,7 +15,7 @@ import {
   Search,
   Trash2,
   Users,
-} from "lucide-react";
+} from "./icons";
 import type { ScreenProps } from "./journal-app";
 import {
   TODAY,
@@ -44,6 +44,7 @@ import {
   Sheet,
 } from "./ui";
 import WorkoutTemplatePicker from "./workout-template-picker";
+import WorkoutMuscleModel from "./workout-muscle-model";
 function newActual(plan?: Workout): Workout {
   return {
     ...emptyWorkout(),
@@ -170,6 +171,7 @@ export function WorkoutScreen(p: ScreenProps) {
           </span>
         ))}
       </div>
+      <WorkoutMuscleModel plan={plan} saved={saved} completions={data.setCompletions?.[key]} date={date} />
       {tab === "plan" ? (
         <>
           {plan ? (

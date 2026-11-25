@@ -4,7 +4,6 @@ import {
   Activity,
   ArrowLeft,
   ArrowRight,
-  ArrowUpRight,
   Bell,
   Check,
   Droplet,
@@ -12,7 +11,7 @@ import {
   Scale,
   Watch,
   Wind,
-} from "lucide-react";
+} from "./icons";
 import { emptyHealth, sampleHealth, type HealthMetrics } from "@/lib/health";
 import { dateKey, formatDate } from "@/lib/model";
 import type { ScreenProps } from "./journal-app";
@@ -20,6 +19,8 @@ import { Button, Sheet } from "./ui";
 import DatePicker from "./date-picker";
 import WearableConnect from "./wearable-connect";
 import RecoveryCard from "./recovery-card";
+import BloodHealthCard from "./blood-health-card";
+import LungCard from "./lung-card";
 import {
   MorningCheckIn,
   MorningReminders,
@@ -176,22 +177,18 @@ export default function HealthOverview(p: ScreenProps & { detail?: HealthSection
       {!p.detail ? (
         <div className="health-summary-cards">
           {([
-            { key: "body", title: "Overall body", icon: Activity, value: currentHealth.recovery, unit: "%", label: "Recovery", digits: 0 },
-            { key: "blood", title: "Blood health", icon: Droplet, value: currentHealth.spo2, unit: "%", label: "Blood oxygen", digits: 1 },
-            { key: "lung", title: "Lung", icon: Wind, value: currentHealth.respiratoryRate, unit: "/min", label: "Respiratory rate", digits: 1 },
+            { key: "body", title: "Overall body" },
+            { key: "blood", title: "Blood health" },
+            { key: "lung", title: "Lung" },
           ] as const).map((card) => (
-            <article key={card.key} className={`health-summary-card health-summary-${card.key}`} aria-label={card.title}>
-              <a href={`#health-${card.key}`} aria-label={`${card.title} details`} onClick={(event) => {
+            <article key={card.key} className={`health-summary-card health-summary-${card.key}`} data-nav-tone="dark" aria-label={card.title}>
+              {card.key === "blood" ? <BloodHealthCard key={currentHealth.date} health={currentHealth} sample={!!p.data.sampleData} onOpen={() => p.navigate("health-blood")} /> : <a href={`#health-${card.key}`} aria-label={`${card.title} details`} onClick={(event) => {
                 if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
                 event.preventDefault();
                 p.navigate(`health-${card.key}`);
               }}>
-                {card.key === "body" ? <RecoveryCard health={currentHealth} sample={!!p.data.sampleData} /> : <>
-                <span className="health-summary-title"><card.icon size={17} aria-hidden="true" /><span>{card.title}</span><ArrowUpRight size={15} aria-hidden="true" /></span>
-                <span className="health-summary-value">{display(card.value, card.digits)}{card.value != null && <small>{card.unit}</small>}</span>
-                <span className="health-summary-label">{card.label}</span>
-                </>}
-              </a>
+                {card.key === "body" ? <RecoveryCard health={currentHealth} sample={!!p.data.sampleData} /> : <LungCard health={currentHealth} />}
+              </a>}
             </article>
           ))}
         </div>

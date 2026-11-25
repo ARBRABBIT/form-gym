@@ -10,8 +10,12 @@
   padding: 10px 12px 44px;
   border: 0;
   border-radius: 24px;
-  background: radial-gradient(ellipse at 50% 140%, #eee, transparent 68%), #fff;
-  color: #181818;
+  background:
+    radial-gradient(ellipse at 50% 0%, #343655 0%, transparent 66%),
+    radial-gradient(ellipse at 50% 112%, #a9d9df 0%, transparent 70%),
+    linear-gradient(180deg, #747999 0%, #626fa7 46%, #a6c4d7 100%);
+  box-shadow: inset 0 0 9px 3px rgb(255 255 255 / 80%), inset 0 0 28px 8px rgb(234 247 255 / 38%);
+  color: #f8fbff;
   overflow: hidden;
 }
 
@@ -46,7 +50,7 @@
   border: 0;
   border-radius: 0;
   background: transparent;
-  color: #181818;
+  color: #f8fbff;
   opacity: .15;
   scroll-snap-align: center;
   transition: opacity 240ms ease;
@@ -69,7 +73,7 @@
 }
 
 .date-strip-track > .week-day.selected > strong {
-  color: #181818;
+  color: #fff;
   transform: scale(1.45);
 }
 
@@ -78,7 +82,7 @@
 }
 
 .date-strip-track > .week-day:active { transform: none; }
-.date-strip-track > .week-day:focus-visible { outline: 1px solid #181818; outline-offset: -2px; border-radius: 8px; }
+.date-strip-track > .week-day:focus-visible { outline: 1px solid #fff; outline-offset: -2px; border-radius: 8px; }
 .date-strip-track > .week-day > i { display: none; }
 .date-strip-track > .week-day > span {
   position: absolute;
@@ -98,7 +102,7 @@
   max-width: calc(100% - 32px);
   margin: 0;
   padding: 0;
-  color: #6e6e6e;
+  color: #fff;
   text-align: center;
   font-size: 18px;
   line-height: 1.3;
@@ -111,11 +115,11 @@
   min-width: 32px;
   height: 44px;
   min-height: 44px;
-  color: #606060;
+  color: #f2f7ff;
   background: transparent;
 }
 .scrollable-date-strip > .icon-button:disabled { opacity: .2; }
-.scrollable-date-strip > .icon-button:focus-visible { outline-color: #181818; }
+.scrollable-date-strip > .icon-button:focus-visible { outline-color: #fff; }
 
 @media (max-width: 760px) {
   .scrollable-date-strip {

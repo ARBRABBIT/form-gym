@@ -9,6 +9,17 @@ import "./water-card.css";
 import "./mobile-nav.css";
 import "./date-strip.css";
 import "./recovery-card.css";
+import "./blood-health-card.css";
+import "./lung-card.css";
+import "./icons.css";
+import "./water-screen.css";
+import "./date-picker.css";
+import "./home-dashboard.css";
+import "./sidebar-menu.css";
+import "./journal-detail.css";
+import "./profile-screen.css";
+import "./reminder-sheet.css";
+import "./workout-muscles.css";
 
 const urbanist = localFont({
   src: "../../public/fonts/Urbanist-Variable.ttf",

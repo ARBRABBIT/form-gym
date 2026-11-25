@@ -8,7 +8,7 @@ import {
   Moon,
   ShieldCheck,
   Watch,
-} from "lucide-react";
+} from "./icons";
 import { Button } from "./ui";
 import WhoopConnectionScreen from "./whoop-connection-screen";
 

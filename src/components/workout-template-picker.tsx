@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { ArrowUpRight, LibraryBig, Search } from "lucide-react";
+import { ArrowUpRight, LibraryBig, Search } from "./icons";
 import {
   copyWorkoutPlan,
   type Workout,

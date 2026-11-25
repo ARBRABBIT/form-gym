@@ -157,6 +157,24 @@ Headings and body use Urbanist with Arial and sans-serif fallbacks. Matricha Reg
 - **Label:** fields and common controls. Dense annotations use smaller type, commonly (10–11px).
 - Numeric inputs and exercise rows use tabular numerals. Training titles use (35px), weight (500), line height (1.18), increasing to (40px) on wide screens.
 
+## Interface icons
+
+The interface uses **Hugeicons Stroke Rounded**, selected against the supplied icon reference on 25 November 2026. Rounded endpoints, soft corners, open silhouettes, and a single outline weight establish the app's icon language. Selection is a visual judgment based on the reference; the image does not establish the original icon vendor.
+
+| Library researched | Relevant capabilities | Decision for Form |
+| --- | --- | --- |
+| [Hugeicons](https://hugeicons.com/docs/integrations/react/quick-start) | Free Stroke Rounded set; React renderer; adjustable size and stroke. [Free-set MIT license](https://hugeicons.com/docs/faqs/license-questions). | Chosen for the closest rounded geometry and coverage of health, training, nutrition, camera, and navigation symbols. |
+| [Phosphor](https://github.com/phosphor-icons/react) | Six weights including light, regular, bold, fill, and duotone; React support and tree shaking. | Strong choice when a product needs several weights; this app uses one outline family. |
+| [Lucide](https://lucide.dev/guide/react/) | Optimized inline SVG components, configurable strokes, TypeScript, and tree shaking. | Existing library; replaced alongside custom navigation glyphs to give the entire app the selected rounded family. |
+| [Tabler](https://docs.tabler.io/icons/libraries/react) | React components with configurable size, color, and stroke; per-icon tree shaking. | Broad utility coverage; Hugeicons is the closer visual match for this reference. |
+| [Iconoir](https://iconoir.com/docs/packages/iconoir-react) | 24px grid, 1.5 default stroke, React provider, and MIT license. | A useful lighter alternative; Hugeicons better matches the reference's soft, substantial outlines. |
+
+Use named imports from `src/components/icons.tsx` for every interface symbol. This module statically imports individual Hugeicons assets, sets a default 1.8 stroke on the 24px grid, forwards SVG props and refs, and hides decorative icons from assistive technology. Labeled symbols receive an image role. Keep accessible names on icon-only buttons.
+
+Use 16–20px icons for compact controls and 24–30px icons in primary navigation. Inherit foreground color from the control; use its existing selected surface and label for active state. Keep the Home, utensils, dumbbell, and profile navigation meanings. Do not introduce another icon family or hand-drawn interface glyphs. Charts, interactive measurement dials, and fillable water graphics remain data visualizations with their own SVG geometry.
+
+Installed packages: `@hugeicons/react` 1.1.10 and `@hugeicons/core-free-icons` 4.4.0. Use the MIT-licensed free pack; its license ships in the dependency. No Pro assets are required.
+
 ## Layout
 
 The desktop shell has a fixed navigation rail (224px), an (88px) topbar and a centered main area with maximum width (1510px). Main padding is (40px 48px 0). Wide screens at (1500px) increase horizontal padding to (60px).

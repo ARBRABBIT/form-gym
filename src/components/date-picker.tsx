@@ -17,7 +17,7 @@ import {
   ChevronDown,
   X,
   Check,
-} from "lucide-react";
+} from "./icons";
 import { TODAY, formatDate, monthLabel } from "@/lib/model";
 
 const keyFor = (date: Date) =>
@@ -200,7 +200,7 @@ export default function DatePicker({
         createPortal(
           <>
             <div
-              className="month-picker-backdrop"
+              className="month-picker-backdrop date-picker-backdrop"
               aria-hidden="true"
               onClick={close}
             />

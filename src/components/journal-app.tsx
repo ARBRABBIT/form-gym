@@ -16,6 +16,7 @@ import {
   CheckCheck,
   ChevronDown,
   Dumbbell,
+  Droplet,
   Flag,
   House,
   LibraryBig,
@@ -27,8 +28,9 @@ import {
   Sparkles,
   Target,
   Users,
+  User,
   X,
-} from "lucide-react";
+} from "./icons";
 import gsap from "gsap";
 import { createPortal } from "react-dom";
 import {
@@ -55,6 +57,9 @@ import { Trainer, WorkoutScreen } from "./workouts";
 import WorkoutLibrary from "./workout-library";
 import Onboarding, { AccountEntry } from "./onboarding";
 import MobileNavIcon from "./mobile-nav-icon";
+import WaterScreen from "./water-screen";
+import NavGlassOptics from "./nav-glass-optics";
+import ProfileScreen from "./profile-screen";
 export type ScreenProps = {
   data: Store;
   update: (fn: (s: Store) => Store, message?: string) => void;
@@ -64,9 +69,11 @@ export type ScreenProps = {
 };
 const nav = [
   { id: "overview", label: "Overview", icon: House },
+  { id: "profile", label: "My profile", icon: User },
   { id: "workout", label: "My workouts", icon: Dumbbell },
   { id: "library", label: "Workout library", icon: LibraryBig },
   { id: "nutrition", label: "Nutrition & wellness", icon: Leaf },
+  { id: "water", label: "Water", icon: Droplet },
   { id: "planner", label: "Monthly planner", icon: CalendarDays },
   { id: "habits", label: "Habit tracker", icon: CheckCheck },
   { id: "challenge", label: "100-day challenge", icon: Flag },
@@ -139,7 +146,7 @@ export default function JournalApp() {
     if (!data || !content.current) return;
     const origin = launchOrigin.current;
     launchOrigin.current = null;
-    if (origin || view.startsWith("health-")) {
+    if (origin || view.startsWith("health-") || view === "water" || view === "profile") {
       window.scrollTo({ top: 0, behavior: "instant" });
       const heading = content.current.querySelector<HTMLElement>("h1");
       heading?.setAttribute("tabindex", "-1");
@@ -326,6 +333,12 @@ export default function JournalApp() {
   const healthSection = view.startsWith("health-") && ["body", "blood", "lung"].includes(view.slice(7)) ? view.slice(7) as HealthSection : undefined;
   const active = nav.find((n) => n.id === view);
   const render = () => {
+    if (view === "profile") return <ProfileScreen {...props} onSignOut={() => {
+      setData(initialStore());
+      setSignedIn(false);
+      setDemoMode(false);
+      navigate("overview");
+    }} />;
     if (healthSection) return <HealthOverview {...props} detail={healthSection} />;
     if (view === "library" || view === "trainer-library")
       return <WorkoutLibrary {...props} />;
@@ -345,6 +358,8 @@ export default function JournalApp() {
         return <Review {...props} />;
       case "nutrition":
         return <NutritionScreen {...props} />;
+      case "water":
+        return <WaterScreen {...props} />;
       case "onboarding":
         return <Onboarding {...props} />;
       case "workout":
@@ -355,7 +370,7 @@ export default function JournalApp() {
   };
   return (
     <>
-      <div className="app-shell" ref={shell}>
+      <div className={`app-shell${view === "water" ? " water-view" : ""}`} ref={shell}>
         <aside id="journal-navigation" className={`sidebar ${menu ? "mobile-open" : ""}`}>
           <div className="sidebar-top">
             <a
@@ -399,8 +414,9 @@ export default function JournalApp() {
                 key={item.id}
                 onClick={() => navigate(item.id)}
                 className={`nav-item ${view === item.id ? "active" : ""}`}
+                aria-current={view === item.id ? "page" : undefined}
               >
-                <item.icon size={19} strokeWidth={1.7} />
+                <item.icon size={19} />
                 <span>{item.label}</span>
                 {view === item.id && <span className="nav-dot" />}
               </button>
@@ -455,6 +471,8 @@ export default function JournalApp() {
               <button
                 className="icon-button mobile-only"
                 aria-label="Open navigation"
+                aria-expanded={menu}
+                aria-controls="journal-navigation"
                 onClick={() => setMenu(true)}
               >
                 <Menu size={21} />
@@ -530,7 +548,7 @@ export default function JournalApp() {
             role="tabpanel"
             aria-labelledby={trainer ? "trainer-tab" : "member-tab"}
           >
-            <div className="screen-content" key={`${role}-${view}`}>
+            <div className={`screen-content${view !== "overview" && view !== "water" && view !== "onboarding" ? " journal-detail-screen" : ""}`} data-screen={view} key={`${role}-${view}`}>
               {render()}
             </div>
             <footer className="page-footer">
@@ -543,38 +561,43 @@ export default function JournalApp() {
           </main>
         </div>
         <nav className="bottom-nav" aria-label="Mobile navigation">
+          <NavGlassOptics />
+          <div className="bottom-nav-tabs">
           {[
             {
               id: trainer ? "trainer" : "overview",
-              label: trainer ? "Members" : "Today",
+              label: trainer ? "Members" : "Home",
             },
-            { id: "nutrition", label: "Nutrition" },
             { id: "workout", label: "Workout" },
-            { id: "menu", label: "Journal" },
+            { id: "nutrition", label: "Food" },
+            { id: "profile", label: "Profile" },
           ]
-            .filter((i) => !trainer || i.id === "trainer" || i.id === "menu")
+            .filter((i) => !trainer || i.id === "trainer" || i.id === "profile")
             .map((item) => {
-              const selected = item.id === "menu"
-                ? menu || (!["overview", "workout", "nutrition", "trainer"].includes(view) && !healthSection)
-                : !menu && (view === item.id || (item.id === "overview" && !!healthSection));
+              const selected = !menu && (view === item.id || (item.id === "overview" && !!healthSection));
               return (
                 <button
                   key={item.id}
                   type="button"
                   aria-label={item.label}
-                  aria-current={selected && item.id !== "menu" ? "page" : undefined}
-                  aria-expanded={item.id === "menu" ? menu : undefined}
-                  aria-controls={item.id === "menu" ? "journal-navigation" : undefined}
-                  onClick={() =>
-                    item.id === "menu" ? setMenu(true) : navigate(item.id)
-                  }
+                  aria-current={selected ? "page" : undefined}
+                  onClick={() => navigate(item.id)}
                   className={selected ? "selected" : ""}
                 >
-                  <MobileNavIcon name={item.id} active={selected} />
+                  <MobileNavIcon name={item.id} />
                   <span className="bottom-nav-label">{item.label}</span>
                 </button>
               );
             })}
+          </div>
+          <button
+            type="button"
+            className="bottom-nav-add"
+            aria-label="Open water tracker"
+            onClick={() => navigate("water")}
+          >
+            <Plus aria-hidden="true" />
+          </button>
         </nav>
         {toast && (
           <div className="toast" role="status">

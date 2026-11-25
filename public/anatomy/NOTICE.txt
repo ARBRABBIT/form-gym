@@ -1,0 +1,8 @@
+Male Muscular Anatomy – 3D Model
+Author: dakarmirajendra (https://sketchfab.com/dakarmirajendra)
+Source: https://sketchfab.com/3d-models/male-muscular-anatomy-3d-model-627f19e053d44e60ad5e4274235b63cb
+License indicated by supplied GLB: SKETCHFAB Standard (https://sketchfab.com/licenses)
+
+User-supplied model. Original file is unchanged. Form bakes world transforms, normalizes scale, partitions triangles using manually traced muscle contours, and compresses the result with Meshopt. Regions illustrate exercise associations and are not precise muscle segmentation.
+
+Source SHA-256: 7032210a4e6c5d35c931f15feeaf4e6dcb4c1d30afb396c1660efb7b70f8d53e
