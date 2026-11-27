@@ -434,3 +434,44 @@ only above the neck, softening the formerly white scalp and cheek patches.
 Vertex colors keep the body's original tendon and bone finish unchanged; eyes,
 iris, teeth and workout muscle materials retain their separate roles. The head
 keeps its source geometry and the existing balanced portrait lighting.
+
+
+## Shared trainer workspace
+
+Trainer member details reuse the member’s health cards, body composition, nutrition forms, water tracker, muscle map, measurement comparison and journal screens. A named member heading and selected date establish context above a wrapping navigation row: Body & health, Workouts, Nutrition & wellness, Water, Progress, Member journal and Connections. Progress and Journal have compact secondary navigation. Preserve the ruled sections, existing fonts and health-card finishes. The body overview groups weight, food totals and training status with direct food/workout edit actions. Device setup is explicitly pending where integrations are unavailable. Real accounts show save/sync state and review controls for conflicting edits; sample access is labelled session-only.
+
+On phones, the selected member’s sections sit in a fixed two-row bottom menu with Health, Workouts, Food, Water, Progress, Journal and Devices. The full accessible names are preserved. The member name/date stays in the menu, the application’s general bottom bar is hidden in member details, and content reserves clearance plus the safe-area inset. Section changes return to the top. Mobile is the sole design target for this workflow.
+
+The trainer overview shows three stacked mobile summary cards for weight, food and training. Each has a matching transparent 3D scale, food bowl or dumbbell rendered at 96px, restrained lavender/peach/teal card tints, and clear value/source text. The date control is a 48px icon-only calendar button aligned to the right; its accessible label and selected-date description remain available. Signup defaults to a member account; an optional trainer signup link replaces the account-type dropdown.
+
+
+## Current trainer member navigation
+
+The approved mobile navigation supersedes the earlier seven-item menu. Use five primary tabs: Overview, Workouts, Food, Progress and More, with the same icon family. More opens Water, Journal and Devices as individual pages. The header shows the current section, member name and selected date; Overview keeps the member name as its title. Header Back returns to the parent page, and each tab/parent retains its scroll position. The member profile avatar opens a separate profile page. Workout assignments, actual logs and meal editors have their own deeper pages; saving returns to the source section. Member food editing remains a sheet in the member’s own workspace.
+
+A compact trainer date strip replaces the plain calendar-only row. It shows a nearby seven-day strip, entry markers, previous/next-day controls, Today, and an accessible calendar button. Dates update all member sections and stay unchanged when navigating. Editing pages show a fixed entry date. Styling follows the existing lavender/teal glass controls, with 44px date targets and a single-row bottom menu.
+
+Trainer date controls: show the day strip only on Overview. Its toolbar contains the month/year and calendar icon; remove visible previous/next arrows, Today shortcut and footer legend. Other sections show a right-aligned icon-only calendar, disabled while editing an entry. Entry dots stay on the day buttons.
+
+Trainer More is now a floating, body-portaled icon menu above the glass navigation, rather than a separate page. It preserves the current page/date/scroll until a destination is chosen. Water, Journal and Devices use icon-only tiles with accessible labels, an outside-tap scrim and a separate circular close action. Menu focus is trapped; Escape closes and restores the More trigger. A short rise/scale/fade, closing fade and local tap feedback provide micro animations, with reduced-motion and live preference changes respected. Trainer bottom navigation is icon-only, retaining aria-labels and white selected capsules.
+
+The Overview date strip now contains every day of the selected month, from day 1 through month end. Touch uses native momentum and proximity snapping; mouse dragging and wheel input are supported. Date selection updates records immediately, then centers with a cancelable 480ms ease-out and a 240ms local scale/opacity acknowledgment. New gestures interrupt programmatic scrolling, dragging never selects a day accidentally, and live reduced-motion preferences stop the effects. Home/End select the first/last day of the month.
+
+Member detail date controls now live in the header immediately before the profile avatar. Overview’s month strip contains only scrollable day buttons, with no month/year title or calendar control inside it. The selected date stays under the page title; the header calendar stays disabled while editing.
+
+
+Monthly goal ordinals retain their existing 68px type and 58px dial layout,
+but render at 1.35 scale anchored to the bottom center. This enlarges only
+the numbers; card dimensions, text spacing and surface styling stay unchanged.
+
+
+Habit tracker: keep month selection above a compact view-switcher row. Place
+the selected weekday and month/day at the right of that row (the selected month
+in monthly view). Each habit is a separate existing glass panel with 16px gaps,
+retaining the current palette, typography, rounded controls and month totals.
+A vertical Hugeicons three-dot disclosure sits at each card’s top-right, with
+a transparent background, no border or shadow, and a 44px touch target. Its white
+glass popover contains Delete text. Monthly totals use 48px Roboto Condensed
+with the existing small Urbanist caption. Reserve 28px above the habit input
+and total row so both sit below the top-right menu without overlap. Delete opens the existing confirmation sheet
+with the habit name, Cancel and Delete habit. Cancellation preserves all data.

@@ -10,6 +10,7 @@ import {
   Activity,
   Bell,
   ArrowUpRight,
+  ArrowLeft,
   BookOpen,
   CalendarDays,
   ChartNoAxesCombined,
@@ -25,6 +26,7 @@ import {
   Menu,
   Plus,
   Settings2,
+  Search,
   ShieldCheck,
   Sparkles,
   Target,
@@ -36,7 +38,6 @@ import gsap from "gsap";
 import { createPortal } from "react-dom";
 import {
   initialStore,
-  withSamplePreview,
   newMemberStore,
   TODAY,
   formatDate,
@@ -54,17 +55,26 @@ import {
   Review,
   NutritionScreen,
 } from "./journal-screens";
-import { Trainer, WorkoutScreen } from "./workouts";
+import { WorkoutScreen } from "./workouts";
 import WorkoutLibrary from "./workout-library";
 import Onboarding, { AccountEntry } from "./onboarding";
 import MobileNavIcon from "./mobile-nav-icon";
 import WaterScreen from "./water-screen";
 import NavGlassOptics from "./nav-glass-optics";
 import ProfileScreen from "./profile-screen";
+import TrainerStudio from "./trainer-studio";
 import MemberStudio, {workspace} from "./member-studio";
 import {requestWorkflowNavigation} from "@/lib/workflow-navigation";
-import TrainerWorkspace from "./trainer-workspace";
+import DatePicker from "./date-picker";
+import TrainerWorkspace, { type TrainerNavigation } from "./trainer-workspace";
+import JournalSharing from "./journal-sharing";
+import JournalSyncStatus from "./journal-sync-status";
+import { useJournalSync, flushAllJournals } from "@/lib/use-journal-sync";
+import type { Account } from "@/lib/accounts";
 export type ScreenProps = {
+  healthMemberId?: string;
+  trainerMode?: boolean;
+  persistent?: boolean;
   data: Store;
   update: (fn: (s: Store) => Store, message?: string) => void;
   navigate: (v: string) => void;
@@ -92,7 +102,7 @@ const nav = [
   { id: "review", label: "Monthly review", icon: BookOpen },
 ];
 export default function JournalApp() {
-  const [data, setData] = useState<Store | null>(null),
+  const [demoData, setData] = useState<Store | null>(null),
     [view, setView] = useState("overview"),
     [signedIn, setSignedIn] = useState(false),
     [demoMode, setDemoMode] = useState(false),
@@ -101,10 +111,36 @@ export default function JournalApp() {
     [toast, setToast] = useState(""),
     [toastRevision, setToastRevision] = useState(0),
     [menu, setMenu] = useState(false);
+  const [trainerMember, setTrainerMember] = useState<{
+    id: string;
+    name: string;
+  } | null>(null);
+  const [trainerNavigation, setTrainerNavigation] =
+    useState<TrainerNavigation | null>(null);
+  const [memberProfileRequest, setMemberProfileRequest] = useState(0);
+  const [trainerSearchQuery, setTrainerSearchQuery] = useState("");
+  const [account, setAccount] = useState<Account | null>(null);
+  const [sessionLoading, setSessionLoading] = useState(true);
+  const sync = useJournalSync(account?.id, !!account);
+  const data = account ? sync.data : demoData;
   useEffect(() => {
-    if (signedIn && data?.onboarded && !data.sampleData)
-      setData((current) => current ? withSamplePreview(current) : current);
-  }, [signedIn, data?.onboarded, data?.sampleData]);
+    fetch("/api/account", { cache: "no-store" })
+      .then((r) => r.json())
+      .then((body) => {
+        if (body.account) {
+          setAccount(body.account);
+          setSignedIn(true);
+          if (body.account.role === "trainer") {
+            setRole("trainer");
+            location.hash = "trainer";
+          }
+        }
+      })
+      .catch(() =>
+        setToast("Unable to check your account. Please try logging in."),
+      )
+      .finally(() => setSessionLoading(false));
+  }, []);
   const shell = useRef<HTMLDivElement>(null);
   const launchCoverRef = useRef<HTMLDivElement>(null);
   const [launchCover, setLaunchCover] = useState<{
@@ -117,9 +153,12 @@ export default function JournalApp() {
   const content = useRef<HTMLElement>(null),
     inputMode = useRef<"pointer" | "keyboard">("pointer"),
     toastTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  useEffect(() => () => {
-    if (toastTimer.current) clearTimeout(toastTimer.current);
-  }, []);
+  useEffect(
+    () => () => {
+      if (toastTimer.current) clearTimeout(toastTimer.current);
+    },
+    [],
+  );
   useEffect(() => {
     const pointer = () => {
       inputMode.current = "pointer";
@@ -144,13 +183,12 @@ export default function JournalApp() {
     setData(initialStore());
     const hash = () => {
       const requested = location.hash.slice(1) || "overview";
-      const retiredHealthView = requested.startsWith("health-") && !["body", "blood", "lung"].includes(requested.slice(7));
+      const retiredHealthView =
+        requested.startsWith("health-") &&
+        !["body", "blood", "lung"].includes(requested.slice(7));
       const v = retiredHealthView ? "overview" : requested;
       if (retiredHealthView) history.replaceState(null, "", "#overview");
       setView(v);
-      setRole(
-        v === "trainer" || v.startsWith("trainer-") ? "trainer" : "member",
-      );
     };
     hash();
     window.addEventListener("hashchange", hash);
@@ -160,7 +198,12 @@ export default function JournalApp() {
     if (!data || !content.current) return;
     const origin = launchOrigin.current;
     launchOrigin.current = null;
-    if (origin || view.startsWith("health-") || view === "water" || view === "profile") {
+    if (
+      origin ||
+      view.startsWith("health-") ||
+      view === "water" ||
+      view === "profile"
+    ) {
       window.scrollTo({ top: 0, behavior: "instant" });
       const heading = content.current.querySelector<HTMLElement>("h1");
       heading?.setAttribute("tabindex", "-1");
@@ -224,8 +267,12 @@ export default function JournalApp() {
     }, shell);
     return () => ctx.revert();
   }, [view, role, !!data, signedIn, demoMode]);
-  const navigate = useCallback((v: string) => {
-    requestWorkflowNavigation(()=>{
+  const navigate = useCallback(async (v: string) => {
+    if (!(await flushAllJournals())) {
+      setToast("Save or resolve your journal changes before leaving.");
+      return;
+    }
+    requestWorkflowNavigation(() => {
     setView(v);
     location.hash = v;
     setMenu(false);
@@ -281,50 +328,76 @@ export default function JournalApp() {
         document.body,
       )
     : null;
-  const update = useCallback((fn: (s: Store) => Store, message?: string) => {
-    setData((s) => (s ? fn(s) : s));
-    if (message) {
-      setToast(message);
-      setToastRevision(revision => revision + 1);
-      if (toastTimer.current) clearTimeout(toastTimer.current);
-      toastTimer.current = setTimeout(() => setToast(""), 3500);
-    }
-  }, []);
-  if (!data)
+  const update = useCallback(
+    (fn: (s: Store) => Store, message?: string) => {
+      if (account) sync.update(fn);
+      else setData((s) => (s ? fn(s) : s));
+      if (message) {
+        setToast(message);
+        setToastRevision((revision) => revision + 1);
+        if (toastTimer.current) clearTimeout(toastTimer.current);
+        toastTimer.current = setTimeout(() => setToast(""), 3500);
+      }
+    },
+    [account, sync.update],
+  );
+  if (!data || sessionLoading)
     return (
       <div className="loading">
         <div className="wordmark">
           form<span>.</span>
         </div>
-        <p>Opening your journal…</p>
+        <p>{account && sync.error ? sync.status : "Opening your journal…"}</p>
+        {account && sync.error && (
+          <Button
+            onClick={() => {
+              setAccount(null);
+              setSignedIn(false);
+              setDemoMode(false);
+            }}
+          >
+            Return to login
+          </Button>
+        )}
       </div>
     );
-  const props: ScreenProps = { data, update, navigate, date, setDate };
+  const props: ScreenProps = {
+    data,
+    update,
+    navigate,
+    date,
+    setDate,
+    persistent: !!account,
+  };
   if (!signedIn && !demoMode)
     return (
       <AccountEntry
-        onDemo={() => {
+        onDemo={(demoRole) => {
+          setRole(demoRole);
           setDemoMode(true);
+          void navigate(demoRole === "trainer" ? "trainer" : "overview");
           window.scrollTo({ top: 0, behavior: "instant" });
         }}
-        onEnter={(email, name, signup) => {
-          const next = !signup && data.account?.email === email
-            ? data
-            : newMemberStore(email, signup ? name : "");
-          update(() => next);
+        onEnter={async (email, name, signup, password, role) => {
+          const response = await fetch("/api/account", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, name, signup, password, role }),
+          });
+          const body = await response.json();
+          if (!response.ok) throw new Error(body.error);
+          setAccount(body.account);
           setSignedIn(true);
           setDemoMode(false);
-          navigate(
-            next.onboarded
-              ? location.hash === "#morning"
-                ? "morning"
-                : "overview"
-              : "onboarding",
-          );
+          setRole(body.account.role);
+          navigate(body.account.role === "trainer" ? "trainer" : "overview");
         }}
       />
     );
-  if ((signedIn && !data.onboarded) || view === "onboarding")
+  if (
+    (signedIn && account?.role !== "trainer" && !data.onboarded) ||
+    view === "onboarding"
+  )
     return (
       <>
         <Onboarding
@@ -342,26 +415,68 @@ export default function JournalApp() {
         {launchOverlay}
       </>
     );
-  const trainer = role === "trainer";
-  const switchRole = (r: string) => requestWorkflowNavigation(()=>{
-    setRole(r);setView(r === "trainer" ? "trainer" : "overview");location.hash=r === "trainer" ? "trainer" : "overview";setMenu(false);
-  });
-  const healthSection = view.startsWith("health-") && ["body", "blood", "lung"].includes(view.slice(7)) ? view.slice(7) as HealthSection : undefined;
+  const trainer =
+    role === "trainer" && (!account || account.role === "trainer");
+  const memberDetail = trainer && view === "trainer" ? trainerMember : null;
+  const signOut = async () => {
+    if (!(await flushAllJournals())) {
+      setToast("Save or resolve your journal changes before logging out.");
+      return;
+    }
+    if (account) {
+      const response = await fetch("/api/account", { method: "DELETE" });
+      if (!response.ok) {
+        setToast("Unable to log out. Try again.");
+        return;
+      }
+    }
+    setAccount(null);
+    setMenu(false);
+    setData(initialStore());
+    setSignedIn(false);
+    setDemoMode(false);
+    setRole("member");
+    setView("overview");
+    location.hash = "overview";
+  };
+  const healthSection =
+    view.startsWith("health-") &&
+    ["body", "blood", "lung"].includes(view.slice(7))
+      ? (view.slice(7) as HealthSection)
+      : undefined;
   const active = nav.find((n) => n.id === view);
   const render = () => {
-    if (view === "profile") return <ProfileScreen {...props} onSignOut={() => {
-      setData(initialStore());
-      setSignedIn(false);
-      setDemoMode(false);
-      navigate("overview");
-    }} />;
-    if (healthSection) return <HealthOverview {...props} detail={healthSection} />;
+    if (view === "profile")
+      return (
+        <>
+          {account?.role === "member" && <JournalSharing />}
+          <ProfileScreen
+            {...props}
+            persistent={!!account}
+            onSignOut={signOut}
+          />
+        </>
+      );
+    if (healthSection)
+      return <HealthOverview {...props} detail={healthSection} />;
     if (view === "library" || view === "trainer-library")
       return <WorkoutLibrary {...props} />;
-    if (view === "trainer-nutrition") return <TrainerWorkspace {...props} mode="nutrition"/>;
-    if (view === "trainer-feedback") return <TrainerWorkspace {...props} mode="feedback"/>;
+    if (view === "trainer-nutrition") return <TrainerStudio {...props} mode="nutrition"/>;
+    if (view === "trainer-feedback") return <TrainerStudio {...props} mode="feedback"/>;
     if (["membership","classes","attendance","meal-plan","feedback","inbox"].includes(view)) return <MemberStudio {...props} view={view}/>;
-    if (trainer) return <Trainer {...props} />;
+    if (trainer)
+      return (
+        <TrainerWorkspace
+          {...props}
+          account={account}
+          member={trainerMember}
+          onNavigationChange={setTrainerNavigation}
+          profileRequest={memberProfileRequest}
+          onMemberChange={setTrainerMember}
+          searchQuery={trainerSearchQuery}
+          onClearSearch={() => setTrainerSearchQuery("")}
+        />
+      );
     switch (view) {
       case "planner":
         return <Planner {...props} />;
@@ -389,13 +504,22 @@ export default function JournalApp() {
   };
   return (
     <>
-      <div className={`app-shell${view === "water" ? " water-view" : ""}`} ref={shell}>
-        <aside id="journal-navigation" className={`sidebar ${menu ? "mobile-open" : ""}`}>
+      <div
+        className={`app-shell${view === "water" ? " water-view" : ""}${trainer && view !== "trainer-library" ? " trainer-members-view" : ""}${memberDetail ? " trainer-member-detail" : ""}`}
+        ref={shell}
+      >
+        <aside
+          id="journal-navigation"
+          className={`sidebar ${menu ? "mobile-open" : ""}`}
+        >
           <div className="sidebar-top">
             <a
               className="wordmark"
-              href="#overview"
-              onClick={() => switchRole("member")}
+              href={trainer ? "#trainer" : "#overview"}
+              onClick={(event) => {
+                event.preventDefault();
+                void navigate(trainer ? "trainer" : "overview");
+              }}
             >
               form<span>.</span>
             </a>
@@ -454,21 +578,17 @@ export default function JournalApp() {
                 </span>
               </button>
             )}
-            <button
-              className="nav-item"
-              onClick={() => {
-                      setData(initialStore());
-                setSignedIn(false);
-                setDemoMode(false);
-                navigate("overview");
-              }}
-            >
+            <button className="nav-item" onClick={signOut}>
               Log out
             </button>
             <div className="profile">
               <span className="avatar">
                 {trainer
-                  ? "KM"
+                  ? (account?.name || "Kabir Mehta")
+                      .split(/\s+/)
+                      .slice(0, 2)
+                      .map((part) => part[0])
+                      .join("")
                   : (data.profile.Name || "Arjun Sharma")
                       .split(" ")
                       .map((s) => s[0])
@@ -476,9 +596,15 @@ export default function JournalApp() {
                       .join("")}
               </span>
               <div>
-                <strong>{trainer ? "Kabir Mehta" : data.profile.Name}</strong>
+                <strong>
+                  {trainer ? account?.name || "Kabir Mehta" : data.profile.Name}
+                </strong>
                 <span>
-                  {trainer ? "Personal trainer" : "Member · demo journal"}
+                  {trainer
+                    ? "Personal trainer"
+                    : account
+                      ? "Member"
+                      : "Member · sample journal"}
                 </span>
               </div>
               <Settings2 size={16} />
@@ -489,73 +615,91 @@ export default function JournalApp() {
         <div className="main-shell">
           <header className="topbar">
             <div className="breadcrumb">
-              <button
-                className="icon-button mobile-only"
-                aria-label="Open navigation"
-                aria-expanded={menu}
-                aria-controls="journal-navigation"
-                onClick={() => setMenu(true)}
-              >
-                <Menu size={21} />
-              </button>
+              {memberDetail ? (
+                <button
+                  type="button"
+                  className="icon-button member-detail-back"
+                  aria-label={trainerNavigation?.backLabel || "Back to members"}
+                  onClick={async () => {
+                    if (await flushAllJournals()) {
+                      if (trainerNavigation) trainerNavigation.onBack();
+                      else setTrainerMember(null);
+                    }
+                  }}
+                >
+                  <ArrowLeft size={21} />
+                </button>
+              ) : (
+                <button
+                  className="icon-button mobile-only"
+                  aria-label="Open navigation"
+                  aria-expanded={menu}
+                  aria-controls="journal-navigation"
+                  onClick={() => setMenu(true)}
+                >
+                  <Menu size={21} />
+                </button>
+              )}
               <span className="desktop-only">My journal</span>
               <span className="breadcrumb-divider desktop-only">/</span>
-              <strong>
-                {view === "trainer-library"
-                  ? "Workout library"
-                  : trainer
-                    ? "Trainer space"
-                    : healthSection ? "Health details" : active?.label || "Set up your journal"}
-              </strong>
+              {trainer && view !== "trainer-library" ? (
+                <div className="member-header-text">
+                  <h1
+                    className="members-header-title"
+                    id="member-page-title"
+                    tabIndex={-1}
+                  >
+                    {memberDetail
+                      ? trainerNavigation?.title || memberDetail.name
+                      : "My members"}
+                  </h1>
+                  {memberDetail && trainerNavigation && (
+                    <p>{trainerNavigation.subtitle}</p>
+                  )}
+                </div>
+              ) : (
+                <strong>
+                  {view === "trainer-library"
+                    ? "Workout library"
+                    : trainer
+                      ? "Trainer space"
+                      : healthSection
+                        ? "Health details"
+                        : active?.label || "Set up your journal"}
+                </strong>
+              )}
             </div>
             <div className="topbar-right">
               {!trainer&&<button className="icon-button" aria-label="Open notifications" onClick={()=>navigate("inbox")}><Bell size={19}/>{workspace(data).notifications.some(n=>!n.read)&&<span className="workflow-notification-dot"/>}</button>}
               <span className="saved-state">
                 <span className="status-dot" />
-                Current session only
+                {account
+                  ? trainer
+                    ? "Saved member journals"
+                    : sync.status
+                  : "Sample session"}
               </span>
-              <div
-                className="view-tabs"
-                role="tablist"
-                aria-label="Dashboard role"
-                onKeyDown={(e) => {
-                  if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
-                    e.preventDefault();
-                    switchRole(trainer ? "member" : "trainer");
-                    document
-                      .getElementById(trainer ? "member-tab" : "trainer-tab")
-                      ?.focus();
-                  }
-                }}
-              >
-                <button
-                  id="member-tab"
-                  role="tab"
-                  aria-controls="dashboard-panel"
-                  tabIndex={!trainer ? 0 : -1}
-                  aria-selected={!trainer}
-                  className={!trainer ? "selected" : ""}
-                  onClick={() => switchRole("member")}
-                >
-                  <House size={14} />
-                  <span>Member view</span>
-                </button>
-                <button
-                  id="trainer-tab"
-                  role="tab"
-                  aria-controls="dashboard-panel"
-                  tabIndex={trainer ? 0 : -1}
-                  aria-selected={trainer}
-                  className={trainer ? "selected" : ""}
-                  onClick={() => switchRole("trainer")}
-                >
-                  <Users size={14} />
-                  <span>Trainer view</span>
-                </button>
-              </div>
+              {trainer && view !== "trainer-library" && !memberDetail && (
+                <label className="trainer-header-search">
+                  <Search size={19} aria-hidden="true" />
+                  <input
+                    type="search"
+                    aria-label="Search members"
+                    placeholder="Search members"
+                    value={trainerSearchQuery}
+                    onChange={(event) =>
+                      setTrainerSearchQuery(event.target.value)
+                    }
+                  />
+                </label>
+              )}
               <span className="avatar small">
                 {trainer
-                  ? "KM"
+                  ? (account?.name || "Kabir Mehta")
+                      .split(/\s+/)
+                      .slice(0, 2)
+                      .map((part) => part[0])
+                      .join("")
                   : (data.profile.Name || "You")
                       .split(" ")
                       .map((s) => s[0])
@@ -563,21 +707,62 @@ export default function JournalApp() {
                       .join("")}
               </span>
             </div>
+            {memberDetail && (
+              <div className="member-header-actions">
+                <DatePicker
+                  value={date}
+                  onChange={setDate}
+                  label="Member journal date"
+                  max="2100-12-31"
+                  iconOnly
+                  disabled={trainerNavigation?.dateLocked}
+                />
+                <button
+                  type="button"
+                  className="member-profile-avatar"
+                  aria-label={`View ${memberDetail.name}’s profile`}
+                  onClick={() =>
+                    setMemberProfileRequest((request) => request + 1)
+                  }
+                >
+                  {memberDetail.name
+                    .trim()
+                    .split(/\s+/)
+                    .slice(0, 2)
+                    .map((part) => part[0])
+                    .join("")}
+                </button>
+              </div>
+            )}
           </header>
           <main
             ref={content}
             id="dashboard-panel"
-            role="tabpanel"
-            aria-labelledby={trainer ? "trainer-tab" : "member-tab"}
+            role="region"
+            aria-label={
+              memberDetail
+                ? undefined
+                : trainer
+                  ? "Trainer workspace"
+                  : "Member workspace"
+            }
+            aria-labelledby={memberDetail ? "member-page-title" : undefined}
           >
-            <div className={`screen-content${view !== "overview" && view !== "water" && view !== "onboarding" ? " journal-detail-screen" : ""}`} data-screen={view} key={`${role}-${view}`}>
+            <div
+              className={`screen-content${view !== "overview" && view !== "water" && view !== "onboarding" ? " journal-detail-screen" : ""}`}
+              data-screen={view}
+              key={`${role}-${view}`}
+            >
+              {account && !trainer && <JournalSyncStatus sync={sync} />}
               {render()}
             </div>
             <footer className="page-footer">
               <span className="footer-brand">form.</span>
               <span>Training, nutrition & the work between.</span>
               <span className="demo-note">
-                {data.sampleData ? "Sample data throughout · browser prototype" : "Personal journal · browser prototype"}
+                {account
+                  ? "Saved journal · shared edits sync automatically"
+                  : "Sample data · session only"}
               </span>
             </footer>
           </main>
@@ -585,44 +770,56 @@ export default function JournalApp() {
         <nav className="bottom-nav" aria-label="Mobile navigation">
           <NavGlassOptics />
           <div className="bottom-nav-tabs">
-          {[
-            {
-              id: trainer ? "trainer" : "overview",
-              label: trainer ? "Members" : "Home",
-            },
-            { id: "workout", label: "Workout" },
-            { id: "nutrition", label: "Food" },
-            { id: "profile", label: "Profile" },
-          ]
-            .filter((i) => !trainer || i.id === "trainer" || i.id === "profile")
-            .map((item) => {
-              const selected = !menu && (view === item.id || (item.id === "overview" && !!healthSection));
-              return (
-                <button
-                  key={item.id}
-                  type="button"
-                  aria-label={item.label}
-                  aria-current={selected ? "page" : undefined}
-                  onClick={() => navigate(item.id)}
-                  className={selected ? "selected" : ""}
-                >
-                  <MobileNavIcon name={item.id} selected={selected} />
-                  <span className="bottom-nav-label">{item.label}</span>
-                </button>
-              );
-            })}
+            {[
+              {
+                id: trainer ? "trainer" : "overview",
+                label: trainer ? "Members" : "Home",
+              },
+              { id: "workout", label: "Workout" },
+              { id: "nutrition", label: "Food" },
+              { id: "profile", label: "Profile" },
+            ]
+              .filter(
+                (i) => !trainer || i.id === "trainer" || i.id === "profile",
+              )
+              .map((item) => {
+                const selected =
+                  !menu &&
+                  (view === item.id ||
+                    (item.id === "overview" && !!healthSection));
+                return (
+                  <button
+                    key={item.id}
+                    type="button"
+                    aria-label={item.label}
+                    aria-current={selected ? "page" : undefined}
+                    onClick={() => navigate(item.id)}
+                    className={selected ? "selected" : ""}
+                  >
+                    <MobileNavIcon name={item.id} selected={selected} />
+                    <span className="bottom-nav-label">{item.label}</span>
+                  </button>
+                );
+              })}
           </div>
-          <button
-            type="button"
-            className="bottom-nav-add"
-            aria-label="Open water tracker"
-            onClick={() => navigate("water")}
-          >
-            <Plus aria-hidden="true" />
-          </button>
+          {!trainer && (
+            <button
+              type="button"
+              className="bottom-nav-add"
+              aria-label="Open water tracker"
+              onClick={() => navigate("water")}
+            >
+              <Plus aria-hidden="true" />
+            </button>
+          )}
         </nav>
         {toast && (
-          <div key={toastRevision} className="toast" role="status" aria-atomic="true">
+          <div
+            key={toastRevision}
+            className="toast"
+            role="status"
+            aria-atomic="true"
+          >
             <span className="toast-check">
               <Check size={15} />
             </span>

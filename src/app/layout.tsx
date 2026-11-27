@@ -26,6 +26,7 @@ import "./chart-reading-popup.css";
 import "./body-composition-card.css";
 import "./display-numerals.css";
 import "./studio-workflows.css";
+import "./trainer-workspace.css";
 
 const urbanist = localFont({
   src: "../../public/fonts/Urbanist-Variable.ttf",

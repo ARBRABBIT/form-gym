@@ -7,11 +7,17 @@ npm install
 npm run dev
 ```
 
-Open http://localhost:3000. Sign up or log in through the labeled demo flow to set up a personal journal. Choose **Explore the sample journal** to review illustrative Indian member profiles and a sample assigned workout. Use the **Member view** and **Trainer view** tabs in the dashboard header.
+Open http://localhost:3000. Sign up as a member or trainer, or log in to your saved account. Choose **Explore the sample journal** to review illustrative Indian member profiles and a sample assigned workout. Use the **Member view** and **Trainer view** tabs in the dashboard header.
 
 The app includes onboarding, planner, habits, the 100-day challenge, weight tracking, measurements, monthly review, workout logging, nutrition and wellness, plus trainer assignments and submitted-log review. Plans and member logs are separate records; later plan changes preserve submitted actuals and the original plan snapshot.
 
-Journal and owner-preview changes live in the current page session and reset on refresh. The member/trainer workspace shares its local state within the page; the owner workspace uses separate demo records. This prototype does not provide backend synchronization or authentication.
+Accounts and journals are saved on the server in SQLite. Passwords use salted scrypt hashes; sessions use opaque HTTP-only cookies. Members share access by entering a trainer’s code under **My profile → Your trainer** and can stop sharing there. Trainers only access explicitly linked journals. Each account has its own journal; the internal `alex:date` workout key is local to that journal, never a global member identifier.
+
+Both views edit the same saved records. Updates sync about every 1.5 seconds; unrelated sections merge and overlapping edits require review. A conflict keeps unsaved edits on screen with download and version-choice controls. Trainer assignments and member actual logs remain separate, preserving the original plan snapshot. Sample access uses memory only and never populates real accounts.
+
+For deployment, run a Node 24+ server with **one shared persistent disk** and set `FORM_DATA_DIR` to its absolute path. The directory contains accounts, journals, encrypted wearable credentials, and reminder data. Back it up with SQLite-aware tooling, protect its permissions, and serve the app through HTTPS. Ephemeral/serverless filesystems or multiple independent replicas do not provide durable cross-device sync with this storage adapter. No public deployment is performed by these changes. Password reset and email verification are not implemented.
+
+WHOOP connections are stored against the signed-in owner and shared with authorized trainers. Configure the existing WHOOP environment variables for live readings. Smart-bottle setup remains pending integration and its preview is illustrative. Push permissions and subscriptions remain device-specific; saved reminder preferences are visible to the trainer.
 
 ```sh
 npm run build

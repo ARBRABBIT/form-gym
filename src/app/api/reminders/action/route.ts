@@ -1,10 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { sameOrigin } from "@/lib/whoop";
 import { reminderDb, reminderFor, localClock } from "@/lib/reminders";
+import { currentAccount } from "@/lib/accounts";
 export async function POST(request: NextRequest) {
   if (!sameOrigin(request))
     return NextResponse.json({ error: "invalid_origin" }, { status: 403 });
-  const id = request.cookies.get("form-reminder-device")?.value || "",
+  const raw = request.cookies.get("form-reminder-device")?.value || "";
+  const actor = currentAccount(request);
+  const id = actor ? `${actor.id}:${raw}` : raw,
     row = reminderFor(id);
   if (!row) return NextResponse.json({ saved: false });
   try {

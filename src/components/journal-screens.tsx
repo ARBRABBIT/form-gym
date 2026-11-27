@@ -2,21 +2,22 @@
 import {workspace} from "./member-studio";
 import { useState, useEffect } from "react";
 import {
+  ArrowDown,
   ArrowLeft,
   ArrowRight,
+  ArrowUp,
   Check,
   ChevronDown,
   ChevronLeft,
   ChevronRight,
   ClipboardList,
   GlassWater,
+  MoreVertical,
   Plus,
   Trash2,
-  Target,
-  Flag,
-  Sparkles,
-  TrendingUp,
 } from "./icons";
+import { playFeedback } from "@/lib/interaction-feedback";
+import WaterCard from "./water-card";
 import type { ScreenProps } from "./journal-app";
 import {
   TODAY,
@@ -63,11 +64,13 @@ function SaveJournal({
 }) {
   return (
     <div className="form-actions">
-      <span>Your trainer can review these journal entries.</span>
+      <span>
+        {p.trainerMode
+          ? "Shared with the member. Changes appear in both views."
+          : "Your linked trainer can review and update these entries."}
+      </span>
       <Button
-        onClick={() =>
-          p.update((s) => ({ ...s }), "Journal saved on this browser")
-        }
+        onClick={() => p.update((s) => ({ ...s }), "Journal changes saved")}
       >
         <Check size={16} />
         {label}
@@ -144,42 +147,47 @@ function PlannerContent({ p }: { p: ScreenProps }) {
       </Section>
       <section
         className="monthly-goal-section"
-        aria-label="Most Important Goals of This Month"
+        aria-label="Most important goals of this month"
       >
-        <h2>Most Important Goals of This Month</h2>
+        <h2>Most important goals of this month</h2>
         <p className="section-description">
-          What are your most important goals this month?
+          {p.trainerMode
+            ? "Member’s key priorities for this month."
+            : "What are your most important goals this month?"}
         </p>
         <div className="monthly-goal-cards">
-          {monthlyGoals(data).map((g, i) => {
-            const Icon = [Target, TrendingUp, Flag, Sparkles][i];
-            return (
-              <article
-                className={`monthly-goal-card goal-tone-${i + 1}`}
-                key={i}
-              >
-                <span className="monthly-goal-icon" aria-hidden="true">
-                  <Icon size={23} />
+          {monthlyGoals(data).map((g, i) => (
+            <article
+              className={`monthly-goal-card goal-tone-${i + 1}`}
+              key={i}
+            >
+              <div className="monthly-goal-top">
+                <span className="monthly-goal-tag">Goal {i + 1}</span>
+              </div>
+              <TextArea
+                label={`Goal ${i + 1}`}
+                value={g}
+                placeholder="What do you want to work toward?"
+                onChange={(v) =>
+                  update((s) => ({
+                    ...s,
+                    goalsByMonth: {
+                      ...s.goalsByMonth,
+                      [s.month]: monthlyGoals(s).map((a, j) =>
+                        i === j ? v : a,
+                      ),
+                    },
+                  }))
+                }
+              />
+              <div className="monthly-goal-dial" aria-hidden="true">
+                <span className="monthly-goal-numeral">
+                  <span>0</span>
+                  <span>{i + 1}</span>
                 </span>
-                <TextArea
-                  label={`Goal ${i + 1}`}
-                  value={g}
-                  placeholder="What do you want to work toward?"
-                  onChange={(v) =>
-                    update((s) => ({
-                      ...s,
-                      goalsByMonth: {
-                        ...s.goalsByMonth,
-                        [s.month]: monthlyGoals(s).map((a, j) =>
-                          i === j ? v : a,
-                        ),
-                      },
-                    }))
-                  }
-                />
-              </article>
-            );
-          })}
+              </div>
+            </article>
+          ))}
         </div>
       </section>
       {open && (
@@ -208,9 +216,10 @@ function PlannerContent({ p }: { p: ScreenProps }) {
   );
 }
 export function Habits(p: ScreenProps) {
-  const { data, update, date, setDate } = p;
+  const { data, update, date } = p;
   const [monthly, setMonthly] = useState(false);
   const [newHabit, setNewHabit] = useState("");
+  const [pendingDelete, setPendingDelete] = useState<{ id: string; name: string } | null>(null);
   const toggle = (id: string, d: string) =>
     update((s) => ({
       ...s,
@@ -232,8 +241,8 @@ export function Habits(p: ScreenProps) {
         description="Daily checkmarks and monthly totals."
         back={back(p)}
       />
-      <div className="filter-bar">
-        {monthField(p)}
+      {monthField(p)}
+      <div className="filter-bar habit-toolbar">
         <div className="segmented">
           <button
             className={!monthly ? "selected" : ""}
@@ -248,23 +257,21 @@ export function Habits(p: ScreenProps) {
             Monthly view
           </button>
         </div>
+        <time className="habit-context-date" dateTime={monthly ? data.month : date}>
+          {monthly ? monthLabel(data.month) : <>
+            <span>{new Date(`${date}T12:00:00`).toLocaleDateString("en-US", { weekday: "long" })}</span>
+            <span>{new Date(`${date}T12:00:00`).toLocaleDateString("en-US", { month: "short", day: "numeric" })}</span>
+          </>}
+        </time>
       </div>
-      {!monthly && (
-        <Field
-          label="Logging date"
-          type="date"
-          value={date}
-          onChange={(v) => v && setDate(v)}
-        />
-      )}
-      <Section title={monthly ? monthLabel(data.month) : formatDate(date)}>
+      <div className="habit-card-list" aria-label="Habits">
         {data.habits.length === 0 && (
           <p className="empty-state">
             Your next good habit starts here. Add one below.
           </p>
         )}
         {data.habits.map((h) => (
-          <div key={h.id} className="habit-detail">
+          <article key={h.id} className="panel habit-detail" aria-label={h.name || "Habit"}>
             <div className="habit-detail-heading">
               <Field
                 label="Habit name"
@@ -282,21 +289,24 @@ export function Habits(p: ScreenProps) {
                 {h.marks.filter((d) => d.startsWith(data.month)).length}
                 <span>Total this month</span>
               </strong>
-              <button
-                aria-label={`Remove ${h.name}`}
-                className="icon-button"
-                onClick={() =>
-                  update(
-                    (s) => ({
-                      ...s,
-                      habits: s.habits.filter((a) => a.id !== h.id),
-                    }),
-                    "Habit removed",
-                  )
+              <details className="habit-actions" onBlur={(event) => {
+                if (!event.currentTarget.contains(event.relatedTarget as Node | null)) event.currentTarget.open = false;
+              }} onKeyDown={(event) => {
+                if (event.key === "Escape") {
+                  event.currentTarget.open = false;
+                  event.currentTarget.querySelector("summary")?.focus();
                 }
-              >
-                <Trash2 size={16} />
-              </button>
+              }}>
+                <summary className="icon-button" aria-label={`Options for ${h.name}`}>
+                  <MoreVertical size={20} />
+                </summary>
+                <div className="habit-action-popover">
+                  <button type="button" onClick={(event) => {
+                    event.currentTarget.closest("details")!.open = false;
+                    setPendingDelete({ id: h.id, name: h.name });
+                  }}>Delete</button>
+                </div>
+              </details>
             </div>
             {h.kind && (
               <p className="helper">
@@ -334,9 +344,9 @@ export function Habits(p: ScreenProps) {
                 {h.marks.includes(date) ? "Completed today" : "Mark complete"}
               </button>
             )}
-          </div>
+          </article>
         ))}
-        <div className="inline-add">
+        <div className="panel inline-add habit-add">
           <Field
             label="New habit"
             value={newHabit}
@@ -364,12 +374,26 @@ export function Habits(p: ScreenProps) {
             Add habit
           </Button>
         </div>
-      </Section>
+      </div>
+      {pendingDelete && <Sheet title="Delete habit?" onClose={() => setPendingDelete(null)}>
+        <p>Delete “{pendingDelete.name}” and its checkmarks? This cannot be undone.</p>
+        <div className="form-actions">
+          <Button variant="secondary" onClick={() => setPendingDelete(null)}>Cancel</Button>
+          <Button onClick={() => {
+            update((s) => ({ ...s, habits: s.habits.filter((habit) => habit.id !== pendingDelete.id) }), "Habit removed");
+            setPendingDelete(null);
+          }}>Delete habit</Button>
+        </div>
+      </Sheet>}
     </>
   );
 }
 export function Challenge(p: ScreenProps) {
   const { data, update } = p;
+  const [showAll, setShowAll] = useState(false);
+  const lastMarked = data.challenge.length ? Math.max(...data.challenge) : 0;
+  const collapsedCount = Math.min(100, Math.ceil(lastMarked / 5) * 5 + 10);
+  const visibleCount = showAll ? 100 : collapsedCount;
   return (
     <>
       <PageHeading
@@ -377,7 +401,7 @@ export function Challenge(p: ScreenProps) {
         description="Mark each day you complete your target."
         back={back(p)}
       />
-      <Section title="Your 100 Days Challenge">
+      <section className="panel" aria-label="100-day challenge">
         <Field
           label="Target"
           value={data.challengeTarget}
@@ -395,7 +419,7 @@ export function Challenge(p: ScreenProps) {
           <div style={{ width: `${data.challenge.length}%` }} />
         </div>
         <div className="challenge-grid">
-          {Array.from({ length: 100 }, (_, i) => (
+          {Array.from({ length: visibleCount }, (_, i) => (
             <button
               key={i}
               aria-label={`Challenge day ${i + 1}`}
@@ -415,12 +439,22 @@ export function Challenge(p: ScreenProps) {
             </button>
           ))}
         </div>
+        {collapsedCount < 100 && (
+          <div className="challenge-show-more">
+            <Button
+              variant="secondary"
+              onClick={() => setShowAll((current) => !current)}
+            >
+              {showAll ? "Show less" : "Show more"}
+            </Button>
+          </div>
+        )}
         <TextArea
           label="Note"
           value={data.challengeNote}
           onChange={(v) => update((s) => ({ ...s, challengeNote: v }))}
         />
-      </Section>
+      </section>
       <SaveJournal p={p} />
     </>
   );
@@ -428,9 +462,10 @@ export function Challenge(p: ScreenProps) {
 export function WeightTracker(p: ScreenProps) {
   const { data, update } = p;
   const [entry, setEntry] = useState<WeightEntry | null>(null);
-  const rows = data.weights
-    .filter((w) => w.date.startsWith(data.month))
-    .sort((a, b) => b.date.localeCompare(a.date));
+  const allSorted = [...data.weights].sort((a, b) =>
+    b.date.localeCompare(a.date),
+  );
+  const rows = allSorted.filter((w) => w.date.startsWith(data.month));
   return (
     <>
       <PageHeading
@@ -463,31 +498,87 @@ export function WeightTracker(p: ScreenProps) {
             No entries this month. Add your first check-in.
           </div>
         )}
-        {rows.map((w) => (
-          <button
-            className="weight-entry"
-            key={w.id}
-            onClick={() => setEntry({ ...w })}
-          >
-            <div>
-              <strong>
-                {formatDate(w.date, { day: "numeric", month: "short" })}
-              </strong>
-              <span>{w.notes || "No note added"}</span>
-            </div>
-            <div className="weight-values">
-              <strong>
-                {w.weight} <small>kg</small>
-              </strong>
-              <span>
-                Gain+ {w.gain || "—"}
-                <br />
-                Loss+ {w.loss || "—"}
-              </span>
-              <ArrowRight size={16} />
-            </div>
-          </button>
-        ))}
+        {rows.map((w) => {
+          const prev =
+            allSorted[allSorted.findIndex((item) => item.id === w.id) + 1];
+          const diff =
+            prev && Number(w.weight) > 0 && Number(prev.weight) > 0
+              ? Number(w.weight) - Number(prev.weight)
+              : 0;
+          const gain = Number(w.gain) || 0;
+          const loss = Number(w.loss) || 0;
+          const trend =
+            Math.abs(diff) > 1e-6
+              ? diff > 0
+                ? "up"
+                : "down"
+              : gain > 0 && !(loss > 0)
+                ? "up"
+                : loss > 0 && !(gain > 0)
+                  ? "down"
+                  : null;
+          const goal = (data.profile["My Goal"] || "").toLowerCase();
+          const goalTone = !trend
+            ? ""
+            : goal.includes("gain")
+              ? trend === "up"
+                ? "is-positive"
+                : "is-negative"
+              : goal.includes("lose") || goal.includes("loss")
+                ? trend === "down"
+                  ? "is-positive"
+                  : "is-negative"
+                : "";
+          return (
+            <button
+              className="weight-entry"
+              key={w.id}
+              onClick={() => setEntry({ ...w })}
+            >
+              <div>
+                <strong>
+                  {formatDate(w.date, { day: "numeric", month: "short" })}
+                </strong>
+                <span>{w.notes || "No note added"}</span>
+              </div>
+              <div className="weight-values">
+                <div className="weight-reading">
+                  {trend === "up" && (
+                    <ArrowUp
+                      size={16}
+                      className={`weight-trend-icon ${goalTone}`.trim()}
+                      aria-label="Weight gained"
+                    />
+                  )}
+                  {trend === "down" && (
+                    <ArrowDown
+                      size={16}
+                      className={`weight-trend-icon ${goalTone}`.trim()}
+                      aria-label="Weight lost"
+                    />
+                  )}
+                  <strong>
+                    {w.weight} <small>kg</small>
+                  </strong>
+                </div>
+                <span>
+                  {trend === "down" ? (
+                    <>Loss+ {w.loss || "—"}</>
+                  ) : trend === "up" ? (
+                    <>Gain+ {w.gain || "—"}</>
+                  ) : (
+                    <>
+                      Gain+ {w.gain || "—"}
+                      <br />
+                      Loss+ {w.loss || "—"}
+                    </>
+                  )}
+                </span>
+                <ArrowRight size={16} />
+              </div>
+            </button>
+          );
+        })}
       </Section>
       {entry && (
         <Sheet title="Weight check-in" onClose={() => setEntry(null)}>
@@ -645,13 +736,17 @@ export function Results(p: ScreenProps) {
   return (
     <>
       <PageHeading
-        title="My starting point & results"
+        title={
+          p.trainerMode
+            ? "Member’s starting point & results"
+            : "My starting point & results"
+        }
         description="Baseline details, measurements and results."
         back={back(p)}
       />
       <div className="month-control">{monthField(p)}</div>
       <BodyComparison p={p} />
-      <Section title="My Starting Point">
+      <Section title={p.trainerMode ? "Member profile" : "My Starting Point"}>
         <ProfileFields p={p} />
       </Section>
       <div className="two-col">
@@ -768,162 +863,429 @@ export function Review(p: ScreenProps) {
     </>
   );
 }
-export function NutritionScreen(p: ScreenProps) {
+type FoodDraft = { meal: string; item: Food };
+function FoodEditorPage({
+  title,
+  children,
+}: {
+  title: string;
+  onClose: () => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <section className="trainer-food-editor" aria-label={title}>
+      {children}
+    </section>
+  );
+}
+const checkInCards = [
+  {
+    key: "Sleep (hours)",
+    label: "Sleep",
+    subtitle: "Duration",
+    unit: "hrs",
+    tone: "sleep",
+  },
+  {
+    key: "Steps",
+    label: "Steps",
+    subtitle: "Daily move",
+    unit: "steps",
+    tone: "steps",
+  },
+] as const;
+
+function CheckInBackdrop({
+  tone,
+}: {
+  tone: (typeof checkInCards)[number]["tone"];
+}) {
+  return (
+    <svg
+      className="checkin-backdrop"
+      viewBox="0 0 160 160"
+      preserveAspectRatio="xMidYMid slice"
+      aria-hidden="true"
+    >
+      {tone === "sleep" && (
+        <g>
+          <path
+            d="M92 28 A42 42 0 1 0 128 92 A31 31 0 1 1 92 28 Z"
+            fill="rgb(144 132 216 / 44%)"
+          />
+          <circle cx="114" cy="42" r="6" fill="rgb(176 164 236 / 70%)" />
+          <circle cx="126" cy="58" r="4" fill="rgb(176 164 236 / 65%)" />
+        </g>
+      )}
+      {tone === "steps" && (
+        <g>
+          <circle cx="84" cy="30" r="11" fill="rgb(224 142 136 / 52%)" />
+          <path
+            d="M80 46 L72 86"
+            stroke="rgb(220 132 142 / 50%)"
+            strokeWidth="16"
+            strokeLinecap="round"
+          />
+          <path
+            d="M78 54 L56 72 M80 54 L104 70"
+            stroke="rgb(224 142 146 / 44%)"
+            strokeWidth="10"
+            strokeLinecap="round"
+          />
+          <path
+            d="M72 86 L50 132 M74 86 L104 130"
+            stroke="rgb(212 128 148 / 48%)"
+            strokeWidth="12"
+            strokeLinecap="round"
+          />
+        </g>
+      )}
+    </svg>
+  );
+}
+
+function CheckInVisual({
+  tone,
+  raw,
+}: {
+  tone: (typeof checkInCards)[number]["tone"];
+  raw: string;
+}) {
+  const num = Number(raw);
+  if (tone === "sleep") {
+    const heights = [6, 10, 14, 22, 30, 38, 30, 22, 14, 10, 6];
+    return (
+      <div className="checkin-visual checkin-bars" aria-hidden="true">
+        {heights.map((height, index) => (
+          <span
+            key={index}
+            style={{ height: `${height}px` }}
+            className={index === 5 ? "is-peak" : ""}
+          />
+        ))}
+      </div>
+    );
+  }
+  const filled = Number.isFinite(num)
+    ? Math.min(8, Math.max(1, Math.round(num / 1500)))
+    : 4;
+  return (
+    <div className="checkin-visual checkin-dots" aria-hidden="true">
+      {Array.from({ length: 8 }, (_, index) => (
+        <span key={index} className={index < filled ? "is-active" : ""} />
+      ))}
+    </div>
+  );
+}
+
+export function DailyCheckInSection(p: ScreenProps) {
+  const { data, update, date } = p;
+  const n = data.nutrition[date] || emptyNutrition();
+  const [editingKey, setEditingKey] = useState<string | null>(null);
+  const [draftValue, setDraftValue] = useState("");
+  const put = (next: typeof n, message?: string) =>
+    update(
+      (s) => ({ ...s, nutrition: { ...s.nutrition, [date]: next } }),
+      message,
+    );
+  const editingCard = checkInCards.find((card) => card.key === editingKey);
+  return (
+    <>
+      <Section
+        title={p.trainerMode ? "Member’s daily check-in" : "Your daily check-in"}
+      >
+        {p.trainerMode ? (
+          <div className="checkin-cards-grid">
+            {checkInCards.map((card) => {
+              const raw = n.metrics[card.key] || "";
+              const formatted =
+                card.key === "Steps" && raw && Number.isFinite(Number(raw))
+                  ? Number(raw).toLocaleString("en-IN")
+                  : raw || "—";
+              return (
+                <button
+                  key={card.key}
+                  type="button"
+                  className={`checkin-card checkin-tone-${card.tone}`}
+                  data-checkin-key={card.key}
+                  onClick={(event) => {
+                    playFeedback(event.currentTarget, "value");
+                    setDraftValue(raw);
+                    setEditingKey(card.key);
+                  }}
+                >
+                  <CheckInBackdrop tone={card.tone} />
+                  <div className="checkin-card-head">
+                    <div className="checkin-card-title">
+                      <span className="checkin-card-label">{card.label}</span>
+                      <span className="checkin-card-sub">{card.subtitle}</span>
+                    </div>
+                  </div>
+                  <div className="checkin-card-center">
+                    <strong className="checkin-card-value">
+                      {formatted}
+                      {raw ? <small>{card.unit}</small> : null}
+                    </strong>
+                    <CheckInVisual tone={card.tone} raw={raw} />
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        ) : (
+          <>
+            <div className="form-grid three-col">
+              {[
+                "Weight (kg)",
+                "Waist (cm)",
+                "Sleep (hours)",
+                "Steps",
+                "Body Fat (%)",
+              ].map((m) => (
+                <Field
+                  key={m}
+                  label={m}
+                  type="number"
+                  value={n.metrics[m] || ""}
+                  onChange={(v) =>
+                    put({ ...n, metrics: { ...n.metrics, [m]: v } })
+                  }
+                />
+              ))}
+            </div>
+            <div className="water-entry">
+              <div>
+                <strong>Water</strong>
+                <span>
+                  {n.water.toLocaleString("en-IN", {
+                    maximumFractionDigits: 2,
+                  })}{" "}
+                  L logged · 1 mark = 1 L
+                </span>
+                <button
+                  type="button"
+                  className="water-tracker-link"
+                  onClick={() => p.navigate("water")}
+                >
+                  Open water tracker <ArrowRight size={14} />
+                </button>
+              </div>
+              <div className="water-drops">
+                {Array.from({ length: 6 }, (_, i) => (
+                  <button
+                    key={i}
+                    aria-label={`Water ${i + 1} L`}
+                    aria-pressed={n.water > i}
+                    onClick={(event) => {
+                      playFeedback(event.currentTarget, "complete");
+                      put({ ...n, water: n.water === i + 1 ? i : i + 1 });
+                    }}
+                  >
+                    <GlassWater size={26} />
+                  </button>
+                ))}
+              </div>
+            </div>
+          </>
+        )}
+        {editingCard && (
+          <Sheet
+            title={`Update ${editingCard.label.toLowerCase()}`}
+            onClose={() => setEditingKey(null)}
+          >
+            <form
+              onSubmit={(event) => {
+                event.preventDefault();
+                const targetKey = editingCard.key;
+                put(
+                  {
+                    ...n,
+                    metrics: { ...n.metrics, [targetKey]: draftValue },
+                  },
+                  `${editingCard.label} updated`,
+                );
+                setEditingKey(null);
+                requestAnimationFrame(() => {
+                  const tile = document.querySelector(
+                    `[data-checkin-key="${targetKey}"]`,
+                  );
+                  playFeedback(tile, "complete");
+                });
+              }}
+            >
+              <Field
+                label={editingCard.key}
+                type="number"
+                value={draftValue}
+                onChange={setDraftValue}
+                placeholder="Enter value"
+              />
+              <div className="form-actions">
+                <Button
+                  variant="secondary"
+                  onClick={() => setEditingKey(null)}
+                >
+                  Cancel
+                </Button>
+                <Button type="submit">
+                  <Check size={16} /> Save
+                </Button>
+              </div>
+            </form>
+          </Sheet>
+        )}
+      </Section>
+      {p.trainerMode && (
+        <WaterCard
+          liters={n.water}
+          onOpen={() => p.navigate("water")}
+          onChange={(water) => put({ ...n, water })}
+        />
+      )}
+    </>
+  );
+}
+export function NutritionScreen(
+  p: ScreenProps & {
+    foodEditor?: FoodDraft | null;
+    onFoodEdit?: (food: FoodDraft | null) => void;
+  },
+) {
   const { data, update, date, setDate } = p;
   const n = data.nutrition[date] || emptyNutrition();
-  const [food, setFood] = useState<{ meal: string; item: Food } | null>(null);
+  const [localFood, setLocalFood] = useState<FoodDraft | null>(null);
+  const food = p.foodEditor || localFood;
+  const setFood = (next: FoodDraft | null) => {
+    if (p.onFoodEdit) p.onFoodEdit(next);
+    else setLocalFood(next);
+  };
+  const FoodContainer = p.trainerMode ? FoodEditorPage : Sheet;
   const put = (next: typeof n) =>
     update((s) => ({ ...s, nutrition: { ...s.nutrition, [date]: next } }));
   const totals = totalNutrition(n);
   const nutrients = ["calories", "protein", "carbs", "fat"] as const;
   return (
     <>
-      <PageHeading
-        title="Nutrition & wellness"
-        description="Meals, nutrition and daily wellness."
-        back={back(p)}
-      />
-      <div className="month-control">
-        <Field
-          label="Journal date"
-          type="date"
-          value={date}
-          onChange={(v) => v && setDate(v)}
-        />
-      </div>
-      <Section title="Your daily total">
-        <div className="daily-totals">
-          {nutrients.map((k) => (
-            <div key={k}>
-              <span>{k[0].toUpperCase() + k.slice(1)}</span>
-              <strong>
-                {totals[k]} <small>{k === "calories" ? "kcal" : "g"}</small>
-              </strong>
-            </div>
-          ))}
-        </div>
-        <div className="goal-comparison">
-          <strong>Vs. Goal</strong>
-          <span>{workspace(data).nutritionPlans.alex ? `${totals.calories} / ${workspace(data).nutritionPlans.alex.calories} kcal · ${totals.protein} / ${workspace(data).nutritionPlans.alex.protein} g protein` : "Target unavailable"}</span>
-        </div>
-      </Section>
-      <Section title="Your daily check-in">
-        <div className="form-grid three-col">
-          {[
-            "Weight (kg)",
-            "Waist (cm)",
-            "Sleep (hours)",
-            "Steps",
-            "Body Fat (%)",
-          ].map((m) => (
+      {!p.foodEditor && (
+        <>
+          <PageHeading
+            title="Nutrition & wellness"
+            description="Meals, nutrition and daily wellness."
+            back={back(p)}
+          />
+          <div className="month-control">
             <Field
-              key={m}
-              label={m}
-              type="number"
-              value={n.metrics[m] || ""}
-              onChange={(v) => put({ ...n, metrics: { ...n.metrics, [m]: v } })}
+              label="Journal date"
+              type="date"
+              value={date}
+              onChange={(v) => v && setDate(v)}
             />
-          ))}
-        </div>
-        <div className="water-entry">
-          <div>
-            <strong>Water</strong>
-            <span>{n.water.toLocaleString("en-IN", { maximumFractionDigits: 2 })} L logged · 1 mark = 1 L</span>
-            <button type="button" className="water-tracker-link" onClick={() => p.navigate("water")}>Open water tracker <ArrowRight size={14} /></button>
           </div>
-          <div className="water-drops">
-            {Array.from({ length: 6 }, (_, i) => (
-              <button
-                key={i}
-                aria-label={`Water ${i + 1} L`}
-                aria-pressed={n.water > i}
-                onClick={() =>
-                  put({ ...n, water: n.water === i + 1 ? i : i + 1 })
-                }
-              >
-                <GlassWater size={26} />
-              </button>
-            ))}
-          </div>
-        </div>
-      </Section>
-      {meals.map((meal) => {
-        const subtotal = totalNutrition({
-          ...emptyNutrition(),
-          meals: { [meal]: n.meals[meal] || [] },
-        });
-        return (
           <Section
-            key={meal}
-            title={meal}
-            action={
-              <Button
-                variant="ghost"
-                onClick={() =>
-                  setFood({
-                    meal,
-                    item: {
-                      id: uid(),
-                      product: "",
-                      serving: "",
-                      calories: "",
-                      protein: "",
-                      carbs: "",
-                      fat: "",
-                    },
-                  })
-                }
-              >
-                <Plus size={16} />
-                Add food
-              </Button>
+            title={
+              p.trainerMode ? "Daily nutrition totals" : "Your daily total"
             }
           >
-            {!n.meals[meal]?.length && (
-              <p className="empty-meal">No food items logged.</p>
-            )}
-            {n.meals[meal]?.map((f) => (
-              <div className="food-row" key={f.id}>
-                <button onClick={() => setFood({ meal, item: { ...f } })}>
-                  <strong>{f.product}</strong>
-                  <span>
-                    {f.serving || "Serving not recorded"} · {f.calories || 0}{" "}
-                    kcal
-                  </span>
-                  <small>
-                    P {f.protein || 0}g · C {f.carbs || 0}g · F {f.fat || 0}g
-                  </small>
-                </button>
-                <button
-                  className="icon-button"
-                  aria-label={`Remove ${f.product}`}
-                  onClick={() =>
-                    put({
-                      ...n,
-                      meals: {
-                        ...n.meals,
-                        [meal]: n.meals[meal].filter((a) => a.id !== f.id),
-                      },
-                    })
-                  }
-                >
-                  <Trash2 size={16} />
-                </button>
-              </div>
-            ))}
-            <div className="meal-subtotal">
-              <strong>Subtotal</strong>
-              <span>{subtotal.calories} kcal</span>
-              <span>
-                P {subtotal.protein}g · C {subtotal.carbs}g · F {subtotal.fat}g
-              </span>
+            <div className="daily-totals">
+              {nutrients.map((k) => (
+                <div key={k}>
+                  <span>{k[0].toUpperCase() + k.slice(1)}</span>
+                  <strong>
+                    {totals[k]} <small>{k === "calories" ? "kcal" : "g"}</small>
+                  </strong>
+                </div>
+              ))}
+            </div>
+            <div className="goal-comparison">
+              <strong>Vs. Goal</strong>
+              <span>{workspace(data).nutritionPlans.alex ? `${totals.calories} / ${workspace(data).nutritionPlans.alex.calories} kcal · ${totals.protein} / ${workspace(data).nutritionPlans.alex.protein} g protein` : "Target unavailable"}</span>
             </div>
           </Section>
-        );
-      })}
-      <SaveJournal p={p} label="Save daily journal" />
+          {!p.trainerMode && <DailyCheckInSection {...p} />}
+          {meals.map((meal) => {
+            const subtotal = totalNutrition({
+              ...emptyNutrition(),
+              meals: { [meal]: n.meals[meal] || [] },
+            });
+            return (
+              <Section
+                key={meal}
+                title={meal}
+                action={
+                  <Button
+                    variant="ghost"
+                    onClick={() =>
+                      setFood({
+                        meal,
+                        item: {
+                          id: uid(),
+                          product: "",
+                          serving: "",
+                          calories: "",
+                          protein: "",
+                          carbs: "",
+                          fat: "",
+                        },
+                      })
+                    }
+                  >
+                    <Plus size={16} />
+                    Add food
+                  </Button>
+                }
+              >
+                {!n.meals[meal]?.length && (
+                  <p className="empty-meal">No food items logged.</p>
+                )}
+                {n.meals[meal]?.map((f) => (
+                  <div className="food-row" key={f.id}>
+                    <button onClick={() => setFood({ meal, item: { ...f } })}>
+                      <strong>{f.product}</strong>
+                      <span>
+                        {f.serving || "Serving not recorded"} ·{" "}
+                        {f.calories || 0} kcal
+                      </span>
+                      <small>
+                        P {f.protein || 0}g · C {f.carbs || 0}g · F {f.fat || 0}
+                        g
+                      </small>
+                    </button>
+                    <button
+                      className="icon-button"
+                      aria-label={`Remove ${f.product}`}
+                      onClick={() =>
+                        put({
+                          ...n,
+                          meals: {
+                            ...n.meals,
+                            [meal]: n.meals[meal].filter((a) => a.id !== f.id),
+                          },
+                        })
+                      }
+                    >
+                      <Trash2 size={16} />
+                    </button>
+                  </div>
+                ))}
+                <div className="meal-subtotal">
+                  <strong>Subtotal</strong>
+                  <span>{subtotal.calories} kcal</span>
+                  <span>
+                    P {subtotal.protein}g · C {subtotal.carbs}g · F{" "}
+                    {subtotal.fat}g
+                  </span>
+                </div>
+              </Section>
+            );
+          })}
+          <SaveJournal p={p} label="Save daily journal" />
+        </>
+      )}
       {food && (
-        <Sheet title={`Add to ${food.meal}`} onClose={() => setFood(null)}>
+        <FoodContainer
+          title={`Add to ${food.meal}`}
+          onClose={() => setFood(null)}
+        >
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -976,7 +1338,7 @@ export function NutritionScreen(p: ScreenProps) {
               Save food item <Check size={16} />
             </Button>
           </form>
-        </Sheet>
+        </FoodContainer>
       )}
     </>
   );

@@ -5,13 +5,17 @@ import { HugeiconsIcon, type IconSvgElement } from "@hugeicons/react";
 import Add01Icon from "@hugeicons/core-free-icons/Add01Icon";
 import AnalyticsUpIcon from "@hugeicons/core-free-icons/AnalyticsUpIcon";
 import ArrowDown01Icon from "@hugeicons/core-free-icons/ArrowDown01Icon";
+import ArrowDown02Icon from "@hugeicons/core-free-icons/ArrowDown02Icon";
 import ArrowHorizontalIcon from "@hugeicons/core-free-icons/ArrowHorizontalIcon";
 import ArrowLeft01Icon from "@hugeicons/core-free-icons/ArrowLeft01Icon";
 import ArrowLeft02Icon from "@hugeicons/core-free-icons/ArrowLeft02Icon";
 import ArrowRight01Icon from "@hugeicons/core-free-icons/ArrowRight01Icon";
 import ArrowRight02Icon from "@hugeicons/core-free-icons/ArrowRight02Icon";
+import ArrowUp02Icon from "@hugeicons/core-free-icons/ArrowUp02Icon";
 import ArrowUpRight01Icon from "@hugeicons/core-free-icons/ArrowUpRight01Icon";
 import BookOpen01Icon from "@hugeicons/core-free-icons/BookOpen01Icon";
+import BodyPartMuscleIcon from "@hugeicons/core-free-icons/BodyPartMuscleIcon";
+import BodyPartSixPackIcon from "@hugeicons/core-free-icons/BodyPartSixPackIcon";
 import Calendar03Icon from "@hugeicons/core-free-icons/Calendar03Icon";
 import Camera01Icon from "@hugeicons/core-free-icons/Camera01Icon";
 import Cancel01Icon from "@hugeicons/core-free-icons/Cancel01Icon";
@@ -29,6 +33,7 @@ import ImageAdd01Icon from "@hugeicons/core-free-icons/ImageAdd01Icon";
 import Leaf01Icon from "@hugeicons/core-free-icons/Leaf01Icon";
 import LibraryIcon from "@hugeicons/core-free-icons/LibraryIcon";
 import Menu01Icon from "@hugeicons/core-free-icons/Menu01Icon";
+import MoreVerticalIcon from "@hugeicons/core-free-icons/MoreVerticalIcon";
 import Moon02Icon from "@hugeicons/core-free-icons/Moon02Icon";
 import UtensilsIcon from "@hugeicons/core-free-icons/UtensilsIcon";
 import Notification03Icon from "@hugeicons/core-free-icons/Notification03Icon";
@@ -92,10 +97,14 @@ function createIcon(icon: IconSvgElement, name: string) {
 }
 
 export const Activity = /*#__PURE__*/ createIcon(Pulse01Icon, "Activity");
+export const ArrowDown = /*#__PURE__*/ createIcon(ArrowDown02Icon, "ArrowDown");
 export const ArrowLeft = /*#__PURE__*/ createIcon(ArrowLeft02Icon, "ArrowLeft");
 export const ArrowRight = /*#__PURE__*/ createIcon(ArrowRight02Icon, "ArrowRight");
+export const ArrowUp = /*#__PURE__*/ createIcon(ArrowUp02Icon, "ArrowUp");
 export const ArrowUpRight = /*#__PURE__*/ createIcon(ArrowUpRight01Icon, "ArrowUpRight");
 export const Bell = /*#__PURE__*/ createIcon(Notification03Icon, "Bell");
+export const BodyMuscle = /*#__PURE__*/ createIcon(BodyPartMuscleIcon, "BodyMuscle");
+export const BodySixPack = /*#__PURE__*/ createIcon(BodyPartSixPackIcon, "BodySixPack");
 export const BookOpen = /*#__PURE__*/ createIcon(BookOpen01Icon, "BookOpen");
 export const CalendarDays = /*#__PURE__*/ createIcon(Calendar03Icon, "CalendarDays");
 export const Camera = /*#__PURE__*/ createIcon(Camera01Icon, "Camera");
@@ -144,3 +153,5 @@ export const Pill = /*#__PURE__*/ createIcon(PillIcon, "Pill");
 export const Runner = /*#__PURE__*/ createIcon(WorkoutRunIcon, "Runner");
 export const Flame = /*#__PURE__*/ createIcon(FireIcon, "Flame");
 export const Food = /*#__PURE__*/ createIcon(UtensilsIcon, "Food");
+
+export const MoreVertical = createIcon(MoreVerticalIcon, "MoreVertical");

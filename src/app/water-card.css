@@ -1,4 +1,5 @@
-.journal-main > .water-intake-card {
+.journal-main > .water-intake-card,
+.trainer-workspace > .water-intake-card {
   position: relative;
   isolation: isolate;
   overflow: hidden;
@@ -46,6 +47,7 @@
 @keyframes water-drift { to { transform: translateX(-50%); } }
 @keyframes water-reflection { to { transform: translate(-12%, 10px) rotate(5deg); opacity: .45; } }
 @media (hover: hover) { .water-glasses button:hover, .water-card-adjust button:hover:not(:disabled) { background: #d7f8ff26; } }
-@media (max-width: 600px) { .journal-main > .water-intake-card { padding: 24px 20px; } }
+@media (max-width: 600px) { .journal-main > .water-intake-card,
+.trainer-workspace > .water-intake-card { padding: 24px 20px; } }
 @media (max-width: 350px) { .water-card-adjust { gap: 5px; } .water-card-adjust button { width: 40px; } .water-card-reading > span:first-child { font-size: 46px; } }
 @media (prefers-reduced-motion: reduce) { .water-wave, .water-liquid::before { animation: none; will-change: auto; } .water-liquid, .water-glass-fill, .water-glass-meniscus, .water-glasses button, .water-card-adjust button { transition: none; } }

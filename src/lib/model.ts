@@ -107,6 +107,8 @@ export type WorkoutTemplate = {
 export type SmartBottleProvider = "hidratespark-pro-2" | "larq-purevis-2" | "other";
 export type Store = {
   studio?: MemberWorkspaceState;
+  memberJournals?: Record<string, Store>;
+  reminderPreferences?: { enabled: boolean; time: string; timezone: string; tone: string };
   sampleData?: boolean;
   onboarded: boolean;
   account?: { email: string };

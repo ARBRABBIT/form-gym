@@ -121,15 +121,33 @@
 .journal-detail-screen .calendar-note-dot { background: #7a88a5; }
 .journal-detail-screen .monthly-goal-section { padding-top: 8px; }
 .journal-detail-screen .monthly-goal-section > h2 { font-weight: 500; font-size: 23px; }
-.journal-detail-screen .monthly-goal-card { background: var(--detail-glass); border: 1px solid #fff; border-radius: 26px; box-shadow: var(--detail-rim); }
+.journal-detail-screen .monthly-goal-card { position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-start; gap: 6px; min-height: 0; padding: 16px 16px 0; border: 1px solid rgb(255 255 255 / 92%); border-radius: 30px; box-shadow: inset 0 1px 6px rgb(255 255 255 / 92%), 0 10px 26px rgb(46 66 84 / 8%); }
+.journal-detail-screen .monthly-goal-card.goal-tone-1 { background: radial-gradient(ellipse 115% 65% at 50% 105%, #8ecbb6 0%, #c6e6da 45%, transparent 82%), linear-gradient(180deg, #f4f8f7 0%, #dceee8 100%); }
+.journal-detail-screen .monthly-goal-card.goal-tone-2 { background: radial-gradient(ellipse 115% 65% at 50% 105%, #92bce8 0%, #c7ddf5 45%, transparent 82%), linear-gradient(180deg, #f4f7fb 0%, #dce8f7 100%); }
+.journal-detail-screen .monthly-goal-card.goal-tone-3 { background: radial-gradient(ellipse 115% 65% at 50% 105%, #b6a6e0 0%, #d9d0f2 45%, transparent 82%), linear-gradient(180deg, #f6f4fb 0%, #e4ddf6 100%); }
+.journal-detail-screen .monthly-goal-card.goal-tone-4 { background: radial-gradient(ellipse 115% 65% at 50% 105%, #dca5ad 0%, #edd0d4 45%, transparent 82%), linear-gradient(180deg, #faf5f6 0%, #f1dfe2 100%); }
+.journal-detail-screen .monthly-goal-top { display: flex; align-items: center; justify-content: center; margin-bottom: 0; position: relative; z-index: 2; }
+.journal-detail-screen .monthly-goal-tag { font-size: 11px; font-weight: 500; color: #58687d; text-align: center; }
+.journal-detail-screen .monthly-goal-card .field { position: relative; z-index: 2; margin: 0; }
+.journal-detail-screen .monthly-goal-card .field > span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.journal-detail-screen .monthly-goal-card .field textarea { padding: 2px 4px; min-height: 44px; height: auto; border: 0; border-radius: 10px; background: transparent; box-shadow: none; text-align: center; font-size: 14px; font-weight: 500; line-height: 1.35; color: var(--detail-ink); resize: none; }
+.journal-detail-screen .monthly-goal-card .field textarea:focus { background: rgb(255 255 255 / 55%); }
+.journal-detail-screen .monthly-goal-dial { position: relative; display: grid; place-items: end center; height: 58px; margin-top: 0; pointer-events: none; }
+.journal-detail-screen .monthly-goal-numeral { position: relative; z-index: 1; display: inline-flex; align-items: baseline; font-family: var(--font-roboto-condensed), var(--font-urbanist), sans-serif; font-size: 68px; font-weight: 600; line-height: 0.78; letter-spacing: -0.05em; color: var(--detail-accent); mask-image: linear-gradient(180deg, #000 45%, rgb(0 0 0 / 28%) 100%); -webkit-mask-image: linear-gradient(180deg, #000 45%, rgb(0 0 0 / 28%) 100%); transform: translateY(4px) scale(1.35); transform-origin: center bottom; }
+.journal-detail-screen .monthly-goal-numeral span:last-child { margin-left: -4px; text-shadow: -3px 0 10px rgb(255 255 255 / 65%); }
 .journal-detail-screen .monthly-goal-icon { background: rgb(255 255 255 / 45%); border: 1px solid #fff; color: var(--detail-accent); }
 .journal-detail-screen .daily-check .check-box { border-color: #92a8b3; background: rgb(255 255 255 / 35%); }
 .journal-detail-screen .daily-check.checked .check-box { color: #fff; background: var(--detail-selected); border-color: #fff; }
 .journal-detail-screen :is(.habit-month-grid > button,.challenge-grid > button) { border: 1px solid rgb(255 255 255 / 80%); border-radius: 16px; background: rgb(255 255 255 / 35%); color: #5d6b82; }
 .journal-detail-screen :is(.habit-month-grid > button,.challenge-grid > button):hover:not(.marked) { background: rgb(255 255 255 / 65%); }
 .journal-detail-screen :is(.habit-month-grid,.challenge-grid) > .marked { color: #fff; background: var(--detail-selected); box-shadow: inset 0 1px 4px rgb(255 255 255 / 65%); }
+.journal-detail-screen .challenge-show-more { display: flex; justify-content: center; margin: 16px 0 6px; }
 .journal-detail-screen .weight-entry { border-color: rgb(255 255 255 / 70%); padding: 20px 12px; border-radius: 20px; }
 .journal-detail-screen .weight-entry:hover { background: rgb(255 255 255 / 35%); }
+.journal-detail-screen .weight-values .weight-reading { display: inline-flex; align-items: center; gap: 6px; }
+.journal-detail-screen .weight-values .weight-trend-icon { flex-shrink: 0; }
+.journal-detail-screen .weight-values .weight-trend-icon.is-positive { color: #16a34a; }
+.journal-detail-screen .weight-values .weight-trend-icon.is-negative { color: #dc2626; }
 .journal-detail-screen .goal-picker label { color: #59687e; background: rgb(255 255 255 / 35%); border-color: #fff; }
 .journal-detail-screen .goal-picker label.selected { color: #fff; background: var(--detail-selected); border-color: #fff; }
 
@@ -212,4 +230,28 @@ body:has(.journal-detail-screen) .wheel-picker-done { background: linear-gradien
   .journal-detail-screen .weight-entry { padding-inline: 0; }
   .journal-detail-screen .daily-totals strong { font-size: 26px; }
   .journal-detail-screen :is(.exercise-editor,.exercise-read) { padding-inline: 8px; }
+}
+
+/* Habit controls and individual panels use the existing journal glass. */
+.journal-detail-screen .habit-toolbar { display: flex; flex-direction: row; align-items: center; justify-content: space-between; flex-wrap: nowrap; gap: 8px; margin: 18px 0; }
+.journal-detail-screen .habit-toolbar .segmented { flex: 0 1 auto; min-width: 0; }
+.journal-detail-screen .habit-context-date { display: flex; flex-direction: column; flex-shrink: 0; text-align: right; font-size: 12px; line-height: 1.4; color: var(--detail-muted); }
+.journal-detail-screen .habit-card-list { display: grid; gap: 16px; }
+.journal-detail-screen .habit-card-list > .panel { margin: 0; }
+.journal-detail-screen .habit-detail-heading { gap: 12px; padding-top: 28px; }
+.journal-detail-screen .habit-detail-heading .field { min-width: 0; }
+.journal-detail-screen .habit-total { min-width: 68px; font-size: 48px; line-height: 1.1; }
+.journal-detail-screen .habit-total > span { line-height: 1.4; }
+.journal-detail-screen .habit-card-list > .habit-detail { position: relative; }
+.journal-detail-screen .habit-actions { position: absolute; top: 8px; right: 8px; }
+.journal-detail-screen .habit-actions > summary.icon-button { background: transparent; border: 0; box-shadow: none; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; cursor: pointer; list-style: none; }
+.journal-detail-screen .habit-actions summary::-webkit-details-marker { display: none; }
+.journal-detail-screen .habit-action-popover { position: absolute; z-index: 5; right: 0; top: calc(100% + 6px); min-width: 120px; padding: 6px; border: 1px solid white; border-radius: 16px; background: #f4f4f4; box-shadow: 0 10px 26px rgb(46 66 84 / 8%); }
+.journal-detail-screen .habit-action-popover button { width: 100%; min-height: 44px; padding: 8px 14px; text-align: left; color: var(--detail-ink); border-radius: 10px; }
+.journal-detail-screen .habit-action-popover button:hover { background: white; }
+@media (max-width: 430px) {
+  .journal-detail-screen .habit-toolbar .segmented button { padding-inline: 9px; font-size: 11px; white-space: nowrap; }
+  .journal-detail-screen .habit-detail-heading { gap: 8px; }
+  .journal-detail-screen .habit-total { min-width: 58px; }
+  .journal-detail-screen .habit-total > span { max-width: 64px; white-space: normal; }
 }

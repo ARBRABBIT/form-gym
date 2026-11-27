@@ -1,50 +1,27 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
-  ArrowLeft,
   ArrowRight,
   ArrowUpRight,
   Check,
   ChevronDown,
-  Clock3,
-  GlassWater,
   Dumbbell,
   FileCheck2,
-  Leaf,
   Plus,
-  Search,
   Trash2,
-  Users,
 } from "./icons";
 import type { ScreenProps } from "./journal-app";
 import {
-  TODAY,
-  members,
   emptyWorkout,
-  emptyNutrition,
-  totalNutrition,
-  meals,
   makeExercise,
   formatDate,
   uid,
   type Workout,
   type Exercise,
   type SetCompletions,
-  type Nutrition,
-  type Food,
-  type Store,
 } from "@/lib/model";
-import {
-  Button,
-  Field,
-  TextArea,
-  Section,
-  PageHeading,
-  AddButton,
-  Sheet,
-} from "./ui";
+import { Button, Field, TextArea, Section, PageHeading, AddButton } from "./ui";
 import WorkoutTemplatePicker from "./workout-template-picker";
-import TrainerMemberJournal from "./trainer-member-journal";
 import { playFeedback, cancelFeedback } from "@/lib/interaction-feedback";
 import WorkoutMuscleModel from "./workout-muscle-model";
 import {NutritionPlanEditor,CoachingThread,workspace} from "./member-studio";
@@ -70,20 +47,31 @@ function newActual(plan?: Workout): Workout {
     planSnapshot: plan ? structuredClone(plan) : undefined,
   };
 }
-export function WorkoutScreen(p: ScreenProps) {
+export function WorkoutScreen(p: ScreenProps & { onSaved?: () => void }) {
   const { data, date, setDate, update } = p;
   const key = `alex:${date}`,
     plan = data.plans[key],
     saved = data.logs[key];
-  const [tab, setTab] = useState("plan"),
+  const [tab, setTab] = useState(p.trainerMode ? "log" : "plan"),
     [draft, setDraft] = useState<Workout>(() =>
       saved ? structuredClone(saved) : newActual(plan),
     ),
     [saving, setSaving] = useState(false);
+  const [dirty, setDirty] = useState(false);
+  const [remoteChanged, setRemoteChanged] = useState(false);
+  const draftDate = useRef(date);
   useEffect(() => {
-    setDraft(saved ? structuredClone(saved) : newActual(plan));
-  }, [date, saved]);
-  const unsavedWorkout=useUnsavedGuard(JSON.stringify(draft)!==JSON.stringify(saved??newActual(plan)));
+    if (draftDate.current !== date) {
+      draftDate.current = date;
+      setDirty(false);
+      setRemoteChanged(false);
+      setDraft(saved ? structuredClone(saved) : newActual(plan));
+      return;
+    }
+    if (dirty) setRemoteChanged(true);
+    else setDraft(saved ? structuredClone(saved) : newActual(plan));
+  }, [date, JSON.stringify(saved)]);
+  const unsavedWorkout = useUnsavedGuard(dirty && JSON.stringify(draft) !== JSON.stringify(saved ?? newActual(plan)));
   const toggleSet = (
     exerciseId: string,
     setIndex: number,
@@ -105,59 +93,69 @@ export function WorkoutScreen(p: ScreenProps) {
     }));
   };
   const save = () => {
+    if (remoteChanged) return;
     setSaving(true);
-    setTimeout(() => {
-      update(
-        (s) => ({
-          ...s,
-          logs: {
-            ...s.logs,
-            [key]: {
-              ...draft,
-              version: (saved?.version || 0) + 1,
-              savedAt: new Date().toISOString(),
-              planVersion: draft.planVersion ?? plan?.version,
-              planSnapshot:
-                draft.planSnapshot ||
-                (plan ? structuredClone(plan) : undefined),
-            },
+    setDirty(false);
+    update(
+      (s) => ({
+        ...s,
+        logs: {
+          ...s.logs,
+          [key]: {
+            ...draft,
+            version: (saved?.version || 0) + 1,
+            savedAt: new Date().toISOString(),
+            planVersion: draft.planVersion ?? plan?.version,
+            planSnapshot:
+              draft.planSnapshot || (plan ? structuredClone(plan) : undefined),
           },
-        }),
-        "Workout log saved. Your trainer can now review it.",
-      );
-      setSaving(false);
-    }, 400);
+        },
+      }),
+      "Workout log saved. Your trainer can now review it.",
+    );
+    setSaving(false);
+    p.onSaved?.();
   };
   return (
     <>
       {unsavedWorkout}
       <PageHeading
-        title="Your workout"
-        description="Review your coach’s plan and record your session."
+        title={p.trainerMode ? "Member’s workout log" : "Your workout"}
+        description={
+          p.trainerMode
+            ? "Review and correct the member’s actual session. Edits are shared with the member."
+            : "Review your coach’s plan and record your session."
+        }
         back={() => p.navigate("overview")}
       />
-      <div className="filter-bar">
-        <Field
-          label="Workout date"
-          type="date"
-          value={date}
-          onChange={(v) => v && requestWorkflowNavigation(()=>setDate(v))}
-        />
-        <div className="segmented">
-          <button
-            className={tab === "plan" ? "selected" : ""}
-            onClick={() => setTab("plan")}
-          >
-            Assigned plan
-          </button>
-          <button
-            className={tab === "log" ? "selected" : ""}
-            onClick={() => setTab("log")}
-          >
-            {saved ? "My saved log" : "Log my workout"}
-          </button>
+      {!p.trainerMode && (
+        <div className="filter-bar">
+          <Field
+            label="Workout date"
+            type="date"
+            value={date}
+            onChange={(v) => v && setDate(v)}
+          />
+          <div className="segmented">
+            <button
+              className={tab === "plan" ? "selected" : ""}
+              onClick={() => setTab("plan")}
+            >
+              Assigned plan
+            </button>
+            <button
+              className={tab === "log" ? "selected" : ""}
+              onClick={() => setTab("log")}
+            >
+              {p.trainerMode
+                ? "Edit actual log"
+                : saved
+                  ? "My saved log"
+                  : "Log my workout"}
+            </button>
+          </div>
         </div>
-      </div>
+      )}
       <div className="weekday-indicator">
         {[
           "Sunday",
@@ -178,7 +176,13 @@ export function WorkoutScreen(p: ScreenProps) {
           </span>
         ))}
       </div>
-      <WorkoutMuscleModel plan={plan} saved={saved} completions={data.setCompletions?.[key]} date={date} />
+      <WorkoutMuscleModel
+        trainerMode={p.trainerMode}
+        plan={plan}
+        saved={saved}
+        completions={data.setCompletions?.[key]}
+        date={date}
+      />
       {tab === "plan" ? (
         <>
           {plan ? (
@@ -188,7 +192,7 @@ export function WorkoutScreen(p: ScreenProps) {
                   <span className="record-dot" />
                   <strong>TRAINER’S ASSIGNED PLAN</strong>
                   <span>
-                    Version {plan.version} · Kabir Mehta
+                    Version {plan.version}
                     {plan.templateName ? ` · ${plan.templateName}` : ""}
                   </span>
                 </div>
@@ -247,9 +251,36 @@ export function WorkoutScreen(p: ScreenProps) {
               preserved.
             </div>
           )}
+          {remoteChanged && (
+            <div className="info-note" role="alert">
+              <p>
+                This log changed in the other account while you were editing.
+                Your draft is still here.
+              </p>
+              <Button
+                variant="secondary"
+                onClick={() => {
+                  setDraft(saved ? structuredClone(saved) : newActual(plan));
+                  setDirty(false);
+                  setRemoteChanged(false);
+                }}
+              >
+                Load saved log
+              </Button>
+              <Button
+                variant="secondary"
+                onClick={() => setRemoteChanged(false)}
+              >
+                Keep my draft
+              </Button>
+            </div>
+          )}
           <WorkoutEditor
             draft={draft}
-            setDraft={setDraft}
+            setDraft={(next) => {
+              setDirty(true);
+              setDraft(next);
+            }}
             plan={draft.planSnapshot || plan}
             completions={data.setCompletions?.[key] || {}}
             onToggleSet={toggleSet}
@@ -260,7 +291,7 @@ export function WorkoutScreen(p: ScreenProps) {
                 ? "Updating your log keeps the original plan snapshot."
                 : "Your trainer will see the saved log."}
             </span>
-            <Button disabled={saving} onClick={save}>
+            <Button disabled={saving || remoteChanged} onClick={save}>
               {saving
                 ? "Saving workout…"
                 : saved
@@ -274,198 +305,61 @@ export function WorkoutScreen(p: ScreenProps) {
     </>
   );
 }
-export function Trainer(p: ScreenProps) {
-  const { data, update } = p;
-  const [selected, setSelected] = useState(""),
-    [date, setDate] = useState(TODAY),
-    [editing, setEditing] = useState(false),
-    [draft, setDraft] = useState<Workout>(emptyWorkout),
-    [query, setQuery] = useState(""),
-    [saving, setSaving] = useState(false),
-    [tab, setTab] = useState<"plan" | "log" | "nutrition" | "journal">("plan");
-  const member = members.find((m) => m.id === selected),
-    key = `${selected}:${date}`,
+/** Assignment editor for the selected member's isolated journal. */
+export function Trainer(
+  p: ScreenProps & {
+    embedded?: boolean;
+    editingPage?: boolean;
+    onEditRequested?: () => void;
+    onCloseEditor?: () => void;
+  },
+) {
+  const { data, update, date, setDate } = p;
+  const key = `alex:${date}`,
     plan = data.plans[key],
     log = data.logs[key];
-  const memberNutritionKey =
-    selected === "alex" ? date : `${selected}:${date}`;
-  const memberNutrition =
-    data.nutrition[memberNutritionKey] ||
-    (selected === "alex" ? data.nutrition[date] : undefined);
-  const hasNutrition = Boolean(
-    memberNutrition &&
-      (memberNutrition.water > 0 ||
-        Object.values(memberNutrition.metrics || {}).some(
-          (v) => v && v.trim() !== "",
-        ) ||
-        Object.values(memberNutrition.meals || {}).some(
-          (items) => items && items.length > 0,
-        )),
+  const [tab, setTab] = useState<"plan" | "log">("plan");
+  const [editing, setEditing] = useState(!!p.editingPage);
+  const [draft, setDraft] = useState<Workout>(() =>
+    plan ? structuredClone(plan) : emptyWorkout(),
   );
-  const memberPlanLogDates = Object.keys({ ...data.plans, ...data.logs })
-    .filter((k) => k.startsWith(selected + ":"))
-    .map((k) => k.split(":")[1]);
-  const memberNutritionDates =
-    selected === "alex"
-      ? Object.keys(data.nutrition).filter((key) => !key.includes(":"))
-      : Object.keys(data.nutrition)
-          .filter((k) => k.startsWith(selected + ":"))
-          .map((k) => k.split(":")[1]);
-  const memberDates = Array.from(
-    new Set([...memberPlanLogDates, ...memberNutritionDates, ...(selected === "alex" ? [
-      ...data.weights.map((entry) => entry.date),
-      ...Object.keys(data.planner),
-      ...data.habits.flatMap((habit) => habit.marks),
-      ...Object.keys({ ...data.goalsByMonth, ...data.measurements, ...data.reviews }).map((month) => `${month}-01`),
-    ] : []), TODAY]),
-  ).sort();
-  const unsavedTrainer=useUnsavedGuard(editing && JSON.stringify(draft)!==JSON.stringify(plan??emptyWorkout()));
+  useEffect(() => {
+    setEditing(!!p.editingPage);
+    setDraft(plan ? structuredClone(plan) : emptyWorkout());
+  }, [date, p.editingPage]);
+  const unsavedTrainer = useUnsavedGuard(editing && JSON.stringify(draft) !== JSON.stringify(plan ?? emptyWorkout()));
   const beginEdit = () => {
+    if (p.onEditRequested) {
+      p.onEditRequested();
+      return;
+    }
     setDraft(plan ? structuredClone(plan) : emptyWorkout());
     setEditing(true);
   };
   const save = () => {
-    setSaving(true);
-    setTimeout(() => {
-      update(
-        (s) => ({
-          ...s,
-          plans: {
-            ...s.plans,
-            [key]: {
-              ...draft,
-              version: (plan?.version || 0) + 1,
-              savedAt: new Date().toISOString(),
-            },
+    update(
+      (store) => ({
+        ...store,
+        plans: {
+          ...store.plans,
+          [key]: {
+            ...draft,
+            version: (store.plans[key]?.version || 0) + 1,
+            savedAt: new Date().toISOString(),
           },
-        }),
-        `Workout ${plan ? "updated" : "assigned"} for ${member?.name}.`,
-      );
-      setSaving(false);
-      setEditing(false);
-    }, 400);
-  };
-  if (!selected)
-    return (
-      <>
-        <PageHeading
-          title="Members"
-          description="Review member journals, progress, nutrition and workout sessions."
-        />
-        <div className="trainer-stats">
-          <div>
-            <Users size={20} />
-            <strong>{members.length}</strong>
-            <span>Linked members</span>
-          </div>
-          <div>
-            <Dumbbell size={20} />
-            <strong>{Object.keys(data.plans).length}</strong>
-            <span>Assigned workouts</span>
-          </div>
-          <div>
-            <FileCheck2 size={20} />
-            <strong>{Object.keys(data.logs).length}</strong>
-            <span>Submitted logs</span>
-          </div>
-        </div>
-        <Section
-          title="Your members"
-          action={<span className="muted">Full member journal access</span>}
-        >
-          <label className="search-field">
-            <Search size={17} />
-            <input
-              aria-label="Search members"
-              placeholder="Find a member…"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-            />
-          </label>
-          <div className="member-list">
-            {members
-              .filter((m) =>
-                (m.id === "alex" ? data.profile.Name : m.name)
-                  .toLowerCase()
-                  .includes(query.toLowerCase()),
-              )
-              .map((m) => {
-                const count = Object.keys(data.plans).filter((k) =>
-                  k.startsWith(m.id + ":"),
-                ).length;
-                const logs = Object.keys(data.logs).filter((k) =>
-                  k.startsWith(m.id + ":"),
-                ).length;
-                return (
-                  <button
-                    key={m.id}
-                    onClick={() => {
-                      setSelected(m.id);
-                      setEditing(false);
-                      setDate(TODAY);
-                      setTab("plan");
-                    }}
-                  >
-                    <span className="member-avatar">{m.initials}</span>
-                    <div>
-                      <strong>
-                        {m.id === "alex" ? data.profile.Name : m.name}
-                      </strong>
-                      <span>{m.description}</span>
-                    </div>
-                    <div className="member-meta">
-                      <span>
-                        {count} {count === 1 ? "plan" : "plans"} · {logs}{" "}
-                        {logs === 1 ? "log" : "logs"}
-                      </span>
-                      <span className="pill">View member</span>
-                    </div>
-                    <ArrowUpRight size={20} />
-                  </button>
-                );
-              })}
-          </div>
-          {!members.some((m) =>
-            (m.id === "alex" ? data.profile.Name : m.name)
-              .toLowerCase()
-              .includes(query.toLowerCase()),
-          ) && (
-            <p className="empty-state">
-              No members match “{query}”. Try a different name.
-            </p>
-          )}
-        </Section>
-        <div className="trainer-scope">
-          <Check size={16} />
-          <p>
-            Review each member’s workouts, nutrition, goals, habits, challenge, measurements,
-            planner, monthly review and available health readings in their detail view.
-          </p>
-        </div>
-      </>
+        },
+      }),
+      "Assigned workout updated. Shared with the member.",
     );
+    setEditing(false);
+    if (p.editingPage) p.onCloseEditor?.();
+  };
   return (
     <>
       {unsavedTrainer}
-      <button
-        className="back-link"
-        onClick={() => {
-          setSelected("");
-          setEditing(false);
-        }}
-      >
-        <ArrowLeft size={16} />
-        All members
-      </button>
       <PageHeading
-        title={`${selected === "alex" ? data.profile.Name : member?.name}’s ${tab === "journal" ? "journal" : tab === "nutrition" ? "nutrition & wellness" : "workouts"}`}
-        description={
-          tab === "journal"
-            ? "Goals, habits, progress, planner, reviews and health readings from the member’s journal."
-            : tab === "nutrition"
-            ? "Meals, daily nutrition totals, and wellness check-in for this member."
-            : "Assigned workouts and member logs, organized by date."
-        }
+        title="Training plan & actuals"
+        description="Adjust the assignment, then compare it with the member’s submitted session."
         action={
           !editing && tab === "plan" ? (
             <Button onClick={beginEdit}>
@@ -475,92 +369,40 @@ export function Trainer(p: ScreenProps) {
           ) : undefined
         }
       />
-      <div className="filter-bar trainer-member-filters">
-        <Field
-          label={tab === "nutrition" || tab === "journal" ? "Journal date" : "Workout date"}
-          type="date"
-          value={date}
-          onChange={(v) => {
-            if (v) {
-              setDate(v);
-              setEditing(false);
-            }
-          }}
-        />
-        <div className="segmented">
-          <button
-            className={tab === "plan" ? "selected" : ""}
-            onClick={() => {
-              setTab("plan");
-              setEditing(false);
-            }}
-          >
-            Assigned plan
-          </button>
-          <button
-            className={tab === "log" ? "selected" : ""}
-            onClick={() => {
-              setTab("log");
-              setEditing(false);
-            }}
-          >
-            Member’s actual log {log && <Check size={13} />}
-          </button>
-          <button
-            className={tab === "nutrition" ? "selected" : ""}
-            onClick={() => {
-              setTab("nutrition");
-              setEditing(false);
-            }}
-          >
-            Nutrition & wellness {hasNutrition && <Check size={13} />}
-          </button>
-          <button
-            className={tab === "journal" ? "selected" : ""}
-            onClick={() => { setTab("journal"); setEditing(false); }}
-          >
-            Member journal
-          </button>
-        </div>
-      </div>
-      <div className="assignment-dates trainer-assignment-dates">
-        {memberDates.map((d) => {
-          const hasCheck =
-            tab === "nutrition"
-              ? Boolean(
-                  selected === "alex"
-                    ? data.nutrition[d]
-                    : data.nutrition[`${selected}:${d}`],
-                )
-              : tab === "journal"
-                ? selected === "alex" && Boolean(data.planner[d] || data.weights.some((entry) => entry.date === d) || data.habits.some((habit) => habit.marks.includes(d)))
-              : tab === "log"
-                ? Boolean(data.logs[`${selected}:${d}`])
-                : Boolean(data.plans[`${selected}:${d}`]);
-          return (
+      {!p.editingPage && (
+        <div className="filter-bar trainer-member-filters">
+          <Field
+            label="Workout date"
+            type="date"
+            value={date}
+            onChange={(value) => value && setDate(value)}
+          />
+          <div className="segmented">
             <button
-              className={d === date ? "selected" : ""}
-              key={d}
+              aria-pressed={tab === "plan"}
+              className={tab === "plan" ? "selected" : ""}
               onClick={() => {
-                setDate(d);
+                setTab("plan");
                 setEditing(false);
               }}
             >
-              {formatDate(d, { month: "short", day: "numeric" })}
-              {hasCheck && <Check size={12} />}
+              Assigned plan
             </button>
-          );
-        })}
-      </div>
+            <button
+              aria-pressed={tab === "log"}
+              className={tab === "log" ? "selected" : ""}
+              onClick={() => {
+                setTab("log");
+                setEditing(false);
+              }}
+            >
+              Member’s actual log
+            </button>
+          </div>
+        </div>
+      )}
       {editing ? (
         <>
-          <div className="record-banner">
-            <div>
-              <Dumbbell size={18} />
-              <strong>{plan ? "EDIT ASSIGNMENT" : "NEW ASSIGNMENT"}</strong>
-              <span>{formatDate(date)}</span>
-            </div>
-          </div>
           <WorkoutTemplatePicker
             templates={data.workoutLibrary || []}
             onChoose={setDraft}
@@ -568,17 +410,21 @@ export function Trainer(p: ScreenProps) {
           />
           <WorkoutEditor draft={draft} setDraft={setDraft} trainer />
           <div className="form-actions">
-            <Button variant="secondary" onClick={() => setEditing(false)}>
+            <Button
+              variant="secondary"
+              onClick={() =>
+                p.editingPage ? p.onCloseEditor?.() : setEditing(false)
+              }
+            >
               Cancel
             </Button>
-            <Button onClick={save} disabled={saving}>
-              {saving ? "Saving assignment…" : "Save assignment"}
-              <Check size={16} />
+            <Button onClick={save}>
+              Save assignment <Check size={16} />
             </Button>
           </div>
           {log && (
             <p className="helper">
-              This update preserves the submitted member log and its original
+              This updates the assignment. The submitted log keeps its original
               plan snapshot.
             </p>
           )}
@@ -588,7 +434,6 @@ export function Trainer(p: ScreenProps) {
           <>
             <div className="record-banner">
               <div>
-                <span className="record-dot" />
                 <strong>TRAINER’S ASSIGNED PLAN</strong>
                 <span>
                   Version {plan.version}
@@ -603,414 +448,54 @@ export function Trainer(p: ScreenProps) {
               workout={plan}
               completions={data.setCompletions?.[key] || {}}
             />
-            {log && (
-              <div className="info-note">
-                A member log is linked to this assignment. Open “Member’s actual
-                log” to review it.
-              </div>
-            )}
           </>
         ) : (
           <Section title="No workout assigned">
             <p className="section-description">
-              No workout assigned for this date.
+              Create an assignment for this member and date.
             </p>
-            <Button onClick={beginEdit}>
-              Create assignment <Plus size={16} />
-            </Button>
           </Section>
         )
-      ) : tab === "log" ? (
-        log ? (
-          <>
-            <div className="record-banner">
-              <div>
-                <FileCheck2 size={18} />
-                <strong>MEMBER’S ACTUAL LOG</strong>
-                <span>
-                  Submitted · plan version {log.planVersion || "unassigned"}
-                </span>
-              </div>
-              <span className="pill">Saved</span>
+      ) : log ? (
+        <>
+          <div className="record-banner">
+            <div>
+              <strong>MEMBER’S ACTUAL LOG</strong>
+              <span>
+                Submitted · plan version {log.planVersion || "unassigned"}
+              </span>
             </div>
-            <WorkoutRead
-              workout={log}
-              actual
-              completions={data.setCompletions?.[key] || {}}
-            />
-            {log.planSnapshot && (
-              <details className="snapshot">
-                <summary>
-                  Assigned plan at submission · version {log.planVersion}
-                  <ChevronDown size={17} />
-                </summary>
-                <WorkoutRead workout={log.planSnapshot} />
-              </details>
-            )}
-          </>
-        ) : (
-          <Section title="No log submitted">
-            <p className="section-description">
-              No member log has been submitted for this date. Once saved in the
-              member view, it appears here.
-            </p>
-          </Section>
-        )
-      ) : tab === "journal" ? (
-        <TrainerMemberJournal data={data} date={date} memberId={selected} />
+          </div>
+          <WorkoutRead
+            workout={log}
+            actual
+            completions={data.setCompletions?.[key] || {}}
+          />
+          {log.planSnapshot && (
+            <details className="snapshot">
+              <summary>
+                Assigned plan at submission · version {log.planVersion}
+                <ChevronDown size={17} />
+              </summary>
+              <WorkoutRead workout={log.planSnapshot} />
+            </details>
+          )}
+        </>
       ) : (
-        <TrainerNutritionView
-          memberId={selected}
-          memberName={
-            selected === "alex" ? data.profile.Name : member?.name || "Member"
-          }
-          date={date}
-          data={data}
-          update={update}
-        />
-      )}
-      <div className="studio-flows">
-        <NutritionPlanEditor key={`nutrition-${selected}`} {...p} date={date} memberId={selected} memberName={selected === "alex" ? data.profile.Name : member?.name || "Member"}/>
-        <CoachingThread key={`feedback-${selected}-${date}`} {...p} date={date} memberId={selected} memberName={selected === "alex" ? data.profile.Name : member?.name || "Member"} trainer/>
-      </div>
-    </>
-  );
-}
-
-function TrainerNutritionView({
-  memberId,
-  memberName,
-  date,
-  data,
-  update,
-}: {
-  memberId: string;
-  memberName: string;
-  date: string;
-  data: Store;
-  update: (fn: (s: Store) => Store, message?: string) => void;
-}) {
-  const nutritionKey = memberId === "alex" ? date : `${memberId}:${date}`;
-  const n =
-    data.nutrition[nutritionKey] ||
-    (memberId === "alex" ? data.nutrition[date] : undefined) ||
-    emptyNutrition();
-  const totals = totalNutrition(n);
-  if(!workspace(data).mealSharing?.[memberId]) return <Section title="Meal entries are private"><p className="section-description">This member has not enabled sharing of detailed meal entries with their coach. Assigned nutrition targets can still be managed below.</p>{workspace(data).sharing[memberId]&&<p className="section-description">Shared daily totals: {totals.calories} kcal · {totals.protein} g protein.</p>}</Section>;
-
-  const nutrients = ["calories", "protein", "carbs", "fat"] as const;
-  const hasItems = Object.values(n.meals || {}).some(
-    (items) => items && items.length > 0,
-  );
-  const hasMetrics = Object.values(n.metrics || {}).some(
-    (v) => v && v.trim() !== "",
-  );
-  const hasNutrition = Boolean(
-    hasItems || hasMetrics || (n.water && n.water > 0),
-  );
-
-  const [foodSheet, setFoodSheet] = useState<{
-    meal: string;
-    item: Food;
-  } | null>(null);
-
-  const put = (next: typeof n) => {
-    update(
-      (s) => ({
-        ...s,
-        nutrition: {
-          ...s.nutrition,
-          [nutritionKey]: next,
-          ...(memberId === "alex" ? { [date]: next } : {}),
-        },
-      }),
-      "Nutrition updated.",
-    );
-  };
-
-  return (
-    <>
-      <div className="record-banner">
-        <div>
-          <Leaf size={18} />
-          <strong>MEMBER’S NUTRITION & WELLNESS</strong>
-          <span>
-            {formatDate(date, {
-              weekday: "short",
-              month: "short",
-              day: "numeric",
-            })}
-            {hasNutrition ? " · Recorded by member" : " · No entries recorded"}
-          </span>
-        </div>
-        <span className={`pill ${hasNutrition ? "" : "muted"}`}>
-          {hasNutrition ? "Logged" : "Not recorded"}
-        </span>
-      </div>
-
-      {!hasNutrition && (
-        <Section title="No nutrition logged">
+        <Section title="No log submitted">
           <p className="section-description">
-            {memberName} has not recorded any meals, water, or wellness metrics
-            for this date. Once logged in their journal, it will appear here.
+            The member has not submitted a session for this date.
           </p>
         </Section>
       )}
-
-      <Section title="Member’s daily total">
-        <div className="daily-totals">
-          {nutrients.map((k) => (
-            <div key={k}>
-              <span>{k[0].toUpperCase() + k.slice(1)}</span>
-              <strong>
-                {totals[k]} <small>{k === "calories" ? "kcal" : "g"}</small>
-              </strong>
-            </div>
-          ))}
-        </div>
-        <div className="goal-comparison">
-          <strong>Vs. Goal</strong>
-          <span>Target unavailable</span>
-        </div>
-      </Section>
-
-      <Section title="Daily check-in">
-        <div className="form-grid three-col">
-          {[
-            "Weight (kg)",
-            "Waist (cm)",
-            "Sleep (hours)",
-            "Steps",
-            "Body Fat (%)",
-          ].map((m) => (
-            <Field
-              key={m}
-              label={m}
-              type="text"
-              value={n.metrics[m] || ""}
-              onChange={(v) =>
-                put({ ...n, metrics: { ...n.metrics, [m]: v } })
-              }
-            />
-          ))}
-        </div>
-        <div className="water-entry">
-          <div>
-            <strong>Water</strong>
-            <span>{n.water || 0} L logged · 1 mark = 1 L</span>
-          </div>
-          <div className="water-drops">
-            {Array.from({ length: 6 }, (_, i) => (
-              <button
-                key={i}
-                type="button"
-                aria-label={`Water ${i + 1} L`}
-                aria-pressed={n.water > i}
-                onClick={() =>
-                  put({ ...n, water: n.water === i + 1 ? i : i + 1 })
-                }
-              >
-                <GlassWater size={26} />
-              </button>
-            ))}
-          </div>
-        </div>
-      </Section>
-
-      {meals.map((meal) => {
-        const mealItems = n.meals?.[meal] || [];
-        const subtotal = totalNutrition({
-          ...emptyNutrition(),
-          meals: { [meal]: mealItems },
-        });
-        return (
-          <Section
-            key={meal}
-            title={meal}
-            action={
-              <Button
-                variant="ghost"
-                onClick={() =>
-                  setFoodSheet({
-                    meal,
-                    item: {
-                      id: uid(),
-                      product: "",
-                      serving: "",
-                      calories: "",
-                      protein: "",
-                      carbs: "",
-                      fat: "",
-                    },
-                  })
-                }
-              >
-                <Plus size={16} /> Add food
-              </Button>
-            }
-          >
-            {mealItems.length === 0 ? (
-              <p className="empty-meal">No food items logged.</p>
-            ) : (
-              mealItems.map((f) => (
-                <div className="food-row" key={f.id}>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      setFoodSheet({ meal, item: { ...f } })
-                    }
-                  >
-                    <strong>{f.product}</strong>
-                    <span>
-                      {f.serving || "Serving not recorded"} ·{" "}
-                      {f.calories || 0} kcal
-                    </span>
-                    <small>
-                      P {f.protein || 0}g · C {f.carbs || 0}g · F{" "}
-                      {f.fat || 0}g
-                    </small>
-                  </button>
-                  <button
-                    type="button"
-                    className="icon-button"
-                    aria-label={`Remove ${f.product}`}
-                    onClick={() =>
-                      put({
-                        ...n,
-                        meals: {
-                          ...n.meals,
-                          [meal]: mealItems.filter((a) => a.id !== f.id),
-                        },
-                      })
-                    }
-                  >
-                    <Trash2 size={16} />
-                  </button>
-                </div>
-              ))
-            )}
-            <div className="meal-subtotal">
-              <strong>Subtotal</strong>
-              <span>{subtotal.calories} kcal</span>
-              <span>
-                P {subtotal.protein}g · C {subtotal.carbs}g · F{" "}
-                {subtotal.fat}g
-              </span>
-            </div>
-          </Section>
-        );
-      })}
-
-      {foodSheet && (
-        <Sheet
-          title={`Add to ${foodSheet.meal}`}
-          onClose={() => setFoodSheet(null)}
-        >
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              put({
-                ...n,
-                meals: {
-                  ...n.meals,
-                  [foodSheet.meal]: [
-                    ...(n.meals[foodSheet.meal] || []).filter(
-                      (f) => f.id !== foodSheet.item.id,
-                    ),
-                    foodSheet.item,
-                  ],
-                },
-              });
-              setFoodSheet(null);
-            }}
-          >
-            <Field
-              label="Product"
-              value={foodSheet.item.product}
-              onChange={(v) =>
-                setFoodSheet({
-                  ...foodSheet,
-                  item: { ...foodSheet.item, product: v },
-                })
-              }
-              placeholder="e.g. Scrambled eggs"
-              required
-            />
-            <Field
-              label="Serving Size"
-              value={foodSheet.item.serving}
-              onChange={(v) =>
-                setFoodSheet({
-                  ...foodSheet,
-                  item: { ...foodSheet.item, serving: v },
-                })
-              }
-              placeholder="e.g. 2 eggs or 150 g"
-            />
-            <div className="form-grid two-col">
-              <Field
-                label="Calories (kcal)"
-                type="number"
-                value={foodSheet.item.calories}
-                onChange={(v) =>
-                  setFoodSheet({
-                    ...foodSheet,
-                    item: { ...foodSheet.item, calories: v },
-                  })
-                }
-              />
-              <Field
-                label="Protein (g)"
-                type="number"
-                value={foodSheet.item.protein}
-                onChange={(v) =>
-                  setFoodSheet({
-                    ...foodSheet,
-                    item: { ...foodSheet.item, protein: v },
-                  })
-                }
-              />
-              <Field
-                label="Carbs (g)"
-                type="number"
-                value={foodSheet.item.carbs}
-                onChange={(v) =>
-                  setFoodSheet({
-                    ...foodSheet,
-                    item: { ...foodSheet.item, carbs: v },
-                  })
-                }
-              />
-              <Field
-                label="Fat (g)"
-                type="number"
-                value={foodSheet.item.fat}
-                onChange={(v) =>
-                  setFoodSheet({
-                    ...foodSheet,
-                    item: { ...foodSheet.item, fat: v },
-                  })
-                }
-              />
-            </div>
-            <div className="form-actions">
-              <Button
-                variant="secondary"
-                type="button"
-                onClick={() => setFoodSheet(null)}
-              >
-                Cancel
-              </Button>
-              <Button type="submit">
-                Save food item <Check size={16} />
-              </Button>
-            </div>
-          </form>
-        </Sheet>
-      )}
+      <div className="studio-flows">
+        <NutritionPlanEditor key="nutrition-alex" {...p} date={date} memberId="alex" memberName={data.profile.Name || "Member"}/>
+        <CoachingThread key={`feedback-alex-${date}`} {...p} date={date} memberId="alex" memberName={data.profile.Name || "Member"} trainer/>
+      </div>
     </>
   );
 }
+
 export function WorkoutEditor({
   draft,
   setDraft,

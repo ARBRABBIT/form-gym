@@ -2,6 +2,7 @@ import { test, expect, type Page } from '@playwright/test';
 
 type FeedbackWindow = Window & { feedbackCalls: string[] };
 async function openJournal(page: Page, reduced = false) {
+  await page.setViewportSize({ width: 390, height: 900 });
   await page.emulateMedia({ reducedMotion: reduced ? 'reduce' : 'no-preference' });
   await page.addInitScript(() => {
     const calls: string[] = [];

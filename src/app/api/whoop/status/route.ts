@@ -11,6 +11,7 @@ import {
   sameOrigin,
   type WhoopSession,
 } from "@/lib/whoop";
+import { currentAccount, wearableFor, saveWearable } from "@/lib/accounts";
 const json = (value: object, status = 200) =>
   NextResponse.json(value, {
     status,
@@ -18,14 +19,19 @@ const json = (value: object, status = 200) =>
   });
 export async function GET(request: NextRequest) {
   if (!config()) return json({ configured: false, connected: false });
-  let session = unseal<WhoopSession>(request.cookies.get(SESSION)?.value);
+  const owner = currentAccount(request)?.id;
+  let session = unseal<WhoopSession>(
+    owner ? wearableFor(owner) : request.cookies.get(SESSION)?.value,
+  );
   if (!session) return json({ configured: true, connected: false });
   let renewed = false;
   const unavailable = () => {
     const result = json({ configured: true, error: "unavailable" }, 502);
     // Preserve rotated refresh credentials even if the profile request fails.
-    if (renewed && session)
-      setCookie(result, SESSION, seal(session), 30 * 86400);
+    if (renewed && session) {
+      if (owner) saveWearable(owner, seal(session));
+      else setCookie(result, SESSION, seal(session), 30 * 86400);
+    }
     return result;
   };
   try {
@@ -43,14 +49,20 @@ export async function GET(request: NextRequest) {
     const response = await profile(session.accessToken);
     if (response.status === 401) {
       const result = json({ configured: true, connected: false });
-      setCookie(result, SESSION, "", 0);
+      {
+        if (owner) saveWearable(owner, null);
+        else setCookie(result, SESSION, "", 0);
+      }
       return result;
     }
     if (!response.ok) return unavailable();
     const user = await response.json();
     if (user.user_id !== session.userId) throw new Error("Invalid account");
     const result = json({ configured: true, connected: true });
-    setCookie(result, SESSION, seal(session), 30 * 86400);
+    {
+      if (owner) saveWearable(owner, seal(session));
+      else setCookie(result, SESSION, seal(session), 30 * 86400);
+    }
     return result;
   } catch {
     return unavailable();
@@ -58,10 +70,16 @@ export async function GET(request: NextRequest) {
 }
 export async function DELETE(request: NextRequest) {
   if (!sameOrigin(request)) return json({ error: "invalid_origin" }, 403);
-  let session = unseal<WhoopSession>(request.cookies.get(SESSION)?.value);
+  const owner = currentAccount(request)?.id;
+  let session = unseal<WhoopSession>(
+    owner ? wearableFor(owner) : request.cookies.get(SESSION)?.value,
+  );
   const retry = () => {
     const result = json({ error: "unavailable" }, 502);
-    if (session) setCookie(result, SESSION, seal(session), 30 * 86400);
+    if (session) {
+      if (owner) saveWearable(owner, seal(session));
+      else setCookie(result, SESSION, seal(session), 30 * 86400);
+    }
     return result;
   };
   if (session) {
@@ -86,6 +104,9 @@ export async function DELETE(request: NextRequest) {
     }
   }
   const result = json({ connected: false });
-  setCookie(result, SESSION, "", 0);
+  {
+    if (owner) saveWearable(owner, null);
+    else setCookie(result, SESSION, "", 0);
+  }
   return result;
 }

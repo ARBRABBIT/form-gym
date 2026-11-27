@@ -10,13 +10,17 @@ import {
   exchange,
   profile,
 } from "@/lib/whoop";
+import { currentAccount, saveWearable } from "@/lib/accounts";
 export async function GET(request: NextRequest) {
   const settings = config();
   if (!settings)
     return NextResponse.json({ error: "not_configured" }, { status: 503 });
-  const saved = unseal<{ state: string; issuedAt: number; returnTo?: string }>(
-    request.cookies.get(STATE)?.value,
-  );
+  const saved = unseal<{
+    state: string;
+    issuedAt: number;
+    returnTo?: string;
+    accountId?: string;
+  }>(request.cookies.get(STATE)?.value);
   const finish = (result: string) => {
     const response = NextResponse.redirect(
       new URL(
@@ -41,6 +45,8 @@ export async function GET(request: NextRequest) {
   )
     return finish("invalid_state");
   if (request.nextUrl.searchParams.has("error")) return finish("cancelled");
+  if (saved.accountId && currentAccount(request)?.id !== saved.accountId)
+    return finish("invalid_state");
   const code = request.nextUrl.searchParams.get("code");
   if (!code) return finish("failed");
   try {
@@ -54,6 +60,10 @@ export async function GET(request: NextRequest) {
     const user = await userResponse.json();
     if (!Number.isSafeInteger(user.user_id)) return finish("failed");
     const response = finish("connected");
+    if (saved.accountId) {
+      saveWearable(saved.accountId, seal({ ...tokens, userId: user.user_id }));
+      return response;
+    }
     setCookie(
       response,
       SESSION,

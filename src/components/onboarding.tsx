@@ -59,10 +59,20 @@ export function AccountEntry({
   onEnter,
   onDemo,
 }: {
-  onEnter: (email: string, name: string, signup: boolean) => void;
-  onDemo: () => void;
+  onEnter: (
+    email: string,
+    name: string,
+    signup: boolean,
+    password: string,
+    role: "member" | "trainer",
+  ) => Promise<void>;
+  onDemo: (role: "member" | "trainer") => void;
 }) {
   const [signup, setSignup] = useState(true);
+  const [accountRole, setAccountRole] = useState<"member" | "trainer">(
+    "member",
+  );
+  const [busy, setBusy] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -123,22 +133,62 @@ export function AccountEntry({
               Log in
             </button>
           </div>
+          <div
+            className="account-workspace-switch"
+            role="group"
+            aria-label="Choose workspace"
+          >
+            {(["member", "trainer"] as const).map((role) => (
+              <button
+                type="button"
+                key={role}
+                aria-pressed={accountRole === role}
+                onClick={() => {
+                  setAccountRole(role);
+                  setError("");
+                }}
+              >
+                {role === "member" ? "Member" : "Trainer"}
+              </button>
+            ))}
+          </div>
           <h2>
             {signup
-              ? "Your next chapter starts here."
+              ? accountRole === "trainer"
+                ? "Create your trainer account."
+                : "Your next chapter starts here."
               : "Good to have you back."}
           </h2>
           <p>
             {signup
               ? "Let’s make a little room for you."
-              : "Open your journal and keep going."}
+              : accountRole === "trainer"
+                ? "Open your members and keep coaching."
+                : "Open your journal and keep going."}
           </p>
           <form
-            onSubmit={(e) => {
+            onSubmit={async (e) => {
               e.preventDefault();
-              const address = email.trim().toLowerCase();
-              onEnter(address, name.trim(), signup);
-              setPassword("");
+              setBusy(true);
+              setError("");
+              try {
+                await onEnter(
+                  email.trim().toLowerCase(),
+                  name.trim(),
+                  signup,
+                  password,
+                  accountRole,
+                );
+                setPassword("");
+              } catch (error) {
+                setError(
+                  error instanceof Error
+                    ? error.message
+                    : "Unable to log in. Try again.",
+                );
+              } finally {
+                setBusy(false);
+              }
             }}
           >
             {signup && (
@@ -174,6 +224,7 @@ export function AccountEntry({
                 <input
                   required
                   minLength={8}
+                  aria-label="Password"
                   type={visible ? "text" : "password"}
                   autoComplete={signup ? "new-password" : "current-password"}
                   value={password}
@@ -195,18 +246,18 @@ export function AccountEntry({
                 {error}
               </p>
             )}
-            <Button type="submit" className="full-width">
+            <Button type="submit" disabled={busy} className="full-width">
               {signup ? "Create my journal" : "Log in"}
               <ArrowRight size={17} />
             </Button>
           </form>
           <p className="account-demo-note">
-            Demo access · No account is created online. Passwords are not
-            verified or saved. Progress lasts until you refresh or close this page.
+            Create an account to save your journal across devices. Sample access
+            below stays separate from your saved records.
           </p>
-            <button className="text-link" onClick={onDemo}>
-              Explore the sample journal <ArrowRight size={15} />
-            </button>
+          <button className="text-link" onClick={() => onDemo(accountRole)}>
+            Explore the sample journal <ArrowRight size={15} />
+          </button>
         </section>
       </main>
       <footer className="welcome-footer">
@@ -444,12 +495,20 @@ export default function Onboarding({
                 </span>
                 {step === 2 ? (
                   <span className="setup-weight-date">
-                    <DatePicker label="Weight entry date" showValue value={draft.weight.date}
-                      onChange={(v) => weight("date", v)} />
+                    <DatePicker
+                      label="Weight entry date"
+                      showValue
+                      value={draft.weight.date}
+                      onChange={(v) => weight("date", v)}
+                    />
                   </span>
                 ) : (
                   <span>
-                    {step === 0 ? "A fresh beginning" : step === 5 ? "One last little step" : "You’re making it yours"}
+                    {step === 0
+                      ? "A fresh beginning"
+                      : step === 5
+                        ? "One last little step"
+                        : "You’re making it yours"}
                   </span>
                 )}
                 <div
@@ -526,18 +585,33 @@ export default function Onboarding({
                         <legend>What would you like to focus on?</legend>
                         {suggestedGoals.map((goal) => {
                           const selected = draft.goals.includes(goal);
-                          const full = draft.goals.filter((g) => g.trim()).length >= 4;
+                          const full =
+                            draft.goals.filter((g) => g.trim()).length >= 4;
                           return (
-                            <label className={`setup-goal-option${selected ? " selected" : ""}`} key={goal}>
+                            <label
+                              className={`setup-goal-option${selected ? " selected" : ""}`}
+                              key={goal}
+                            >
                               <input
                                 type="checkbox"
                                 checked={selected}
                                 disabled={!selected && full}
-                                onChange={() => patch({
-                                  goals: selected
-                                    ? draft.goals.map((g) => g === goal ? "" : g)
-                                    : draft.goals.map((g, i) => i === draft.goals.findIndex((g) => !g.trim()) ? goal : g),
-                                })}
+                                onChange={() =>
+                                  patch({
+                                    goals: selected
+                                      ? draft.goals.map((g) =>
+                                          g === goal ? "" : g,
+                                        )
+                                      : draft.goals.map((g, i) =>
+                                          i ===
+                                          draft.goals.findIndex(
+                                            (g) => !g.trim(),
+                                          )
+                                            ? goal
+                                            : g,
+                                        ),
+                                  })
+                                }
                               />
                               <span>{goal}</span>
                             </label>
@@ -545,26 +619,45 @@ export default function Onboarding({
                         })}
                       </fieldset>
                       <p className="setup-goal-count" role="status">
-                        {draft.goals.filter((g) => g.trim()).length} of 4 selected
-                        {draft.goals.every((g) => g.trim()) && " · Remove a goal to choose another."}
+                        {draft.goals.filter((g) => g.trim()).length} of 4
+                        selected
+                        {draft.goals.every((g) => g.trim()) &&
+                          " · Remove a goal to choose another."}
                       </p>
                       <div className="setup-custom-goals">
                         {draft.goals.map((goal, i) => {
-                          if (suggestedGoals.includes(goal) || (!goal.trim() && i !== draft.goals.findIndex((g) => !g.trim()))) return null;
+                          if (
+                            suggestedGoals.includes(goal) ||
+                            (!goal.trim() &&
+                              i !== draft.goals.findIndex((g) => !g.trim()))
+                          )
+                            return null;
                           return (
                             <div className="setup-custom-goal" key={i}>
                               <Field
                                 label={`Custom goal ${i + 1}`}
                                 value={goal}
                                 placeholder="e.g. Feel stronger on the stairs"
-                                onChange={(value) => patch({ goals: draft.goals.map((g, j) => i === j ? value : g) })}
+                                onChange={(value) =>
+                                  patch({
+                                    goals: draft.goals.map((g, j) =>
+                                      i === j ? value : g,
+                                    ),
+                                  })
+                                }
                               />
                               {goal.trim() && (
                                 <button
                                   type="button"
                                   className="setup-goal-remove"
                                   aria-label={`Remove custom goal ${i + 1}`}
-                                  onClick={() => patch({ goals: draft.goals.map((g, j) => i === j ? "" : g) })}
+                                  onClick={() =>
+                                    patch({
+                                      goals: draft.goals.map((g, j) =>
+                                        i === j ? "" : g,
+                                      ),
+                                    })
+                                  }
                                 >
                                   <Trash2 size={17} aria-hidden="true" />
                                 </button>
@@ -579,21 +672,27 @@ export default function Onboarding({
                     <>
                       {draft.goals.some((goal) => goal.trim()) && (
                         <fieldset className="setup-goal-options setup-challenge-goals">
-                          <legend>Your monthly goals · Pick one for your challenge</legend>
-                          {draft.goals.filter((goal) => goal.trim()).map((goal, i) => (
-                            <label
-                              className={`setup-goal-option${draft.target === goal.trim() ? " selected" : ""}`}
-                              key={i}
-                            >
-                              <input
-                                type="radio"
-                                name="challenge-goal"
-                                checked={draft.target === goal.trim()}
-                                onChange={() => patch({ target: goal.trim() })}
-                              />
-                              <span>{goal.trim()}</span>
-                            </label>
-                          ))}
+                          <legend>
+                            Your monthly goals · Pick one for your challenge
+                          </legend>
+                          {draft.goals
+                            .filter((goal) => goal.trim())
+                            .map((goal, i) => (
+                              <label
+                                className={`setup-goal-option${draft.target === goal.trim() ? " selected" : ""}`}
+                                key={i}
+                              >
+                                <input
+                                  type="radio"
+                                  name="challenge-goal"
+                                  checked={draft.target === goal.trim()}
+                                  onChange={() =>
+                                    patch({ target: goal.trim() })
+                                  }
+                                />
+                                <span>{goal.trim()}</span>
+                              </label>
+                            ))}
                         </fieldset>
                       )}
                       <Field
@@ -652,96 +751,133 @@ export default function Onboarding({
                     </>
                   )}
                   {step === 2 && (
-                    <WeightDial value={draft.weight.weight} onChange={(v) => weight("weight", v)} />
+                    <WeightDial
+                      value={draft.weight.weight}
+                      onChange={(v) => weight("weight", v)}
+                    />
                   )}
                   {step === 3 && (
                     <>
                       <div className="setup-habit-suggestions">
                         {(["build", "break"] as const).map((kind) => (
                           <fieldset className="setup-goal-options" key={kind}>
-                            <legend>{kind === "build" ? "Habits to build" : "Habits to break"}</legend>
-                            {suggestedHabits.filter((habit) => habit.kind === kind).map((habit) => {
-                              const selected = draft.habits.some((h) => h.name === habit.name && h.kind === kind);
-                              return (
-                                <label className={`setup-goal-option${selected ? " selected" : ""}`} key={habit.name}>
-                                  <input
-                                    type="checkbox"
-                                    checked={selected}
-                                    onChange={() => patch({
-                                      habits: selected
-                                        ? draft.habits.filter((h) => !(h.name === habit.name && h.kind === kind))
-                                        : [...draft.habits, { id: uid(), ...habit, marks: [] }],
-                                    })}
-                                  />
-                                  <span>{habit.name}</span>
-                                </label>
-                              );
-                            })}
+                            <legend>
+                              {kind === "build"
+                                ? "Habits to build"
+                                : "Habits to break"}
+                            </legend>
+                            {suggestedHabits
+                              .filter((habit) => habit.kind === kind)
+                              .map((habit) => {
+                                const selected = draft.habits.some(
+                                  (h) =>
+                                    h.name === habit.name && h.kind === kind,
+                                );
+                                return (
+                                  <label
+                                    className={`setup-goal-option${selected ? " selected" : ""}`}
+                                    key={habit.name}
+                                  >
+                                    <input
+                                      type="checkbox"
+                                      checked={selected}
+                                      onChange={() =>
+                                        patch({
+                                          habits: selected
+                                            ? draft.habits.filter(
+                                                (h) =>
+                                                  !(
+                                                    h.name === habit.name &&
+                                                    h.kind === kind
+                                                  ),
+                                              )
+                                            : [
+                                                ...draft.habits,
+                                                {
+                                                  id: uid(),
+                                                  ...habit,
+                                                  marks: [],
+                                                },
+                                              ],
+                                        })
+                                      }
+                                    />
+                                    <span>{habit.name}</span>
+                                  </label>
+                                );
+                              })}
                           </fieldset>
                         ))}
                       </div>
                       <div className="setup-habits">
-                        {draft.habits.map((h, i) => suggestedHabits.some((habit) => habit.name === h.name && habit.kind === h.kind) ? null : (
-                          <div className="setup-habit" key={h.id}>
-                            <Field
-                              label={`Habit ${i + 1}`}
-                              value={h.name}
-                              onChange={(v) =>
-                                patch({
-                                  habits: draft.habits.map((a) =>
-                                    a.id === h.id ? { ...a, name: v } : a,
-                                  ),
-                                })
-                              }
-                              placeholder="e.g. Read before bed / less late-night scrolling"
-                            />
-                            <div className="habit-row-actions">
-                              <fieldset className="habit-kind">
-                                <legend className="sr-only">
-                                  Habit {i + 1} direction
-                                </legend>
-                                {(["build", "break"] as const).map((kind) => (
-                                  <label
-                                    key={kind}
-                                    className={
-                                      h.kind === kind ? "selected" : ""
-                                    }
-                                  >
-                                    <input
-                                      type="radio"
-                                      name={`habit-${h.id}`}
-                                      checked={h.kind === kind}
-                                      onChange={() =>
-                                        patch({
-                                          habits: draft.habits.map((a) =>
-                                            a.id === h.id ? { ...a, kind } : a,
-                                          ),
-                                        })
-                                      }
-                                    />
-                                    {kind === "build"
-                                      ? "Good habit to build"
-                                      : "Bad habit to break"}
-                                  </label>
-                                ))}
-                              </fieldset>
-                              <button
-                                type="button"
-                                className="icon-button"
-                                aria-label={`Remove habit ${i + 1}`}
-                                onClick={() =>
+                        {draft.habits.map((h, i) =>
+                          suggestedHabits.some(
+                            (habit) =>
+                              habit.name === h.name && habit.kind === h.kind,
+                          ) ? null : (
+                            <div className="setup-habit" key={h.id}>
+                              <Field
+                                label={`Habit ${i + 1}`}
+                                value={h.name}
+                                onChange={(v) =>
                                   patch({
-                                    habits: draft.habits.filter(
-                                      (a) => a.id !== h.id,
+                                    habits: draft.habits.map((a) =>
+                                      a.id === h.id ? { ...a, name: v } : a,
                                     ),
                                   })
                                 }
-                              >
-                                <Trash2 size={17} />
-                              </button>
+                                placeholder="e.g. Read before bed / less late-night scrolling"
+                              />
+                              <div className="habit-row-actions">
+                                <fieldset className="habit-kind">
+                                  <legend className="sr-only">
+                                    Habit {i + 1} direction
+                                  </legend>
+                                  {(["build", "break"] as const).map((kind) => (
+                                    <label
+                                      key={kind}
+                                      className={
+                                        h.kind === kind ? "selected" : ""
+                                      }
+                                    >
+                                      <input
+                                        type="radio"
+                                        name={`habit-${h.id}`}
+                                        checked={h.kind === kind}
+                                        onChange={() =>
+                                          patch({
+                                            habits: draft.habits.map((a) =>
+                                              a.id === h.id
+                                                ? { ...a, kind }
+                                                : a,
+                                            ),
+                                          })
+                                        }
+                                      />
+                                      {kind === "build"
+                                        ? "Good habit to build"
+                                        : "Bad habit to break"}
+                                    </label>
+                                  ))}
+                                </fieldset>
+                                <button
+                                  type="button"
+                                  className="icon-button"
+                                  aria-label={`Remove habit ${i + 1}`}
+                                  onClick={() =>
+                                    patch({
+                                      habits: draft.habits.filter(
+                                        (a) => a.id !== h.id,
+                                      ),
+                                    })
+                                  }
+                                >
+                                  <Trash2 size={17} />
+                                </button>
+                              </div>
                             </div>
-                          </div>
-                        ))}
+                          ),
+                        )}
                       </div>
                       <Button
                         variant="secondary"

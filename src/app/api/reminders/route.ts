@@ -8,6 +8,12 @@ import {
   validSubscription,
   localClock,
 } from "@/lib/reminders";
+import { currentAccount, saveReminderPreferences } from "@/lib/accounts";
+const deviceId = (request: NextRequest) => {
+  const raw = request.cookies.get(COOKIE)?.value || "";
+  const owner = currentAccount(request);
+  return owner ? `${owner.id}:${raw}` : raw;
+};
 export const runtime = "nodejs";
 const COOKIE = "form-reminder-device";
 const json = (value: object, status = 200) =>
@@ -16,7 +22,7 @@ const json = (value: object, status = 200) =>
     headers: { "Cache-Control": "no-store" },
   });
 export async function GET(request: NextRequest) {
-  const row = reminderFor(request.cookies.get(COOKIE)?.value || "");
+  const row = reminderFor(deviceId(request));
   const heartbeat = reminderDb()
     .prepare("SELECT value FROM settings WHERE name='worker_heartbeat'")
     .get() as { value: string } | undefined;
@@ -45,12 +51,14 @@ export async function POST(request: NextRequest) {
     const id =
       request.cookies.get(COOKIE)?.value ||
       randomBytes(24).toString("base64url");
+    const actor = currentAccount(request);
+    const scopedId = actor ? `${actor.id}:${id}` : id;
     reminderDb()
       .prepare(
         "INSERT INTO reminders(id,subscription,time,timezone,tone) VALUES (?,?,?,?,?) ON CONFLICT(id) DO UPDATE SET subscription=excluded.subscription,time=excluded.time,timezone=excluded.timezone,tone=excluded.tone,enabled=1",
       )
       .run(
-        id,
+        scopedId,
         JSON.stringify(body.subscription),
         body.time,
         body.timezone,
@@ -59,7 +67,14 @@ export async function POST(request: NextRequest) {
     if (body.checkedInToday === true)
       reminderDb()
         .prepare("UPDATE reminders SET skipped_date=?, snooze_at=0 WHERE id=?")
-        .run(localClock(body.timezone).day, id);
+        .run(localClock(body.timezone).day, scopedId);
+    if (actor)
+      saveReminderPreferences(actor.id, {
+        enabled: true,
+        time: body.time,
+        timezone: body.timezone,
+        tone: body.tone,
+      });
     const response = json({ enabled: true });
     response.cookies.set(COOKIE, id, {
       httpOnly: true,
@@ -77,7 +92,15 @@ export async function DELETE(request: NextRequest) {
   if (!sameOrigin(request)) return json({ error: "invalid_origin" }, 403);
   reminderDb()
     .prepare("DELETE FROM reminders WHERE id=?")
-    .run(request.cookies.get(COOKIE)?.value || "");
+    .run(deviceId(request));
+  const actor = currentAccount(request);
+  if (actor)
+    saveReminderPreferences(actor.id, {
+      enabled: false,
+      time: "07:30",
+      timezone: "Asia/Kolkata",
+      tone: "friendly",
+    });
   const response = json({ enabled: false });
   response.cookies.set(COOKIE, "", { maxAge: 0, path: "/api/reminders" });
   return response;

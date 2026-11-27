@@ -32,6 +32,7 @@ export default function Dashboard({
   navigate,
   date,
   setDate,
+  healthMemberId, trainerMode, persistent,
 }: ScreenProps) {
   const plan = data.plans[`alex:${date}`],
     log = data.logs[`alex:${date}`];
@@ -80,13 +81,15 @@ export default function Dashboard({
         hasPlan={(key) => !!data.plans[`alex:${key}`]}
       />
       <HealthOverview
+        healthMemberId={healthMemberId}
+        trainerMode={trainerMode}
         data={data}
         update={update}
         navigate={navigate}
         date={date}
         setDate={setDate}
       />
-      <BodyCompositionCard data={data} update={update} date={date} />
+      <BodyCompositionCard data={data} update={update} date={date} persistent={persistent} />
       <div className="journal-columns">
         <div className="journal-main">
           <section className="training-section">

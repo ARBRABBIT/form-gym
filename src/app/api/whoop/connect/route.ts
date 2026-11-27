@@ -9,6 +9,7 @@ import {
   setCookie,
   sameOrigin,
 } from "@/lib/whoop";
+import { currentAccount } from "@/lib/accounts";
 export async function POST(request: NextRequest) {
   if (!sameOrigin(request))
     return NextResponse.json({ error: "invalid_origin" }, { status: 403 });
@@ -42,7 +43,12 @@ export async function POST(request: NextRequest) {
   setCookie(
     response,
     STATE,
-    seal({ state, issuedAt: Date.now(), returnTo }),
+    seal({
+      state,
+      issuedAt: Date.now(),
+      returnTo,
+      accountId: currentAccount(request)?.id,
+    }),
     600,
   );
   return response;

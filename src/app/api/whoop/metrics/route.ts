@@ -11,6 +11,12 @@ import {
 } from "@/lib/whoop";
 import { emptyHealth } from "@/lib/health";
 
+import {
+  currentAccount,
+  canAccess,
+  wearableFor,
+  saveWearable,
+} from "@/lib/accounts";
 type RecordData = {
   id?: string | number;
   cycle_id?: number;
@@ -57,14 +63,23 @@ export async function GET(request: NextRequest) {
       status,
       headers: { "Cache-Control": "no-store" },
     });
+  const actor = currentAccount(request);
+  const target = request.nextUrl.searchParams.get("memberId");
+  if (target && (!actor || !canAccess(actor, target)))
+    return json({ error: "Journal not shared" }, 403);
+  const owner = target || actor?.id;
   if (!config()) return json(emptyHealth(date));
-  let session = unseal<WhoopSession>(request.cookies.get(SESSION)?.value);
+  let session = unseal<WhoopSession>(
+    owner ? wearableFor(owner) : request.cookies.get(SESSION)?.value,
+  );
   if (!session) return json(emptyHealth(date, true));
   let renewed = false;
   const respond = (body: object, status = 200) => {
     const response = json(body, status);
-    if (renewed && session)
-      setCookie(response, SESSION, seal(session), 30 * 86400);
+    if (renewed && session) {
+      if (owner) saveWearable(owner, seal(session));
+      else setCookie(response, SESSION, seal(session), 30 * 86400);
+    }
     return response;
   };
   try {
@@ -171,7 +186,8 @@ export async function GET(request: NextRequest) {
         { ...emptyHealth(date, true), error: "reconnect" },
         401,
       );
-      setCookie(response, SESSION, "", 0);
+      if (owner) saveWearable(owner, null);
+      else setCookie(response, SESSION, "", 0);
       return response;
     }
     return respond(

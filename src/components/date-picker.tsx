@@ -31,12 +31,16 @@ export default function DatePicker({
   max = TODAY,
   label = "Dashboard date",
   showValue = false,
+  iconOnly = false,
+  disabled = false,
 }: {
   value: string;
   onChange: (date: string) => void;
   max?: string;
   label?: string;
   showValue?: boolean;
+  iconOnly?: boolean;
+  disabled?: boolean;
 }) {
   const [open, setOpen] = useState(false),
     [month, setMonth] = useState(value.slice(0, 7)),
@@ -165,7 +169,8 @@ export default function DatePicker({
       <button
         type="button"
         ref={trigger}
-        className="date-control custom-date-trigger"
+        disabled={disabled}
+        className={`date-control custom-date-trigger${iconOnly ? " date-icon-only" : ""}`}
         aria-label={label}
         aria-describedby={`${id}-value`}
         aria-haspopup="dialog"
@@ -183,15 +188,17 @@ export default function DatePicker({
         }}
       >
         <CalendarDays size={17} />
-        <span>
-          {showValue
-            ? formatDate(value, {
-                day: "numeric",
-                month: "short",
-                year: "numeric",
-              })
-            : "Change date"}
-        </span>
+        {!iconOnly && (
+          <span>
+            {showValue
+              ? formatDate(value, {
+                  day: "numeric",
+                  month: "short",
+                  year: "numeric",
+                })
+              : "Change date"}
+          </span>
+        )}
         <span className="sr-only" id={`${id}-value`}>
           {formatDate(value)}
         </span>
