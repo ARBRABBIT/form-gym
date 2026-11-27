@@ -26,7 +26,7 @@
 .water-amount-button > svg { width: 22px; height: 22px; }
 .water-amount-button:disabled { opacity: .3; }
 .water-amount-display { min-width: 140px; text-align: center; }
-.water-amount-display output { display: block; color: #fff; font-family: var(--font-matricha), monospace; font-size: 76px; font-weight: 400; line-height: 1.1; letter-spacing: -3px; text-shadow: 0 5px 12px rgb(255 255 255 / 18%); }
+.water-amount-display output { display: block; color: #fff; font-family: var(--font-roboto-condensed), var(--font-urbanist), sans-serif; font-size: 76px; font-weight: 400; line-height: 1.1; letter-spacing: -3px; text-shadow: 0 5px 12px rgb(255 255 255 / 18%); }
 .water-amount-display > span { display: block; margin-top: 10px; color: rgb(255 255 255 / 72%); font-size: 14px; }
 .water-daily-total { margin: 16px 0 36px; text-align: center; font-size: 11px; line-height: 1.5; color: rgb(255 255 255 / 72%); }
 .water-serving-section > h2 { margin: 0 0 16px; color: inherit; font-size: 19px; font-weight: 500; letter-spacing: -.02em; }
@@ -35,7 +35,7 @@
 .water-serving-card { position: relative; display: flex; flex: 1; align-items: center; justify-content: space-between; min-width: 0; height: 136px; overflow: hidden; padding: 18px; border: 1px solid rgb(255 255 255 / 26%); border-radius: 999px; color: inherit; background: linear-gradient(115deg, rgb(255 255 255 / 23%), rgb(255 255 255 / 10%)); box-shadow: inset 0 1px 2px rgb(255 255 255 / 35%); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); text-align: left; }
 .water-serving-card[aria-pressed="true"] { border-color: rgb(255 255 255 / 65%); background: linear-gradient(115deg, rgb(255 255 255 / 33%), rgb(255 255 255 / 13%)); }
 .water-serving-quantity { display: inline-flex; align-items: baseline; gap: 4px; flex-shrink: 0; }
-.water-serving-quantity strong { font-family: var(--font-matricha), monospace; font-size: 34px; font-weight: 400; line-height: 1; }
+.water-serving-quantity strong { font-family: var(--font-roboto-condensed), var(--font-urbanist), sans-serif; font-size: 34px; font-weight: 400; line-height: 1; }
 .water-serving-quantity > span { font-size: 11px; color: rgb(255 255 255 / 70%); }
 .water-serving-vessel { position: relative; display: flex; justify-content: center; align-items: center; flex: 0 1 155px; height: 114px; margin-right: -9px; border: 1px dotted rgb(255 255 255 / 45%); border-radius: 999px; }
 .drink-vessel { display: block; width: 140px; height: 140px; filter: drop-shadow(0 6px 10px rgb(255 255 255 / 12%)); transform: rotate(-7deg); }

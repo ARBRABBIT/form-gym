@@ -10,13 +10,13 @@
 .profile-vitals > div { text-align: center; padding-inline: 10px; border-right: 1px solid rgb(255 255 255 / 80%); }
 .profile-vitals > div:last-child { border: 0; }
 .profile-vitals dt { color: #667286; font-size: 11px; margin-bottom: 10px; }
-.profile-vitals dd { margin: 0; color: #5c647f; font-family: var(--font-matricha), monospace; font-size: 30px; line-height: 1.2; }
+.profile-vitals dd { margin: 0; color: #5c647f; font-family: var(--font-roboto-condensed), var(--font-urbanist), sans-serif; font-size: 30px; line-height: 1.2; font-weight: 400; }
 .profile-vitals dd small { display: block; font-family: var(--font-urbanist), sans-serif; font-size: 11px; margin-top: 5px; }
 .profile-vitals .profile-goal-value { font-family: var(--font-urbanist), sans-serif; font-size: 15px; font-weight: 500; line-height: 1.4; }
 .profile-sections { display: grid; grid-template-columns: 1.1fr 1fr; gap: 22px; }
 .profile-practice-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
 .profile-practice-grid > div { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; padding: 16px 12px; background: rgb(255 255 255 / 30%); border: 1px solid rgb(255 255 255 / 80%); border-radius: 18px; color: #6b6b88; }
-.profile-practice-grid strong { font-family: var(--font-matricha), monospace; font-size: 31px; line-height: 1; font-weight: 400; }
+.profile-practice-grid strong { font-family: var(--font-roboto-condensed), var(--font-urbanist), sans-serif; font-size: 31px; line-height: 1; font-weight: 400; }
 .profile-practice-grid strong small { font-family: var(--font-urbanist), sans-serif; font-size: 11px; margin-left: 3px; }
 .profile-practice-grid > div > span { font-size: 11px; line-height: 1.4; }
 .profile-links { display: flex; flex-direction: column; }

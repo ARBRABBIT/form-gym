@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @theme inline {
   --font-sans: var(--font-urbanist), Arial, sans-serif;
-  --font-display: var(--font-matricha), var(--font-urbanist), sans-serif;
+  --font-display: var(--font-matricha), var(--font-urbanist), Arial, sans-serif;
   --color-ink: #181818;
   --color-paper: #ffffff;
 }

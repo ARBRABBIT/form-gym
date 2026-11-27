@@ -1,6 +1,6 @@
 ---
 name: Form — gym journal
-description: A training journal using Urbanist for interface text and Matricha for the Form wordmark.
+description: A training journal using Urbanist for interface text, Matricha for the Form wordmark, with Roboto Condensed for numeric displays.
 colors:
   ink: "#181818"
   muted: "#707070"
@@ -123,7 +123,7 @@ The interface is mobile-first. Familiar controls, persistent role tabs and compa
 **Key Characteristics:**
 
 - Flat ruled sections and aligned ledgers.
-- Urbanist throughout the interface, with Matricha for the Form wordmark.
+- Urbanist for interface text, Matricha for the Form wordmark; Roboto Condensed for numeric displays only.
 - Grayscale state changes and sharp controls.
 - Persistent Member view / Trainer view navigation.
 
@@ -148,7 +148,11 @@ A monochrome paper-and-ink palette, with restrained gray distinctions for suppor
 
 ## Typography
 
-Headings and body use Urbanist with Arial and sans-serif fallbacks. Matricha Regular supplies the Form wordmark and footer branding. Both fonts are self-hosted through next/font/local; Urbanist supports weights 100–900.
+Headings and body use Urbanist; the Form wordmark and footer branding use Matricha Regular with Arial and sans-serif fallbacks. Roboto Condensed is reserved for calendar numerals, metric readings and numeric counters. All three fonts are self-hosted through next/font/local; Urbanist supports weights 100–900; Roboto Condensed uses Regular (400) for numeric displays only.
+
+Numeric displays use tabular figures, -.02em tracking, and a 1.12 vertical scale
+for the taller watch-like proportions. Individual CSS scale composes with the
+existing calendar selection, reflected numerals and value-change animations.
 
 - **Display:** the desktop journal weekday. Its date companion is lighter (400) and smaller (40px). At the mobile breakpoint the weekday becomes (36px) and its date companion (30px); the narrow-phone override uses (33px) and (28px).
 - **Headline:** standard page headings. Mobile page headings use (34px), with tighter tracking (-1px).
@@ -231,7 +235,7 @@ Sheets support labeled forms, a close action, focus trapping, Escape dismissal a
 
 ### Do:
 
-- **Do** use Urbanist for interface text and Matricha Regular for the Form wordmark.
+- **Do** use Urbanist for interface text and Matricha for wordmark branding; reserve Roboto Condensed for numbers.
 - **Do** align numeric workout data and retain tabular numerals.
 - **Do** preserve persistent field labels, keyboard focus and reduced-motion behavior.
 - **Do** use ruled sections and restrained grayscale to organize records.
@@ -243,3 +247,190 @@ Sheets support labeled forms, a close action, focus trapping, Escape dismissal a
 - **Don't** return to a generic grid of rounded dashboard cards.
 - **Don't** apply sheet rounding or floating shadows to ordinary journal sections.
 - **Don't** use placeholder-only labels or rely on color alone to identify the active role.
+
+## Interaction feedback — November 2026
+
+Motion reinforces an action or a real state change. The glass surfaces stay visually
+stable; feedback is local to controls and values. The implementation uses existing
+CSS and the browser Web Animations API, with no additional animation package.
+
+Research informing this pass:
+
+- [Apple: Motion](https://developer.apple.com/design/human-interface-guidelines/motion):
+  brief, purposeful, interruptible feedback; adapt to input and accessibility settings.
+- [Nielsen Norman Group: Microinteractions](https://www.nngroup.com/articles/microinteractions/):
+  identify a trigger and a small contextual response close to that trigger.
+- [Nielsen Norman Group: Animation duration](https://www.nngroup.com/articles/animation-duration/):
+  tailor duration and easing to frequency and purpose. The timings below are Form's
+  implementation choices, not experimentally validated thresholds.
+- [W3C: Animation from interactions](https://www.w3.org/WAI/WCAG22/Understanding/animation-from-interactions):
+  respect reduced-motion preferences and retain information without motion.
+- [MDN: Element.animate](https://developer.mozilla.org/en-US/docs/Web/API/Element/animate)
+  and [Animation.cancel](https://developer.mozilla.org/en-US/docs/Web/API/Animation/cancel):
+  use cancelable native animations without queuing successive interactions.
+
+| Trigger | Feedback | Timing | Without motion |
+| --- | --- | --- | --- |
+| Press a button | Small compression, preserving its glass material | 120 ms | Existing focus/pressed color and action result |
+| Select a navigation tab | Icon settles; label fades into selected white capsule | 160–220 ms | Instant selected capsule and `aria-current` |
+| Change water amount | Actual total updates immediately with a short value acknowledgment | 220 ms | Immediate value and polite announcement |
+| Select a water vessel | Selected vessel lifts 2 px inside its card | 220 ms | Selected styling and `aria-pressed` |
+| Complete a workout set | Local mint glow plus existing check mark | 280 ms | Checked state, row tint and muscle map update |
+| Focus a form field | Label and field styling transition | 160–200 ms | Immediate visible focus indicator |
+| Save or log an entry | Brief confirmation entrance and mint check | 220–280 ms | Text confirmation in a polite status region |
+| Repeat the same save/log action | A fresh confirmation, one toast at a time | Same as above | Re-announced confirmation text |
+| Hover a directional action using a mouse | Arrow nudges toward its destination by 1 px | 160 ms | Standard hover/focus styling |
+
+Implementation constraints:
+
+- Values are never interpolated through fictitious readings. Data updates are not
+  delayed to wait for animation, and controls remain usable during feedback.
+- Value feedback skips initial render. Workout glow only runs when a person checks
+  a set; loading existing completed sets does not replay it.
+- A rapid subsequent update cancels the prior animation on that value. Undo cancels
+  completion feedback. Cleanup removes listeners and animations on unmount.
+- Changing the system preference to reduced motion also cancels active native
+  feedback. CSS feedback disables motion under the same preference.
+- Existing sheet and route transitions are retained. No additional scroll effects,
+  autoplay loops, sounds, vibration, confetti, or pointer tracking are introduced.
+- Keyboard focus is not moved by confirmations. Disabled controls receive no press
+  animation; numbers retain their live status semantics.
+
+Validation: `tests/interactions.spec.ts` exercises rapid updates, repeated identical
+confirmations, keyboard completion and undo, reduced motion, live preference changes,
+and responsive layout. Existing water, profile, navigation and workout suites cover
+shared data and action behavior.
+
+## Water logging sources
+
+The water screen has keyboard-accessible Manual entry and Smart bottle tabs
+inside a single glass pill, with a warm white selected state. A compact custom
+entry form places the amount, unit and Add water action together; narrow phones
+move the action to its own row. White translucent surfaces follow the water
+screen's existing gradient.
+Manual mode keeps the existing serving shortcuts and adds custom ml/US fl oz
+entry. Both update the same dated `Nutrition.water` total used by the home card
+and nutrition screens, retaining precision until display formatting. Custom
+entries above 5,000 ml are rejected without changing the journal.
+
+The bottle setup sheet saves a brand/model and display name in the optional
+session-only `Store.smartWaterBottle` field. Its status remains pending: saving
+details does not pair hardware or claim a successful sync. Sample journals can
+preview a dated 750 ml example with three sample drinks. The preview never writes
+to water totals and is explicitly labelled. Removing bottle settings preserves
+water entries. Live ingestion requires a supported bottle-specific integration;
+no vendor API or Bluetooth pairing is implemented by these UI controls.
+
+The setup picker includes HidrateSpark PRO 2, LARQ PureVis 2 and another-bottle
+entry. HidrateSpark direct integration is presented as pending vendor access;
+public API availability was not verified. LARQ's route uses its app's Apple Health
+water sharing and requires a native iPhone connector to read that data into Form.
+The browser does not request HealthKit access or claim a connection. Provider
+selection is saved with the bottle details and determines the setup guidance.
+References: [HidrateSpark integration help](https://hidratespark.zendesk.com/hc/en-us/articles/219256347--Apple-Health-Watch),
+[LARQ Apple Health](https://support.livelarq.com/hc/en-us/articles/37061029850011-Apple-Health-compatibility),
+[Apple HealthKit setup](https://developer.apple.com/documentation/healthkit/setting-up-healthkit).
+
+## Body composition overview
+
+The home page includes a separate glass composition card below the three wearable
+health cards. A light peach/rose gradient, a luminous rim,
+fine grain and warm dark type give the card its own palette within the health-card finish. It shows body fat percentage, weight and skeletal
+muscle, with a three-row dot-matrix fat/fat-free meter. The last scan date sits
+in the upper-right corner. Tapping anywhere on the card opens details through
+a full-card button that also supports Enter/Space and restores focus on dismissal;
+the arrow, source pill and redundant
+fat/fat-free mass row are omitted from the card. Source and full readings remain
+in the detail sheet.
+A subtle glass recess holds the meter; rose/plum dots indicate the fat fraction
+against quieter unfilled dots. The continuous percentage fill is masked into the
+same fixed grid so it remains accurate for fractional readings. There is no
+circular marker. The treatment draws from RonDesignLab’s SuperPower health
+visualizations, adapted to the card’s peach/rose palette. A detail sheet exposes
+available readings and lets members record report values manually for the current
+session. Roboto Condensed is reserved for numeric values; labels use Urbanist.
+
+`Store.bodyCompositionScans` is optional. The latest scan on or before the selected
+day is shown; equal-date entries favor the newest record. Sample values exist only
+in the sample journal and on two dated scans. Missing muscle/water/BMR readings
+stay unavailable. Manual entries are labelled separately, and muscle values above
+fat-free mass are rejected. Fat and fat-free mass are calculated from weight and
+body fat percentage. InBody hardware/API integration is not connected by this UI.
+
+## Named anatomical workout model
+
+The workout viewer now uses the Z-Anatomy Blender atlas, derived from BodyParts3D,
+from pinned revision `7be0bfc49409b45fda74bf86fc13086fad0f4df2`. Source archive
+SHA-256: `e029688545627bd0214b269e1063143abb580aad72b2c2445d6d8a9a0d9da736`.
+
+The prior merged user-supplied model and manually traced positional masks have
+been replaced. The export preserves 114 named workout muscle parts across the
+existing 18 muscle groups, including separate pectoral and deltoid heads and all
+four quadriceps muscles on both sides. Green targets muscle tissue; authored
+tendon surfaces keep their neutral material. Untrained muscle uses a natural red
+anatomical palette, with ivory bone/tendon support. Highlight roles still describe
+exercise associations rather than measured muscle activation.
+
+To keep the browser asset small, supporting anatomy and nonselectable muscle parts
+are combined. Mapped muscle-part nodes retain their anatomical names and group
+metadata. The athletic adaptation uses a shared, symmetrical spatial deformation
+to broaden the shoulders and add chest, arm, thigh and calf volume. Muscle,
+tendon and support geometry follow the same field to retain their attachments;
+head and foot shapes are preserved. The reference A-pose opens the arms another
+25 degrees around the shoulders and the legs another 10 degrees around the hips.
+Free limbs rotate rigidly, with blending limited to their attachment regions;
+below the waist, the arm region begins outside the thighs so lateral muscle and
+fascia surfaces cannot be pulled outward by the shoulder rotation.
+the finished model is re-centered and normalized to two units tall.
+The Front and Reset controls use a centered, level orthographic view with the
+camera and target at the same height, removing pitch and perspective skew.
+Equal neutral
+portrait lights balance both halves of the face. This stylized build is for fitness
+visualization. It does not represent measured muscle growth or clinical anatomy.
+The prepared model is about 3.5 MB, with roughly 769k unique-mesh
+triangles and 218 rendered primitive instances. Rendering remains on demand;
+the model loads only on the workout screen.
+
+Rebuild with Blender installed:
+
+```sh
+BLENDER_BIN=/path/to/blender npm run prepare:anatomy
+```
+
+`scripts/export-z-anatomy.py` runs with Blender auto-execution disabled, bakes each
+selected source object's modifiers before combining support geometry, and omits
+viewport subdivision. `scripts/prepare-muscle-model.mjs` verifies the source ZIP,
+normalizes scale and simplifies with bounded error and locked borders.
+`scripts/athletic-anatomy.mjs` applies the coherent body shaping in normalized
+world coordinates, preserves named nodes and tissue materials, and recalculates
+surface normals before Meshopt compression. Shared source meshes are cloned
+before deforming their instances, preventing mirrored parts from being changed
+twice. `FORM_ANATOMY_CACHE` optionally selects the conversion cache;
+`--reuse-export` explicitly reuses its intermediate export. Blender and the atlas
+are build-time tools, not runtime or deployment dependencies.
+
+Model assets retain CC BY-SA 4.0 licensing. Source credits, upstream notices and
+modification details ship in `public/anatomy/`. The exported subset excludes
+inner-ear, kidney and other organ-system assets. The viewer links the attribution
+from its model credits disclosure.
+
+`checks/anatomy-model.test.mjs` validates provenance, anatomical node mappings,
+separate muscle/tendon materials, bounds and source exclusions. Workout browser
+tests exercise highlighting, direct 3D selection, framing, logging and fallback.
+
+The viewer adds a shared 512px procedural color/bump surface to mapped muscles,
+with per-part fiber coordinates. Pectoral striations fan toward the upper-arm
+attachment; elongated muscle parts follow their principal geometry direction.
+Tendon surfaces keep their ivory material and receive much finer relief.
+The neutral fiber map preserves primary/assisting green when the workout changes.
+Textures are generated once per viewer, use mipmaps and bounded anisotropy, and
+are disposed with the model. Pixel ratio is capped at 2 and rendering stays on
+demand. Pinch/scroll zoom is bounded, and Reset restores the full-body view.
+These are surface-detail improvements to the existing atlas, not additional
+anatomical sculpt geometry or a scan of the reference image.
+
+Facial skull, cartilage and fascia surfaces use a warm anatomical tint blended
+only above the neck, softening the formerly white scalp and cheek patches.
+Vertex colors keep the body's original tendon and bone finish unchanged; eyes,
+iris, teeth and workout muscle materials retain their separate roles. The head
+keeps its source geometry and the existing balanced portrait lighting.

@@ -1,0 +1,85 @@
+.water-method-tabs { display: flex; gap: 5px; padding: 5px; margin-top: 24px; border: 1px solid rgb(255 255 255 / 50%); border-radius: 999px; background: rgb(255 255 255 / 12%); box-shadow: inset 0 0 8px rgb(255 255 255 / 25%); }
+.water-method-tabs > button { display: flex; align-items: center; justify-content: center; flex: 1; gap: 8px; min-width: 0; min-height: 44px; padding: 10px 12px; border-radius: 999px; color: #fff9f3; font-size: 13px; }
+.water-method-tabs > button[aria-selected="true"] { color: #795765; background: #fff9f3; }
+.water-method-tabs + .water-amount-control { margin-top: 30px; }
+.water-custom-entry { padding: 20px; margin-bottom: 28px; border: 1px solid rgb(255 255 255 / 45%); border-radius: 28px; background: linear-gradient(130deg,rgb(255 255 255 / 24%),rgb(255 255 255 / 9%)); box-shadow: inset 0 0 9px 2px rgb(255 255 255 / 25%); }
+.water-custom-entry h2 { margin: 0 0 18px; font-size: 18px; font-weight: 500; letter-spacing: -.4px; }
+.water-custom-fields { display: grid; grid-template-columns: minmax(0,1fr) 64px auto; align-items: end; gap: 10px; }
+.water-custom-fields label { display: flex; min-width: 0; flex-direction: column; gap: 8px; }
+.water-custom-fields label > span { font-size: 11px; }
+.water-custom-fields input,.water-custom-fields select { width: 100%; min-width: 0; height: 48px; padding: 10px; border: 1px solid rgb(255 255 255 / 55%); border-radius: 15px; background: rgb(255 255 255 / 10%); color: #fff9f3; }
+.water-custom-fields input { font-family: var(--font-roboto-condensed),sans-serif; font-size: 26px; font-weight: 400; font-variant-numeric: tabular-nums; }
+.water-custom-fields input::placeholder { color: rgb(255 249 243 / 65%); }
+.water-custom-fields select { appearance: none; font-size: 14px; padding-inline: 8px 26px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='m2 4 4 4 4-4' stroke='%23fff9f3' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; background-size: 12px; }
+.water-custom-fields select option { color: #624b55; background: #fff; }
+.water-custom-fields button { display: flex; align-items: center; justify-content: center; gap: 6px; min-height: 48px; padding: 10px 12px; border: 1px solid rgb(255 255 255 / 70%); border-radius: 15px; background: #fff9f3; color: #795765; font-size: 12px; font-weight: 500; }
+.water-custom-entry > p { margin: 10px 0 0; color: #fff9f3; font-size: 12px; line-height: 1.5; }
+.smart-bottle-panel { display: flex; flex-direction: column; gap: 18px; }
+.water-bottle-card,.water-bottle-readings { min-width: 0; padding: 22px; border: 1px solid rgb(255 255 255 / 45%); border-radius: 28px; background: linear-gradient(130deg,rgb(255 255 255 / 24%),rgb(255 255 255 / 9%)); box-shadow: inset 0 0 9px 2px rgb(255 255 255 / 25%); }
+.water-bottle-card > header,.water-bottle-readings > header { display: flex; align-items: center; flex-wrap: wrap; justify-content: space-between; gap: 8px; font-size: 13px; }
+.water-bottle-card > header > span:first-child { display: flex; align-items: center; gap: 7px; }
+.water-bottle-status { padding: 5px 8px; border: 1px solid rgb(255 255 255 / 35%); border-radius: 999px; background: rgb(255 255 255 / 8%); color: rgb(255 255 255 / 90%); font-size: 10px; white-space: nowrap; }
+.water-bottle-identity { display: flex; align-items: center; gap: 14px; margin-block: 22px 14px; }
+.water-bottle-illustration { flex: 0 0 82px; display: grid; place-items: center; height: 110px; border: 1px solid rgb(255 255 255 / 25%); border-radius: 28px; background: rgb(255 255 255 / 9%); }
+.water-bottle-illustration .drink-vessel { width: 100px; height: 110px; transform: rotate(-5deg); }
+.water-bottle-identity > div:last-child { min-width: 0; }
+.water-bottle-identity h2 { margin: 0 0 8px; font-weight: 500; font-size: 23px; line-height: 1.25; letter-spacing: -.5px; overflow-wrap: anywhere; }
+.water-bottle-identity p { font-size: 12px; line-height: 1.6; color: rgb(255 255 255 / 85%); overflow-wrap: anywhere; }
+.water-bottle-help { font-size: 12px; line-height: 1.7; color: rgb(255 255 255 / 85%); margin: 0 0 18px; }
+.water-bottle-card .btn { width: 100%; min-height: 46px; color: #73525b; border: 1px solid rgb(255 255 255 / 70%); background: rgb(255 255 255 / 85%); }
+.water-bottle-remove { display: block; margin: 10px auto 0; min-height: 44px; color: rgb(255 255 255 / 85%); font-size: 12px; }
+.water-preview-toggle { display: flex; align-items: center; justify-content: space-between; gap: 10px; width: 100%; min-height: 48px; padding: 0 4px; font-size: 13px; color: inherit; text-align: left; }
+.water-preview-toggle > span { font-size: 10px; padding: 5px 8px; border: 1px solid rgb(255 255 255 / 30%); border-radius: 999px; white-space: nowrap; }
+.water-bottle-readings { margin-top: 9px; }
+.water-bottle-summary { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin: 24px 0 20px; }
+.water-bottle-summary p { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px; }
+.water-source-digits { font-family: var(--font-roboto-condensed),sans-serif; }
+.water-bottle-summary strong { font-size: 46px; font-weight: 400; line-height: 1; }
+.water-bottle-summary p > span { font-size: 11px; }
+.water-bottle-summary > span { font-size: 11px; line-height: 1.7; color: rgb(255 255 255 / 80%); text-align: right; }
+.water-bottle-readings ol { padding: 0; margin: 0 0 18px; list-style: none; }
+.water-bottle-readings li { display: flex; align-items: center; gap: 10px; padding: 12px 0; border-bottom: 1px solid rgb(255 255 255 / 22%); }
+.water-bottle-sip-icon { display: grid; place-items: center; width: 28px; height: 28px; border: 1px solid rgb(255 255 255 / 35%); border-radius: 50%; background: rgb(255 255 255 / 12%); }
+.water-bottle-readings li > div { flex: 1; }
+.water-bottle-readings li strong { display: block; font-size: 12px; font-weight: 500; }
+.water-bottle-readings time { display: block; font-size: 10px; margin-top: 4px; color: rgb(255 255 255 / 80%); }
+.water-bottle-readings li > span:last-child { font-size: 11px; }
+.water-bottle-readings li b { font-size: 21px; font-weight: 400; }
+.water-bottle-readings > .water-bottle-help { margin-bottom: 0; }
+.water-bottle-sheet { background: radial-gradient(ellipse at 0% 0%,#f3e0e9,transparent 75%),linear-gradient(145deg,#fff4ea,#f1e4e9); color: #624b55; border: 1px solid #fff; }
+.water-bottle-setup-note { font-size: 13px; line-height: 1.7; color: #78616d; margin: 0 0 22px; }
+.water-bottle-setup-state { display: flex; align-items: flex-start; gap: 12px; padding: 16px; margin-top: 10px; border: 1px solid #fff; border-radius: 20px; background: rgb(255 255 255 / 35%); }
+.water-bottle-setup-state strong { font-size: 13px; font-weight: 500; }
+.water-bottle-setup-state p { font-size: 12px; line-height: 1.7; margin-top: 6px; color: #78616d; }
+.water-bottle-sheet .btn.primary { color: #fff; background: linear-gradient(135deg,#906b83,#a36d70); border: 1px solid #fff; }
+.water-bottle-route { display: flex; align-items: center; gap: 7px; margin: 0 0 12px; color: rgb(255 255 255 / 95%); font-size: 11px; }
+.water-bottle-route > span { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+.water-provider-options { border: 0; padding: 0; margin: 0 0 20px; min-width: 0; }
+.water-provider-options legend { font-size: 13px; margin-bottom: 10px; }
+.water-provider-options > label { display: flex; align-items: center; gap: 11px; min-height: 88px; padding: 12px; margin-top: 9px; border: 1px solid rgb(255 255 255 / 85%); border-radius: 22px; background: rgb(255 255 255 / 25%); cursor: pointer; }
+.water-provider-options > label.selected { border-color: #aa8193; background: rgb(255 255 255 / 65%); box-shadow: 0 0 0 1px rgb(170 129 147 / 15%); }
+.water-provider-options input { position: absolute; width: 1px; height: 1px; clip-path: inset(50%); overflow: hidden; }
+.water-provider-options > label:has(input:focus-visible) { outline: 2px solid #906b83; outline-offset: 3px; }
+.water-provider-vessel { display: grid; place-items: center; flex: 0 0 50px; height: 60px; border: 1px solid #fff; border-radius: 16px; background: linear-gradient(145deg,#b591a5,#927486); overflow: hidden; }
+.water-provider-vessel .drink-vessel { width: 60px; height: 66px; transform: rotate(-5deg); }
+.water-provider-copy { display: flex; flex: 1; min-width: 0; flex-direction: column; gap: 5px; }
+.water-provider-copy > strong { font-size: 14px; font-weight: 600; line-height: 1.3; overflow-wrap: anywhere; }
+.water-provider-copy > span { font-size: 11px; color: #78616d; line-height: 1.5; }
+.water-provider-check { display: grid; place-items: center; flex: 0 0 20px; width: 20px; height: 20px; border: 1px solid #c8aeb9; border-radius: 50%; color: #fff; }
+.water-provider-options .selected .water-provider-check { background: #927486; border-color: #927486; }
+.water-provider-guidance { padding: 15px; margin-bottom: 20px; border: 1px solid #fff; border-radius: 18px; background: rgb(255 255 255 / 35%); }
+.water-provider-guidance > strong { font-size: 13px; font-weight: 500; }
+.water-provider-guidance > p { color: #78616d; font-size: 12px; line-height: 1.7; margin-block: 7px; }
+.water-provider-guidance > a { display: inline-flex; align-items: center; min-height: 44px; color: #785969; font-size: 12px; text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width:375px) {
+  .water-method-tabs > button { padding-inline: 8px; gap: 6px; font-size: 12px; }
+  .water-custom-entry { padding: 18px; }
+  .water-custom-fields { grid-template-columns: minmax(0,1fr) 64px; }
+  .water-custom-fields button { grid-column: 1 / -1; }
+  .water-bottle-card,.water-bottle-readings { padding: 18px; }
+  .water-bottle-illustration { flex-basis: 70px; }
+  .water-bottle-identity { gap: 12px; }
+  .water-bottle-identity h2 { font-size: 21px; }
+}
+
+@media (prefers-reduced-motion:reduce) { .water-method-tabs > button { transition:none; } }

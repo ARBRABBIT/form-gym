@@ -38,7 +38,6 @@
   background: var(--detail-glass);
   box-shadow: var(--detail-rim);
 }
-.journal-detail-screen .page-heading::after { content: ""; position: absolute; z-index: -1; width: 180px; height: 180px; right: -55px; top: -70px; border: 1px solid rgb(255 255 255 / 65%); border-radius: 50%; box-shadow: 0 0 0 14px rgb(255 255 255 / 8%), 0 0 0 30px rgb(255 255 255 / 10%), 0 0 0 48px rgb(255 255 255 / 8%); pointer-events: none; }
 .journal-detail-screen .page-heading h1 { font-size: clamp(29px, 3vw, 40px); line-height: 1.15; font-weight: 500; letter-spacing: -1px; color: var(--detail-ink); }
 .journal-detail-screen .page-heading p { color: #58687d; max-width: 55ch; line-height: 1.7; margin-top: 9px; }
 .journal-detail-screen .back-link { min-height: 44px; color: var(--detail-accent); font-size: 12px; }
@@ -99,15 +98,16 @@
 .journal-detail-screen .trainer-stats > div { border-color: rgb(255 255 255 / 70%); }
 .journal-detail-screen .trainer-stats span { color: #576d80; }
 
-/* Readings use the same dot-matrix language as the health cards. */
-.journal-detail-screen :is(.daily-totals strong,.habit-total,.challenge-progress strong,.weight-values strong,.trainer-stats strong) { font-family: var(--font-matricha), monospace; font-weight: 400; letter-spacing: -1px; color: var(--detail-accent); }
+/* Readings use the same condensed numerals as the health cards. */
+.journal-detail-screen :is(.daily-totals strong,.habit-total,.challenge-progress strong,.weight-values strong,.trainer-stats strong) { font-family: var(--font-roboto-condensed), var(--font-urbanist), sans-serif; font-weight: 400; letter-spacing: -1px; color: var(--detail-accent); }
 .journal-detail-screen :is(.daily-totals small,.habit-total > span,.challenge-progress strong > span,.weight-values small) { font-family: var(--font-urbanist), sans-serif; font-weight: 400; letter-spacing: 0; }
 .journal-detail-screen .daily-totals > div { background: rgb(255 255 255 / 28%); border: 1px solid rgb(255 255 255 / 70%); border-radius: 22px; padding: 18px; }
 .journal-detail-screen .daily-totals { gap: 12px; }
 .journal-detail-screen .daily-totals strong { font-size: clamp(27px, 3vw, 40px); }
 .journal-detail-screen .goal-comparison { background: rgb(255 255 255 / 25%); border-color: rgb(255 255 255 / 70%); border-radius: 16px; padding: 14px 16px; }
-.journal-detail-screen .water-drops button { color: #829aa7; }
-.journal-detail-screen .water-drops button[aria-pressed="true"] { color: #4c7d89; }
+.journal-detail-screen .water-drops button { color: var(--detail-accent); opacity: .45; }
+.journal-detail-screen .water-drops button[aria-pressed="true"] { color: var(--detail-accent); opacity: 1; }
+.journal-detail-screen .water-drops button[aria-pressed="true"] svg { filter: drop-shadow(0 1px 3px rgb(255 255 255 / 65%)); }
 .journal-detail-screen .food-row { padding-block: 18px; }
 .journal-detail-screen .meal-subtotal { color: #5d6b7f; }
 .journal-detail-screen .food-row .food-nutrients { color: #66758a; }

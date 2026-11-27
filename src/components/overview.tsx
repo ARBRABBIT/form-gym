@@ -24,6 +24,7 @@ import { TextLink, Button } from "./ui";
 import DatePicker from "./date-picker";
 import DateStrip from "./date-strip";
 import HealthOverview from "./health-overview";
+import BodyCompositionCard from "./body-composition-card";
 import WaterCard from "./water-card";
 export default function Dashboard({
   data,
@@ -85,6 +86,7 @@ export default function Dashboard({
         date={date}
         setDate={setDate}
       />
+      <BodyCompositionCard data={data} update={update} date={date} />
       <div className="journal-columns">
         <div className="journal-main">
           <section className="training-section">

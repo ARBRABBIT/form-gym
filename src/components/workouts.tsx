@@ -7,7 +7,7 @@ import {
   Check,
   ChevronDown,
   Clock3,
-  Droplet,
+  GlassWater,
   Dumbbell,
   FileCheck2,
   Leaf,
@@ -44,6 +44,7 @@ import {
   Sheet,
 } from "./ui";
 import WorkoutTemplatePicker from "./workout-template-picker";
+import { playFeedback, cancelFeedback } from "@/lib/interaction-feedback";
 import WorkoutMuscleModel from "./workout-muscle-model";
 function newActual(plan?: Workout): Workout {
   return {
@@ -778,10 +779,7 @@ function TrainerNutritionView({
                   put({ ...n, water: n.water === i + 1 ? i : i + 1 })
                 }
               >
-                <Droplet
-                  size={27}
-                  fill={n.water > i ? "currentColor" : "none"}
-                />
+                <GlassWater size={26} />
               </button>
             ))}
           </div>
@@ -1459,7 +1457,13 @@ function SetCheckbox({
           aria-label={`${exercise || "Exercise"} Set ${index + 1} complete`}
           checked={checked}
           disabled={!onChange}
-          onChange={(event) => onChange?.(event.target.checked)}
+          onChange={(event) => {
+            const completed = event.target.checked;
+            onChange?.(completed);
+            const control = event.currentTarget.closest(".set-completion");
+            if (completed) playFeedback(control, "complete");
+            else cancelFeedback(control);
+          }}
         />
         <Check size={14} aria-hidden="true" />
       </span>

@@ -1,6 +1,7 @@
 import { useId, useState } from "react";
 import { ArrowUpRight, ChevronLeft, ChevronRight } from "./icons";
 import type { HealthMetrics } from "@/lib/health";
+import { ChartReadingPopup, ChartReadingTargets, useChartReadingPopup } from "./chart-reading-popup";
 import { formatDate } from "@/lib/model";
 
 const shiftDate = (date: string, days: number) => {
@@ -25,6 +26,7 @@ export default function BloodHealthCard({ health, sample, onOpen }: {
   sample: boolean;
   onOpen: () => void;
 }) {
+  const popup = useChartReadingPopup();
   const [weekOffset, setWeekOffset] = useState(0);
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const id = useId().replace(/:/g, "");
@@ -52,9 +54,9 @@ export default function BloodHealthCard({ health, sample, onOpen }: {
   });
   const selectedPoint = chosen ? pointFor(week.indexOf(chosen)) : null;
   const rangeLabel = `${formatDate(start, { month: "short", day: "numeric" })} – ${formatDate(end, { month: "short", day: "numeric" })}`;
-  const changeWeek = (offset: number) => { setWeekOffset(offset); setSelectedDate(null); };
+  const changeWeek = (offset: number) => { setWeekOffset(offset); setSelectedDate(null); popup.close(); };
 
-  return <div className="blood-card-inner">
+  return <div ref={popup.root} className="blood-card-inner">
     <a className="blood-card-link" href="#health-blood" aria-label="Blood health details" onClick={event => {
       if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
       event.preventDefault();
@@ -77,11 +79,13 @@ export default function BloodHealthCard({ health, sample, onOpen }: {
           </g>)}
           {selectedPoint && <path d={`M${selectedPoint.x} ${selectedPoint.y}V126`} className="blood-card-guide" />}
         </svg>
-        {selectedPoint && <span className="blood-card-marker" style={{ left: `${selectedPoint.x / 280 * 100}%`, top: `${selectedPoint.y / 150 * 100}%` }} title={`${chosen!.value}% blood oxygen`} aria-hidden="true"><span /></span>}
+        {selectedPoint && <span className="blood-card-marker" style={{ left: `${selectedPoint.x / 280 * 100}%`, top: `${selectedPoint.y / 150 * 100}%` }} aria-hidden="true"><span /></span>}
+        <ChartReadingTargets readings={week} selectedDate={chosen?.date} popupDate={popup.selection?.date} tooltipId={popup.id} label="Blood oxygen"
+          onSelect={(point, anchor) => { setSelectedDate(point.date); popup.open(point, anchor); }} />
       </> : <span className="blood-card-empty">Your weekly blood oxygen profile will appear here.</span>}
     </div>
     <div className="blood-card-days" role="group" aria-label="Blood oxygen readings">
-      {week.map(day => <button type="button" key={day.date} disabled={day.value == null} aria-pressed={chosen?.date === day.date} aria-label={`${formatDate(day.date)}${day.value == null ? ", no reading" : `, blood oxygen ${day.value}%`}`} onClick={() => setSelectedDate(day.date)}>
+      {week.map(day => <button type="button" key={day.date} disabled={day.value == null} aria-pressed={chosen?.date === day.date} aria-label={`${formatDate(day.date)}${day.value == null ? ", no reading" : `, blood oxygen ${day.value}%`}`} aria-describedby={popup.selection?.date === day.date ? popup.id : undefined} onClick={event => { setSelectedDate(day.date); popup.open(day, event.currentTarget); }}>
         <span>{formatDate(day.date, { weekday: "short" }).slice(0, 1)}</span>
       </button>)}
     </div>
@@ -90,5 +94,6 @@ export default function BloodHealthCard({ health, sample, onOpen }: {
       <span aria-live="polite">{rangeLabel}</span>
       <button type="button" aria-label="Next blood health week" disabled={weekOffset === 0} onClick={() => changeWeek(weekOffset - 1)}><ChevronRight aria-hidden="true" /></button>
     </div>
+    <ChartReadingPopup id={popup.id} selection={popup.selection} unit="% SpO₂" tone="blood" />
   </div>;
 }

@@ -7,6 +7,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { MeshoptDecoder } from "three/examples/jsm/libs/meshopt_decoder.module.js";
 import { ArrowLeft, ArrowRight, RotateCcw } from "./icons";
 import { muscleLabels, type MuscleActivity, type MuscleGroup } from "@/lib/workout-muscles";
+import { addMuscleFiberCoordinates, createMuscleSurface, matchHeadSurface } from "./muscle-surface";
 
 type Region = { muscle: MuscleGroup; meshNames: string[] };
 type ViewerApi = { view: (back: boolean) => void; frame: (upper: boolean) => void; rotate: (angle: number) => void; paint: () => void };
@@ -30,9 +31,9 @@ export default function MuscleViewer({ muscles, selected, onSelect }: { muscles:
     let disposed = false;
     const controller = new AbortController();
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(32, 1, .01, 30);
-    camera.position.set(0, .08, 4.1);
-    renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
+    const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, .01, 30);
+    camera.position.set(0, 0, 4.1);
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
     renderer.setClearColor(0x000000, 0);
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -46,23 +47,32 @@ export default function MuscleViewer({ muscles, selected, onSelect }: { muscles:
     element.appendChild(renderer.domElement);
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enablePan = false;
-    controls.enableZoom = false;
+    controls.enableZoom = true;
+    controls.minZoom = .8;
+    controls.maxZoom = 3;
     controls.minPolarAngle = Math.PI * .3;
     controls.maxPolarAngle = Math.PI * .7;
-    scene.add(new THREE.HemisphereLight(0xe9f3ff, 0x6d6b80, 1.1));
-    const key = new THREE.DirectionalLight(0xffffff, 2.2); key.position.set(-3, 4, 5); key.castShadow = true;
+    scene.add(new THREE.HemisphereLight(0xf4f5f7, 0x98949b, 1.45));
+    const key = new THREE.DirectionalLight(0xffffff, 1.3); key.position.set(-3, 3, 5); key.castShadow = true;
     key.shadow.mapSize.set(1024, 1024); key.shadow.camera.left = -1.5; key.shadow.camera.right = 1.5; key.shadow.camera.top = 1.5; key.shadow.camera.bottom = -1.5; key.shadow.normalBias = .008;
     key.shadow.camera.updateProjectionMatrix();
     scene.add(key);
     const fill = new THREE.DirectionalLight(0xc5e5e3, 1.2); fill.position.set(3, 1, -3); scene.add(fill);
-    const front = new THREE.DirectionalLight(0xffffff, .6); front.position.set(0, 0, 4); scene.add(front);
+    // Equal neutral softboxes avoid a dark or cool-tinted half of the face.
+    const portraitFill = new THREE.DirectionalLight(0xffffff, 1.3); portraitFill.position.set(3, 3, 5); scene.add(portraitFill);
+    const front = new THREE.DirectionalLight(0xffffff, .8); front.position.set(0, 1, 4); scene.add(front);
     const meshes: THREE.Mesh[] = [];
+    let upperBody = false;
     const render = () => { if (!disposed) renderer.render(scene, camera); };
     const resize = () => {
       const width = element.clientWidth, height = element.clientHeight;
       if (!width || !height) return;
       renderer.setSize(width, height, false);
-      camera.aspect = width / height;
+      const frameHeight = upperBody ? 1.34 : 2.32;
+      camera.top = frameHeight/2;
+      camera.bottom = -frameHeight/2;
+      camera.left = -frameHeight/2*width/height;
+      camera.right = frameHeight/2*width/height;
       camera.updateProjectionMatrix();
       render();
     };
@@ -72,15 +82,15 @@ export default function MuscleViewer({ muscles, selected, onSelect }: { muscles:
       meshes.forEach(mesh => {
         const group = mesh.userData.muscle as MuscleGroup | undefined;
         const load = group ? groups.get(group) : undefined;
-        if (load) highlighted++;
         const materials = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+        if (load && materials.some(material => material.userData.tissue)) highlighted++;
         materials.forEach(base => {
           const material = base as THREE.MeshStandardMaterial;
           if (!material.color) return;
           const tissue = material.userData.tissue;
-          material.color.set(load && tissue ? (load.primarySets ? "#66e98b" : "#b6ebc8") : material.userData.neutral);
-          material.emissive.set(load && tissue ? "#35cb6d" : "#000000");
-          material.emissiveIntensity = load && tissue ? (group === current.current.selected ? .65 : load.primarySets ? .28 : .1) : 0;
+          material.color.set(load && tissue ? (load.primarySets ? "#20cf60" : "#9aebb4") : material.userData.neutral);
+          material.emissive.set(load && tissue ? (load.primarySets ? "#12ad45" : "#79d998") : "#000000");
+          material.emissiveIntensity = load && tissue ? (group === current.current.selected ? (load.primarySets ? .58 : .3) : load.primarySets ? .38 : .12) : 0;
         });
       });
       element.dataset.highlightedCount = String(highlighted);
@@ -91,11 +101,13 @@ export default function MuscleViewer({ muscles, selected, onSelect }: { muscles:
       camera.position.copy(controls.target).add(offset);
       controls.update(); setView("free"); render();
     };
-    let upperBody = false;
     const setCamera = (back: boolean) => {
-      camera.position.set(0, upperBody ? .55 : .08, (back ? -1 : 1) * (upperBody ? 2.15 : 4.1));
-      controls.target.set(0, upperBody ? .5 : 0, 0);
-      controls.update(); render();
+      const targetHeight = upperBody ? .5 : 0;
+      camera.up.set(0, 1, 0);
+      camera.zoom = 1;
+      camera.position.set(0, targetHeight, back ? -4.1 : 4.1);
+      controls.target.set(0, targetHeight, 0);
+      controls.update(); resize();
     };
     api.current = {
       paint, rotate,
@@ -131,29 +143,50 @@ export default function MuscleViewer({ muscles, selected, onSelect }: { muscles:
     ]).then(async ([buffer, manifest]) => {
       const gltf = await loader.parseAsync(buffer, "/anatomy/");
       if (disposed) { disposeModel(gltf.scene); return; }
+      const surface = createMuscleSurface(renderer.capabilities.getMaxAnisotropy());
+      const sourceGeometries = new Set<THREE.BufferGeometry>();
+      const sourceMaterials = new Set<THREE.Material>();
       const groups = new Map(manifest.regions.flatMap(region => region.meshNames.map(name => [name, region.muscle] as const)));
+      gltf.scene.updateMatrixWorld(true);
       gltf.scene.traverse(object => {
         if (!(object as THREE.Mesh).isMesh) return;
         const mesh = object as THREE.Mesh;
         let node: THREE.Object3D | null = mesh;
         while (node && !groups.has(node.name)) node = node.parent;
         mesh.userData.muscle = node ? groups.get(node.name) : undefined;
+        sourceGeometries.add(mesh.geometry);
+        mesh.geometry = mesh.geometry.clone();
+        if (mesh.userData.muscle) {
+          addMuscleFiberCoordinates(mesh, mesh.userData.muscle);
+        }
         mesh.castShadow = true; mesh.receiveShadow = true;
         const original = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
         const materials = original.map(base => {
+          sourceMaterials.add(base);
           const material = base.clone() as THREE.MeshStandardMaterial;
-          material.userData = { tissue: /muscle/i.test(base.name), neutral: /muscle/i.test(base.name) ? "#c6cdcd" : "#e2e5df" };
-          if (material.color) { material.color.set(material.userData.neutral); material.roughness = .52; material.metalness = .04; material.normalScale?.set(.5, .5); }
+          const tissue = /muscle/i.test(base.name);
+          material.userData = { tissue, neutral: tissue ? "#ae5c53" : material.color ? `#${material.color.getHexString()}` : "#e9e1d3" };
+          if (material.color) { material.color.set(material.userData.neutral); material.roughness = tissue ? .48 : .55; material.metalness = 0; }
+          if (mesh.userData.muscle) {
+            if (tissue) material.map = surface.map;
+            material.bumpMap = surface.bump;
+            material.bumpScale = tissue ? .0012 : .00025;
+          }
           return material;
         });
+        matchHeadSurface(mesh, materials);
         mesh.material = materials.length === 1 ? materials[0] : materials;
         meshes.push(mesh);
       });
+      sourceGeometries.forEach(geometry => geometry.dispose());
+      sourceMaterials.forEach(material => material.dispose());
       const box = new THREE.Box3().setFromObject(gltf.scene);
       const center = box.getCenter(new THREE.Vector3());
       const group = new THREE.Group(); group.add(gltf.scene); gltf.scene.position.sub(center);
       scene.add(group);
+      setCamera(false);
       element.dataset.meshCount = String(meshes.length);
+      element.dataset.surfaceDetail = "muscle-fibers";
       setState("ready"); paint();
     }).catch(() => { if (!disposed) setState("unavailable"); });
 
@@ -181,7 +214,7 @@ export default function MuscleViewer({ muscles, selected, onSelect }: { muscles:
       <button type="button" aria-label="Reset model view" disabled={state !== "ready"} onClick={() => { api.current?.frame(false); api.current?.view(false); }}><RotateCcw size={17} /></button>
       <button type="button" aria-label="Rotate model right" disabled={state !== "ready"} onClick={() => api.current?.rotate(.35)}><ArrowRight size={17} /></button>
     </div>
-    <p className="muscle-view-hint" id={descriptionId}>Drag to rotate · Arrow keys to turn · Home to reset{selected ? ` · ${muscleLabels[selected]}` : ""}</p>
+    <p className="muscle-view-hint" id={descriptionId}>Drag to rotate · Pinch or scroll to zoom · Arrow keys to turn · Home to reset{selected ? ` · ${muscleLabels[selected]}` : ""}</p>
   </div>;
 }
 

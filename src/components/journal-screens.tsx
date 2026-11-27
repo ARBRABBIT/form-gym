@@ -8,7 +8,7 @@ import {
   ChevronLeft,
   ChevronRight,
   ClipboardList,
-  Droplet,
+  GlassWater,
   Plus,
   Trash2,
   Target,
@@ -840,10 +840,7 @@ export function NutritionScreen(p: ScreenProps) {
                   put({ ...n, water: n.water === i + 1 ? i : i + 1 })
                 }
               >
-                <Droplet
-                  size={27}
-                  fill={n.water > i ? "currentColor" : "none"}
-                />
+                <GlassWater size={26} />
               </button>
             ))}
           </div>

@@ -19,15 +19,20 @@
   pointer-events: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath filter='url(%23n)' d='M0 0h160v160H0z'/%3E%3C/svg%3E");
 }
-.health-summary-lung > a { position: relative; justify-content: center; gap: clamp(8px, 3cqw, 12px); color: inherit; }
-.health-summary-lung > a:hover { background: transparent; }
-.health-summary-lung > a:focus-visible { outline-color: #b95846; }
+.lung-card-inner { position: relative; display: flex; flex-direction: column; justify-content: center; gap: clamp(8px, 3cqw, 12px); min-height: 146px; height: 100%; padding: 18px; color: inherit; }
+.lung-card-reading-link { display: block; flex: 0 0 auto; color: inherit; border-radius: 6px; text-decoration: none; }
+.lung-card-reading-link:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+.lung-rate-chart-wrap { position: relative; width: 100%; }
+.chart-reading-targets.lung-chart-targets { left: 3.125%; right: 3.125%; }
+.lung-chart-segment.is-selected { stroke: #fff; }
+@media (max-width: 760px) { .lung-card-inner { min-height: 122px; padding: 14px 16px; } }
+@media (max-width: 375px) { .lung-card-inner { padding: 12px; } }
 .lung-card-heading { display: block; text-align: left; font-size: var(--health-card-title-size); line-height: 1.25; font-weight: 500; }
 .lung-card-content { display: flex; align-items: center; gap: clamp(10px, 4cqw, 18px); width: 100%; padding-inline: 0; }
 .health-summary-lung .lung-card-reading { position: relative; display: flex; align-items: baseline; flex: 0 0 auto; gap: 4px; margin: 0; color: inherit; font-size: var(--health-card-reading-size); font-weight: 400; line-height: 1; }
-.lung-card-digits { font-family: var(--font-matricha), monospace; font-weight: 400; letter-spacing: -1px; text-shadow: 0 3px 8px rgb(255 255 255 / 16%); }
+.lung-card-digits { font-family: var(--font-roboto-condensed), var(--font-urbanist), sans-serif; font-weight: 400; letter-spacing: -1px; text-shadow: 0 3px 8px rgb(255 255 255 / 16%); }
 .health-summary-lung .lung-card-reading > small { margin: 0; font-size: var(--health-card-unit-size); font-weight: 400; letter-spacing: 0; color: #fff3e3; }
-.lung-card-reflection { position: absolute; top: calc(100% - 4px); left: 0; height: 10px; overflow: hidden; font-family: var(--font-matricha), monospace; font-size: inherit; letter-spacing: -1px; color: rgb(255 255 255 / 24%); transform: scaleY(-1); filter: blur(2px); pointer-events: none; }
+.lung-card-reflection { position: absolute; top: calc(100% - 4px); left: 0; height: 10px; overflow: hidden; font-family: var(--font-roboto-condensed), var(--font-urbanist), sans-serif; font-size: inherit; letter-spacing: -1px; color: rgb(255 255 255 / 24%); transform: scaleY(-1); filter: blur(2px); pointer-events: none; font-weight: 400; }
 .lung-card-history { display: flex; flex: 1; min-width: 0; flex-direction: column; align-items: stretch; gap: 5px; }
 .lung-card-baseline { display: flex; min-width: 0; justify-content: center; align-items: baseline; gap: 5px; line-height: 1.2; }
 .lung-card-baseline > span { font-size: var(--health-card-caption-size); color: #fff3e3; }

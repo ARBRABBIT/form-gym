@@ -18,6 +18,7 @@ import Cancel01Icon from "@hugeicons/core-free-icons/Cancel01Icon";
 import ChartLineData01Icon from "@hugeicons/core-free-icons/ChartLineData01Icon";
 import Delete02Icon from "@hugeicons/core-free-icons/Delete02Icon";
 import DropletIcon from "@hugeicons/core-free-icons/DropletIcon";
+import GlassWaterIcon from "@hugeicons/core-free-icons/GlassWaterIcon";
 import Dumbbell01Icon from "@hugeicons/core-free-icons/Dumbbell01Icon";
 import FileVerifiedIcon from "@hugeicons/core-free-icons/FileVerifiedIcon";
 import FireIcon from "@hugeicons/core-free-icons/FireIcon";
@@ -107,6 +108,7 @@ export const ChevronRight = /*#__PURE__*/ createIcon(ArrowRight01Icon, "ChevronR
 export const ClipboardList = /*#__PURE__*/ createIcon(Task01Icon, "ClipboardList");
 export const Clock3 = /*#__PURE__*/ createIcon(Time04Icon, "Clock3");
 export const Droplet = /*#__PURE__*/ createIcon(DropletIcon, "Droplet");
+export const GlassWater = /*#__PURE__*/ createIcon(GlassWaterIcon, "GlassWater");
 export const Dumbbell = /*#__PURE__*/ createIcon(Dumbbell01Icon, "Dumbbell");
 export const Eye = /*#__PURE__*/ createIcon(ViewIcon, "Eye");
 export const EyeOff = /*#__PURE__*/ createIcon(ViewOffSlashIcon, "EyeOff");

@@ -1,7 +1,7 @@
 import type { HealthMetrics } from "@/lib/health";
 import RespiratoryRateChart from "./respiratory-rate-chart";
 
-export default function LungCard({ health }: { health: HealthMetrics }) {
+export default function LungCard({ health, onOpen }: { health: HealthMetrics; onOpen: () => void }) {
   const rate = health.respiratoryRate != null && Number.isFinite(health.respiratoryRate) ? health.respiratoryRate : null;
   const baseline = health.respiratoryRateBaseline != null && Number.isFinite(health.respiratoryRateBaseline) && health.respiratoryRateBaseline > 0
     ? health.respiratoryRateBaseline : null;
@@ -15,20 +15,25 @@ export default function LungCard({ health }: { health: HealthMetrics }) {
     .sort((a, b) => a.date.localeCompare(b.date))
     .slice(-14);
 
-  return <>
+  return <div className="lung-card-inner">
     <span className="lung-card-heading">Lung</span>
-    <span className="lung-card-content">
+    <div className="lung-card-content">
+      <a className="lung-card-reading-link" href="#health-lung" aria-label="Lung details" onClick={event => {
+        if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
+        event.preventDefault(); onOpen();
+      }}>
       <span className="health-summary-value lung-card-reading">
         <span className="lung-card-digits">{reading}</span>{rate != null && <small>/min</small>}
         <span className="lung-card-reflection" aria-hidden="true">{reading}</span>
       </span>
-      <span className="lung-card-history">
+      </a>
+      <div className="lung-card-history">
         <RespiratoryRateChart history={history} />
         <span className="lung-card-baseline">
           <span>Baseline</span>
           <strong>{baseline == null ? "—" : baseline.toLocaleString("en-IN", { minimumFractionDigits: 1, maximumFractionDigits: 1 })}{baseline != null && <small> /min</small>}</strong>
         </span>
-      </span>
+      </div>
       <span className="lung-card-trend">
         <span className="lung-card-comparison" role="img" aria-label={comparison} title={comparison}>
           {change != null && change !== 0 && <span aria-hidden="true">{change > 0 ? "↑" : "↓"}</span>}
@@ -36,7 +41,7 @@ export default function LungCard({ health }: { health: HealthMetrics }) {
         </span>
         <span className="lung-card-underline" aria-hidden="true" />
       </span>
-    </span>
+    </div>
     <span className="lung-card-caption">Respiratory rate</span>
-  </>;
+  </div>;
 }

@@ -182,13 +182,7 @@ export default function HealthOverview(p: ScreenProps & { detail?: HealthSection
             { key: "lung", title: "Lung" },
           ] as const).map((card) => (
             <article key={card.key} className={`health-summary-card health-summary-${card.key}`} data-nav-tone="dark" aria-label={card.title}>
-              {card.key === "blood" ? <BloodHealthCard key={currentHealth.date} health={currentHealth} sample={!!p.data.sampleData} onOpen={() => p.navigate("health-blood")} /> : <a href={`#health-${card.key}`} aria-label={`${card.title} details`} onClick={(event) => {
-                if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
-                event.preventDefault();
-                p.navigate(`health-${card.key}`);
-              }}>
-                {card.key === "body" ? <RecoveryCard health={currentHealth} sample={!!p.data.sampleData} /> : <LungCard health={currentHealth} />}
-              </a>}
+              {card.key === "body" ? <div className="recovery-card-content"><RecoveryCard health={currentHealth} sample={!!p.data.sampleData} onOpen={() => p.navigate("health-body")} /></div> : card.key === "blood" ? <BloodHealthCard key={currentHealth.date} health={currentHealth} sample={!!p.data.sampleData} onOpen={() => p.navigate("health-blood")} /> : <LungCard health={currentHealth} onOpen={() => p.navigate("health-lung")} />}
             </article>
           ))}
         </div>
