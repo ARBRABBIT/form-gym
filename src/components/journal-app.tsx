@@ -89,6 +89,7 @@ export default function JournalApp() {
     [role, setRole] = useState("member"),
     [date, setDate] = useState(TODAY),
     [toast, setToast] = useState(""),
+    [toastRevision, setToastRevision] = useState(0),
     [menu, setMenu] = useState(false);
   useEffect(() => {
     if (signedIn && data?.onboarded && !data.sampleData)
@@ -106,6 +107,9 @@ export default function JournalApp() {
   const content = useRef<HTMLElement>(null),
     inputMode = useRef<"pointer" | "keyboard">("pointer"),
     toastTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  useEffect(() => () => {
+    if (toastTimer.current) clearTimeout(toastTimer.current);
+  }, []);
   useEffect(() => {
     const pointer = () => {
       inputMode.current = "pointer";
@@ -269,6 +273,7 @@ export default function JournalApp() {
     setData((s) => (s ? fn(s) : s));
     if (message) {
       setToast(message);
+      setToastRevision(revision => revision + 1);
       if (toastTimer.current) clearTimeout(toastTimer.current);
       toastTimer.current = setTimeout(() => setToast(""), 3500);
     }
@@ -584,7 +589,7 @@ export default function JournalApp() {
                   onClick={() => navigate(item.id)}
                   className={selected ? "selected" : ""}
                 >
-                  <MobileNavIcon name={item.id} />
+                  <MobileNavIcon name={item.id} selected={selected} />
                   <span className="bottom-nav-label">{item.label}</span>
                 </button>
               );
@@ -600,7 +605,7 @@ export default function JournalApp() {
           </button>
         </nav>
         {toast && (
-          <div className="toast" role="status">
+          <div key={toastRevision} className="toast" role="status" aria-atomic="true">
             <span className="toast-check">
               <Check size={15} />
             </span>

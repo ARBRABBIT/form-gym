@@ -33,7 +33,7 @@ test("recovery graph and complementary health cards fit mobile widths", async ({
     await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
     expect(await page.evaluate(() => scrollY)).toBe(0);
     const body = page.getByRole("article", { name: "Overall body", exact: true });
-    const chart = body.getByRole("img", { name: /Sample recovery graph/ });
+    const chart = body.getByRole("group", { name: /Sample recovery graph/ });
     await expect(chart).toBeVisible();
     await expect(body).toContainText(`HRV ${current.hrv} ms`);
     const card = (await body.boundingBox())!;
@@ -45,9 +45,17 @@ test("recovery graph and complementary health cards fit mobile widths", async ({
     const graph = (await chart.boundingBox())!;
     expect(graph.height).toBeGreaterThan(20);
     const bars = chart.locator('.recovery-chart-bar');
-    await expect(bars).toHaveCount(24);
+    await expect(bars).toHaveCount(12);
     await expect(chart.locator('.recovery-chart-bar.is-active')).toHaveCount(1);
-    await bars.first().hover();
+    await page.keyboard.press('Escape');
+    await expect(chart.getByRole('tooltip')).toHaveCount(0);
+    await expect(chart.locator('.recovery-chart-x-labels, .recovery-chart-y-labels')).toHaveCount(0);
+    const hit = chart.getByRole('button').first();
+    const hitBox = (await hit.boundingBox())!;
+    const barBox = (await bars.first().boundingBox())!;
+    expect(hitBox.width / barBox.width).toBeGreaterThan(1.5);
+    await hit.click();
+    await expect(page).not.toHaveURL(/#health-body$/);
     await expect(chart.locator('.recovery-chart-tooltip')).toBeVisible();
     await expect(chart.locator('.recovery-chart-tooltip')).toContainText('Recovery', { ignoreCase: true });
     const tooltip = (await chart.locator('.recovery-chart-tooltip').boundingBox())!;
@@ -172,8 +180,10 @@ test("all three health cards share the same title, reading, and unit typography"
       expect(group[1]).toEqual(group[0]);
       expect(group[2]).toEqual(group[0]);
     }
-    expect(groups.readings[0].family.toLowerCase()).toContain('matricha');
+    expect(groups.readings[0].family.toLowerCase()).toContain('robotocondensed');
+    expect(groups.readings[0].weight).toBe('400');
     expect(groups.titles[0].family.toLowerCase()).toContain('urbanist');
+    expect(await page.locator('.wordmark').first().evaluate(el => getComputedStyle(el).fontFamily.toLowerCase())).toContain('urbanist');
     const blood = page.getByRole('article', { name: 'Blood health', exact: true });
     const box = (await blood.boundingBox())!;
     const reading = (await blood.locator('.blood-card-value').boundingBox())!;

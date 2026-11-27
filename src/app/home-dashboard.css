@@ -64,7 +64,7 @@
 .home-dashboard .nutrition-ledger > div:not(:first-child) > span::before { background: #a2698c; }
 .home-dashboard .nutrition-ledger > div:nth-child(3) > span::before { background: #9b795c; }
 .home-dashboard .nutrition-ledger > div:nth-child(4) > span::before { background: #7e779b; }
-.home-dashboard .nutrition-ledger strong { font-family: var(--font-matricha), monospace; font-size: 32px; font-weight: 400; letter-spacing: -1px; color: #674555; }
+.home-dashboard .nutrition-ledger strong { font-family: var(--font-roboto-condensed), var(--font-urbanist), sans-serif; font-size: 32px; font-weight: 400; letter-spacing: -1px; color: #674555; }
 .home-dashboard .nutrition-ledger small { display: block; font-family: var(--font-urbanist), sans-serif; font-size: 12px; color: #76586a; margin: 7px 0 0; }
 
 .home-dashboard .wellness-section { background: radial-gradient(ellipse at 0% 0%, #e6d3ec, transparent 75%), linear-gradient(145deg, #e4e4f3, #cfdee9); }
@@ -72,7 +72,7 @@
 .home-dashboard .wellness-ledger > button { border-color: rgb(255 255 255 / 65%); }
 .home-dashboard .wellness-ledger > button > div { color: #62627c; font-size: 12px; }
 .home-dashboard .wellness-ledger > button:hover { background: rgb(255 255 255 / 20%); border-radius: 14px; }
-.home-dashboard .wellness-ledger strong { font-family: var(--font-matricha), monospace; font-weight: 400; font-size: 30px; color: #4f506e; }
+.home-dashboard .wellness-ledger strong { font-family: var(--font-roboto-condensed), var(--font-urbanist), sans-serif; font-weight: 400; font-size: 30px; color: #4f506e; }
 .home-dashboard .wellness-ledger small { display: block; font-family: var(--font-urbanist), sans-serif; font-size: 11px; color: #62627c; margin: 7px 0 0; }
 
 .home-dashboard .month-section { background: radial-gradient(ellipse at 0% 0%, #e3d8ed, transparent 70%), linear-gradient(160deg, #e6eaf4, #c6e4e3); }
@@ -91,7 +91,7 @@
 .home-dashboard .goal-list p { color: #65495f; font-size: 13px; }
 
 .home-dashboard .challenge-section { color: var(--home-ink); background: radial-gradient(ellipse at 95% 100%, #bce4da, transparent 80%), radial-gradient(ellipse at 0% 0%, #dfd3eb, transparent 75%), #d6e7eb; }
-.home-dashboard .challenge-count > strong { font-family: var(--font-matricha), monospace; font-size: 58px; font-weight: 400; }
+.home-dashboard .challenge-count > strong { font-family: var(--font-roboto-condensed), var(--font-urbanist), sans-serif; font-size: 58px; font-weight: 400; }
 .home-dashboard :is(.challenge-count > span,.challenge-description,.challenge-section .text-link) { color: #526979; }
 .home-dashboard .challenge-mini > span { background: rgb(255 255 255 / 42%); border-radius: 50%; }
 .home-dashboard .challenge-mini > .marked { background: #547b80; box-shadow: inset 0 1px 3px rgb(255 255 255 / 45%); }

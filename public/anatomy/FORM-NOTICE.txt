@@ -1,10 +1,12 @@
 Form workout muscle viewer
 
-Active model: Male Muscular Anatomy – 3D Model
-Source SHA-256: 7032210a4e6c5d35c931f15feeaf4e6dcb4c1d30afb396c1660efb7b70f8d53e
+Named, authored muscle-part meshes grouped by anatomical name. No position masks or projected region cuts. Muscle and tendon materials remain separate.
+Muscles and supporting bones, cartilage, teeth and eye geometry selected. Nonselectable supporting structures combined; mapped muscle parts remain separate and named. Materials replaced, world scale centered to 2 units, geometry simplified with bounded error and locked borders, and Meshopt compressed. Inner-ear, kidney and other organ systems are excluded.
 
-Manually traced bilateral muscle contours on a single continuous surface, with local limb depth. Surface annotations are not artist-authored anatomical segmentation.
-World transforms baked; centered at origin and normalized to 2 units tall; source surface preserved; annotation boundary triangles subdivided for smooth edges; partitioned by traced muscle contours with fascia and joints left neutral; Meshopt compressed.
+Primary muscles are green; assisting muscles are lighter green. Planned focus is previewed before any sets are recorded; recorded sets determine the map after training begins. Highlights describe exercise associations, not measured muscle activation or recovery.
 
-Primary muscles are green; assisting muscles are lighter green. Planned focus is previewed before any sets are recorded; completed sets determine the map after recording begins. Planned previews never count as completed sets.
-See NOTICE.txt and LICENSE.txt for the supplied model attribution.
+Rebuild: BLENDER_BIN=/path/to/blender npm run prepare:anatomy
+Blender is only needed to rebuild the model, not to run or deploy the app.
+See NOTICE.txt, LICENSE.txt and UPSTREAM-LICENSE.txt for source terms.
+
+Athletic shape adaptation: A smooth, symmetrical whole-body deformation broadens the shoulder girdle and adds chest, upper-arm, thigh and calf volume. A relaxed A-pose opens the arms by 25 degrees and the legs by 10 degrees from the source stance. All tissues share the same deformation so muscle attachments and authored boundaries remain together. Head and foot shapes are preserved. This is a stylized fitness visualization, not a clinical anatomy reference.

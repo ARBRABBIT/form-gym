@@ -1,3 +1,5 @@
+import type { BodyCompositionScan } from "./body-composition";
+
 export type SetCompletions = Record<string, boolean[]>;
 export type SetEntry = { reps: string; weight: string };
 export type Exercise = { id: string; name: string; sets: SetEntry[] };
@@ -101,6 +103,7 @@ export type WorkoutTemplate = {
   workout: Workout;
   updatedAt: string;
 };
+export type SmartBottleProvider = "hidratespark-pro-2" | "larq-purevis-2" | "other";
 export type Store = {
   sampleData?: boolean;
   onboarded: boolean;
@@ -108,6 +111,7 @@ export type Store = {
   onboardingDraft?: OnboardingDraft;
   challengeAccepted?: boolean;
   wearablePreference?: "whoop" | "none";
+  smartWaterBottle?: { name: string; brand: string; provider?: SmartBottleProvider; status: "pending" };
   month: string;
   goalsByMonth: Record<string, string[]>;
   profile: Record<string, string>;
@@ -117,6 +121,7 @@ export type Store = {
   challengeTarget: string;
   challengeNote: string;
   weights: WeightEntry[];
+  bodyCompositionScans?: BodyCompositionScan[];
   measurements: Record<string, Record<string, string>>;
   baselineMeasurements?: Record<string, string>;
   resultDates: { now: string; previous: string };

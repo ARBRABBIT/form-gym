@@ -35,7 +35,7 @@
 
 .health-summary-cards { align-items: start; }
 
-.health-summary-body > a {
+.health-summary-body > .recovery-card-content {
   position: absolute;
   inset: 0;
   min-height: 0;
@@ -43,14 +43,17 @@
   height: 100%;
   padding: 20px 22px;
   gap: 0;
+  display: flex;
+  flex-direction: column;
   color: inherit;
 }
 
-.health-summary-body > a:hover { background: transparent; }
+.recovery-card-details { display: block; flex-shrink: 0; color: inherit; text-decoration: none; border-radius: 8px; }
+.recovery-card-details:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
 .recovery-card-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: var(--health-card-title-size); font-weight: 500; line-height: 1.25; }
 .recovery-card-badge { flex-shrink: 0; border-radius: 999px; padding: 4px 9px; background: rgb(255 255 255 / 6%); color: rgb(255 255 255 / 80%); font-size: var(--health-card-status-size); font-weight: 400; }
 .health-summary-body .recovery-card-score { display: flex; align-items: center; gap: 7px; margin-top: 20px; font-size: var(--health-card-reading-size); line-height: 1; color: inherit; }
-.recovery-card-score > span { font-family: var(--font-matricha), monospace; font-weight: 400; letter-spacing: -1px; }
+.recovery-card-score > span { font-family: var(--font-roboto-condensed), var(--font-urbanist), sans-serif; font-weight: 400; letter-spacing: -1px; }
 .health-summary-body .recovery-card-score > small { margin: 0; font-size: var(--health-card-unit-size); font-weight: 400; }
 .recovery-card-chart { display: flex; align-items: flex-end; flex: 1; min-height: 0; margin-top: 14px; }
 .recovery-chart-empty { padding-block: 24px; font-size: 13px; line-height: 1.5; color: #d4ecca; }
@@ -75,20 +78,36 @@
   display: block;
   width: 100%;
   height: 100%;
-  min-height: 0;
+  min-height: 40px;
   color: #f6ffed;
 }
 .recovery-chart-plot {
   position: absolute;
-  inset: 30px 23px 16px 0;
+  inset: 0;
+  display: grid;
+}
+.recovery-chart-hit {
   display: flex;
   align-items: flex-end;
+  justify-content: center;
+  position: relative;
+  min-width: 0;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
+.recovery-chart-hit:focus-visible { outline: 1px solid rgb(255 255 255 / 80%); outline-offset: -1px; }
 .recovery-chart-bar {
   display: block;
-  flex: 0 0 auto;
-  min-width: 0;
-  max-width: 9px;
+  flex: 0 0 64%;
+  min-width: 1px;
+  max-width: 14px;
   border-radius: 999px 999px 0 0;
   background: linear-gradient(to bottom, rgb(255 255 255 / 48%), rgb(255 255 255 / 22%) 62%, rgb(255 255 255 / 2%) 100%);
   transition: background 160ms ease;
@@ -98,20 +117,23 @@
 }
 .recovery-chart-tooltip {
   position: absolute;
-  z-index: 1;
+  z-index: 3;
   display: flex;
   flex-direction: column;
   gap: 2px;
-  width: max-content;
-  padding: 5px 8px;
+  width: min(124px, 100%);
+  box-sizing: border-box;
+  height: 40px;
+  padding: 4px 7px;
+  text-align: center;
   border: 1px solid rgb(255 255 255 / 10%);
   border-radius: 10px;
   color: #fff;
-  background: rgb(255 255 255 / 22%);
+  background: linear-gradient(135deg, rgb(91 65 84 / 92%), rgb(59 79 74 / 92%));
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
-  font-size: var(--health-card-caption-size);
-  line-height: 1.2;
+  font-size: 11px;
+  line-height: 14px;
   white-space: nowrap;
   transform: translateX(-50%);
   pointer-events: none;
@@ -128,36 +150,6 @@
 }
 .recovery-chart-tooltip strong { font-weight: 600; }
 .recovery-chart-tooltip > span { color: rgb(255 255 255 / 78%); font-size: inherit; }
-.recovery-chart-y-labels {
-  position: absolute;
-  inset: 30px 0 16px auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  font-size: var(--health-card-caption-size);
-  line-height: 1;
-  color: rgb(255 255 255 / 58%);
-}
-.recovery-chart-x-labels {
-  position: absolute;
-  inset: auto 23px 0 0;
-  display: flex;
-  justify-content: space-between;
-  font-size: var(--health-card-caption-size);
-  line-height: 1;
-  color: rgb(255 255 255 / 70%);
-}
-@container (max-width: 220px) {
-  .recovery-chart-plot { top: 2px; right: 16px; bottom: 12px; }
-  .recovery-chart-y-labels { top: 2px; bottom: 12px; font-size: var(--health-card-caption-size); }
-  .recovery-chart-x-labels { right: 16px; font-size: var(--health-card-caption-size); }
-  .recovery-chart-tooltip { display: none; top: 0; bottom: auto !important; padding: 4px 6px; border-radius: 7px; }
-  .recovery-bar-chart[data-inspecting="true"] .recovery-chart-tooltip { display: flex; }
-}
-@container (max-width: 160px) {
-  .recovery-chart-tooltip { padding: 3px 5px; }
-  .recovery-chart-tooltip > span { display: none; }
-}
 @media (prefers-reduced-motion: reduce) {
   .recovery-chart-bar { transition: none; }
 }
@@ -167,8 +159,8 @@
 }
 
 @media (max-width: 760px) {
-  .health-summary-body > a { padding: 16px 18px; }
+  .health-summary-body > .recovery-card-content { padding: 16px 18px; }
 }
 @media (max-width: 375px) {
-  .health-summary-body > a { padding: 12px; }
+  .health-summary-body > .recovery-card-content { padding: 12px; }
 }

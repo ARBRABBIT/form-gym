@@ -1,7 +1,6 @@
-License indicated in the user-supplied model metadata:
-SKETCHFAB Standard (https://sketchfab.com/licenses)
+Z-Anatomy-derived workout model assets
 
-Author: dakarmirajendra (https://sketchfab.com/dakarmirajendra)
-Source: https://sketchfab.com/3d-models/male-muscular-anatomy-3d-model-627f19e053d44e60ad5e4274235b63cb
+Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0).
+https://creativecommons.org/licenses/by-sa/4.0/
 
-See NOTICE.txt for Form's processing details.
+Attribution and modification notices must accompany redistributed model assets. Adapted model assets retain the same license. See NOTICE.txt and UPSTREAM-LICENSE.txt.

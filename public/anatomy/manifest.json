@@ -1,129 +1,5927 @@
 {
   "model": {
     "url": "/anatomy/male.glb",
-    "title": "Male Muscular Anatomy – 3D Model",
-    "author": "dakarmirajendra (https://sketchfab.com/dakarmirajendra)",
-    "source": "https://sketchfab.com/3d-models/male-muscular-anatomy-3d-model-627f19e053d44e60ad5e4274235b63cb",
-    "license": "SKETCHFAB Standard (https://sketchfab.com/licenses)"
+    "title": "Athletic workout anatomy · Z-Anatomy",
+    "author": "Gauthier Kervyn / Z-Anatomy; Kousaku Okubo / BodyParts3D",
+    "source": "https://github.com/Z-Anatomy/Models-of-human-anatomy",
+    "license": "CC BY-SA 4.0"
   },
-  "mapping": "Manually traced bilateral muscle contours on a single continuous surface, with local limb depth. Surface annotations are not artist-authored anatomical segmentation.",
+  "mapping": "Named, authored muscle-part meshes grouped by anatomical name. No position masks or projected region cuts. Muscle and tendon materials remain separate.",
   "regions": [
     {
       "muscle": "chest",
       "meshNames": [
-        "chest"
-      ]
-    },
-    {
-      "muscle": "hamstrings",
-      "meshNames": [
-        "hamstrings"
-      ]
-    },
-    {
-      "muscle": "forearms",
-      "meshNames": [
-        "forearms"
-      ]
-    },
-    {
-      "muscle": "traps",
-      "meshNames": [
-        "traps"
-      ]
-    },
-    {
-      "muscle": "glutes",
-      "meshNames": [
-        "glutes"
-      ]
-    },
-    {
-      "muscle": "abdominals",
-      "meshNames": [
-        "abdominals"
-      ]
-    },
-    {
-      "muscle": "lowerback",
-      "meshNames": [
-        "lowerback"
-      ]
-    },
-    {
-      "muscle": "traps-middle",
-      "meshNames": [
-        "traps-middle"
+        "anatomy_abdominal_part_of_pectoralis_major_muscle_l",
+        "anatomy_abdominal_part_of_pectoralis_major_muscle_r",
+        "anatomy_clavicular_head_of_pectoralis_major_muscle_l",
+        "anatomy_clavicular_head_of_pectoralis_major_muscle_r",
+        "anatomy_sternocostal_head_of_pectoralis_major_muscle_l",
+        "anatomy_sternocostal_head_of_pectoralis_major_muscle_r"
+      ],
+      "anatomicalNames": [
+        "(Abdominal part of pectoralis major muscle).l",
+        "(Abdominal part of pectoralis major muscle).r",
+        "Clavicular head of pectoralis major muscle.l",
+        "Clavicular head of pectoralis major muscle.r",
+        "Sternocostal head of pectoralis major muscle.l",
+        "Sternocostal head of pectoralis major muscle.r"
       ]
     },
     {
       "muscle": "adductors",
       "meshNames": [
-        "adductors"
-      ]
-    },
-    {
-      "muscle": "lats",
-      "meshNames": [
-        "lats"
-      ]
-    },
-    {
-      "muscle": "quads",
-      "meshNames": [
-        "quads"
-      ]
-    },
-    {
-      "muscle": "obliques",
-      "meshNames": [
-        "obliques"
-      ]
-    },
-    {
-      "muscle": "calves",
-      "meshNames": [
-        "calves"
+        "anatomy_adductor_minimus_l",
+        "anatomy_adductor_minimus_r",
+        "anatomy_adductor_brevis_l",
+        "anatomy_adductor_brevis_r",
+        "anatomy_adductor_longus_l",
+        "anatomy_adductor_longus_r",
+        "anatomy_adductor_magnus_l",
+        "anatomy_adductor_magnus_r",
+        "anatomy_gracilis_muscle_l",
+        "anatomy_gracilis_muscle_r",
+        "anatomy_pectineus_muscle_l",
+        "anatomy_pectineus_muscle_r"
+      ],
+      "anatomicalNames": [
+        "(Adductor minimus).l",
+        "(Adductor minimus).r",
+        "Adductor brevis.l",
+        "Adductor brevis.r",
+        "Adductor longus.l",
+        "Adductor longus.r",
+        "Adductor magnus.l",
+        "Adductor magnus.r",
+        "Gracilis muscle.l",
+        "Gracilis muscle.r",
+        "Pectineus muscle.l",
+        "Pectineus muscle.r"
       ]
     },
     {
       "muscle": "front-shoulders",
       "meshNames": [
-        "front-shoulders"
+        "anatomy_acromial_part_of_deltoid_muscle_l",
+        "anatomy_acromial_part_of_deltoid_muscle_r",
+        "anatomy_clavicular_part_of_deltoid_muscle_l",
+        "anatomy_clavicular_part_of_deltoid_muscle_r"
+      ],
+      "anatomicalNames": [
+        "Acromial part of deltoid muscle.l",
+        "Acromial part of deltoid muscle.r",
+        "Clavicular part of deltoid muscle.l",
+        "Clavicular part of deltoid muscle.r"
       ]
     },
     {
-      "muscle": "rear-shoulders",
+      "muscle": "traps-middle",
       "meshNames": [
-        "rear-shoulders"
+        "anatomy_ascending_part_of_trapezius_muscle_l",
+        "anatomy_ascending_part_of_trapezius_muscle_r",
+        "anatomy_transverse_part_of_trapezius_muscle_l",
+        "anatomy_transverse_part_of_trapezius_muscle_r"
+      ],
+      "anatomicalNames": [
+        "Ascending part of trapezius muscle.l",
+        "Ascending part of trapezius muscle.r",
+        "Transverse part of trapezius muscle.l",
+        "Transverse part of trapezius muscle.r"
       ]
     },
     {
-      "muscle": "tibialis",
+      "muscle": "forearms",
       "meshNames": [
-        "tibialis"
+        "anatomy_brachioradialis_muscle_l",
+        "anatomy_brachioradialis_muscle_r",
+        "anatomy_deep_head_of_pronator_teres_l",
+        "anatomy_deep_head_of_pronator_teres_r",
+        "anatomy_extensor_carpi_radialis_brevis_l",
+        "anatomy_extensor_carpi_radialis_brevis_r",
+        "anatomy_extensor_carpi_radialis_longus_l",
+        "anatomy_extensor_carpi_radialis_longus_r",
+        "anatomy_extensor_digitorum_l",
+        "anatomy_extensor_digitorum_r",
+        "anatomy_flexor_carpi_radialis_l",
+        "anatomy_flexor_carpi_radialis_r",
+        "anatomy_flexor_digitorum_profundus_l",
+        "anatomy_flexor_digitorum_profundus_r",
+        "anatomy_humeral_head_of_extensor_carpi_ulnaris_l",
+        "anatomy_humeral_head_of_extensor_carpi_ulnaris_r",
+        "anatomy_humeral_head_of_flexor_carpi_ulnaris_l",
+        "anatomy_humeral_head_of_flexor_carpi_ulnaris_r",
+        "anatomy_humero_ulnar_head_of_flexor_digitorum_superficialis_l",
+        "anatomy_humero_ulnar_head_of_flexor_digitorum_superficialis_r",
+        "anatomy_palmaris_longus_muscle_l",
+        "anatomy_palmaris_longus_muscle_r",
+        "anatomy_radial_head_of_flexor_digitorum_superficialis_l",
+        "anatomy_radial_head_of_flexor_digitorum_superficialis_r",
+        "anatomy_superficial_head_of_pronator_teres_l",
+        "anatomy_superficial_head_of_pronator_teres_r",
+        "anatomy_ulnar_head_of_extensor_carpi_ulnaris_l",
+        "anatomy_ulnar_head_of_extensor_carpi_ulnaris_r",
+        "anatomy_ulnar_head_of_flexor_carpi_ulnaris_l",
+        "anatomy_ulnar_head_of_flexor_carpi_ulnaris_r"
+      ],
+      "anatomicalNames": [
+        "Brachioradialis muscle.l",
+        "Brachioradialis muscle.r",
+        "Deep head of pronator teres.l",
+        "Deep head of pronator teres.r",
+        "Extensor carpi radialis brevis.l",
+        "Extensor carpi radialis brevis.r",
+        "Extensor carpi radialis longus.l",
+        "Extensor carpi radialis longus.r",
+        "Extensor digitorum.l",
+        "Extensor digitorum.r",
+        "Flexor carpi radialis.l",
+        "Flexor carpi radialis.r",
+        "Flexor digitorum profundus.l",
+        "Flexor digitorum profundus.r",
+        "Humeral head of extensor carpi ulnaris.l",
+        "Humeral head of extensor carpi ulnaris.r",
+        "Humeral head of flexor carpi ulnaris.l",
+        "Humeral head of flexor carpi ulnaris.r",
+        "Humero-ulnar head of flexor digitorum superficialis.l",
+        "Humero-ulnar head of flexor digitorum superficialis.r",
+        "Palmaris longus muscle.l",
+        "Palmaris longus muscle.r",
+        "Radial head of flexor digitorum superficialis.l",
+        "Radial head of flexor digitorum superficialis.r",
+        "Superficial head of pronator teres.l",
+        "Superficial head of pronator teres.r",
+        "Ulnar head of extensor carpi ulnaris.l",
+        "Ulnar head of extensor carpi ulnaris.r",
+        "Ulnar head of flexor carpi ulnaris.l",
+        "Ulnar head of flexor carpi ulnaris.r"
+      ]
+    },
+    {
+      "muscle": "traps",
+      "meshNames": [
+        "anatomy_descending_part_of_trapezius_muscle_l",
+        "anatomy_descending_part_of_trapezius_muscle_r"
+      ],
+      "anatomicalNames": [
+        "Descending part of trapezius muscle.l",
+        "Descending part of trapezius muscle.r"
+      ]
+    },
+    {
+      "muscle": "obliques",
+      "meshNames": [
+        "anatomy_external_abdominal_oblique_muscle_l",
+        "anatomy_external_abdominal_oblique_muscle_r",
+        "anatomy_internal_abdominal_oblique_muscle_l",
+        "anatomy_internal_abdominal_oblique_muscle_r"
+      ],
+      "anatomicalNames": [
+        "External abdominal oblique muscle.l",
+        "External abdominal oblique muscle.r",
+        "Internal abdominal oblique muscle.l",
+        "Internal abdominal oblique muscle.r"
+      ]
+    },
+    {
+      "muscle": "glutes",
+      "meshNames": [
+        "anatomy_gluteus_maximus_muscle_l",
+        "anatomy_gluteus_maximus_muscle_r",
+        "anatomy_gluteus_medius_muscle_l",
+        "anatomy_gluteus_medius_muscle_r",
+        "anatomy_gluteus_minimus_muscle_l",
+        "anatomy_gluteus_minimus_muscle_r"
+      ],
+      "anatomicalNames": [
+        "Gluteus maximus muscle.l",
+        "Gluteus maximus muscle.r",
+        "Gluteus medius muscle.l",
+        "Gluteus medius muscle.r",
+        "Gluteus minimus muscle.l",
+        "Gluteus minimus muscle.r"
+      ]
+    },
+    {
+      "muscle": "lowerback",
+      "meshNames": [
+        "anatomy_iliocostalis_lumborum_muscle_l",
+        "anatomy_iliocostalis_lumborum_muscle_r",
+        "anatomy_longissimus_thoracis_muscle_l",
+        "anatomy_longissimus_thoracis_muscle_r",
+        "anatomy_multifidus_lumborum_muscle_l",
+        "anatomy_multifidus_lumborum_muscle_r"
+      ],
+      "anatomicalNames": [
+        "Iliocostalis lumborum muscle.l",
+        "Iliocostalis lumborum muscle.r",
+        "Longissimus thoracis muscle.l",
+        "Longissimus thoracis muscle.r",
+        "Multifidus lumborum muscle.l",
+        "Multifidus lumborum muscle.r"
+      ]
+    },
+    {
+      "muscle": "calves",
+      "meshNames": [
+        "anatomy_lateral_head_of_gastrocnemius_l",
+        "anatomy_lateral_head_of_gastrocnemius_r",
+        "anatomy_medial_head_of_gastrocnemius_l",
+        "anatomy_medial_head_of_gastrocnemius_r",
+        "anatomy_soleus_muscle_l",
+        "anatomy_soleus_muscle_r"
+      ],
+      "anatomicalNames": [
+        "Lateral head of gastrocnemius.l",
+        "Lateral head of gastrocnemius.r",
+        "Medial head of gastrocnemius.l",
+        "Medial head of gastrocnemius.r",
+        "Soleus muscle.l",
+        "Soleus muscle.r"
       ]
     },
     {
       "muscle": "triceps",
       "meshNames": [
-        "triceps"
+        "anatomy_lateral_head_of_triceps_brachii_l",
+        "anatomy_lateral_head_of_triceps_brachii_r",
+        "anatomy_long_head_of_triceps_brachii_l",
+        "anatomy_long_head_of_triceps_brachii_r",
+        "anatomy_medial_head_of_triceps_brachii_l",
+        "anatomy_medial_head_of_triceps_brachii_r"
+      ],
+      "anatomicalNames": [
+        "Lateral head of triceps brachii.l",
+        "Lateral head of triceps brachii.r",
+        "Long head of triceps brachii.l",
+        "Long head of triceps brachii.r",
+        "Medial head of triceps brachii.l",
+        "Medial head of triceps brachii.r"
+      ]
+    },
+    {
+      "muscle": "lats",
+      "meshNames": [
+        "anatomy_latissimus_dorsi_muscle_l",
+        "anatomy_latissimus_dorsi_muscle_r"
+      ],
+      "anatomicalNames": [
+        "Latissimus dorsi muscle.l",
+        "Latissimus dorsi muscle.r"
       ]
     },
     {
       "muscle": "biceps",
       "meshNames": [
-        "biceps"
+        "anatomy_long_head_of_biceps_brachii_l",
+        "anatomy_long_head_of_biceps_brachii_r",
+        "anatomy_short_head_of_biceps_brachii_l",
+        "anatomy_short_head_of_biceps_brachii_r"
+      ],
+      "anatomicalNames": [
+        "Long head of biceps brachii.l",
+        "Long head of biceps brachii.r",
+        "Short head of biceps brachii.l",
+        "Short head of biceps brachii.r"
+      ]
+    },
+    {
+      "muscle": "hamstrings",
+      "meshNames": [
+        "anatomy_long_head_of_biceps_femoris_l",
+        "anatomy_long_head_of_biceps_femoris_r",
+        "anatomy_semimembranosus_muscle_l",
+        "anatomy_semimembranosus_muscle_r",
+        "anatomy_semitendinosus_muscle_l",
+        "anatomy_semitendinosus_muscle_r",
+        "anatomy_short_head_of_biceps_femoris_l",
+        "anatomy_short_head_of_biceps_femoris_r"
+      ],
+      "anatomicalNames": [
+        "Long head of biceps femoris.l",
+        "Long head of biceps femoris.r",
+        "Semimembranosus muscle.l",
+        "Semimembranosus muscle.r",
+        "Semitendinosus muscle.l",
+        "Semitendinosus muscle.r",
+        "Short head of biceps femoris.l",
+        "Short head of biceps femoris.r"
+      ]
+    },
+    {
+      "muscle": "abdominals",
+      "meshNames": [
+        "anatomy_rectus_abdominis_muscle_l",
+        "anatomy_rectus_abdominis_muscle_r"
+      ],
+      "anatomicalNames": [
+        "Rectus abdominis muscle.l",
+        "Rectus abdominis muscle.r"
+      ]
+    },
+    {
+      "muscle": "quads",
+      "meshNames": [
+        "anatomy_rectus_femoris_muscle_l",
+        "anatomy_rectus_femoris_muscle_r",
+        "anatomy_vastus_intermedius_muscle_l",
+        "anatomy_vastus_intermedius_muscle_r",
+        "anatomy_vastus_lateralis_muscle_l",
+        "anatomy_vastus_lateralis_muscle_r",
+        "anatomy_vastus_medialis_muscle_l",
+        "anatomy_vastus_medialis_muscle_r"
+      ],
+      "anatomicalNames": [
+        "Rectus femoris muscle.l",
+        "Rectus femoris muscle.r",
+        "Vastus intermedius muscle.l",
+        "Vastus intermedius muscle.r",
+        "Vastus lateralis muscle.l",
+        "Vastus lateralis muscle.r",
+        "Vastus medialis muscle.l",
+        "Vastus medialis muscle.r"
+      ]
+    },
+    {
+      "muscle": "rear-shoulders",
+      "meshNames": [
+        "anatomy_scapular_spinal_part_of_deltoid_muscle_l",
+        "anatomy_scapular_spinal_part_of_deltoid_muscle_r"
+      ],
+      "anatomicalNames": [
+        "Scapular spinal part of deltoid muscle.l",
+        "Scapular spinal part of deltoid muscle.r"
+      ]
+    },
+    {
+      "muscle": "tibialis",
+      "meshNames": [
+        "anatomy_tibialis_anterior_muscle_l",
+        "anatomy_tibialis_anterior_muscle_r"
+      ],
+      "anatomicalNames": [
+        "Tibialis anterior muscle.l",
+        "Tibialis anterior muscle.r"
       ]
     }
   ],
+  "anatomy": [
+    {
+      "name": "anatomy_abdominal_part_of_pectoralis_major_muscle_l",
+      "anatomicalName": "(Abdominal part of pectoralis major muscle).l",
+      "muscle": "chest",
+      "tissue": "muscle",
+      "sourceFaces": 1508
+    },
+    {
+      "name": "anatomy_abdominal_part_of_pectoralis_major_muscle_r",
+      "anatomicalName": "(Abdominal part of pectoralis major muscle).r",
+      "muscle": "chest",
+      "tissue": "muscle",
+      "sourceFaces": 1508
+    },
+    {
+      "name": "anatomy_adductor_minimus_l",
+      "anatomicalName": "(Adductor minimus).l",
+      "muscle": "adductors",
+      "tissue": "muscle",
+      "sourceFaces": 948
+    },
+    {
+      "name": "anatomy_adductor_minimus_r",
+      "anatomicalName": "(Adductor minimus).r",
+      "muscle": "adductors",
+      "tissue": "muscle",
+      "sourceFaces": 948
+    },
+    {
+      "name": "anatomy_opponens_digiti_minimi_muscle_of_foot_l",
+      "anatomicalName": "(Opponens digiti minimi muscle of foot).l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 236
+    },
+    {
+      "name": "anatomy_opponens_digiti_minimi_muscle_of_foot_r",
+      "anatomicalName": "(Opponens digiti minimi muscle of foot).r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 236
+    },
+    {
+      "name": "anatomy_abductor_digiti_minimi_of_foot_l",
+      "anatomicalName": "Abductor digiti minimi of foot.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1280
+    },
+    {
+      "name": "anatomy_abductor_digiti_minimi_of_foot_r",
+      "anatomicalName": "Abductor digiti minimi of foot.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1280
+    },
+    {
+      "name": "anatomy_abductor_digiti_minimi_of_hand_l",
+      "anatomicalName": "Abductor digiti minimi of hand.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 672
+    },
+    {
+      "name": "anatomy_abductor_digiti_minimi_of_hand_r",
+      "anatomicalName": "Abductor digiti minimi of hand.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 672
+    },
+    {
+      "name": "anatomy_abductor_hallucis_l",
+      "anatomicalName": "Abductor hallucis.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1688
+    },
+    {
+      "name": "anatomy_abductor_hallucis_r",
+      "anatomicalName": "Abductor hallucis.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1688
+    },
+    {
+      "name": "anatomy_abductor_pollicis_brevis_l",
+      "anatomicalName": "Abductor pollicis brevis.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 624
+    },
+    {
+      "name": "anatomy_abductor_pollicis_brevis_r",
+      "anatomicalName": "Abductor pollicis brevis.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 624
+    },
+    {
+      "name": "anatomy_abductor_pollicis_longus_l",
+      "anatomicalName": "Abductor pollicis longus.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 2462
+    },
+    {
+      "name": "anatomy_abductor_pollicis_longus_r",
+      "anatomicalName": "Abductor pollicis longus.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 2462
+    },
+    {
+      "name": "anatomy_acromial_part_of_deltoid_muscle_l",
+      "anatomicalName": "Acromial part of deltoid muscle.l",
+      "muscle": "front-shoulders",
+      "tissue": "muscle",
+      "sourceFaces": 2964
+    },
+    {
+      "name": "anatomy_acromial_part_of_deltoid_muscle_r",
+      "anatomicalName": "Acromial part of deltoid muscle.r",
+      "muscle": "front-shoulders",
+      "tissue": "muscle",
+      "sourceFaces": 2964
+    },
+    {
+      "name": "anatomy_adductor_brevis_l",
+      "anatomicalName": "Adductor brevis.l",
+      "muscle": "adductors",
+      "tissue": "muscle",
+      "sourceFaces": 2132
+    },
+    {
+      "name": "anatomy_adductor_brevis_r",
+      "anatomicalName": "Adductor brevis.r",
+      "muscle": "adductors",
+      "tissue": "muscle",
+      "sourceFaces": 2132
+    },
+    {
+      "name": "anatomy_adductor_longus_l",
+      "anatomicalName": "Adductor longus.l",
+      "muscle": "adductors",
+      "tissue": "muscle",
+      "sourceFaces": 3714
+    },
+    {
+      "name": "anatomy_adductor_longus_r",
+      "anatomicalName": "Adductor longus.r",
+      "muscle": "adductors",
+      "tissue": "muscle",
+      "sourceFaces": 3714
+    },
+    {
+      "name": "anatomy_adductor_magnus_l",
+      "anatomicalName": "Adductor magnus.l",
+      "muscle": "adductors",
+      "tissue": "muscle",
+      "sourceFaces": 8192
+    },
+    {
+      "name": "anatomy_adductor_magnus_r",
+      "anatomicalName": "Adductor magnus.r",
+      "muscle": "adductors",
+      "tissue": "muscle",
+      "sourceFaces": 8192
+    },
+    {
+      "name": "anatomy_anconeus_muscle_l",
+      "anatomicalName": "Anconeus muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1442
+    },
+    {
+      "name": "anatomy_anconeus_muscle_r",
+      "anatomicalName": "Anconeus muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1442
+    },
+    {
+      "name": "anatomy_anterior_belly_of_digastric_muscle_l",
+      "anatomicalName": "Anterior belly of digastric muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 392
+    },
+    {
+      "name": "anatomy_anterior_belly_of_digastric_muscle_r",
+      "anatomicalName": "Anterior belly of digastric muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 392
+    },
+    {
+      "name": "anatomy_anterior_segment_of_eyeball_l",
+      "anatomicalName": "Anterior segment of eyeball.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 416
+    },
+    {
+      "name": "anatomy_anterior_segment_of_eyeball_r",
+      "anatomicalName": "Anterior segment of eyeball.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 416
+    },
+    {
+      "name": "anatomy_ary_epiglottic_part_of_oblique_arytenoid_muscle_l",
+      "anatomicalName": "Ary-epiglottic part of oblique arytenoid muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1022
+    },
+    {
+      "name": "anatomy_ary_epiglottic_part_of_oblique_arytenoid_muscle_r",
+      "anatomicalName": "Ary-epiglottic part of oblique arytenoid muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1022
+    },
+    {
+      "name": "anatomy_arytenoid_cartilage_r",
+      "anatomicalName": "Arytenoid cartilage.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 625
+    },
+    {
+      "name": "anatomy_arytenoid_cartilage_l",
+      "anatomicalName": "Arytenoid cartilage.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 625
+    },
+    {
+      "name": "anatomy_ascending_part_of_trapezius_muscle_l",
+      "anatomicalName": "Ascending part of trapezius muscle.l",
+      "muscle": "traps-middle",
+      "tissue": "muscle",
+      "sourceFaces": 4596
+    },
+    {
+      "name": "anatomy_ascending_part_of_trapezius_muscle_r",
+      "anatomicalName": "Ascending part of trapezius muscle.r",
+      "muscle": "traps-middle",
+      "tissue": "muscle",
+      "sourceFaces": 4596
+    },
+    {
+      "name": "anatomy_atlas_c1",
+      "anatomicalName": "Atlas (C1)",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 2146
+    },
+    {
+      "name": "anatomy_axis_c2",
+      "anatomicalName": "Axis (C2)",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 2244
+    },
+    {
+      "name": "anatomy_body_of_sternum",
+      "anatomicalName": "Body of sternum",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 4466
+    },
+    {
+      "name": "anatomy_brachialis_muscle_l",
+      "anatomicalName": "Brachialis muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 3478
+    },
+    {
+      "name": "anatomy_brachialis_muscle_r",
+      "anatomicalName": "Brachialis muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 3478
+    },
+    {
+      "name": "anatomy_brachioradialis_muscle_l",
+      "anatomicalName": "Brachioradialis muscle.l",
+      "muscle": "forearms",
+      "tissue": "muscle",
+      "sourceFaces": 7312
+    },
+    {
+      "name": "anatomy_brachioradialis_muscle_r",
+      "anatomicalName": "Brachioradialis muscle.r",
+      "muscle": "forearms",
+      "tissue": "muscle",
+      "sourceFaces": 7312
+    },
+    {
+      "name": "anatomy_bucinator_l",
+      "anatomicalName": "Bucinator.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 884
+    },
+    {
+      "name": "anatomy_bucinator_r",
+      "anatomicalName": "Bucinator.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 884
+    },
+    {
+      "name": "anatomy_calcaneal_tendon_l",
+      "anatomicalName": "Calcaneal tendon.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 4334
+    },
+    {
+      "name": "anatomy_calcaneal_tendon_r",
+      "anatomicalName": "Calcaneal tendon.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 4334
+    },
+    {
+      "name": "anatomy_calcaneus_l",
+      "anatomicalName": "Calcaneus.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1432
+    },
+    {
+      "name": "anatomy_calcaneus_r",
+      "anatomicalName": "Calcaneus.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1432
+    },
+    {
+      "name": "anatomy_capitate_bone_l",
+      "anatomicalName": "Capitate bone.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 470
+    },
+    {
+      "name": "anatomy_capitate_bone_r",
+      "anatomicalName": "Capitate bone.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 470
+    },
+    {
+      "name": "anatomy_clavicle_l",
+      "anatomicalName": "Clavicle.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1548
+    },
+    {
+      "name": "anatomy_clavicle_r",
+      "anatomicalName": "Clavicle.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1548
+    },
+    {
+      "name": "anatomy_clavicular_head_of_pectoralis_major_muscle_l",
+      "anatomicalName": "Clavicular head of pectoralis major muscle.l",
+      "muscle": "chest",
+      "tissue": "muscle",
+      "sourceFaces": 850
+    },
+    {
+      "name": "anatomy_clavicular_head_of_pectoralis_major_muscle_r",
+      "anatomicalName": "Clavicular head of pectoralis major muscle.r",
+      "muscle": "chest",
+      "tissue": "muscle",
+      "sourceFaces": 850
+    },
+    {
+      "name": "anatomy_clavicular_part_of_deltoid_muscle_l",
+      "anatomicalName": "Clavicular part of deltoid muscle.l",
+      "muscle": "front-shoulders",
+      "tissue": "muscle",
+      "sourceFaces": 2902
+    },
+    {
+      "name": "anatomy_clavicular_part_of_deltoid_muscle_r",
+      "anatomicalName": "Clavicular part of deltoid muscle.r",
+      "muscle": "front-shoulders",
+      "tissue": "muscle",
+      "sourceFaces": 2902
+    },
+    {
+      "name": "anatomy_coccygeus_muscle_l",
+      "anatomicalName": "Coccygeus muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1034
+    },
+    {
+      "name": "anatomy_coccygeus_muscle_r",
+      "anatomicalName": "Coccygeus muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1034
+    },
+    {
+      "name": "anatomy_coccyx",
+      "anatomicalName": "Coccyx",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1066
+    },
+    {
+      "name": "anatomy_common_tendinous_ring_l",
+      "anatomicalName": "Common tendinous ring.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 362
+    },
+    {
+      "name": "anatomy_common_tendinous_ring_r",
+      "anatomicalName": "Common tendinous ring.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 362
+    },
+    {
+      "name": "anatomy_coracobrachialis_muscle_l",
+      "anatomicalName": "Coracobrachialis muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1160
+    },
+    {
+      "name": "anatomy_coracobrachialis_muscle_r",
+      "anatomicalName": "Coracobrachialis muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1160
+    },
+    {
+      "name": "anatomy_corniculate_cartilage_r",
+      "anatomicalName": "Corniculate cartilage.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 136
+    },
+    {
+      "name": "anatomy_corniculate_cartilage_l",
+      "anatomicalName": "Corniculate cartilage.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 136
+    },
+    {
+      "name": "anatomy_corrugator_supercilii_l",
+      "anatomicalName": "Corrugator supercilii.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 278
+    },
+    {
+      "name": "anatomy_corrugator_supercilii_r",
+      "anatomicalName": "Corrugator supercilii.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 278
+    },
+    {
+      "name": "anatomy_costal_cartilage_of_eighth_rib_l",
+      "anatomicalName": "Costal cartilage of eighth rib.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 330
+    },
+    {
+      "name": "anatomy_costal_cartilage_of_eighth_rib_r",
+      "anatomicalName": "Costal cartilage of eighth rib.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 330
+    },
+    {
+      "name": "anatomy_costal_cartilage_of_fifth_rib_l",
+      "anatomicalName": "Costal cartilage of fifth rib.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1082
+    },
+    {
+      "name": "anatomy_costal_cartilage_of_fifth_rib_r",
+      "anatomicalName": "Costal cartilage of fifth rib.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1082
+    },
+    {
+      "name": "anatomy_costal_cartilage_of_first_rib_l",
+      "anatomicalName": "Costal cartilage of first rib.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 462
+    },
+    {
+      "name": "anatomy_costal_cartilage_of_first_rib_r",
+      "anatomicalName": "Costal cartilage of first rib.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 462
+    },
+    {
+      "name": "anatomy_costal_cartilage_of_fourth_rib_l",
+      "anatomicalName": "Costal cartilage of fourth rib.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 745
+    },
+    {
+      "name": "anatomy_costal_cartilage_of_fourth_rib_r",
+      "anatomicalName": "Costal cartilage of fourth rib.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 745
+    },
+    {
+      "name": "anatomy_costal_cartilage_of_ninth_rib_l",
+      "anatomicalName": "Costal cartilage of ninth rib.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 247
+    },
+    {
+      "name": "anatomy_costal_cartilage_of_ninth_rib_r",
+      "anatomicalName": "Costal cartilage of ninth rib.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 247
+    },
+    {
+      "name": "anatomy_costal_cartilage_of_second_rib_l",
+      "anatomicalName": "Costal cartilage of second rib.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 568
+    },
+    {
+      "name": "anatomy_costal_cartilage_of_second_rib_r",
+      "anatomicalName": "Costal cartilage of second rib.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 568
+    },
+    {
+      "name": "anatomy_costal_cartilage_of_seventh_rib_l",
+      "anatomicalName": "Costal cartilage of seventh rib.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 2294
+    },
+    {
+      "name": "anatomy_costal_cartilage_of_seventh_rib_r",
+      "anatomicalName": "Costal cartilage of seventh rib.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 2294
+    },
+    {
+      "name": "anatomy_costal_cartilage_of_sixth_rib_l",
+      "anatomicalName": "Costal cartilage of sixth rib.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1353
+    },
+    {
+      "name": "anatomy_costal_cartilage_of_sixth_rib_r",
+      "anatomicalName": "Costal cartilage of sixth rib.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1353
+    },
+    {
+      "name": "anatomy_costal_cartilage_of_tenth_rib_l",
+      "anatomicalName": "Costal cartilage of tenth rib.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 192
+    },
+    {
+      "name": "anatomy_costal_cartilage_of_tenth_rib_r",
+      "anatomicalName": "Costal cartilage of tenth rib.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 192
+    },
+    {
+      "name": "anatomy_costal_cartilage_of_third_rib_l",
+      "anatomicalName": "Costal cartilage of third rib.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 600
+    },
+    {
+      "name": "anatomy_costal_cartilage_of_third_rib_r",
+      "anatomicalName": "Costal cartilage of third rib.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 600
+    },
+    {
+      "name": "anatomy_cricoid_cartilage",
+      "anatomicalName": "Cricoid cartilage",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1806
+    },
+    {
+      "name": "anatomy_cuboid_bone_l",
+      "anatomicalName": "Cuboid bone.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 994
+    },
+    {
+      "name": "anatomy_cuboid_bone_r",
+      "anatomicalName": "Cuboid bone.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 994
+    },
+    {
+      "name": "anatomy_deep_head_of_flexor_pollicis_brevis_l",
+      "anatomicalName": "Deep head of flexor pollicis brevis.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 746
+    },
+    {
+      "name": "anatomy_deep_head_of_flexor_pollicis_brevis_r",
+      "anatomicalName": "Deep head of flexor pollicis brevis.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 746
+    },
+    {
+      "name": "anatomy_deep_head_of_pronator_teres_l",
+      "anatomicalName": "Deep head of pronator teres.l",
+      "muscle": "forearms",
+      "tissue": "muscle",
+      "sourceFaces": 1114
+    },
+    {
+      "name": "anatomy_deep_head_of_pronator_teres_r",
+      "anatomicalName": "Deep head of pronator teres.r",
+      "muscle": "forearms",
+      "tissue": "muscle",
+      "sourceFaces": 1114
+    },
+    {
+      "name": "anatomy_deep_part_of_masseter_l",
+      "anatomicalName": "Deep part of masseter.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 994
+    },
+    {
+      "name": "anatomy_deep_part_of_masseter_r",
+      "anatomicalName": "Deep part of masseter.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 994
+    },
+    {
+      "name": "anatomy_depressor_anguli_oris_l",
+      "anatomicalName": "Depressor anguli oris.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 594
+    },
+    {
+      "name": "anatomy_depressor_anguli_oris_r",
+      "anatomicalName": "Depressor anguli oris.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 594
+    },
+    {
+      "name": "anatomy_depressor_labii_inferioris_l",
+      "anatomicalName": "Depressor labii inferioris.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 832
+    },
+    {
+      "name": "anatomy_depressor_labii_inferioris_r",
+      "anatomicalName": "Depressor labii inferioris.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 832
+    },
+    {
+      "name": "anatomy_depressor_septi_nasi_l",
+      "anatomicalName": "Depressor septi nasi.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 276
+    },
+    {
+      "name": "anatomy_depressor_septi_nasi_r",
+      "anatomicalName": "Depressor septi nasi.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 276
+    },
+    {
+      "name": "anatomy_descending_part_of_trapezius_muscle_l",
+      "anatomicalName": "Descending part of trapezius muscle.l",
+      "muscle": "traps",
+      "tissue": "muscle",
+      "sourceFaces": 6760
+    },
+    {
+      "name": "anatomy_descending_part_of_trapezius_muscle_r",
+      "anatomicalName": "Descending part of trapezius muscle.r",
+      "muscle": "traps",
+      "tissue": "muscle",
+      "sourceFaces": 6760
+    },
+    {
+      "name": "anatomy_diaphragm",
+      "anatomicalName": "Diaphragm",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 4921
+    },
+    {
+      "name": "anatomy_distal_phalanx_of_fifth_finger_of_foot_l",
+      "anatomicalName": "Distal phalanx of fifth finger of foot.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 222
+    },
+    {
+      "name": "anatomy_distal_phalanx_of_fifth_finger_of_foot_r",
+      "anatomicalName": "Distal phalanx of fifth finger of foot.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 222
+    },
+    {
+      "name": "anatomy_distal_phalanx_of_fifth_finger_of_hand_l",
+      "anatomicalName": "Distal phalanx of fifth finger of hand.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 192
+    },
+    {
+      "name": "anatomy_distal_phalanx_of_fifth_finger_of_hand_r",
+      "anatomicalName": "Distal phalanx of fifth finger of hand.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 192
+    },
+    {
+      "name": "anatomy_distal_phalanx_of_first_finger_of_foot_l",
+      "anatomicalName": "Distal phalanx of first finger of foot.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 466
+    },
+    {
+      "name": "anatomy_distal_phalanx_of_first_finger_of_foot_r",
+      "anatomicalName": "Distal phalanx of first finger of foot.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 466
+    },
+    {
+      "name": "anatomy_distal_phalanx_of_first_finger_of_hand_l",
+      "anatomicalName": "Distal phalanx of first finger of hand.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 222
+    },
+    {
+      "name": "anatomy_distal_phalanx_of_first_finger_of_hand_r",
+      "anatomicalName": "Distal phalanx of first finger of hand.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 222
+    },
+    {
+      "name": "anatomy_distal_phalanx_of_fourth_finger_of_foot_l",
+      "anatomicalName": "Distal phalanx of fourth finger of foot.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 278
+    },
+    {
+      "name": "anatomy_distal_phalanx_of_fourth_finger_of_foot_r",
+      "anatomicalName": "Distal phalanx of fourth finger of foot.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 278
+    },
+    {
+      "name": "anatomy_distal_phalanx_of_fourth_finger_of_hand_l",
+      "anatomicalName": "Distal phalanx of fourth finger of hand.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 134
+    },
+    {
+      "name": "anatomy_distal_phalanx_of_fourth_finger_of_hand_r",
+      "anatomicalName": "Distal phalanx of fourth finger of hand.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 134
+    },
+    {
+      "name": "anatomy_distal_phalanx_of_second_finger_of_foot_l",
+      "anatomicalName": "Distal phalanx of second finger of foot.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 236
+    },
+    {
+      "name": "anatomy_distal_phalanx_of_second_finger_of_foot_r",
+      "anatomicalName": "Distal phalanx of second finger of foot.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 236
+    },
+    {
+      "name": "anatomy_distal_phalanx_of_second_finger_of_hand_l",
+      "anatomicalName": "Distal phalanx of second finger of hand.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 250
+    },
+    {
+      "name": "anatomy_distal_phalanx_of_second_finger_of_hand_r",
+      "anatomicalName": "Distal phalanx of second finger of hand.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 250
+    },
+    {
+      "name": "anatomy_distal_phalanx_of_third_finger_of_foot_l",
+      "anatomicalName": "Distal phalanx of third finger of foot.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 318
+    },
+    {
+      "name": "anatomy_distal_phalanx_of_third_finger_of_foot_r",
+      "anatomicalName": "Distal phalanx of third finger of foot.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 318
+    },
+    {
+      "name": "anatomy_distal_phalanx_of_third_finger_of_hand_l",
+      "anatomicalName": "Distal phalanx of third finger of hand.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 192
+    },
+    {
+      "name": "anatomy_distal_phalanx_of_third_finger_of_hand_r",
+      "anatomicalName": "Distal phalanx of third finger of hand.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 192
+    },
+    {
+      "name": "anatomy_dorsal_interossei_muscles_of_foot_l",
+      "anatomicalName": "Dorsal interossei muscles of foot.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1946
+    },
+    {
+      "name": "anatomy_dorsal_interossei_muscles_of_foot_r",
+      "anatomicalName": "Dorsal interossei muscles of foot.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1946
+    },
+    {
+      "name": "anatomy_dorsal_interossei_muscles_of_hand_l",
+      "anatomicalName": "Dorsal interossei muscles of hand.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1364
+    },
+    {
+      "name": "anatomy_dorsal_interossei_muscles_of_hand_r",
+      "anatomicalName": "Dorsal interossei muscles of hand.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1364
+    },
+    {
+      "name": "anatomy_dorsal_parts_of_lateral_intertransversarii_lumborum_muscles_l",
+      "anatomicalName": "Dorsal parts of lateral intertransversarii lumborum muscles.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 720
+    },
+    {
+      "name": "anatomy_dorsal_parts_of_lateral_intertransversarii_lumborum_muscles_r",
+      "anatomicalName": "Dorsal parts of lateral intertransversarii lumborum muscles.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 720
+    },
+    {
+      "name": "anatomy_eighth_rib_l",
+      "anatomicalName": "Eighth rib.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 8257
+    },
+    {
+      "name": "anatomy_eighth_rib_r",
+      "anatomicalName": "Eighth rib.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 8257
+    },
+    {
+      "name": "anatomy_eleventh_rib_l",
+      "anatomicalName": "Eleventh rib.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 5032
+    },
+    {
+      "name": "anatomy_eleventh_rib_r",
+      "anatomicalName": "Eleventh rib.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 5032
+    },
+    {
+      "name": "anatomy_epicranial_aponeurosis_l",
+      "anatomicalName": "Epicranial aponeurosis.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 20118
+    },
+    {
+      "name": "anatomy_epicranial_aponeurosis_r",
+      "anatomicalName": "Epicranial aponeurosis.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 20118
+    },
+    {
+      "name": "anatomy_ethmoid_bone",
+      "anatomicalName": "Ethmoid bone",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 3775
+    },
+    {
+      "name": "anatomy_extensor_carpi_radialis_brevis_l",
+      "anatomicalName": "Extensor carpi radialis brevis.l",
+      "muscle": "forearms",
+      "tissue": "muscle",
+      "sourceFaces": 3142
+    },
+    {
+      "name": "anatomy_extensor_carpi_radialis_brevis_r",
+      "anatomicalName": "Extensor carpi radialis brevis.r",
+      "muscle": "forearms",
+      "tissue": "muscle",
+      "sourceFaces": 3142
+    },
+    {
+      "name": "anatomy_extensor_carpi_radialis_longus_l",
+      "anatomicalName": "Extensor carpi radialis longus.l",
+      "muscle": "forearms",
+      "tissue": "muscle",
+      "sourceFaces": 3706
+    },
+    {
+      "name": "anatomy_extensor_carpi_radialis_longus_r",
+      "anatomicalName": "Extensor carpi radialis longus.r",
+      "muscle": "forearms",
+      "tissue": "muscle",
+      "sourceFaces": 3706
+    },
+    {
+      "name": "anatomy_extensor_digiti_minimi_l",
+      "anatomicalName": "Extensor digiti minimi.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 2152
+    },
+    {
+      "name": "anatomy_extensor_digiti_minimi_r",
+      "anatomicalName": "Extensor digiti minimi.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 2152
+    },
+    {
+      "name": "anatomy_extensor_digitorum_brevis_l",
+      "anatomicalName": "Extensor digitorum brevis.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 3184
+    },
+    {
+      "name": "anatomy_extensor_digitorum_brevis_r",
+      "anatomicalName": "Extensor digitorum brevis.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 3184
+    },
+    {
+      "name": "anatomy_extensor_digitorum_longus_l",
+      "anatomicalName": "Extensor digitorum longus.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 3176
+    },
+    {
+      "name": "anatomy_extensor_digitorum_longus_r",
+      "anatomicalName": "Extensor digitorum longus.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 3176
+    },
+    {
+      "name": "anatomy_extensor_digitorum_l",
+      "anatomicalName": "Extensor digitorum.l",
+      "muscle": "forearms",
+      "tissue": "muscle",
+      "sourceFaces": 6410
+    },
+    {
+      "name": "anatomy_extensor_digitorum_r",
+      "anatomicalName": "Extensor digitorum.r",
+      "muscle": "forearms",
+      "tissue": "muscle",
+      "sourceFaces": 6410
+    },
+    {
+      "name": "anatomy_extensor_hallucis_brevis_l",
+      "anatomicalName": "Extensor hallucis brevis.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1118
+    },
+    {
+      "name": "anatomy_extensor_hallucis_brevis_r",
+      "anatomicalName": "Extensor hallucis brevis.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1118
+    },
+    {
+      "name": "anatomy_extensor_hallucis_longus_l",
+      "anatomicalName": "Extensor hallucis longus.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 2362
+    },
+    {
+      "name": "anatomy_extensor_hallucis_longus_r",
+      "anatomicalName": "Extensor hallucis longus.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 2362
+    },
+    {
+      "name": "anatomy_extensor_indicis_l",
+      "anatomicalName": "Extensor indicis.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1142
+    },
+    {
+      "name": "anatomy_extensor_indicis_r",
+      "anatomicalName": "Extensor indicis.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1142
+    },
+    {
+      "name": "anatomy_extensor_pollicis_brevis_l",
+      "anatomicalName": "Extensor pollicis brevis.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1173
+    },
+    {
+      "name": "anatomy_extensor_pollicis_brevis_r",
+      "anatomicalName": "Extensor pollicis brevis.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1173
+    },
+    {
+      "name": "anatomy_extensor_pollicis_longus_l",
+      "anatomicalName": "Extensor pollicis longus.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1602
+    },
+    {
+      "name": "anatomy_extensor_pollicis_longus_r",
+      "anatomicalName": "Extensor pollicis longus.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1602
+    },
+    {
+      "name": "anatomy_extensor_retinaculum_of_wrist_l",
+      "anatomicalName": "Extensor retinaculum of wrist.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 78
+    },
+    {
+      "name": "anatomy_extensor_retinaculum_of_wrist_r",
+      "anatomicalName": "Extensor retinaculum of wrist.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 78
+    },
+    {
+      "name": "anatomy_external_abdominal_oblique_muscle_l",
+      "anatomicalName": "External abdominal oblique muscle.l",
+      "muscle": "obliques",
+      "tissue": "muscle",
+      "sourceFaces": 29622
+    },
+    {
+      "name": "anatomy_external_abdominal_oblique_muscle_r",
+      "anatomicalName": "External abdominal oblique muscle.r",
+      "muscle": "obliques",
+      "tissue": "muscle",
+      "sourceFaces": 29622
+    },
+    {
+      "name": "anatomy_external_anal_sphincter_l",
+      "anatomicalName": "External anal sphincter.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 202
+    },
+    {
+      "name": "anatomy_external_anal_sphincter_r",
+      "anatomicalName": "External anal sphincter.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 202
+    },
+    {
+      "name": "anatomy_external_intercostal_muscles_l",
+      "anatomicalName": "External intercostal muscles.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 41357
+    },
+    {
+      "name": "anatomy_external_intercostal_muscles_r",
+      "anatomicalName": "External intercostal muscles.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 41357
+    },
+    {
+      "name": "anatomy_eyelashes_l",
+      "anatomicalName": "Eyelashes.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 31
+    },
+    {
+      "name": "anatomy_eyelashes_r",
+      "anatomicalName": "Eyelashes.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 31
+    },
+    {
+      "name": "anatomy_femur_l",
+      "anatomicalName": "Femur.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 3786
+    },
+    {
+      "name": "anatomy_femur_r",
+      "anatomicalName": "Femur.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 3786
+    },
+    {
+      "name": "anatomy_fibula_l",
+      "anatomicalName": "Fibula.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1264
+    },
+    {
+      "name": "anatomy_fibula_r",
+      "anatomicalName": "Fibula.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1264
+    },
+    {
+      "name": "anatomy_fibularis_brevis_muscle_l",
+      "anatomicalName": "Fibularis brevis muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 3446
+    },
+    {
+      "name": "anatomy_fibularis_brevis_muscle_r",
+      "anatomicalName": "Fibularis brevis muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 3446
+    },
+    {
+      "name": "anatomy_fibularis_longus_muscle_l",
+      "anatomicalName": "Fibularis longus muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 5522
+    },
+    {
+      "name": "anatomy_fibularis_longus_muscle_r",
+      "anatomicalName": "Fibularis longus muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 5522
+    },
+    {
+      "name": "anatomy_fibularis_tertius_muscle_l",
+      "anatomicalName": "Fibularis tertius muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 586
+    },
+    {
+      "name": "anatomy_fibularis_tertius_muscle_r",
+      "anatomicalName": "Fibularis tertius muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 586
+    },
+    {
+      "name": "anatomy_fifth_metacarpal_bone_l",
+      "anatomicalName": "Fifth metacarpal bone.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 503
+    },
+    {
+      "name": "anatomy_fifth_metacarpal_bone_r",
+      "anatomicalName": "Fifth metacarpal bone.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 503
+    },
+    {
+      "name": "anatomy_fifth_metatarsal_bone_l",
+      "anatomicalName": "Fifth metatarsal bone.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 894
+    },
+    {
+      "name": "anatomy_fifth_metatarsal_bone_r",
+      "anatomicalName": "Fifth metatarsal bone.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 894
+    },
+    {
+      "name": "anatomy_fifth_rib_l",
+      "anatomicalName": "Fifth rib.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 9360
+    },
+    {
+      "name": "anatomy_fifth_rib_r",
+      "anatomicalName": "Fifth rib.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 9360
+    },
+    {
+      "name": "anatomy_first_metacarpal_bone_l",
+      "anatomicalName": "First metacarpal bone.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 682
+    },
+    {
+      "name": "anatomy_first_metacarpal_bone_r",
+      "anatomicalName": "First metacarpal bone.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 682
+    },
+    {
+      "name": "anatomy_first_metatarsal_bone_l",
+      "anatomicalName": "First metatarsal bone.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1087
+    },
+    {
+      "name": "anatomy_first_metatarsal_bone_r",
+      "anatomicalName": "First metatarsal bone.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1087
+    },
+    {
+      "name": "anatomy_first_rib_l",
+      "anatomicalName": "First rib.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 3208
+    },
+    {
+      "name": "anatomy_first_rib_r",
+      "anatomicalName": "First rib.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 3208
+    },
+    {
+      "name": "anatomy_flexor_carpi_radialis_l",
+      "anatomicalName": "Flexor carpi radialis.l",
+      "muscle": "forearms",
+      "tissue": "muscle",
+      "sourceFaces": 1666
+    },
+    {
+      "name": "anatomy_flexor_carpi_radialis_r",
+      "anatomicalName": "Flexor carpi radialis.r",
+      "muscle": "forearms",
+      "tissue": "muscle",
+      "sourceFaces": 1666
+    },
+    {
+      "name": "anatomy_flexor_digiti_minimi_of_foot_l",
+      "anatomicalName": "Flexor digiti minimi of foot.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 464
+    },
+    {
+      "name": "anatomy_flexor_digiti_minimi_of_foot_r",
+      "anatomicalName": "Flexor digiti minimi of foot.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 464
+    },
+    {
+      "name": "anatomy_flexor_digiti_minimi_of_hand_l",
+      "anatomicalName": "Flexor digiti minimi of hand.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 308
+    },
+    {
+      "name": "anatomy_flexor_digiti_minimi_of_hand_r",
+      "anatomicalName": "Flexor digiti minimi of hand.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 308
+    },
+    {
+      "name": "anatomy_flexor_digitorum_brevis_l",
+      "anatomicalName": "Flexor digitorum brevis.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 3224
+    },
+    {
+      "name": "anatomy_flexor_digitorum_brevis_r",
+      "anatomicalName": "Flexor digitorum brevis.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 3224
+    },
+    {
+      "name": "anatomy_flexor_digitorum_longus_l",
+      "anatomicalName": "Flexor digitorum longus.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 6836
+    },
+    {
+      "name": "anatomy_flexor_digitorum_longus_r",
+      "anatomicalName": "Flexor digitorum longus.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 6836
+    },
+    {
+      "name": "anatomy_flexor_digitorum_profundus_l",
+      "anatomicalName": "Flexor digitorum profundus.l",
+      "muscle": "forearms",
+      "tissue": "muscle",
+      "sourceFaces": 7110
+    },
+    {
+      "name": "anatomy_flexor_digitorum_profundus_r",
+      "anatomicalName": "Flexor digitorum profundus.r",
+      "muscle": "forearms",
+      "tissue": "muscle",
+      "sourceFaces": 7110
+    },
+    {
+      "name": "anatomy_flexor_hallucis_longus_l",
+      "anatomicalName": "Flexor hallucis longus.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 5878
+    },
+    {
+      "name": "anatomy_flexor_hallucis_longus_r",
+      "anatomicalName": "Flexor hallucis longus.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 5878
+    },
+    {
+      "name": "anatomy_flexor_pollicis_longus_l",
+      "anatomicalName": "Flexor pollicis longus.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1666
+    },
+    {
+      "name": "anatomy_flexor_pollicis_longus_r",
+      "anatomicalName": "Flexor pollicis longus.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1666
+    },
+    {
+      "name": "anatomy_flexor_retinaculum_of_ankle_l",
+      "anatomicalName": "Flexor retinaculum of ankle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 154
+    },
+    {
+      "name": "anatomy_flexor_retinaculum_of_ankle_r",
+      "anatomicalName": "Flexor retinaculum of ankle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 154
+    },
+    {
+      "name": "anatomy_flexor_retinaculum_of_wrist_l",
+      "anatomicalName": "Flexor retinaculum of wrist.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 113
+    },
+    {
+      "name": "anatomy_flexor_retinaculum_of_wrist_r",
+      "anatomicalName": "Flexor retinaculum of wrist.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 113
+    },
+    {
+      "name": "anatomy_fourth_metacarpal_bone_l",
+      "anatomicalName": "Fourth metacarpal bone.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 642
+    },
+    {
+      "name": "anatomy_fourth_metacarpal_bone_r",
+      "anatomicalName": "Fourth metacarpal bone.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 642
+    },
+    {
+      "name": "anatomy_fourth_metatarsal_bone_l",
+      "anatomicalName": "Fourth metatarsal bone.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 732
+    },
+    {
+      "name": "anatomy_fourth_metatarsal_bone_r",
+      "anatomicalName": "Fourth metatarsal bone.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 732
+    },
+    {
+      "name": "anatomy_fourth_rib_l",
+      "anatomicalName": "Fourth rib.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 8640
+    },
+    {
+      "name": "anatomy_fourth_rib_r",
+      "anatomicalName": "Fourth rib.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 8640
+    },
+    {
+      "name": "anatomy_frontal_bone",
+      "anatomicalName": "Frontal bone",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 7754
+    },
+    {
+      "name": "anatomy_frontalis_muscle_l",
+      "anatomicalName": "Frontalis muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 5874
+    },
+    {
+      "name": "anatomy_frontalis_muscle_r",
+      "anatomicalName": "Frontalis muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 5874
+    },
+    {
+      "name": "anatomy_genioglossus_muscle_l",
+      "anatomicalName": "Genioglossus muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 3746
+    },
+    {
+      "name": "anatomy_genioglossus_muscle_r",
+      "anatomicalName": "Genioglossus muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 3746
+    },
+    {
+      "name": "anatomy_geniohyoid_muscle_l",
+      "anatomicalName": "Geniohyoid muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 530
+    },
+    {
+      "name": "anatomy_geniohyoid_muscle_r",
+      "anatomicalName": "Geniohyoid muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 530
+    },
+    {
+      "name": "anatomy_gluteus_maximus_muscle_l",
+      "anatomicalName": "Gluteus maximus muscle.l",
+      "muscle": "glutes",
+      "tissue": "muscle",
+      "sourceFaces": 3326
+    },
+    {
+      "name": "anatomy_gluteus_maximus_muscle_r",
+      "anatomicalName": "Gluteus maximus muscle.r",
+      "muscle": "glutes",
+      "tissue": "muscle",
+      "sourceFaces": 3326
+    },
+    {
+      "name": "anatomy_gluteus_medius_muscle_l",
+      "anatomicalName": "Gluteus medius muscle.l",
+      "muscle": "glutes",
+      "tissue": "muscle",
+      "sourceFaces": 5176
+    },
+    {
+      "name": "anatomy_gluteus_medius_muscle_r",
+      "anatomicalName": "Gluteus medius muscle.r",
+      "muscle": "glutes",
+      "tissue": "muscle",
+      "sourceFaces": 5176
+    },
+    {
+      "name": "anatomy_gluteus_minimus_muscle_l",
+      "anatomicalName": "Gluteus minimus muscle.l",
+      "muscle": "glutes",
+      "tissue": "muscle",
+      "sourceFaces": 6250
+    },
+    {
+      "name": "anatomy_gluteus_minimus_muscle_r",
+      "anatomicalName": "Gluteus minimus muscle.r",
+      "muscle": "glutes",
+      "tissue": "muscle",
+      "sourceFaces": 6250
+    },
+    {
+      "name": "anatomy_gracilis_muscle_l",
+      "anatomicalName": "Gracilis muscle.l",
+      "muscle": "adductors",
+      "tissue": "muscle",
+      "sourceFaces": 4812
+    },
+    {
+      "name": "anatomy_gracilis_muscle_r",
+      "anatomicalName": "Gracilis muscle.r",
+      "muscle": "adductors",
+      "tissue": "muscle",
+      "sourceFaces": 4812
+    },
+    {
+      "name": "anatomy_hairs_of_eyebrow_l",
+      "anatomicalName": "Hairs of eyebrow.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 794
+    },
+    {
+      "name": "anatomy_hairs_of_eyebrow_r",
+      "anatomicalName": "Hairs of eyebrow.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 794
+    },
+    {
+      "name": "anatomy_hamate_bone_l",
+      "anatomicalName": "Hamate bone.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 536
+    },
+    {
+      "name": "anatomy_hamate_bone_r",
+      "anatomicalName": "Hamate bone.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 536
+    },
+    {
+      "name": "anatomy_hip_bone_l",
+      "anatomicalName": "Hip bone.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 3608
+    },
+    {
+      "name": "anatomy_hip_bone_r",
+      "anatomicalName": "Hip bone.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 3608
+    },
+    {
+      "name": "anatomy_humeral_head_of_extensor_carpi_ulnaris_l",
+      "anatomicalName": "Humeral head of extensor carpi ulnaris.l",
+      "muscle": "forearms",
+      "tissue": "muscle",
+      "sourceFaces": 830
+    },
+    {
+      "name": "anatomy_humeral_head_of_extensor_carpi_ulnaris_r",
+      "anatomicalName": "Humeral head of extensor carpi ulnaris.r",
+      "muscle": "forearms",
+      "tissue": "muscle",
+      "sourceFaces": 830
+    },
+    {
+      "name": "anatomy_humeral_head_of_flexor_carpi_ulnaris_l",
+      "anatomicalName": "Humeral head of flexor carpi ulnaris.l",
+      "muscle": "forearms",
+      "tissue": "muscle",
+      "sourceFaces": 3912
+    },
+    {
+      "name": "anatomy_humeral_head_of_flexor_carpi_ulnaris_r",
+      "anatomicalName": "Humeral head of flexor carpi ulnaris.r",
+      "muscle": "forearms",
+      "tissue": "muscle",
+      "sourceFaces": 3912
+    },
+    {
+      "name": "anatomy_humero_ulnar_head_of_flexor_digitorum_superficialis_l",
+      "anatomicalName": "Humero-ulnar head of flexor digitorum superficialis.l",
+      "muscle": "forearms",
+      "tissue": "muscle",
+      "sourceFaces": 12798
+    },
+    {
+      "name": "anatomy_humero_ulnar_head_of_flexor_digitorum_superficialis_r",
+      "anatomicalName": "Humero-ulnar head of flexor digitorum superficialis.r",
+      "muscle": "forearms",
+      "tissue": "muscle",
+      "sourceFaces": 12798
+    },
+    {
+      "name": "anatomy_humerus_l",
+      "anatomicalName": "Humerus.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 4280
+    },
+    {
+      "name": "anatomy_humerus_r",
+      "anatomicalName": "Humerus.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 4280
+    },
+    {
+      "name": "anatomy_hyoglossus_muscle_l",
+      "anatomicalName": "Hyoglossus muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1424
+    },
+    {
+      "name": "anatomy_hyoglossus_muscle_r",
+      "anatomicalName": "Hyoglossus muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1424
+    },
+    {
+      "name": "anatomy_hyoid_bone",
+      "anatomicalName": "Hyoid bone",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1310
+    },
+    {
+      "name": "anatomy_iliacus_muscle_l",
+      "anatomicalName": "Iliacus muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 4354
+    },
+    {
+      "name": "anatomy_iliacus_muscle_r",
+      "anatomicalName": "Iliacus muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 4354
+    },
+    {
+      "name": "anatomy_iliococcygeus_muscle_l",
+      "anatomicalName": "Iliococcygeus muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1962
+    },
+    {
+      "name": "anatomy_iliococcygeus_muscle_r",
+      "anatomicalName": "Iliococcygeus muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1962
+    },
+    {
+      "name": "anatomy_iliocostalis_colli_muscle",
+      "anatomicalName": "Iliocostalis colli muscle",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 2050
+    },
+    {
+      "name": "anatomy_iliocostalis_colli_muscle_r",
+      "anatomicalName": "Iliocostalis colli muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 2050
+    },
+    {
+      "name": "anatomy_iliocostalis_lumborum_muscle_l",
+      "anatomicalName": "Iliocostalis lumborum muscle.l",
+      "muscle": "lowerback",
+      "tissue": "muscle",
+      "sourceFaces": 10038
+    },
+    {
+      "name": "anatomy_iliocostalis_lumborum_muscle_r",
+      "anatomicalName": "Iliocostalis lumborum muscle.r",
+      "muscle": "lowerback",
+      "tissue": "muscle",
+      "sourceFaces": 10038
+    },
+    {
+      "name": "anatomy_iliocostalis_thoracis_muscle_l",
+      "anatomicalName": "Iliocostalis thoracis muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 5772
+    },
+    {
+      "name": "anatomy_iliocostalis_thoracis_muscle_r",
+      "anatomicalName": "Iliocostalis thoracis muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 5772
+    },
+    {
+      "name": "anatomy_iliotibial_tract_l",
+      "anatomicalName": "Iliotibial tract.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 48612
+    },
+    {
+      "name": "anatomy_iliotibial_tract_r",
+      "anatomicalName": "Iliotibial tract.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 48612
+    },
+    {
+      "name": "anatomy_incus_l",
+      "anatomicalName": "Incus.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1277
+    },
+    {
+      "name": "anatomy_incus_r",
+      "anatomicalName": "Incus.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1277
+    },
+    {
+      "name": "anatomy_inferior_extensor_retinaculum_of_ankle_l",
+      "anatomicalName": "Inferior extensor retinaculum of ankle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 65
+    },
+    {
+      "name": "anatomy_inferior_extensor_retinaculum_of_ankle_r",
+      "anatomicalName": "Inferior extensor retinaculum of ankle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 65
+    },
+    {
+      "name": "anatomy_inferior_fibular_retinaculum_l",
+      "anatomicalName": "Inferior fibular retinaculum.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 35
+    },
+    {
+      "name": "anatomy_inferior_fibular_retinaculum_r",
+      "anatomicalName": "Inferior fibular retinaculum.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 35
+    },
+    {
+      "name": "anatomy_inferior_gemellus_muscle_l",
+      "anatomicalName": "Inferior gemellus muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 976
+    },
+    {
+      "name": "anatomy_inferior_gemellus_muscle_r",
+      "anatomicalName": "Inferior gemellus muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 976
+    },
+    {
+      "name": "anatomy_inferior_head_of_lateral_pterygoid_muscle_l",
+      "anatomicalName": "Inferior head of lateral pterygoid muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 326
+    },
+    {
+      "name": "anatomy_inferior_head_of_lateral_pterygoid_muscle_r",
+      "anatomicalName": "Inferior head of lateral pterygoid muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 326
+    },
+    {
+      "name": "anatomy_inferior_nasal_concha_bone_l",
+      "anatomicalName": "Inferior nasal concha bone.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 476
+    },
+    {
+      "name": "anatomy_inferior_nasal_concha_bone_r",
+      "anatomicalName": "Inferior nasal concha bone.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 476
+    },
+    {
+      "name": "anatomy_inferior_oblique_muscle_l",
+      "anatomicalName": "Inferior oblique muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1148
+    },
+    {
+      "name": "anatomy_inferior_oblique_muscle_r",
+      "anatomicalName": "Inferior oblique muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1148
+    },
+    {
+      "name": "anatomy_inferior_pharyngeal_constrictor_l",
+      "anatomicalName": "Inferior pharyngeal constrictor.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 3696
+    },
+    {
+      "name": "anatomy_inferior_pharyngeal_constrictor_r",
+      "anatomicalName": "Inferior pharyngeal constrictor.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 3696
+    },
+    {
+      "name": "anatomy_inferior_rectus_muscle_l",
+      "anatomicalName": "Inferior rectus muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1736
+    },
+    {
+      "name": "anatomy_inferior_rectus_muscle_r",
+      "anatomicalName": "Inferior rectus muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1736
+    },
+    {
+      "name": "anatomy_inferior_tarsus_l",
+      "anatomicalName": "Inferior tarsus.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 106
+    },
+    {
+      "name": "anatomy_inferior_tarsus_r",
+      "anatomicalName": "Inferior tarsus.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 106
+    },
+    {
+      "name": "anatomy_infraspinatus_muscle_l",
+      "anatomicalName": "Infraspinatus muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 3166
+    },
+    {
+      "name": "anatomy_infraspinatus_muscle_r",
+      "anatomicalName": "Infraspinatus muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 3166
+    },
+    {
+      "name": "anatomy_inguinal_ligament_l",
+      "anatomicalName": "Inguinal ligament.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1056
+    },
+    {
+      "name": "anatomy_inguinal_ligament_r",
+      "anatomicalName": "Inguinal ligament.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1056
+    },
+    {
+      "name": "anatomy_innermost_intercostal_muscles_l",
+      "anatomicalName": "Innermost intercostal muscles.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 38254
+    },
+    {
+      "name": "anatomy_innermost_intercostal_muscles_r",
+      "anatomicalName": "Innermost intercostal muscles.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 38254
+    },
+    {
+      "name": "anatomy_intermediate_cuneiform_bone_l",
+      "anatomicalName": "Intermediate cuneiform bone.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 444
+    },
+    {
+      "name": "anatomy_intermediate_cuneiform_bone_r",
+      "anatomicalName": "Intermediate cuneiform bone.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 444
+    },
+    {
+      "name": "anatomy_intermediate_tendon_of_digastric_muscle_l",
+      "anatomicalName": "Intermediate tendon of digastric muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 228
+    },
+    {
+      "name": "anatomy_intermediate_tendon_of_digastric_muscle_r",
+      "anatomicalName": "Intermediate tendon of digastric muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 228
+    },
+    {
+      "name": "anatomy_internal_abdominal_oblique_muscle_l",
+      "anatomicalName": "Internal abdominal oblique muscle.l",
+      "muscle": "obliques",
+      "tissue": "muscle",
+      "sourceFaces": 28869
+    },
+    {
+      "name": "anatomy_internal_abdominal_oblique_muscle_r",
+      "anatomicalName": "Internal abdominal oblique muscle.r",
+      "muscle": "obliques",
+      "tissue": "muscle",
+      "sourceFaces": 28869
+    },
+    {
+      "name": "anatomy_internal_intercostal_muscles_l",
+      "anatomicalName": "Internal intercostal muscles.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 40184
+    },
+    {
+      "name": "anatomy_internal_intercostal_muscles_r",
+      "anatomicalName": "Internal intercostal muscles.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 40184
+    },
+    {
+      "name": "anatomy_interspinales_colli_muscles_l",
+      "anatomicalName": "Interspinales colli muscles.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 444
+    },
+    {
+      "name": "anatomy_interspinales_colli_muscles_r",
+      "anatomicalName": "Interspinales colli muscles.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 444
+    },
+    {
+      "name": "anatomy_interspinales_lumborum_muscles_l",
+      "anatomicalName": "Interspinales lumborum muscles.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 562
+    },
+    {
+      "name": "anatomy_interspinales_lumborum_muscles_r",
+      "anatomicalName": "Interspinales lumborum muscles.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 562
+    },
+    {
+      "name": "anatomy_interspinales_thoracis_muscles_l",
+      "anatomicalName": "Interspinales thoracis muscles.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 198
+    },
+    {
+      "name": "anatomy_interspinales_thoracis_muscles_r",
+      "anatomicalName": "Interspinales thoracis muscles.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 198
+    },
+    {
+      "name": "anatomy_iris_l",
+      "anatomicalName": "Iris.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 3248
+    },
+    {
+      "name": "anatomy_iris_r",
+      "anatomicalName": "Iris.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 3248
+    },
+    {
+      "name": "anatomy_lacrimal_bone_l",
+      "anatomicalName": "Lacrimal bone.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 588
+    },
+    {
+      "name": "anatomy_lacrimal_bone_r",
+      "anatomicalName": "Lacrimal bone.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 588
+    },
+    {
+      "name": "anatomy_lateral_crico_arytenoid_muscle_l",
+      "anatomicalName": "Lateral crico-arytenoid muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1624
+    },
+    {
+      "name": "anatomy_lateral_crico_arytenoid_muscle_r",
+      "anatomicalName": "Lateral crico-arytenoid muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1624
+    },
+    {
+      "name": "anatomy_lateral_cuneiform_bone_l",
+      "anatomicalName": "Lateral cuneiform bone.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 632
+    },
+    {
+      "name": "anatomy_lateral_cuneiform_bone_r",
+      "anatomicalName": "Lateral cuneiform bone.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 632
+    },
+    {
+      "name": "anatomy_lateral_head_of_flexor_hallucis_brevis_l",
+      "anatomicalName": "Lateral head of flexor hallucis brevis.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 966
+    },
+    {
+      "name": "anatomy_lateral_head_of_flexor_hallucis_brevis_r",
+      "anatomicalName": "Lateral head of flexor hallucis brevis.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 966
+    },
+    {
+      "name": "anatomy_lateral_head_of_gastrocnemius_l",
+      "anatomicalName": "Lateral head of gastrocnemius.l",
+      "muscle": "calves",
+      "tissue": "muscle",
+      "sourceFaces": 4908
+    },
+    {
+      "name": "anatomy_lateral_head_of_gastrocnemius_r",
+      "anatomicalName": "Lateral head of gastrocnemius.r",
+      "muscle": "calves",
+      "tissue": "muscle",
+      "sourceFaces": 4908
+    },
+    {
+      "name": "anatomy_lateral_head_of_triceps_brachii_l",
+      "anatomicalName": "Lateral head of triceps brachii.l",
+      "muscle": "triceps",
+      "tissue": "muscle",
+      "sourceFaces": 3628
+    },
+    {
+      "name": "anatomy_lateral_head_of_triceps_brachii_r",
+      "anatomicalName": "Lateral head of triceps brachii.r",
+      "muscle": "triceps",
+      "tissue": "muscle",
+      "sourceFaces": 3628
+    },
+    {
+      "name": "anatomy_lateral_patellar_retinaculum_l",
+      "anatomicalName": "Lateral patellar retinaculum.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 6
+    },
+    {
+      "name": "anatomy_lateral_patellar_retinaculum_r",
+      "anatomicalName": "Lateral patellar retinaculum.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 6
+    },
+    {
+      "name": "anatomy_lateral_process_of_nasal_septal_cartilage_l",
+      "anatomicalName": "Lateral process of nasal septal cartilage.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 347
+    },
+    {
+      "name": "anatomy_lateral_process_of_nasal_septal_cartilage_r",
+      "anatomicalName": "Lateral process of nasal septal cartilage.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 347
+    },
+    {
+      "name": "anatomy_lateral_rectus_muscle_l",
+      "anatomicalName": "Lateral rectus muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1600
+    },
+    {
+      "name": "anatomy_lateral_rectus_muscle_r",
+      "anatomicalName": "Lateral rectus muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1600
+    },
+    {
+      "name": "anatomy_latissimus_dorsi_muscle_l",
+      "anatomicalName": "Latissimus dorsi muscle.l",
+      "muscle": "lats",
+      "tissue": "muscle",
+      "sourceFaces": 21580
+    },
+    {
+      "name": "anatomy_latissimus_dorsi_muscle_r",
+      "anatomicalName": "Latissimus dorsi muscle.r",
+      "muscle": "lats",
+      "tissue": "muscle",
+      "sourceFaces": 21580
+    },
+    {
+      "name": "anatomy_levator_anguli_oris_l",
+      "anatomicalName": "Levator anguli oris.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 330
+    },
+    {
+      "name": "anatomy_levator_anguli_oris_r",
+      "anatomicalName": "Levator anguli oris.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 330
+    },
+    {
+      "name": "anatomy_levator_labii_superioris_l",
+      "anatomicalName": "Levator labii superioris.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 540
+    },
+    {
+      "name": "anatomy_levator_labii_superioris_r",
+      "anatomicalName": "Levator labii superioris.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 540
+    },
+    {
+      "name": "anatomy_levator_nasolabialis_l",
+      "anatomicalName": "Levator nasolabialis.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 172
+    },
+    {
+      "name": "anatomy_levator_nasolabialis_r",
+      "anatomicalName": "Levator nasolabialis.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 172
+    },
+    {
+      "name": "anatomy_levator_palpebrae_superioris_l",
+      "anatomicalName": "Levator palpebrae superioris.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 2152
+    },
+    {
+      "name": "anatomy_levator_palpebrae_superioris_r",
+      "anatomicalName": "Levator palpebrae superioris.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 2152
+    },
+    {
+      "name": "anatomy_levator_scapulae_l",
+      "anatomicalName": "Levator scapulae.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 3082
+    },
+    {
+      "name": "anatomy_levator_scapulae_r",
+      "anatomicalName": "Levator scapulae.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 3082
+    },
+    {
+      "name": "anatomy_levatores_breves_costarum_l",
+      "anatomicalName": "Levatores breves costarum.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 2690
+    },
+    {
+      "name": "anatomy_levatores_breves_costarum_r",
+      "anatomicalName": "Levatores breves costarum.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 2690
+    },
+    {
+      "name": "anatomy_levatores_longi_costarum_l",
+      "anatomicalName": "Levatores longi costarum.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 5930
+    },
+    {
+      "name": "anatomy_levatores_longi_costarum_r",
+      "anatomicalName": "Levatores longi costarum.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 5930
+    },
+    {
+      "name": "anatomy_linea_alba",
+      "anatomicalName": "Linea alba",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 338
+    },
+    {
+      "name": "anatomy_long_head_of_biceps_brachii_l",
+      "anatomicalName": "Long head of biceps brachii.l",
+      "muscle": "biceps",
+      "tissue": "muscle",
+      "sourceFaces": 3218
+    },
+    {
+      "name": "anatomy_long_head_of_biceps_brachii_r",
+      "anatomicalName": "Long head of biceps brachii.r",
+      "muscle": "biceps",
+      "tissue": "muscle",
+      "sourceFaces": 3218
+    },
+    {
+      "name": "anatomy_long_head_of_biceps_femoris_l",
+      "anatomicalName": "Long head of biceps femoris.l",
+      "muscle": "hamstrings",
+      "tissue": "muscle",
+      "sourceFaces": 7258
+    },
+    {
+      "name": "anatomy_long_head_of_biceps_femoris_r",
+      "anatomicalName": "Long head of biceps femoris.r",
+      "muscle": "hamstrings",
+      "tissue": "muscle",
+      "sourceFaces": 7258
+    },
+    {
+      "name": "anatomy_long_head_of_triceps_brachii_l",
+      "anatomicalName": "Long head of triceps brachii.l",
+      "muscle": "triceps",
+      "tissue": "muscle",
+      "sourceFaces": 3950
+    },
+    {
+      "name": "anatomy_long_head_of_triceps_brachii_r",
+      "anatomicalName": "Long head of triceps brachii.r",
+      "muscle": "triceps",
+      "tissue": "muscle",
+      "sourceFaces": 3950
+    },
+    {
+      "name": "anatomy_longissimus_capitis_muscle_l",
+      "anatomicalName": "Longissimus capitis muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1574
+    },
+    {
+      "name": "anatomy_longissimus_capitis_muscle_r",
+      "anatomicalName": "Longissimus capitis muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1574
+    },
+    {
+      "name": "anatomy_longissimus_colli_muscle_l",
+      "anatomicalName": "Longissimus colli muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1826
+    },
+    {
+      "name": "anatomy_longissimus_colli_muscle_r",
+      "anatomicalName": "Longissimus colli muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1826
+    },
+    {
+      "name": "anatomy_longissimus_thoracis_muscle_l",
+      "anatomicalName": "Longissimus thoracis muscle.l",
+      "muscle": "lowerback",
+      "tissue": "muscle",
+      "sourceFaces": 9652
+    },
+    {
+      "name": "anatomy_longissimus_thoracis_muscle_r",
+      "anatomicalName": "Longissimus thoracis muscle.r",
+      "muscle": "lowerback",
+      "tissue": "muscle",
+      "sourceFaces": 9652
+    },
+    {
+      "name": "anatomy_longus_capitis_muscle_l",
+      "anatomicalName": "Longus capitis muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1980
+    },
+    {
+      "name": "anatomy_longus_capitis_muscle_r",
+      "anatomicalName": "Longus capitis muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1980
+    },
+    {
+      "name": "anatomy_longus_colli_muscle_l",
+      "anatomicalName": "Longus colli muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 6294
+    },
+    {
+      "name": "anatomy_longus_colli_muscle_r",
+      "anatomicalName": "Longus colli muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 6294
+    },
+    {
+      "name": "anatomy_lower_canine_l",
+      "anatomicalName": "Lower canine.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1276
+    },
+    {
+      "name": "anatomy_lower_canine_r",
+      "anatomicalName": "Lower canine.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1276
+    },
+    {
+      "name": "anatomy_lower_first_molar_tooth_l",
+      "anatomicalName": "Lower first molar tooth.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 4475
+    },
+    {
+      "name": "anatomy_lower_first_molar_tooth_r",
+      "anatomicalName": "Lower first molar tooth.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 4475
+    },
+    {
+      "name": "anatomy_lower_first_premolar_l",
+      "anatomicalName": "Lower first premolar.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1207
+    },
+    {
+      "name": "anatomy_lower_first_premolar_r",
+      "anatomicalName": "Lower first premolar.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1207
+    },
+    {
+      "name": "anatomy_lower_lateral_incisor_l",
+      "anatomicalName": "Lower lateral incisor.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1033
+    },
+    {
+      "name": "anatomy_lower_lateral_incisor_r",
+      "anatomicalName": "Lower lateral incisor.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1033
+    },
+    {
+      "name": "anatomy_lower_medial_incisor_r",
+      "anatomicalName": "Lower medial incisor.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 984
+    },
+    {
+      "name": "anatomy_lower_medial_incisor_l",
+      "anatomicalName": "Lower medial incisor.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 984
+    },
+    {
+      "name": "anatomy_lower_second_molar_tooth_l",
+      "anatomicalName": "Lower second molar tooth.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1655
+    },
+    {
+      "name": "anatomy_lower_second_molar_tooth_r",
+      "anatomicalName": "Lower second molar tooth.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1655
+    },
+    {
+      "name": "anatomy_lower_second_premolar_l",
+      "anatomicalName": "Lower second premolar.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1180
+    },
+    {
+      "name": "anatomy_lower_second_premolar_r",
+      "anatomicalName": "Lower second premolar.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1180
+    },
+    {
+      "name": "anatomy_lumbrical_muscles_of_foot_l",
+      "anatomicalName": "Lumbrical muscles of foot.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 418
+    },
+    {
+      "name": "anatomy_lumbrical_muscles_of_foot_r",
+      "anatomicalName": "Lumbrical muscles of foot.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 418
+    },
+    {
+      "name": "anatomy_lumbrical_muscles_of_hand_l",
+      "anatomicalName": "Lumbrical muscles of hand.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1368
+    },
+    {
+      "name": "anatomy_lumbrical_muscles_of_hand_r",
+      "anatomicalName": "Lumbrical muscles of hand.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1368
+    },
+    {
+      "name": "anatomy_lunate_bone_l",
+      "anatomicalName": "Lunate bone.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 348
+    },
+    {
+      "name": "anatomy_lunate_bone_r",
+      "anatomicalName": "Lunate bone.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 348
+    },
+    {
+      "name": "anatomy_major_alar_cartilage_l",
+      "anatomicalName": "Major alar cartilage.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 344
+    },
+    {
+      "name": "anatomy_major_alar_cartilage_r",
+      "anatomicalName": "Major alar cartilage.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 344
+    },
+    {
+      "name": "anatomy_malleus_l",
+      "anatomicalName": "Malleus.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1998
+    },
+    {
+      "name": "anatomy_malleus_r",
+      "anatomicalName": "Malleus.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1998
+    },
+    {
+      "name": "anatomy_mandible",
+      "anatomicalName": "Mandible",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 18838
+    },
+    {
+      "name": "anatomy_manubrium_of_sternum",
+      "anatomicalName": "Manubrium of sternum",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 2662
+    },
+    {
+      "name": "anatomy_maxilla_l",
+      "anatomicalName": "Maxilla.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 4798
+    },
+    {
+      "name": "anatomy_maxilla_r",
+      "anatomicalName": "Maxilla.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 4798
+    },
+    {
+      "name": "anatomy_medial_cuneiform_bone_l",
+      "anatomicalName": "Medial cuneiform bone.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 968
+    },
+    {
+      "name": "anatomy_medial_cuneiform_bone_r",
+      "anatomicalName": "Medial cuneiform bone.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 968
+    },
+    {
+      "name": "anatomy_medial_head_of_flexor_hallucis_brevis_l",
+      "anatomicalName": "Medial head of flexor hallucis brevis.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 514
+    },
+    {
+      "name": "anatomy_medial_head_of_flexor_hallucis_brevis_r",
+      "anatomicalName": "Medial head of flexor hallucis brevis.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 514
+    },
+    {
+      "name": "anatomy_medial_head_of_gastrocnemius_l",
+      "anatomicalName": "Medial head of gastrocnemius.l",
+      "muscle": "calves",
+      "tissue": "muscle",
+      "sourceFaces": 6462
+    },
+    {
+      "name": "anatomy_medial_head_of_gastrocnemius_r",
+      "anatomicalName": "Medial head of gastrocnemius.r",
+      "muscle": "calves",
+      "tissue": "muscle",
+      "sourceFaces": 6462
+    },
+    {
+      "name": "anatomy_medial_head_of_triceps_brachii_l",
+      "anatomicalName": "Medial head of triceps brachii.l",
+      "muscle": "triceps",
+      "tissue": "muscle",
+      "sourceFaces": 2686
+    },
+    {
+      "name": "anatomy_medial_head_of_triceps_brachii_r",
+      "anatomicalName": "Medial head of triceps brachii.r",
+      "muscle": "triceps",
+      "tissue": "muscle",
+      "sourceFaces": 2686
+    },
+    {
+      "name": "anatomy_medial_patellar_retinaculum_l",
+      "anatomicalName": "Medial patellar retinaculum.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 8
+    },
+    {
+      "name": "anatomy_medial_patellar_retinaculum_r",
+      "anatomicalName": "Medial patellar retinaculum.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 8
+    },
+    {
+      "name": "anatomy_medial_pterygoid_muscle_l",
+      "anatomicalName": "Medial pterygoid muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 496
+    },
+    {
+      "name": "anatomy_medial_pterygoid_muscle_r",
+      "anatomicalName": "Medial pterygoid muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 496
+    },
+    {
+      "name": "anatomy_medial_rectus_muscle_l",
+      "anatomicalName": "Medial rectus muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1252
+    },
+    {
+      "name": "anatomy_medial_rectus_muscle_r",
+      "anatomicalName": "Medial rectus muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1252
+    },
+    {
+      "name": "anatomy_mentalis_muscle_l",
+      "anatomicalName": "Mentalis muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 166
+    },
+    {
+      "name": "anatomy_mentalis_muscle_r",
+      "anatomicalName": "Mentalis muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 166
+    },
+    {
+      "name": "anatomy_middle_phalanx_of_fifth_finger_of_foot_l",
+      "anatomicalName": "Middle phalanx of fifth finger of foot.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 216
+    },
+    {
+      "name": "anatomy_middle_phalanx_of_fifth_finger_of_foot_r",
+      "anatomicalName": "Middle phalanx of fifth finger of foot.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 216
+    },
+    {
+      "name": "anatomy_middle_phalanx_of_fifth_finger_of_hand_l",
+      "anatomicalName": "Middle phalanx of fifth finger of hand.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 292
+    },
+    {
+      "name": "anatomy_middle_phalanx_of_fifth_finger_of_hand_r",
+      "anatomicalName": "Middle phalanx of fifth finger of hand.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 292
+    },
+    {
+      "name": "anatomy_middle_phalanx_of_fourth_finger_of_foot_l",
+      "anatomicalName": "Middle phalanx of fourth finger of foot.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 404
+    },
+    {
+      "name": "anatomy_middle_phalanx_of_fourth_finger_of_foot_r",
+      "anatomicalName": "Middle phalanx of fourth finger of foot.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 404
+    },
+    {
+      "name": "anatomy_middle_phalanx_of_fourth_finger_of_hand_l",
+      "anatomicalName": "Middle phalanx of fourth finger of hand.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 446
+    },
+    {
+      "name": "anatomy_middle_phalanx_of_fourth_finger_of_hand_r",
+      "anatomicalName": "Middle phalanx of fourth finger of hand.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 446
+    },
+    {
+      "name": "anatomy_middle_phalanx_of_second_finger_of_foot_l",
+      "anatomicalName": "Middle phalanx of second finger of foot.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 326
+    },
+    {
+      "name": "anatomy_middle_phalanx_of_second_finger_of_foot_r",
+      "anatomicalName": "Middle phalanx of second finger of foot.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 326
+    },
+    {
+      "name": "anatomy_middle_phalanx_of_second_finger_of_hand_l",
+      "anatomicalName": "Middle phalanx of second finger of hand.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 314
+    },
+    {
+      "name": "anatomy_middle_phalanx_of_second_finger_of_hand_r",
+      "anatomicalName": "Middle phalanx of second finger of hand.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 314
+    },
+    {
+      "name": "anatomy_middle_phalanx_of_third_finger_of_foot_l",
+      "anatomicalName": "Middle phalanx of third finger of foot.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 359
+    },
+    {
+      "name": "anatomy_middle_phalanx_of_third_finger_of_foot_r",
+      "anatomicalName": "Middle phalanx of third finger of foot.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 359
+    },
+    {
+      "name": "anatomy_middle_phalanx_of_third_finger_of_hand_l",
+      "anatomicalName": "Middle phalanx of third finger of hand.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 360
+    },
+    {
+      "name": "anatomy_middle_phalanx_of_third_finger_of_hand_r",
+      "anatomicalName": "Middle phalanx of third finger of hand.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 360
+    },
+    {
+      "name": "anatomy_middle_pharyngeal_constrictor_l",
+      "anatomicalName": "Middle pharyngeal constrictor.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 2948
+    },
+    {
+      "name": "anatomy_middle_pharyngeal_constrictor_r",
+      "anatomicalName": "Middle pharyngeal constrictor.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 2948
+    },
+    {
+      "name": "anatomy_multifidus_colli_muscle_l",
+      "anatomicalName": "Multifidus colli muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1390
+    },
+    {
+      "name": "anatomy_multifidus_colli_muscle_r",
+      "anatomicalName": "Multifidus colli muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1390
+    },
+    {
+      "name": "anatomy_multifidus_lumborum_muscle_l",
+      "anatomicalName": "Multifidus lumborum muscle.l",
+      "muscle": "lowerback",
+      "tissue": "muscle",
+      "sourceFaces": 2820
+    },
+    {
+      "name": "anatomy_multifidus_lumborum_muscle_r",
+      "anatomicalName": "Multifidus lumborum muscle.r",
+      "muscle": "lowerback",
+      "tissue": "muscle",
+      "sourceFaces": 2820
+    },
+    {
+      "name": "anatomy_multifidus_thoracis_muscle_l",
+      "anatomicalName": "Multifidus thoracis muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 3902
+    },
+    {
+      "name": "anatomy_multifidus_thoracis_muscle_r",
+      "anatomicalName": "Multifidus thoracis muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 3902
+    },
+    {
+      "name": "anatomy_mylohyoid_muscle_l",
+      "anatomicalName": "Mylohyoid muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1122
+    },
+    {
+      "name": "anatomy_mylohyoid_muscle_r",
+      "anatomicalName": "Mylohyoid muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1122
+    },
+    {
+      "name": "anatomy_nasal_bone_l",
+      "anatomicalName": "Nasal bone.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 292
+    },
+    {
+      "name": "anatomy_nasal_bone_r",
+      "anatomicalName": "Nasal bone.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 292
+    },
+    {
+      "name": "anatomy_nasal_cartilages_j",
+      "anatomicalName": "Nasal cartilages.j",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 0
+    },
+    {
+      "name": "anatomy_nasal_septal_cartilage",
+      "anatomicalName": "Nasal septal cartilage",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 360
+    },
+    {
+      "name": "anatomy_nasalis_muscle_l",
+      "anatomicalName": "Nasalis muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 704
+    },
+    {
+      "name": "anatomy_nasalis_muscle_r",
+      "anatomicalName": "Nasalis muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 704
+    },
+    {
+      "name": "anatomy_navicular_bone_l",
+      "anatomicalName": "Navicular bone.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 731
+    },
+    {
+      "name": "anatomy_navicular_bone_r",
+      "anatomicalName": "Navicular bone.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 731
+    },
+    {
+      "name": "anatomy_ninth_rib_l",
+      "anatomicalName": "Ninth rib.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 7743
+    },
+    {
+      "name": "anatomy_ninth_rib_r",
+      "anatomicalName": "Ninth rib.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 7743
+    },
+    {
+      "name": "anatomy_oblique_head_of_adductor_hallucis_l",
+      "anatomicalName": "Oblique head of adductor hallucis.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 904
+    },
+    {
+      "name": "anatomy_oblique_head_of_adductor_hallucis_r",
+      "anatomicalName": "Oblique head of adductor hallucis.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 904
+    },
+    {
+      "name": "anatomy_oblique_head_of_adductor_pollicis_l",
+      "anatomicalName": "Oblique head of adductor pollicis.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 450
+    },
+    {
+      "name": "anatomy_oblique_head_of_adductor_pollicis_r",
+      "anatomicalName": "Oblique head of adductor pollicis.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 450
+    },
+    {
+      "name": "anatomy_obliquus_inferior_capitis_muscle_l",
+      "anatomicalName": "Obliquus inferior capitis muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 540
+    },
+    {
+      "name": "anatomy_obliquus_inferior_capitis_muscle_r",
+      "anatomicalName": "Obliquus inferior capitis muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 540
+    },
+    {
+      "name": "anatomy_obliquus_superior_capitis_muscle_l",
+      "anatomicalName": "Obliquus superior capitis muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 654
+    },
+    {
+      "name": "anatomy_obliquus_superior_capitis_muscle_r",
+      "anatomicalName": "Obliquus superior capitis muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 654
+    },
+    {
+      "name": "anatomy_obturator_externus_l",
+      "anatomicalName": "Obturator externus.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1156
+    },
+    {
+      "name": "anatomy_obturator_externus_r",
+      "anatomicalName": "Obturator externus.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1156
+    },
+    {
+      "name": "anatomy_obturator_internus_l",
+      "anatomicalName": "Obturator internus.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 3760
+    },
+    {
+      "name": "anatomy_obturator_internus_r",
+      "anatomicalName": "Obturator internus.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 3760
+    },
+    {
+      "name": "anatomy_occipital_bone",
+      "anatomicalName": "Occipital bone",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 7493
+    },
+    {
+      "name": "anatomy_occipitalis_muscle_l",
+      "anatomicalName": "Occipitalis muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 2602
+    },
+    {
+      "name": "anatomy_occipitalis_muscle_r",
+      "anatomicalName": "Occipitalis muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 2602
+    },
+    {
+      "name": "anatomy_omohyoid_muscle_l",
+      "anatomicalName": "Omohyoid muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 2706
+    },
+    {
+      "name": "anatomy_omohyoid_muscle_r",
+      "anatomicalName": "Omohyoid muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 2706
+    },
+    {
+      "name": "anatomy_opponens_digiti_minimi_muscle_of_hand_l",
+      "anatomicalName": "Opponens digiti minimi muscle of hand.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 420
+    },
+    {
+      "name": "anatomy_opponens_digiti_minimi_muscle_of_hand_r",
+      "anatomicalName": "Opponens digiti minimi muscle of hand.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 420
+    },
+    {
+      "name": "anatomy_opponens_pollicis_muscle_l",
+      "anatomicalName": "Opponens pollicis muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 384
+    },
+    {
+      "name": "anatomy_opponens_pollicis_muscle_r",
+      "anatomicalName": "Opponens pollicis muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 384
+    },
+    {
+      "name": "anatomy_orbicularis_oris_muscle_l",
+      "anatomicalName": "Orbicularis oris muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1880
+    },
+    {
+      "name": "anatomy_orbicularis_oris_muscle_r",
+      "anatomicalName": "Orbicularis oris muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1880
+    },
+    {
+      "name": "anatomy_palatine_bone_l",
+      "anatomicalName": "Palatine bone.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1460
+    },
+    {
+      "name": "anatomy_palatine_bone_r",
+      "anatomicalName": "Palatine bone.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1460
+    },
+    {
+      "name": "anatomy_palatopharyngeus_muscle_l",
+      "anatomicalName": "Palatopharyngeus muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 15282
+    },
+    {
+      "name": "anatomy_palatopharyngeus_muscle_r",
+      "anatomicalName": "Palatopharyngeus muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 15282
+    },
+    {
+      "name": "anatomy_palmar_interossei_muscles_l",
+      "anatomicalName": "Palmar interossei muscles.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 172
+    },
+    {
+      "name": "anatomy_palmar_interossei_muscles_r",
+      "anatomicalName": "Palmar interossei muscles.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 172
+    },
+    {
+      "name": "anatomy_palmaris_longus_muscle_l",
+      "anatomicalName": "Palmaris longus muscle.l",
+      "muscle": "forearms",
+      "tissue": "muscle",
+      "sourceFaces": 4374
+    },
+    {
+      "name": "anatomy_palmaris_longus_muscle_r",
+      "anatomicalName": "Palmaris longus muscle.r",
+      "muscle": "forearms",
+      "tissue": "muscle",
+      "sourceFaces": 4374
+    },
+    {
+      "name": "anatomy_parietal_bone_l",
+      "anatomicalName": "Parietal bone.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 6886
+    },
+    {
+      "name": "anatomy_parietal_bone_r",
+      "anatomicalName": "Parietal bone.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 6713
+    },
+    {
+      "name": "anatomy_patella_l",
+      "anatomicalName": "Patella.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 274
+    },
+    {
+      "name": "anatomy_pectineus_muscle_l",
+      "anatomicalName": "Pectineus muscle.l",
+      "muscle": "adductors",
+      "tissue": "muscle",
+      "sourceFaces": 1952
+    },
+    {
+      "name": "anatomy_pectineus_muscle_r",
+      "anatomicalName": "Pectineus muscle.r",
+      "muscle": "adductors",
+      "tissue": "muscle",
+      "sourceFaces": 1952
+    },
+    {
+      "name": "anatomy_pectoralis_minor_muscle_l",
+      "anatomicalName": "Pectoralis minor muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 4142
+    },
+    {
+      "name": "anatomy_pectoralis_minor_muscle_r",
+      "anatomicalName": "Pectoralis minor muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 4142
+    },
+    {
+      "name": "anatomy_piriformis_muscle_l",
+      "anatomicalName": "Piriformis muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1500
+    },
+    {
+      "name": "anatomy_piriformis_muscle_r",
+      "anatomicalName": "Piriformis muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1500
+    },
+    {
+      "name": "anatomy_pisiform_bone_l",
+      "anatomicalName": "Pisiform bone.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 278
+    },
+    {
+      "name": "anatomy_pisiform_bone_r",
+      "anatomicalName": "Pisiform bone.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 278
+    },
+    {
+      "name": "anatomy_plantar_aponeurosis_l",
+      "anatomicalName": "Plantar aponeurosis.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 211
+    },
+    {
+      "name": "anatomy_plantar_aponeurosis_r",
+      "anatomicalName": "Plantar aponeurosis.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 211
+    },
+    {
+      "name": "anatomy_plantar_interossei_muscles_l",
+      "anatomicalName": "Plantar interossei muscles.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1242
+    },
+    {
+      "name": "anatomy_plantar_interossei_muscles_r",
+      "anatomicalName": "Plantar interossei muscles.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1242
+    },
+    {
+      "name": "anatomy_plantaris_muscle_l",
+      "anatomicalName": "Plantaris muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 4698
+    },
+    {
+      "name": "anatomy_plantaris_muscle_r",
+      "anatomicalName": "Plantaris muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 4698
+    },
+    {
+      "name": "anatomy_popliteus_muscle_l",
+      "anatomicalName": "Popliteus muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1132
+    },
+    {
+      "name": "anatomy_popliteus_muscle_r",
+      "anatomicalName": "Popliteus muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1132
+    },
+    {
+      "name": "anatomy_posterior_crico_arytenoid_muscle_l",
+      "anatomicalName": "Posterior crico-arytenoid muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1812
+    },
+    {
+      "name": "anatomy_posterior_crico_arytenoid_muscle_r",
+      "anatomicalName": "Posterior crico-arytenoid muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1812
+    },
+    {
+      "name": "anatomy_procerus_muscle_l",
+      "anatomicalName": "Procerus muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 546
+    },
+    {
+      "name": "anatomy_procerus_muscle_r",
+      "anatomicalName": "Procerus muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 546
+    },
+    {
+      "name": "anatomy_pronator_quadratus_l",
+      "anatomicalName": "Pronator quadratus.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1020
+    },
+    {
+      "name": "anatomy_pronator_quadratus_r",
+      "anatomicalName": "Pronator quadratus.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1020
+    },
+    {
+      "name": "anatomy_proximal_phalanx_of_fifth_finger_of_foot_l",
+      "anatomicalName": "Proximal phalanx of fifth finger of foot.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 516
+    },
+    {
+      "name": "anatomy_psoas_major_l",
+      "anatomicalName": "Psoas major.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 5474
+    },
+    {
+      "name": "anatomy_psoas_major_r",
+      "anatomicalName": "Psoas major.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 5474
+    },
+    {
+      "name": "anatomy_pubo_analis_muscle_l",
+      "anatomicalName": "Pubo-analis muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1440
+    },
+    {
+      "name": "anatomy_pubo_analis_muscle_r",
+      "anatomicalName": "Pubo-analis muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1440
+    },
+    {
+      "name": "anatomy_pubococcygeus_muscle_l",
+      "anatomicalName": "Pubococcygeus muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 2512
+    },
+    {
+      "name": "anatomy_pubococcygeus_muscle_r",
+      "anatomicalName": "Pubococcygeus muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 2512
+    },
+    {
+      "name": "anatomy_pyramidalis_muscle_l",
+      "anatomicalName": "Pyramidalis muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1112
+    },
+    {
+      "name": "anatomy_pyramidalis_muscle_r",
+      "anatomicalName": "Pyramidalis muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1112
+    },
+    {
+      "name": "anatomy_quadratus_femoris_muscle_l",
+      "anatomicalName": "Quadratus femoris muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1646
+    },
+    {
+      "name": "anatomy_quadratus_femoris_muscle_r",
+      "anatomicalName": "Quadratus femoris muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1646
+    },
+    {
+      "name": "anatomy_quadratus_lumborum_muscle_l",
+      "anatomicalName": "Quadratus lumborum muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 2832
+    },
+    {
+      "name": "anatomy_quadratus_lumborum_muscle_r",
+      "anatomicalName": "Quadratus lumborum muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 2832
+    },
+    {
+      "name": "anatomy_quadratus_plantae_muscle_l",
+      "anatomicalName": "Quadratus plantae muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1176
+    },
+    {
+      "name": "anatomy_quadratus_plantae_muscle_r",
+      "anatomicalName": "Quadratus plantae muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1176
+    },
+    {
+      "name": "anatomy_radial_head_of_flexor_digitorum_superficialis_l",
+      "anatomicalName": "Radial head of flexor digitorum superficialis.l",
+      "muscle": "forearms",
+      "tissue": "muscle",
+      "sourceFaces": 1276
+    },
+    {
+      "name": "anatomy_radial_head_of_flexor_digitorum_superficialis_r",
+      "anatomicalName": "Radial head of flexor digitorum superficialis.r",
+      "muscle": "forearms",
+      "tissue": "muscle",
+      "sourceFaces": 1276
+    },
+    {
+      "name": "anatomy_rectus_abdominis_muscle_l",
+      "anatomicalName": "Rectus abdominis muscle.l",
+      "muscle": "abdominals",
+      "tissue": "muscle",
+      "sourceFaces": 20604
+    },
+    {
+      "name": "anatomy_rectus_abdominis_muscle_r",
+      "anatomicalName": "Rectus abdominis muscle.r",
+      "muscle": "abdominals",
+      "tissue": "muscle",
+      "sourceFaces": 20604
+    },
+    {
+      "name": "anatomy_rectus_femoris_muscle_l",
+      "anatomicalName": "Rectus femoris muscle.l",
+      "muscle": "quads",
+      "tissue": "muscle",
+      "sourceFaces": 8276
+    },
+    {
+      "name": "anatomy_rectus_femoris_muscle_r",
+      "anatomicalName": "Rectus femoris muscle.r",
+      "muscle": "quads",
+      "tissue": "muscle",
+      "sourceFaces": 8276
+    },
+    {
+      "name": "anatomy_rectus_posterior_major_capitis_muscle_l",
+      "anatomicalName": "Rectus posterior major capitis muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 788
+    },
+    {
+      "name": "anatomy_rectus_posterior_major_capitis_muscle_r",
+      "anatomicalName": "Rectus posterior major capitis muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 788
+    },
+    {
+      "name": "anatomy_rectus_posterior_minor_capitis_muscle_l",
+      "anatomicalName": "Rectus posterior minor capitis muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 432
+    },
+    {
+      "name": "anatomy_rectus_posterior_minor_capitis_muscle_r",
+      "anatomicalName": "Rectus posterior minor capitis muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 432
+    },
+    {
+      "name": "anatomy_rhomboid_major_muscle_l",
+      "anatomicalName": "Rhomboid major muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 4800
+    },
+    {
+      "name": "anatomy_rhomboid_major_muscle_r",
+      "anatomicalName": "Rhomboid major muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 4800
+    },
+    {
+      "name": "anatomy_rhomboid_minor_muscle_l",
+      "anatomicalName": "Rhomboid minor muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1494
+    },
+    {
+      "name": "anatomy_rhomboid_minor_muscle_r",
+      "anatomicalName": "Rhomboid minor muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1494
+    },
+    {
+      "name": "anatomy_risorius_muscle_l",
+      "anatomicalName": "Risorius muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 592
+    },
+    {
+      "name": "anatomy_risorius_muscle_r",
+      "anatomicalName": "Risorius muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 592
+    },
+    {
+      "name": "anatomy_rotatores_l",
+      "anatomicalName": "Rotatores.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 6518
+    },
+    {
+      "name": "anatomy_rotatores_r",
+      "anatomicalName": "Rotatores.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 6518
+    },
+    {
+      "name": "anatomy_sartorius_muscle_l",
+      "anatomicalName": "Sartorius muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 4966
+    },
+    {
+      "name": "anatomy_sartorius_muscle_r",
+      "anatomicalName": "Sartorius muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 4966
+    },
+    {
+      "name": "anatomy_scalenus_anterior_muscle_l",
+      "anatomicalName": "Scalenus anterior muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1386
+    },
+    {
+      "name": "anatomy_scalenus_anterior_muscle_r",
+      "anatomicalName": "Scalenus anterior muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1386
+    },
+    {
+      "name": "anatomy_scalenus_medius_muscle_l",
+      "anatomicalName": "Scalenus medius muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 2078
+    },
+    {
+      "name": "anatomy_scalenus_medius_muscle_r",
+      "anatomicalName": "Scalenus medius muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 2078
+    },
+    {
+      "name": "anatomy_scalenus_posterior_muscle_l",
+      "anatomicalName": "Scalenus posterior muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1326
+    },
+    {
+      "name": "anatomy_scalenus_posterior_muscle_r",
+      "anatomicalName": "Scalenus posterior muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1326
+    },
+    {
+      "name": "anatomy_scaphoid_bone_r",
+      "anatomicalName": "Scaphoid bone.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 390
+    },
+    {
+      "name": "anatomy_second_metatarsal_bone_r",
+      "anatomicalName": "Second metatarsal bone.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 690
+    },
+    {
+      "name": "anatomy_second_rib_r",
+      "anatomicalName": "Second rib.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 5354
+    },
+    {
+      "name": "anatomy_semimembranosus_muscle_l",
+      "anatomicalName": "Semimembranosus muscle.l",
+      "muscle": "hamstrings",
+      "tissue": "muscle",
+      "sourceFaces": 7442
+    },
+    {
+      "name": "anatomy_semimembranosus_muscle_r",
+      "anatomicalName": "Semimembranosus muscle.r",
+      "muscle": "hamstrings",
+      "tissue": "muscle",
+      "sourceFaces": 7442
+    },
+    {
+      "name": "anatomy_semispinalis_colli_muscle_l",
+      "anatomicalName": "Semispinalis colli muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 2584
+    },
+    {
+      "name": "anatomy_semispinalis_colli_muscle_r",
+      "anatomicalName": "Semispinalis colli muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 2584
+    },
+    {
+      "name": "anatomy_semispinalis_thoracis_muscle_r",
+      "anatomicalName": "Semispinalis thoracis muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 4972
+    },
+    {
+      "name": "anatomy_semitendinosus_muscle_l",
+      "anatomicalName": "Semitendinosus muscle.l",
+      "muscle": "hamstrings",
+      "tissue": "muscle",
+      "sourceFaces": 4316
+    },
+    {
+      "name": "anatomy_semitendinosus_muscle_r",
+      "anatomicalName": "Semitendinosus muscle.r",
+      "muscle": "hamstrings",
+      "tissue": "muscle",
+      "sourceFaces": 4316
+    },
+    {
+      "name": "anatomy_serratus_anterior_muscle_l",
+      "anatomicalName": "Serratus anterior muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 25240
+    },
+    {
+      "name": "anatomy_serratus_anterior_muscle_r",
+      "anatomicalName": "Serratus anterior muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 25240
+    },
+    {
+      "name": "anatomy_serratus_posterior_inferior_muscle_l",
+      "anatomicalName": "Serratus posterior inferior muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 8958
+    },
+    {
+      "name": "anatomy_serratus_posterior_inferior_muscle_r",
+      "anatomicalName": "Serratus posterior inferior muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 8958
+    },
+    {
+      "name": "anatomy_serratus_posterior_superior_muscle_l",
+      "anatomicalName": "Serratus posterior superior muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 5518
+    },
+    {
+      "name": "anatomy_serratus_posterior_superior_muscle_r",
+      "anatomicalName": "Serratus posterior superior muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 5518
+    },
+    {
+      "name": "anatomy_sesamoid_bones_of_foot_r",
+      "anatomicalName": "Sesamoid bones of foot.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 290
+    },
+    {
+      "name": "anatomy_short_head_of_biceps_brachii_l",
+      "anatomicalName": "Short head of biceps brachii.l",
+      "muscle": "biceps",
+      "tissue": "muscle",
+      "sourceFaces": 2696
+    },
+    {
+      "name": "anatomy_short_head_of_biceps_brachii_r",
+      "anatomicalName": "Short head of biceps brachii.r",
+      "muscle": "biceps",
+      "tissue": "muscle",
+      "sourceFaces": 2696
+    },
+    {
+      "name": "anatomy_short_head_of_biceps_femoris_l",
+      "anatomicalName": "Short head of biceps femoris.l",
+      "muscle": "hamstrings",
+      "tissue": "muscle",
+      "sourceFaces": 2476
+    },
+    {
+      "name": "anatomy_short_head_of_biceps_femoris_r",
+      "anatomicalName": "Short head of biceps femoris.r",
+      "muscle": "hamstrings",
+      "tissue": "muscle",
+      "sourceFaces": 2476
+    },
+    {
+      "name": "anatomy_soleus_muscle_l",
+      "anatomicalName": "Soleus muscle.l",
+      "muscle": "calves",
+      "tissue": "muscle",
+      "sourceFaces": 6774
+    },
+    {
+      "name": "anatomy_soleus_muscle_r",
+      "anatomicalName": "Soleus muscle.r",
+      "muscle": "calves",
+      "tissue": "muscle",
+      "sourceFaces": 6774
+    },
+    {
+      "name": "anatomy_sphenoid_bone",
+      "anatomicalName": "Sphenoid bone",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 7308
+    },
+    {
+      "name": "anatomy_external_part_of_thyro_arytenoid_muscle_l",
+      "anatomicalName": "External part of thyro-arytenoid muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 2236
+    },
+    {
+      "name": "anatomy_external_part_of_thyro_arytenoid_muscle_r",
+      "anatomicalName": "External part of thyro-arytenoid muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 2236
+    },
+    {
+      "name": "anatomy_oblique_part_of_cricothyroid_muscle_l",
+      "anatomicalName": "Oblique part of cricothyroid muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 2060
+    },
+    {
+      "name": "anatomy_oblique_part_of_cricothyroid_muscle_r",
+      "anatomicalName": "Oblique part of cricothyroid muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 2060
+    },
+    {
+      "name": "anatomy_orbital_part_of_orbicularis_oculi_l",
+      "anatomicalName": "Orbital part of orbicularis oculi.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 2390
+    },
+    {
+      "name": "anatomy_orbital_part_of_orbicularis_oculi_r",
+      "anatomicalName": "Orbital part of orbicularis oculi.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 2390
+    },
+    {
+      "name": "anatomy_palpebral_part_of_orbicularis_oculi_l",
+      "anatomicalName": "Palpebral part of orbicularis oculi.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 830
+    },
+    {
+      "name": "anatomy_palpebral_part_of_orbicularis_oculi_r",
+      "anatomicalName": "Palpebral part of orbicularis oculi.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 830
+    },
+    {
+      "name": "anatomy_patella_r",
+      "anatomicalName": "Patella.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 274
+    },
+    {
+      "name": "anatomy_platysma_l",
+      "anatomicalName": "Platysma.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 6548
+    },
+    {
+      "name": "anatomy_platysma_r",
+      "anatomicalName": "Platysma.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 6548
+    },
+    {
+      "name": "anatomy_posterior_belly_of_digastric_muscle_l",
+      "anatomicalName": "Posterior belly of digastric muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1276
+    },
+    {
+      "name": "anatomy_posterior_belly_of_digastric_muscle_r",
+      "anatomicalName": "Posterior belly of digastric muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1276
+    },
+    {
+      "name": "anatomy_posterior_segment_of_eyeball_l",
+      "anatomicalName": "Posterior segment of eyeball.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 832
+    },
+    {
+      "name": "anatomy_posterior_segment_of_eyeball_r",
+      "anatomicalName": "Posterior segment of eyeball.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 832
+    },
+    {
+      "name": "anatomy_proximal_phalanx_of_fifth_finger_of_foot_r",
+      "anatomicalName": "Proximal phalanx of fifth finger of foot.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 516
+    },
+    {
+      "name": "anatomy_proximal_phalanx_of_fifth_finger_of_hand_l",
+      "anatomicalName": "Proximal phalanx of fifth finger of hand.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 560
+    },
+    {
+      "name": "anatomy_proximal_phalanx_of_fifth_finger_of_hand_r",
+      "anatomicalName": "Proximal phalanx of fifth finger of hand.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 560
+    },
+    {
+      "name": "anatomy_proximal_phalanx_of_first_finger_of_foot_l",
+      "anatomicalName": "Proximal phalanx of first finger of foot.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 517
+    },
+    {
+      "name": "anatomy_proximal_phalanx_of_first_finger_of_foot_r",
+      "anatomicalName": "Proximal phalanx of first finger of foot.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 517
+    },
+    {
+      "name": "anatomy_proximal_phalanx_of_first_finger_of_hand_l",
+      "anatomicalName": "Proximal phalanx of first finger of hand.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 328
+    },
+    {
+      "name": "anatomy_proximal_phalanx_of_first_finger_of_hand_r",
+      "anatomicalName": "Proximal phalanx of first finger of hand.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 328
+    },
+    {
+      "name": "anatomy_proximal_phalanx_of_fourth_finger_of_foot_l",
+      "anatomicalName": "Proximal phalanx of fourth finger of foot.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 460
+    },
+    {
+      "name": "anatomy_proximal_phalanx_of_fourth_finger_of_foot_r",
+      "anatomicalName": "Proximal phalanx of fourth finger of foot.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 460
+    },
+    {
+      "name": "anatomy_proximal_phalanx_of_fourth_finger_of_hand_l",
+      "anatomicalName": "Proximal phalanx of fourth finger of hand.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 368
+    },
+    {
+      "name": "anatomy_proximal_phalanx_of_fourth_finger_of_hand_r",
+      "anatomicalName": "Proximal phalanx of fourth finger of hand.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 368
+    },
+    {
+      "name": "anatomy_proximal_phalanx_of_second_finger_of_foot_l",
+      "anatomicalName": "Proximal phalanx of second finger of foot.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 424
+    },
+    {
+      "name": "anatomy_proximal_phalanx_of_second_finger_of_foot_r",
+      "anatomicalName": "Proximal phalanx of second finger of foot.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 424
+    },
+    {
+      "name": "anatomy_proximal_phalanx_of_second_finger_of_hand_l",
+      "anatomicalName": "Proximal phalanx of second finger of hand.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 414
+    },
+    {
+      "name": "anatomy_proximal_phalanx_of_second_finger_of_hand_r",
+      "anatomicalName": "Proximal phalanx of second finger of hand.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 414
+    },
+    {
+      "name": "anatomy_proximal_phalanx_of_third_finger_of_foot_l",
+      "anatomicalName": "Proximal phalanx of third finger of foot.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 458
+    },
+    {
+      "name": "anatomy_proximal_phalanx_of_third_finger_of_foot_r",
+      "anatomicalName": "Proximal phalanx of third finger of foot.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 458
+    },
+    {
+      "name": "anatomy_proximal_phalanx_of_third_finger_of_hand_l",
+      "anatomicalName": "Proximal phalanx of third finger of hand.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 439
+    },
+    {
+      "name": "anatomy_proximal_phalanx_of_third_finger_of_hand_r",
+      "anatomicalName": "Proximal phalanx of third finger of hand.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 439
+    },
+    {
+      "name": "anatomy_radius_l",
+      "anatomicalName": "Radius.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 719
+    },
+    {
+      "name": "anatomy_radius_r",
+      "anatomicalName": "Radius.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 719
+    },
+    {
+      "name": "anatomy_rectus_anterior_capitis_muscle_l",
+      "anatomicalName": "Rectus anterior capitis muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 396
+    },
+    {
+      "name": "anatomy_rectus_anterior_capitis_muscle_r",
+      "anatomicalName": "Rectus anterior capitis muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 396
+    },
+    {
+      "name": "anatomy_rectus_lateralis_capitis_muscle_l",
+      "anatomicalName": "Rectus lateralis capitis muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 360
+    },
+    {
+      "name": "anatomy_rectus_lateralis_capitis_muscle_r",
+      "anatomicalName": "Rectus lateralis capitis muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 360
+    },
+    {
+      "name": "anatomy_sacrum",
+      "anatomicalName": "Sacrum",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 8522
+    },
+    {
+      "name": "anatomy_scaphoid_bone_l",
+      "anatomicalName": "Scaphoid bone.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 390
+    },
+    {
+      "name": "anatomy_scapula_l",
+      "anatomicalName": "Scapula.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 25255
+    },
+    {
+      "name": "anatomy_scapula_r",
+      "anatomicalName": "Scapula.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 25255
+    },
+    {
+      "name": "anatomy_scapular_spinal_part_of_deltoid_muscle_l",
+      "anatomicalName": "Scapular spinal part of deltoid muscle.l",
+      "muscle": "rear-shoulders",
+      "tissue": "muscle",
+      "sourceFaces": 4378
+    },
+    {
+      "name": "anatomy_scapular_spinal_part_of_deltoid_muscle_r",
+      "anatomicalName": "Scapular spinal part of deltoid muscle.r",
+      "muscle": "rear-shoulders",
+      "tissue": "muscle",
+      "sourceFaces": 4378
+    },
+    {
+      "name": "anatomy_second_metacarpal_bone_l",
+      "anatomicalName": "Second metacarpal bone.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 764
+    },
+    {
+      "name": "anatomy_second_metacarpal_bone_r",
+      "anatomicalName": "Second metacarpal bone.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 764
+    },
+    {
+      "name": "anatomy_second_metatarsal_bone_l",
+      "anatomicalName": "Second metatarsal bone.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 690
+    },
+    {
+      "name": "anatomy_second_rib_l",
+      "anatomicalName": "Second rib.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 5354
+    },
+    {
+      "name": "anatomy_semispinalis_thoracis_muscle_l",
+      "anatomicalName": "Semispinalis thoracis muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 4972
+    },
+    {
+      "name": "anatomy_sesamoid_bones_of_foot_l",
+      "anatomicalName": "Sesamoid bones of foot.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 290
+    },
+    {
+      "name": "anatomy_seventh_rib_l",
+      "anatomicalName": "Seventh rib.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 9741
+    },
+    {
+      "name": "anatomy_seventh_rib_r",
+      "anatomicalName": "Seventh rib.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 9741
+    },
+    {
+      "name": "anatomy_sinus_of_frontal_bone",
+      "anatomicalName": "Sinus of frontal bone",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 752
+    },
+    {
+      "name": "anatomy_sinus_of_sphenoid_bone",
+      "anatomicalName": "Sinus of sphenoid bone",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 384
+    },
+    {
+      "name": "anatomy_sixth_rib_l",
+      "anatomicalName": "Sixth rib.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 10092
+    },
+    {
+      "name": "anatomy_sixth_rib_r",
+      "anatomicalName": "Sixth rib.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 10092
+    },
+    {
+      "name": "anatomy_spinalis_capitis_muscle_l",
+      "anatomicalName": "Spinalis capitis muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 2560
+    },
+    {
+      "name": "anatomy_spinalis_capitis_muscle_r",
+      "anatomicalName": "Spinalis capitis muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 2560
+    },
+    {
+      "name": "anatomy_spinalis_colli_muscle_l",
+      "anatomicalName": "Spinalis colli muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 596
+    },
+    {
+      "name": "anatomy_spinalis_colli_muscle_r",
+      "anatomicalName": "Spinalis colli muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 596
+    },
+    {
+      "name": "anatomy_spinalis_thoracis_muscle_l",
+      "anatomicalName": "Spinalis thoracis muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 5532
+    },
+    {
+      "name": "anatomy_spinalis_thoracis_muscle_r",
+      "anatomicalName": "Spinalis thoracis muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 5532
+    },
+    {
+      "name": "anatomy_splenius_capitis_muscle_l",
+      "anatomicalName": "Splenius capitis muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 5262
+    },
+    {
+      "name": "anatomy_splenius_capitis_muscle_r",
+      "anatomicalName": "Splenius capitis muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 5262
+    },
+    {
+      "name": "anatomy_splenius_colli_muscle_l",
+      "anatomicalName": "Splenius colli muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 4314
+    },
+    {
+      "name": "anatomy_splenius_colli_muscle_r",
+      "anatomicalName": "Splenius colli muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 4314
+    },
+    {
+      "name": "anatomy_stapes_l",
+      "anatomicalName": "Stapes.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 2180
+    },
+    {
+      "name": "anatomy_stapes_r",
+      "anatomicalName": "Stapes.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 2180
+    },
+    {
+      "name": "anatomy_sternocleidomastoid_muscle_l",
+      "anatomicalName": "Sternocleidomastoid muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 4952
+    },
+    {
+      "name": "anatomy_sternocleidomastoid_muscle_r",
+      "anatomicalName": "Sternocleidomastoid muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 4952
+    },
+    {
+      "name": "anatomy_sternocostal_head_of_pectoralis_major_muscle_l",
+      "anatomicalName": "Sternocostal head of pectoralis major muscle.l",
+      "muscle": "chest",
+      "tissue": "muscle",
+      "sourceFaces": 3217
+    },
+    {
+      "name": "anatomy_sternocostal_head_of_pectoralis_major_muscle_r",
+      "anatomicalName": "Sternocostal head of pectoralis major muscle.r",
+      "muscle": "chest",
+      "tissue": "muscle",
+      "sourceFaces": 3217
+    },
+    {
+      "name": "anatomy_sternohyoid_muscle_l",
+      "anatomicalName": "Sternohyoid muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1394
+    },
+    {
+      "name": "anatomy_sternohyoid_muscle_r",
+      "anatomicalName": "Sternohyoid muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1394
+    },
+    {
+      "name": "anatomy_sternothyroid_muscle_l",
+      "anatomicalName": "Sternothyroid muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1088
+    },
+    {
+      "name": "anatomy_sternothyroid_muscle_r",
+      "anatomicalName": "Sternothyroid muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1088
+    },
+    {
+      "name": "anatomy_straight_part_of_cricothyroid_muscle_l",
+      "anatomicalName": "Straight part of cricothyroid muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1180
+    },
+    {
+      "name": "anatomy_straight_part_of_cricothyroid_muscle_r",
+      "anatomicalName": "Straight part of cricothyroid muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1180
+    },
+    {
+      "name": "anatomy_stylohyoid_muscle_l",
+      "anatomicalName": "Stylohyoid muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 694
+    },
+    {
+      "name": "anatomy_stylohyoid_muscle_r",
+      "anatomicalName": "Stylohyoid muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 694
+    },
+    {
+      "name": "anatomy_stylopharyngeus_muscle_l",
+      "anatomicalName": "Stylopharyngeus muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 9478
+    },
+    {
+      "name": "anatomy_stylopharyngeus_muscle_r",
+      "anatomicalName": "Stylopharyngeus muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 9478
+    },
+    {
+      "name": "anatomy_subclavius_muscle_l",
+      "anatomicalName": "Subclavius muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 794
+    },
+    {
+      "name": "anatomy_subclavius_muscle_r",
+      "anatomicalName": "Subclavius muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 794
+    },
+    {
+      "name": "anatomy_subscapularis_muscle_l",
+      "anatomicalName": "Subscapularis muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 2954
+    },
+    {
+      "name": "anatomy_subscapularis_muscle_r",
+      "anatomicalName": "Subscapularis muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 2954
+    },
+    {
+      "name": "anatomy_superficial_head_of_flexor_pollicis_brevis_l",
+      "anatomicalName": "Superficial head of flexor pollicis brevis.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 276
+    },
+    {
+      "name": "anatomy_superficial_head_of_flexor_pollicis_brevis_r",
+      "anatomicalName": "Superficial head of flexor pollicis brevis.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 276
+    },
+    {
+      "name": "anatomy_superficial_head_of_pronator_teres_l",
+      "anatomicalName": "Superficial head of pronator teres.l",
+      "muscle": "forearms",
+      "tissue": "muscle",
+      "sourceFaces": 2546
+    },
+    {
+      "name": "anatomy_superficial_head_of_pronator_teres_r",
+      "anatomicalName": "Superficial head of pronator teres.r",
+      "muscle": "forearms",
+      "tissue": "muscle",
+      "sourceFaces": 2546
+    },
+    {
+      "name": "anatomy_superficial_part_of_masseter_l",
+      "anatomicalName": "Superficial part of masseter.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1402
+    },
+    {
+      "name": "anatomy_superficial_part_of_masseter_r",
+      "anatomicalName": "Superficial part of masseter.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1402
+    },
+    {
+      "name": "anatomy_superficial_transverse_metacarpal_ligament_l",
+      "anatomicalName": "Superficial transverse metacarpal ligament.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 33
+    },
+    {
+      "name": "anatomy_superficial_transverse_metacarpal_ligament_r",
+      "anatomicalName": "Superficial transverse metacarpal ligament.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 33
+    },
+    {
+      "name": "anatomy_superficial_transverse_metatarsal_ligament_l",
+      "anatomicalName": "Superficial transverse metatarsal ligament.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 55
+    },
+    {
+      "name": "anatomy_superficial_transverse_metatarsal_ligament_r",
+      "anatomicalName": "Superficial transverse metatarsal ligament.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 55
+    },
+    {
+      "name": "anatomy_superior_extensor_retinaculum_of_ankle_l",
+      "anatomicalName": "Superior extensor retinaculum of ankle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 50
+    },
+    {
+      "name": "anatomy_superior_extensor_retinaculum_of_ankle_r",
+      "anatomicalName": "Superior extensor retinaculum of ankle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 50
+    },
+    {
+      "name": "anatomy_superior_fibular_retinaculum_l",
+      "anatomicalName": "Superior fibular retinaculum.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 138
+    },
+    {
+      "name": "anatomy_superior_fibular_retinaculum_r",
+      "anatomicalName": "Superior fibular retinaculum.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 138
+    },
+    {
+      "name": "anatomy_superior_gemellus_muscle_l",
+      "anatomicalName": "Superior gemellus muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 404
+    },
+    {
+      "name": "anatomy_superior_gemellus_muscle_r",
+      "anatomicalName": "Superior gemellus muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 404
+    },
+    {
+      "name": "anatomy_superior_head_of_lateral_pterygoid_muscle_l",
+      "anatomicalName": "Superior head of lateral pterygoid muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 226
+    },
+    {
+      "name": "anatomy_superior_head_of_lateral_pterygoid_muscle_r",
+      "anatomicalName": "Superior head of lateral pterygoid muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 226
+    },
+    {
+      "name": "anatomy_superior_oblique_muscle_l",
+      "anatomicalName": "Superior oblique muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1750
+    },
+    {
+      "name": "anatomy_superior_oblique_muscle_r",
+      "anatomicalName": "Superior oblique muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1750
+    },
+    {
+      "name": "anatomy_superior_pharyngeal_constrictor_l",
+      "anatomicalName": "Superior pharyngeal constrictor.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 5334
+    },
+    {
+      "name": "anatomy_superior_pharyngeal_constrictor_r",
+      "anatomicalName": "Superior pharyngeal constrictor.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 5334
+    },
+    {
+      "name": "anatomy_superior_rectus_muscle_l",
+      "anatomicalName": "Superior rectus muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1284
+    },
+    {
+      "name": "anatomy_superior_rectus_muscle_r",
+      "anatomicalName": "Superior rectus muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1284
+    },
+    {
+      "name": "anatomy_superior_tarsus_l",
+      "anatomicalName": "Superior tarsus.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 178
+    },
+    {
+      "name": "anatomy_superior_tarsus_r",
+      "anatomicalName": "Superior tarsus.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 178
+    },
+    {
+      "name": "anatomy_supinator_l",
+      "anatomicalName": "Supinator.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 2754
+    },
+    {
+      "name": "anatomy_supinator_r",
+      "anatomicalName": "Supinator.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 2754
+    },
+    {
+      "name": "anatomy_supraspinatus_muscle_l",
+      "anatomicalName": "Supraspinatus muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1430
+    },
+    {
+      "name": "anatomy_supraspinatus_muscle_r",
+      "anatomicalName": "Supraspinatus muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1430
+    },
+    {
+      "name": "anatomy_talus_l",
+      "anatomicalName": "Talus.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1325
+    },
+    {
+      "name": "anatomy_talus_r",
+      "anatomicalName": "Talus.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1325
+    },
+    {
+      "name": "anatomy_temporal_bone_l",
+      "anatomicalName": "Temporal bone.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 14094
+    },
+    {
+      "name": "anatomy_temporal_bone_r",
+      "anatomicalName": "Temporal bone.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 14094
+    },
+    {
+      "name": "anatomy_temporalis_muscle_l",
+      "anatomicalName": "Temporalis muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 10260
+    },
+    {
+      "name": "anatomy_temporalis_muscle_r",
+      "anatomicalName": "Temporalis muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 10260
+    },
+    {
+      "name": "anatomy_temporoparietalis_muscle_l",
+      "anatomicalName": "Temporoparietalis muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 11972
+    },
+    {
+      "name": "anatomy_temporoparietalis_muscle_r",
+      "anatomicalName": "Temporoparietalis muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 11972
+    },
+    {
+      "name": "anatomy_tendinous_arch_of_levator_ani_l",
+      "anatomicalName": "Tendinous arch of levator ani.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 750
+    },
+    {
+      "name": "anatomy_tendinous_arch_of_levator_ani_r",
+      "anatomicalName": "Tendinous arch of levator ani.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 750
+    },
+    {
+      "name": "anatomy_tendon_of_extensor_digitorum_longus_l",
+      "anatomicalName": "Tendon of extensor digitorum longus.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 5184
+    },
+    {
+      "name": "anatomy_tendon_of_extensor_digitorum_longus_r",
+      "anatomicalName": "Tendon of extensor digitorum longus.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 5184
+    },
+    {
+      "name": "anatomy_tensor_fasciae_latae_l",
+      "anatomicalName": "Tensor fasciae latae.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1862
+    },
+    {
+      "name": "anatomy_tensor_fasciae_latae_r",
+      "anatomicalName": "Tensor fasciae latae.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1862
+    },
+    {
+      "name": "anatomy_tenth_rib_l",
+      "anatomicalName": "Tenth rib.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 7002
+    },
+    {
+      "name": "anatomy_tenth_rib_r",
+      "anatomicalName": "Tenth rib.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 7002
+    },
+    {
+      "name": "anatomy_teres_major_muscle_l",
+      "anatomicalName": "Teres major muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1154
+    },
+    {
+      "name": "anatomy_teres_major_muscle_r",
+      "anatomicalName": "Teres major muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1154
+    },
+    {
+      "name": "anatomy_teres_minor_muscle_l",
+      "anatomicalName": "Teres minor muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1522
+    },
+    {
+      "name": "anatomy_teres_minor_muscle_r",
+      "anatomicalName": "Teres minor muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1522
+    },
+    {
+      "name": "anatomy_third_metacarpal_bone_l",
+      "anatomicalName": "Third metacarpal bone.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 708
+    },
+    {
+      "name": "anatomy_third_metacarpal_bone_r",
+      "anatomicalName": "Third metacarpal bone.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 708
+    },
+    {
+      "name": "anatomy_third_metatarsal_bone_l",
+      "anatomicalName": "Third metatarsal bone.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 804
+    },
+    {
+      "name": "anatomy_third_metatarsal_bone_r",
+      "anatomicalName": "Third metatarsal bone.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 804
+    },
+    {
+      "name": "anatomy_third_rib_l",
+      "anatomicalName": "Third rib.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 6957
+    },
+    {
+      "name": "anatomy_third_rib_r",
+      "anatomicalName": "Third rib.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 6957
+    },
+    {
+      "name": "anatomy_thyro_epiglottic_part_of_thyro_arytenoid_muscle_l",
+      "anatomicalName": "Thyro-epiglottic part of thyro-arytenoid muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 3110
+    },
+    {
+      "name": "anatomy_thyro_epiglottic_part_of_thyro_arytenoid_muscle_r",
+      "anatomicalName": "Thyro-epiglottic part of thyro-arytenoid muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 3110
+    },
+    {
+      "name": "anatomy_thyrohyoid_muscle_l",
+      "anatomicalName": "Thyrohyoid muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 692
+    },
+    {
+      "name": "anatomy_thyrohyoid_muscle_r",
+      "anatomicalName": "Thyrohyoid muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 692
+    },
+    {
+      "name": "anatomy_thyroid_cartilage",
+      "anatomicalName": "Thyroid cartilage",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 4482
+    },
+    {
+      "name": "anatomy_tibia_l",
+      "anatomicalName": "Tibia.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1613
+    },
+    {
+      "name": "anatomy_tibia_r",
+      "anatomicalName": "Tibia.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1613
+    },
+    {
+      "name": "anatomy_tibialis_anterior_muscle_l",
+      "anatomicalName": "Tibialis anterior muscle.l",
+      "muscle": "tibialis",
+      "tissue": "muscle",
+      "sourceFaces": 3526
+    },
+    {
+      "name": "anatomy_tibialis_anterior_muscle_r",
+      "anatomicalName": "Tibialis anterior muscle.r",
+      "muscle": "tibialis",
+      "tissue": "muscle",
+      "sourceFaces": 3526
+    },
+    {
+      "name": "anatomy_tibialis_posterior_muscle_l",
+      "anatomicalName": "Tibialis posterior muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 5526
+    },
+    {
+      "name": "anatomy_tibialis_posterior_muscle_r",
+      "anatomicalName": "Tibialis posterior muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 5526
+    },
+    {
+      "name": "anatomy_transverse_arytenoid_muscle",
+      "anatomicalName": "Transverse arytenoid muscle",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1822
+    },
+    {
+      "name": "anatomy_transverse_head_of_adductor_hallucis_l",
+      "anatomicalName": "Transverse head of adductor hallucis.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 366
+    },
+    {
+      "name": "anatomy_transverse_head_of_adductor_hallucis_r",
+      "anatomicalName": "Transverse head of adductor hallucis.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 366
+    },
+    {
+      "name": "anatomy_transverse_head_of_adductor_pollicis_l",
+      "anatomicalName": "Transverse head of adductor pollicis.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1014
+    },
+    {
+      "name": "anatomy_transverse_head_of_adductor_pollicis_r",
+      "anatomicalName": "Transverse head of adductor pollicis.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1014
+    },
+    {
+      "name": "anatomy_transverse_part_of_trapezius_muscle_l",
+      "anatomicalName": "Transverse part of trapezius muscle.l",
+      "muscle": "traps-middle",
+      "tissue": "muscle",
+      "sourceFaces": 2992
+    },
+    {
+      "name": "anatomy_transverse_part_of_trapezius_muscle_r",
+      "anatomicalName": "Transverse part of trapezius muscle.r",
+      "muscle": "traps-middle",
+      "tissue": "muscle",
+      "sourceFaces": 2992
+    },
+    {
+      "name": "anatomy_transversus_abdominis_muscle_l",
+      "anatomicalName": "Transversus abdominis muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 34328
+    },
+    {
+      "name": "anatomy_transversus_abdominis_muscle_r",
+      "anatomicalName": "Transversus abdominis muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 34328
+    },
+    {
+      "name": "anatomy_transversus_thoracis_muscle_l",
+      "anatomicalName": "Transversus thoracis muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1670
+    },
+    {
+      "name": "anatomy_transversus_thoracis_muscle_r",
+      "anatomicalName": "Transversus thoracis muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 1670
+    },
+    {
+      "name": "anatomy_trapezium_bone_l",
+      "anatomicalName": "Trapezium bone.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 500
+    },
+    {
+      "name": "anatomy_trapezium_bone_r",
+      "anatomicalName": "Trapezium bone.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 500
+    },
+    {
+      "name": "anatomy_trapezoid_bone_l",
+      "anatomicalName": "Trapezoid bone.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 364
+    },
+    {
+      "name": "anatomy_trapezoid_bone_r",
+      "anatomicalName": "Trapezoid bone.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 364
+    },
+    {
+      "name": "anatomy_triquetrum_bone_l",
+      "anatomicalName": "Triquetrum bone.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 176
+    },
+    {
+      "name": "anatomy_triquetrum_bone_r",
+      "anatomicalName": "Triquetrum bone.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 176
+    },
+    {
+      "name": "anatomy_trochlea_of_superior_oblique_muscle_l",
+      "anatomicalName": "Trochlea of superior oblique muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 192
+    },
+    {
+      "name": "anatomy_trochlea_of_superior_oblique_muscle_r",
+      "anatomicalName": "Trochlea of superior oblique muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 192
+    },
+    {
+      "name": "anatomy_twelfth_rib_l",
+      "anatomicalName": "Twelfth rib.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 2995
+    },
+    {
+      "name": "anatomy_twelfth_rib_r",
+      "anatomicalName": "Twelfth rib.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 2995
+    },
+    {
+      "name": "anatomy_ulna_l",
+      "anatomicalName": "Ulna.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 875
+    },
+    {
+      "name": "anatomy_ulna_r",
+      "anatomicalName": "Ulna.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 875
+    },
+    {
+      "name": "anatomy_ulnar_head_of_extensor_carpi_ulnaris_l",
+      "anatomicalName": "Ulnar head of extensor carpi ulnaris.l",
+      "muscle": "forearms",
+      "tissue": "muscle",
+      "sourceFaces": 582
+    },
+    {
+      "name": "anatomy_ulnar_head_of_extensor_carpi_ulnaris_r",
+      "anatomicalName": "Ulnar head of extensor carpi ulnaris.r",
+      "muscle": "forearms",
+      "tissue": "muscle",
+      "sourceFaces": 582
+    },
+    {
+      "name": "anatomy_ulnar_head_of_flexor_carpi_ulnaris_l",
+      "anatomicalName": "Ulnar head of flexor carpi ulnaris.l",
+      "muscle": "forearms",
+      "tissue": "muscle",
+      "sourceFaces": 1466
+    },
+    {
+      "name": "anatomy_ulnar_head_of_flexor_carpi_ulnaris_r",
+      "anatomicalName": "Ulnar head of flexor carpi ulnaris.r",
+      "muscle": "forearms",
+      "tissue": "muscle",
+      "sourceFaces": 1466
+    },
+    {
+      "name": "anatomy_upper_canine_l",
+      "anatomicalName": "Upper canine.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1434
+    },
+    {
+      "name": "anatomy_upper_canine_r",
+      "anatomicalName": "Upper canine.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1434
+    },
+    {
+      "name": "anatomy_upper_first_molar_tooth_l",
+      "anatomicalName": "Upper first molar tooth.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 2168
+    },
+    {
+      "name": "anatomy_upper_first_molar_tooth_r",
+      "anatomicalName": "Upper first molar tooth.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 2168
+    },
+    {
+      "name": "anatomy_upper_first_premolar_l",
+      "anatomicalName": "Upper first premolar.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1651
+    },
+    {
+      "name": "anatomy_upper_first_premolar_r",
+      "anatomicalName": "Upper first premolar.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1651
+    },
+    {
+      "name": "anatomy_upper_lateral_incisor_l",
+      "anatomicalName": "Upper lateral incisor.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1412
+    },
+    {
+      "name": "anatomy_upper_lateral_incisor_r",
+      "anatomicalName": "Upper lateral incisor.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1412
+    },
+    {
+      "name": "anatomy_upper_medial_incisor_l",
+      "anatomicalName": "Upper medial incisor.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1368
+    },
+    {
+      "name": "anatomy_upper_medial_incisor_r",
+      "anatomicalName": "Upper medial incisor.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1368
+    },
+    {
+      "name": "anatomy_upper_second_molar_tooth_l",
+      "anatomicalName": "Upper second molar tooth.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1843
+    },
+    {
+      "name": "anatomy_upper_second_molar_tooth_r",
+      "anatomicalName": "Upper second molar tooth.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1843
+    },
+    {
+      "name": "anatomy_upper_second_premolar_l",
+      "anatomicalName": "Upper second premolar.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1511
+    },
+    {
+      "name": "anatomy_upper_second_premolar_r",
+      "anatomicalName": "Upper second premolar.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1511
+    },
+    {
+      "name": "anatomy_vastus_intermedius_muscle_l",
+      "anatomicalName": "Vastus intermedius muscle.l",
+      "muscle": "quads",
+      "tissue": "muscle",
+      "sourceFaces": 6164
+    },
+    {
+      "name": "anatomy_vastus_intermedius_muscle_r",
+      "anatomicalName": "Vastus intermedius muscle.r",
+      "muscle": "quads",
+      "tissue": "muscle",
+      "sourceFaces": 6164
+    },
+    {
+      "name": "anatomy_vastus_lateralis_muscle_l",
+      "anatomicalName": "Vastus lateralis muscle.l",
+      "muscle": "quads",
+      "tissue": "muscle",
+      "sourceFaces": 9356
+    },
+    {
+      "name": "anatomy_vastus_lateralis_muscle_r",
+      "anatomicalName": "Vastus lateralis muscle.r",
+      "muscle": "quads",
+      "tissue": "muscle",
+      "sourceFaces": 9356
+    },
+    {
+      "name": "anatomy_vastus_medialis_muscle_l",
+      "anatomicalName": "Vastus medialis muscle.l",
+      "muscle": "quads",
+      "tissue": "muscle",
+      "sourceFaces": 6460
+    },
+    {
+      "name": "anatomy_vastus_medialis_muscle_r",
+      "anatomicalName": "Vastus medialis muscle.r",
+      "muscle": "quads",
+      "tissue": "muscle",
+      "sourceFaces": 6460
+    },
+    {
+      "name": "anatomy_ventral_parts_of_lateral_intertransversarii_lumborum_muscles_l",
+      "anatomicalName": "Ventral parts of lateral intertransversarii lumborum muscles.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 996
+    },
+    {
+      "name": "anatomy_ventral_parts_of_lateral_intertransversarii_lumborum_muscles_r",
+      "anatomicalName": "Ventral parts of lateral intertransversarii lumborum muscles.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 996
+    },
+    {
+      "name": "anatomy_vertebra_c3",
+      "anatomicalName": "Vertebra C3",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 2374
+    },
+    {
+      "name": "anatomy_vertebra_c4",
+      "anatomicalName": "Vertebra C4",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1938
+    },
+    {
+      "name": "anatomy_vertebra_c5",
+      "anatomicalName": "Vertebra C5",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 2256
+    },
+    {
+      "name": "anatomy_vertebra_c6",
+      "anatomicalName": "Vertebra C6",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 2224
+    },
+    {
+      "name": "anatomy_vertebra_c7",
+      "anatomicalName": "Vertebra C7",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 2090
+    },
+    {
+      "name": "anatomy_vertebra_l1",
+      "anatomicalName": "Vertebra L1",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 3056
+    },
+    {
+      "name": "anatomy_vertebra_l2",
+      "anatomicalName": "Vertebra L2",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 2572
+    },
+    {
+      "name": "anatomy_vertebra_l3",
+      "anatomicalName": "Vertebra L3",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 3060
+    },
+    {
+      "name": "anatomy_vertebra_l4",
+      "anatomicalName": "Vertebra L4",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 3692
+    },
+    {
+      "name": "anatomy_vertebra_l5",
+      "anatomicalName": "Vertebra L5",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 3920
+    },
+    {
+      "name": "anatomy_vertebra_t1",
+      "anatomicalName": "Vertebra T1",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1946
+    },
+    {
+      "name": "anatomy_vertebra_t10",
+      "anatomicalName": "Vertebra T10",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 2953
+    },
+    {
+      "name": "anatomy_vertebra_t11",
+      "anatomicalName": "Vertebra T11",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1780
+    },
+    {
+      "name": "anatomy_vertebra_t12",
+      "anatomicalName": "Vertebra T12",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 2472
+    },
+    {
+      "name": "anatomy_vertebra_t2",
+      "anatomicalName": "Vertebra T2",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 2092
+    },
+    {
+      "name": "anatomy_vertebra_t3",
+      "anatomicalName": "Vertebra T3",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 2342
+    },
+    {
+      "name": "anatomy_vertebra_t4",
+      "anatomicalName": "Vertebra T4",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 2214
+    },
+    {
+      "name": "anatomy_vertebra_t5",
+      "anatomicalName": "Vertebra T5",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 2152
+    },
+    {
+      "name": "anatomy_vertebra_t6",
+      "anatomicalName": "Vertebra T6",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1774
+    },
+    {
+      "name": "anatomy_vertebra_t7",
+      "anatomicalName": "Vertebra T7",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 2646
+    },
+    {
+      "name": "anatomy_vertebra_t8",
+      "anatomicalName": "Vertebra T8",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1706
+    },
+    {
+      "name": "anatomy_vertebra_t9",
+      "anatomicalName": "Vertebra T9",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 2968
+    },
+    {
+      "name": "anatomy_vomer",
+      "anatomicalName": "Vomer",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 946
+    },
+    {
+      "name": "anatomy_xiphoid_process",
+      "anatomicalName": "Xiphoid process",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 914
+    },
+    {
+      "name": "anatomy_zygomatic_bone_l",
+      "anatomicalName": "Zygomatic bone.l",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1328
+    },
+    {
+      "name": "anatomy_zygomatic_bone_r",
+      "anatomicalName": "Zygomatic bone.r",
+      "muscle": null,
+      "tissue": "support",
+      "sourceFaces": 1328
+    },
+    {
+      "name": "anatomy_zygomaticus_major_muscle_l",
+      "anatomicalName": "Zygomaticus major muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 798
+    },
+    {
+      "name": "anatomy_zygomaticus_major_muscle_r",
+      "anatomicalName": "Zygomaticus major muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 798
+    },
+    {
+      "name": "anatomy_zygomaticus_minor_muscle_l",
+      "anatomicalName": "Zygomaticus minor muscle.l",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 432
+    },
+    {
+      "name": "anatomy_zygomaticus_minor_muscle_r",
+      "anatomicalName": "Zygomaticus minor muscle.r",
+      "muscle": null,
+      "tissue": "muscle",
+      "sourceFaces": 432
+    }
+  ],
   "form": {
-    "sourceSha256": "7032210a4e6c5d35c931f15feeaf4e6dcb4c1d30afb396c1660efb7b70f8d53e",
-    "sourceBytes": 7577664,
-    "bytes": 3070512,
-    "sourceTriangles": 90154,
-    "triangles": 211978,
+    "sourceRevision": "7be0bfc49409b45fda74bf86fc13086fad0f4df2",
+    "archiveSha256": "e029688545627bd0214b269e1063143abb580aad72b2c2445d6d8a9a0d9da736",
+    "archiveBytes": 86734957,
+    "sourceBytes": 56080272,
+    "bytes": 3545672,
+    "sourceTriangles": 2575595,
+    "triangles": 769483,
     "regionCount": 18,
-    "changes": "World transforms baked; centered at origin and normalized to 2 units tall; source surface preserved; annotation boundary triangles subdivided for smooth edges; partitioned by traced muscle contours with fascia and joints left neutral; Meshopt compressed."
+    "mappedMuscleParts": 114,
+    "meshes": 116,
+    "primitives": 218,
+    "renderMeshes": 218,
+    "blender": "4.5.9 LTS",
+    "height": 2,
+    "changes": "Muscles and supporting bones, cartilage, teeth and eye geometry selected. Nonselectable supporting structures combined; mapped muscle parts remain separate and named. Materials replaced, world scale centered to 2 units, geometry simplified with bounded error and locked borders, and Meshopt compressed. Inner-ear, kidney and other organ systems are excluded. A smooth, symmetrical whole-body deformation broadens the shoulder girdle and adds chest, upper-arm, thigh and calf volume. A relaxed A-pose opens the arms by 25 degrees and the legs by 10 degrees from the source stance. All tissues share the same deformation so muscle attachments and authored boundaries remain together. Head and foot shapes are preserved. This is a stylized fitness visualization, not a clinical anatomy reference."
+  },
+  "appearance": {
+    "version": 4,
+    "label": "Athletic anatomy",
+    "description": "A smooth, symmetrical whole-body deformation broadens the shoulder girdle and adds chest, upper-arm, thigh and calf volume. A relaxed A-pose opens the arms by 25 degrees and the legs by 10 degrees from the source stance. All tissues share the same deformation so muscle attachments and authored boundaries remain together. Head and foot shapes are preserved. This is a stylized fitness visualization, not a clinical anatomy reference."
   }
 }

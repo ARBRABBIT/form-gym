@@ -1,8 +1,21 @@
-Male Muscular Anatomy – 3D Model
-Author: dakarmirajendra (https://sketchfab.com/dakarmirajendra)
-Source: https://sketchfab.com/3d-models/male-muscular-anatomy-3d-model-627f19e053d44e60ad5e4274235b63cb
-License indicated by supplied GLB: SKETCHFAB Standard (https://sketchfab.com/licenses)
+Z-Anatomy workout anatomy
 
-User-supplied model. Original file is unchanged. Form bakes world transforms, normalizes scale, partitions triangles using manually traced muscle contours, and compresses the result with Meshopt. Regions illustrate exercise associations and are not precise muscle segmentation.
+Z-Anatomy - The libre 3D atlas of anatomy - CC-BY-SA 4.0
+BodyParts3D - The Database Center for Life Science - CC-BY-SA 2.1 Japan
 
-Source SHA-256: 7032210a4e6c5d35c931f15feeaf4e6dcb4c1d30afb396c1660efb7b70f8d53e
+Kousaku Okubo: original BodyParts3D model.
+Gauthier Kervyn: Z-Anatomy design, 3D and anatomy.
+Marcin Zielinski: Blender add-on.
+Lluis Vinent: Unity development.
+
+Source: https://github.com/Z-Anatomy/Models-of-human-anatomy
+Pinned revision: 7be0bfc49409b45fda74bf86fc13086fad0f4df2
+Archive SHA-256: e029688545627bd0214b269e1063143abb580aad72b2c2445d6d8a9a0d9da736
+
+Form modifications: Muscles and supporting bones, cartilage, teeth and eye geometry selected. Nonselectable supporting structures combined; mapped muscle parts remain separate and named. Materials replaced, world scale centered to 2 units, geometry simplified with bounded error and locked borders, and Meshopt compressed. Inner-ear, kidney and other organ systems are excluded.
+
+These model assets are distributed under CC BY-SA 4.0.
+https://creativecommons.org/licenses/by-sa/4.0/
+Full upstream attribution is preserved in UPSTREAM-LICENSE.txt.
+
+Athletic shape adaptation: A smooth, symmetrical whole-body deformation broadens the shoulder girdle and adds chest, upper-arm, thigh and calf volume. A relaxed A-pose opens the arms by 25 degrees and the legs by 10 degrees from the source stance. All tissues share the same deformation so muscle attachments and authored boundaries remain together. Head and foot shapes are preserved. This is a stylized fitness visualization, not a clinical anatomy reference.

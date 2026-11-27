@@ -69,7 +69,7 @@
   .blood-card-plot { margin: 3px -4px 0; }
 }
 
-.blood-card-digits { font-family: var(--font-matricha), monospace; font-weight: 400; letter-spacing: -1px; }
+.blood-card-digits { font-family: var(--font-roboto-condensed), var(--font-urbanist), sans-serif; font-weight: 400; letter-spacing: -1px; }
 @container (max-width: 220px) {
   .blood-card-reading-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 }

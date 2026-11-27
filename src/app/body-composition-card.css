@@ -1,0 +1,68 @@
+.body-composition-card {
+  position: relative;
+  overflow: hidden;
+  min-width: 0;
+  padding: 17px 24px;
+  border: 1px solid rgb(255 255 255 / 90%);
+  border-radius: 28px;
+  color: #624b55;
+  background: radial-gradient(ellipse at 5% 0%, #fae9da, transparent 78%), radial-gradient(ellipse at 100% 110%, #e8bfc9, transparent 78%), linear-gradient(135deg, #f4d5c5, #f2dfd7 55%, #ecd0d7);
+  box-shadow: inset 0 0 10px 3px rgb(255 255 255 / 90%), inset 0 0 30px 7px rgb(255 250 242 / 40%);
+}
+.body-composition-card::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .12; mix-blend-mode: soft-light; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath filter='url(%23n)' d='M0 0h160v160H0z'/%3E%3C/svg%3E"); }
+.body-composition-card > header { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.body-composition-card h3 { font-size: 17px; font-weight: 500; letter-spacing: -.35px; }
+.composition-scan-date { display: flex; flex-direction: column; align-items: flex-end; justify-content: center; gap: 3px; flex-shrink: 0; min-height: 44px; padding: 2px 0 2px 8px; color: #79616a; font-size: 10px; line-height: 1.4; text-align: right; }
+.composition-scan-date > span { font-size: 9px; opacity: .8; }
+.composition-card-trigger { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; border: 0; border-radius: inherit; background: transparent; cursor: pointer; }
+.composition-card-trigger:focus-visible { outline: 2px solid #936571; outline-offset: -4px; }
+.composition-overview { display: grid; grid-template-columns: .9fr 1.7fr; align-items: end; gap: 22px; margin: 14px 0 3px; }
+.composition-primary > span,.composition-secondary dt { font-size: 9px; color: #79616a; line-height: 1.4; }
+.composition-primary p { display: flex; align-items: baseline; gap: 5px; margin: 8px 0 0; line-height: 1; }
+.composition-primary strong { font-size: 28px; font-weight: 400; }
+.composition-primary small { font-size: 11px; }
+.composition-digits { font-family: var(--font-roboto-condensed), var(--font-urbanist), sans-serif; }
+.composition-secondary { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; min-width: 0; margin: 0; }
+.composition-secondary > div { min-width: 0; padding-left: 16px; }
+.composition-secondary dd { display: flex; align-items: baseline; gap: 5px; margin: 8px 0 0; line-height: 1; }
+.composition-secondary .composition-digits { font-size: 18px; }
+.composition-secondary small { font-size: 10px; color: #79616a; }
+.composition-detail-readings small { font-size: 12px; color: #617383; }
+.composition-distribution { position: relative; padding: 8px 0; margin-top: 10px; }
+.composition-distribution::before { content: ""; position: absolute; inset: 0 -7px; border-radius: 13px; background: linear-gradient(180deg,rgb(153 106 124 / 5%),rgb(255 250 245 / 16%)); box-shadow: inset 0 1px 2px rgb(118 78 94 / 5%),inset 0 -1px 1px rgb(255 255 255 / 45%); pointer-events: none; }
+.composition-meter-track { position: relative; height: 21px; background: rgb(147 102 119 / 19%); mask-image: radial-gradient(circle at center,#000 1.45px,transparent 1.7px); mask-size: calc(100% / 48) 7px; mask-repeat: repeat; }
+.composition-meter-track > span { display: block; height: 100%; width: var(--composition-fat); background: linear-gradient(110deg,#91617b,#ad7689 70%,#c68f94); }
+.composition-empty { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; padding-top: 14px; }
+.composition-empty p { font-size: 20px; line-height: 1.35; }
+.composition-empty > span { font-size: 13px; color: #79616a; line-height: 1.7; max-width: 440px; }
+.composition-empty .btn { border: 1px solid rgb(255 255 255 / 60%); background: rgb(255 255 255 / 35%); color: #624b55; }
+.composition-sheet { background: radial-gradient(ellipse at 0% 0%, #ece5f1, transparent 75%), linear-gradient(145deg, #f3f5f8, #dcebe7); color: #344557; border: 1px solid #fff; box-shadow: inset 0 0 10px 3px rgb(255 255 255 / 80%); }
+.sheet.composition-sheet > header { background: transparent; border-bottom-color: rgb(255 255 255 / 45%); }
+.composition-sheet-source { font-size: 12px; color: #647487; margin: 0 0 20px; }
+.composition-detail-readings { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 0 20px; margin-bottom: 20px; }
+.composition-detail-readings > div { padding: 15px 0; border-bottom: 1px solid rgb(255 255 255 / 85%); }
+.composition-detail-readings dt { font-size: 12px; color: #647487; }
+.composition-detail-readings dd { display: flex; align-items: baseline; gap: 6px; margin: 8px 0 0; }
+.composition-detail-readings .composition-digits { font-size: 32px; }
+.composition-note { color: #647487; font-size: 12px; line-height: 1.7; margin: 0 0 18px; }
+.composition-sheet .btn.primary { border: 1px solid #fff; background: linear-gradient(135deg,#67708b,#3b676e); color: #fff; }
+@media (max-width: 760px) {
+  .body-composition-card { padding: 13px 18px; border-radius: 24px; }
+  .body-composition-card h3 { font-size: 16px; }
+  .composition-overview { gap: 14px; margin-top: 12px; }
+  .composition-primary strong { font-size: 24px; }
+  .composition-secondary { gap: 10px; }
+  .composition-secondary > div { padding-left: 12px; }
+  .composition-secondary .composition-digits { font-size: 16px; }
+  .composition-primary > span,.composition-secondary dt { font-size: 9px; }
+  .composition-secondary small { font-size: 9px; }
+}
+@media (max-width: 375px) {
+  .body-composition-card { padding-inline: 15px; }
+  .composition-overview { gap: 10px; grid-template-columns: .85fr 1.8fr; }
+  .composition-primary strong { font-size: 23px; }
+  .composition-secondary { gap: 8px; }
+  .composition-secondary > div { padding-left: 8px; }
+  .composition-secondary .composition-digits { font-size: 15px; }
+  .composition-secondary dd { gap: 3px; }
+}

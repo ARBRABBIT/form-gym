@@ -44,6 +44,9 @@ test("glass mobile navbar switches labeled tabs and retains the separate add act
       await expect(button).toHaveAttribute("aria-current", "page");
       await expect(button.locator('.bottom-nav-label')).toBeVisible();
       await expect(nav.locator('.bottom-nav-tabs > .selected')).toHaveCount(1);
+      await expect(button.locator('svg')).toHaveAttribute('data-icon-variant', 'solid');
+      await expect(button.locator('svg')).toHaveAttribute('fill', 'currentColor');
+      await expect(nav.locator('.bottom-nav-tabs > button:not(.selected) svg[data-icon-variant="outline"]')).toHaveCount(3);
     }
     const bounds = (await nav.boundingBox())!;
     expect(bounds.x).toBeGreaterThanOrEqual(0);
@@ -59,6 +62,7 @@ test("glass mobile navbar switches labeled tabs and retains the separate add act
   await expect(page).toHaveURL(/#profile$/);
   await expect(page.getByRole("heading", { name: "My profile", exact: true })).toBeVisible();
   await expect(nav.getByRole("button", { name: "Profile", exact: true })).toHaveAttribute("aria-current", "page");
+  await expect(nav.getByRole("button", { name: "Profile", exact: true }).locator('svg')).toHaveAttribute('data-icon-variant', 'solid');
   await page.getByRole("button", { name: "Open navigation", exact: true }).click();
   await page.getByRole("button", { name: "Close menu", exact: true }).click();
   await nav.getByRole("button", { name: "Open water tracker", exact: true }).click();
@@ -67,6 +71,7 @@ test("glass mobile navbar switches labeled tabs and retains the separate add act
   await page.getByRole("button", { name: "Back to journal", exact: true }).click();
   await page.getByRole("tab", { name: "Trainer view" }).click();
   await expect(nav.getByRole("button")).toHaveCount(3);
+  await expect(nav.getByRole("button", { name: "Members", exact: true }).locator('svg')).toHaveAttribute('data-icon-variant', 'solid');
   await nav.getByRole("button", { name: "Open water tracker", exact: true }).click();
   await expect(page).toHaveURL(/#water$/);
   await page.getByRole("button", { name: "Back to journal", exact: true }).click();

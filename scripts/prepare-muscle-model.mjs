@@ -1,113 +1,95 @@
-/** Import the supplied anatomy mesh and derive approximate workout regions.
- * The source is a single welded surface: these are traced surface annotations, not
- * separately authored anatomical muscles. The source geometry is preserved.
+/** Rebuild the workout model from the pinned Z-Anatomy Blender atlas.
+ * BLENDER_BIN=/path/to/blender npm run prepare:anatomy
+ * npm run prepare:anatomy -- --reuse-export  (reuse this source's cached export)
+ * Blender is a build-time conversion tool; the app serves the prepared GLB.
  */
-import { NodeIO, Document } from '@gltf-transform/core';
+import { NodeIO } from '@gltf-transform/core';
 import { ALL_EXTENSIONS } from '@gltf-transform/extensions';
-import { meshopt } from '@gltf-transform/functions';
-import { MeshoptEncoder } from 'meshoptimizer';
-import * as THREE from 'three';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { readFile, writeFile } from 'node:fs/promises';
+import { dedup, getBounds, meshopt, prune, simplify, weld } from '@gltf-transform/functions';
+import { MeshoptDecoder, MeshoptEncoder, MeshoptSimplifier } from 'meshoptimizer';
+import { readFile, writeFile, mkdir, access } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
-import { regionAt, sectionKey } from './anatomy-contours.mjs';
+import { execFile } from 'node:child_process';
+import { promisify } from 'node:util';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { applyAthleticBuild, athleticBuild } from './athletic-anatomy.mjs';
 
-if (!process.argv[2]) throw new Error('Usage: npm run prepare:anatomy -- /path/to/male_muscular_anatomy__3d_model.glb');
-const input = await readFile(process.argv[2]);
-const sourceSha256 = createHash('sha256').update(input).digest('hex');
-if (sourceSha256 !== '7032210a4e6c5d35c931f15feeaf4e6dcb4c1d30afb396c1660efb7b70f8d53e') {
-  throw new Error('These contours are traced for the supplied male muscular anatomy GLB. A different model requires its own contours or named muscle meshes.');
-}
-const gltf = await new GLTFLoader().parseAsync(input.buffer.slice(input.byteOffset, input.byteOffset + input.byteLength), '');
-gltf.scene.updateMatrixWorld(true);
-const bounds = new THREE.Box3().setFromObject(gltf.scene);
-const center = bounds.getCenter(new THREE.Vector3());
-const scale = 2 / bounds.getSize(new THREE.Vector3()).y;
-
-const regions = new Map(), trianglesToMap = [], depths = new Map();
-const vertex = new THREE.Vector3(), normal = new THREE.Vector3();
-let triangles = 0;
-gltf.scene.traverse(object => {
-  if (!object.isMesh) return;
-  const geometry = object.geometry, position = geometry.getAttribute('position');
-  const normals = geometry.getAttribute('normal'), index = geometry.index;
-  const normalMatrix = new THREE.Matrix3().getNormalMatrix(object.matrixWorld);
-  for (let i = 0; i < (index?.count ?? position.count); i += 3) {
-    const positions = [], directions = [];
-    for (let j = 0; j < 3; j++) {
-      const n = index ? index.getX(i + j) : i + j;
-      vertex.fromBufferAttribute(position, n).applyMatrix4(object.matrixWorld).sub(center).multiplyScalar(scale);
-      positions.push(vertex.x, vertex.y, vertex.z);
-      normal.fromBufferAttribute(normals, n).applyNormalMatrix(normalMatrix);
-      directions.push(normal.x, normal.y, normal.z);
-    }
-    trianglesToMap.push({ positions, directions });
-    for (let j = 0; j < 9; j += 3) {
-      const key = sectionKey(positions[j], positions[j+1]);
-      const range = depths.get(key) ?? [Infinity, -Infinity];
-      range[0] = Math.min(range[0], positions[j+2]);
-      range[1] = Math.max(range[1], positions[j+2]);
-      depths.set(key, range);
-    }
-    triangles++;
-  }
-});
-function label(point) {
-  const [x, y, z] = point;
-  const range = depths.get(sectionKey(x, y));
-  return regionAt(x, y, z, range ? (range[0]+range[1])/2 : 0);
-}
-const midpoint = (a, b) => a.map((value, i) => (value+b[i])/2);
-let mappedTriangles = 0;
-function partition(points, normals, depth = 0) {
-  const center = points[0].map((value, i) => (value+points[1][i]+points[2][i])/3);
-  const muscle = label(center);
-  const edge = Math.max(...points.map((point, i) => Math.hypot(...point.map((value,j)=>value-points[(i+1)%3][j]))));
-  // Refine only annotation boundaries. Interpolated points stay on the source
-  // triangle: no bulging, overlapping overlay, or floating highlight geometry.
-  if (depth < 3 && edge > .0025 && points.some(point => label(point) !== muscle)) {
-    const ab = midpoint(points[0], points[1]), bc = midpoint(points[1], points[2]), ca = midpoint(points[2], points[0]);
-    const nab = midpoint(normals[0], normals[1]), nbc = midpoint(normals[1], normals[2]), nca = midpoint(normals[2], normals[0]);
-    partition([points[0], ab, ca], [normals[0], nab, nca], depth+1);
-    partition([ab, points[1], bc], [nab, normals[1], nbc], depth+1);
-    partition([ca, bc, points[2]], [nca, nbc, normals[2]], depth+1);
-    partition([ab, bc, ca], [nab, nbc, nca], depth+1);
-    return;
-  }
-  if (!regions.has(muscle)) regions.set(muscle, { positions: [], normals: [] });
-  const region = regions.get(muscle);
-  points.forEach(point => region.positions.push(...point));
-  normals.forEach(direction => {
-    const length = Math.hypot(...direction);
-    region.normals.push(...direction.map(value => value/length));
-  });
-  mappedTriangles++;
-}
-for (const { positions, directions } of trianglesToMap) {
-  partition([positions.slice(0,3), positions.slice(3,6), positions.slice(6,9)], [directions.slice(0,3), directions.slice(3,6), directions.slice(6,9)]);
-}
-const document = new Document(), buffer = document.createBuffer(), scene = document.createScene('Supplied muscular anatomy');
-const material = document.createMaterial('Muscle surface').setBaseColorFactor([.7, .73, .72, 1]).setRoughnessFactor(.6).setDoubleSided(true);
-for (const [name, data] of regions) {
-  const primitive = document.createPrimitive().setAttribute('POSITION', document.createAccessor().setType('VEC3').setArray(new Float32Array(data.positions)).setBuffer(buffer)).setAttribute('NORMAL', document.createAccessor().setType('VEC3').setArray(new Float32Array(data.normals)).setBuffer(buffer)).setMaterial(material);
-  scene.addChild(document.createNode(name).setMesh(document.createMesh(name).addPrimitive(primitive)));
-}
-const source = gltf.asset.extras ?? {};
-document.getRoot().getAsset().extras = { ...source, form: 'Normalized and partitioned using traced surface contours for workout illustration.' };
-await MeshoptEncoder.ready;
-const io = new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({ 'meshopt.encoder': MeshoptEncoder });
-await document.transform(meshopt({ encoder: MeshoptEncoder, level: 'high' }));
-const output = await io.writeBinary(document);
+const revision = '7be0bfc49409b45fda74bf86fc13086fad0f4df2';
+const archiveSha256 = 'e029688545627bd0214b269e1063143abb580aad72b2c2445d6d8a9a0d9da736';
+const sourceUrl = `https://raw.githubusercontent.com/Z-Anatomy/Models-of-human-anatomy/${revision}/Z-Anatomy.zip`;
+const upstreamUrl = `https://raw.githubusercontent.com/Z-Anatomy/Models-of-human-anatomy/${revision}/License.txt`;
+const cache = process.env.FORM_ANATOMY_CACHE || join(tmpdir(), 'form-z-anatomy');
 const root = new URL('../public/anatomy/', import.meta.url);
-await writeFile(new URL('male.glb', root), output);
+const run = promisify(execFile);
+const sha256 = bytes => createHash('sha256').update(bytes).digest('hex');
+await mkdir(cache, { recursive: true });
+const archivePath = join(cache, 'Z-Anatomy.zip');
+try { await access(archivePath); }
+catch {
+  const response = await fetch(sourceUrl);
+  if (!response.ok) throw new Error(`Z-Anatomy download failed: ${response.status}`);
+  await writeFile(archivePath, new Uint8Array(await response.arrayBuffer()));
+}
+const archive = await readFile(archivePath);
+if (sha256(archive) !== archiveSha256) throw new Error('Source archive checksum mismatch.');
+const sourcePath = join(cache, 'workout-source.glb');
+const metadataPath = join(cache, 'export-metadata.json');
+if (!process.argv.includes('--reuse-export')) {
+  await run('unzip', ['-oq', archivePath, 'Z-Anatomy/Startup.blend', '-d', join(cache, 'atlas')]);
+  const blender = process.env.BLENDER_BIN || 'blender';
+  const { stdout } = await run(blender, ['--background', '--factory-startup', '--disable-autoexec', '--python-exit-code', '1', join(cache, 'atlas/Z-Anatomy/Startup.blend'), '--python', fileURLToPath(new URL('./export-z-anatomy.py', import.meta.url)), '--', sourcePath, metadataPath], { maxBuffer: 8 * 1024 * 1024 });
+  console.log(stdout.split('\n').filter(line => /MAPPED_PARTS|SOURCE_OBJECTS|EXPORTED_BYTES/.test(line)).join('\n'));
+}
+const metadata = JSON.parse(await readFile(metadataPath, 'utf8'));
+const source = new Uint8Array(await readFile(sourcePath));
+await Promise.all([MeshoptDecoder.ready, MeshoptEncoder.ready, MeshoptSimplifier.ready]);
+const io = new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({ 'meshopt.decoder': MeshoptDecoder, 'meshopt.encoder': MeshoptEncoder });
+const document = await io.readBinary(source);
+const scene = document.getRoot().getDefaultScene();
+if (!scene) throw new Error('Missing anatomy scene.');
+const bounds = getBounds(scene);
+const height = bounds.max[1] - bounds.min[1];
+if (!Number.isFinite(height) || height <= 0) throw new Error('Invalid anatomy bounds.');
+const scale = 2 / height;
+const parent = document.createNode('workout_anatomy').setScale([scale, scale, scale]).setTranslation(bounds.min.map((value, index) => -(value+bounds.max[index])/2*scale));
+for (const child of scene.listChildren()) { scene.removeChild(child); parent.addChild(child); }
+scene.addChild(parent);
+const triangleCount = () => document.getRoot().listMeshes().reduce((total, mesh) => total + mesh.listPrimitives().reduce((sum, primitive) => sum + (primitive.getIndices()?.getCount() ?? primitive.getAttribute('POSITION').getCount())/3, 0), 0);
+document.getRoot().getAsset().copyright = 'Z-Anatomy / Gauthier Kervyn; BodyParts3D / DBCLS / Kousaku Okubo. Model assets: CC BY-SA 4.0.';
+const sourceTriangles = triangleCount();
+await document.transform(dedup(), weld(), simplify({ simplifier: MeshoptSimplifier, ratio: .28, error: .002, lockBorder: true }), prune());
+await applyAthleticBuild(document);
+await document.transform(dedup(), prune(), meshopt({ encoder: MeshoptEncoder, level: 'high' }));
+const output = await io.writeBinary(document);
+const objects = metadata.objects;
+const regions = Object.keys(metadata.groups).map(muscle => ({ muscle, meshNames: objects.filter(object => object.muscle === muscle).map(object => object.name), anatomicalNames: objects.filter(object => object.muscle === muscle).map(object => object.anatomicalName) }));
+const namedNodes = new Set(document.getRoot().listNodes().map(node => node.getName()));
+for (const region of regions) for (const name of region.meshNames) {
+  if (!namedNodes.has(name)) throw new Error(`Named muscle lost during optimization: ${name}`);
+}
 const manifest = {
-  model: { url: '/anatomy/male.glb', title: source.title, author: source.author, source: source.source, license: source.license },
-  mapping: 'Manually traced bilateral muscle contours on a single continuous surface, with local limb depth. Surface annotations are not artist-authored anatomical segmentation.',
-  regions: [...regions.keys()].filter(name => name !== 'neutral').map(muscle => ({ muscle, meshNames: [muscle] })),
-  form: { sourceSha256, sourceBytes: input.length, bytes: output.length, sourceTriangles: triangles, triangles: mappedTriangles, regionCount: regions.size - 1, changes: 'World transforms baked; centered at origin and normalized to 2 units tall; source surface preserved; annotation boundary triangles subdivided for smooth edges; partitioned by traced muscle contours with fascia and joints left neutral; Meshopt compressed.' },
+  model: { url: '/anatomy/male.glb', title: 'Athletic workout anatomy · Z-Anatomy', author: 'Gauthier Kervyn / Z-Anatomy; Kousaku Okubo / BodyParts3D', source: 'https://github.com/Z-Anatomy/Models-of-human-anatomy', license: 'CC BY-SA 4.0' },
+  appearance: athleticBuild,
+  mapping: 'Named, authored muscle-part meshes grouped by anatomical name. No position masks or projected region cuts. Muscle and tendon materials remain separate.',
+  regions,
+  anatomy: objects,
+  form: { sourceRevision: revision, archiveSha256, archiveBytes: archive.length, sourceBytes: source.length, bytes: output.length, sourceTriangles, triangles: triangleCount(), regionCount: regions.length, mappedMuscleParts: regions.reduce((count, region) => count+region.meshNames.length, 0), meshes: document.getRoot().listMeshes().length, primitives: document.getRoot().listMeshes().reduce((count, mesh) => count+mesh.listPrimitives().length, 0), renderMeshes: document.getRoot().listNodes().reduce((count, node) => count+(node.getMesh()?.listPrimitives().length ?? 0), 0), blender: metadata.blender, height: 2, changes: 'Muscles and supporting bones, cartilage, teeth and eye geometry selected. Nonselectable supporting structures combined; mapped muscle parts remain separate and named. Materials replaced, world scale centered to 2 units, geometry simplified with bounded error and locked borders, and Meshopt compressed. Inner-ear, kidney and other organ systems are excluded. '+athleticBuild.description },
 };
-await writeFile(new URL('manifest.json', root), JSON.stringify(manifest, null, 2) + '\n');
-await writeFile(new URL('NOTICE.txt', root), `${source.title}\nAuthor: ${source.author}\nSource: ${source.source}\nLicense indicated by supplied GLB: ${source.license}\n\nUser-supplied model. Original file is unchanged. Form bakes world transforms, normalizes scale, partitions triangles using manually traced muscle contours, and compresses the result with Meshopt. Regions illustrate exercise associations and are not precise muscle segmentation.\n\nSource SHA-256: ${manifest.form.sourceSha256}\n`);
-await writeFile(new URL('LICENSE.txt', root), `License indicated in the user-supplied model metadata:\n${source.license}\n\nAuthor: ${source.author}\nSource: ${source.source}\n\nSee NOTICE.txt for Form's processing details.\n`);
-await writeFile(new URL('FORM-NOTICE.txt', root), `Form workout muscle viewer\n\nActive model: ${source.title}\nSource SHA-256: ${manifest.form.sourceSha256}\n\n${manifest.mapping}\n${manifest.form.changes}\n\nPrimary muscles are green; assisting muscles are lighter green. Planned focus is previewed before any sets are recorded; completed sets determine the map after recording begins. Planned previews never count as completed sets.\nSee NOTICE.txt and LICENSE.txt for the supplied model attribution.\n`);
+let upstreamLicense;
+try { upstreamLicense = await readFile(join(cache, 'UPSTREAM-LICENSE.txt'), 'utf8'); }
+catch {
+  const response = await fetch(upstreamUrl);
+  if (!response.ok) throw new Error('Could not obtain upstream attribution notice.');
+  upstreamLicense = await response.text();
+  await writeFile(join(cache, 'UPSTREAM-LICENSE.txt'), upstreamLicense);
+}
+await mkdir(root, { recursive: true });
+await writeFile(new URL('male.glb', root), output);
+await writeFile(new URL('manifest.json', root), JSON.stringify(manifest, null, 2)+'\n');
+await writeFile(new URL('UPSTREAM-LICENSE.txt', root), upstreamLicense);
+await writeFile(new URL('LICENSE.txt', root), 'Z-Anatomy-derived workout model assets\n\nCreative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0).\nhttps://creativecommons.org/licenses/by-sa/4.0/\n\nAttribution and modification notices must accompany redistributed model assets. Adapted model assets retain the same license. See NOTICE.txt and UPSTREAM-LICENSE.txt.\n');
+await writeFile(new URL('NOTICE.txt', root), `Z-Anatomy workout anatomy\n\nZ-Anatomy - The libre 3D atlas of anatomy - CC-BY-SA 4.0\nBodyParts3D - The Database Center for Life Science - CC-BY-SA 2.1 Japan\n\nKousaku Okubo: original BodyParts3D model.\nGauthier Kervyn: Z-Anatomy design, 3D and anatomy.\nMarcin Zielinski: Blender add-on.\nLluis Vinent: Unity development.\n\nSource: ${manifest.model.source}\nPinned revision: ${revision}\nArchive SHA-256: ${archiveSha256}\n\nForm modifications: ${manifest.form.changes}\n\nThese model assets are distributed under CC BY-SA 4.0.\nhttps://creativecommons.org/licenses/by-sa/4.0/\nFull upstream attribution is preserved in UPSTREAM-LICENSE.txt.\n`);
+await writeFile(new URL('FORM-NOTICE.txt', root), `Form workout muscle viewer\n\n${manifest.mapping}\n${manifest.form.changes}\n\nPrimary muscles are green; assisting muscles are lighter green. Planned focus is previewed before any sets are recorded; recorded sets determine the map after training begins. Highlights describe exercise associations, not measured muscle activation or recovery.\n\nRebuild: BLENDER_BIN=/path/to/blender npm run prepare:anatomy\nBlender is only needed to rebuild the model, not to run or deploy the app.\nSee NOTICE.txt, LICENSE.txt and UPSTREAM-LICENSE.txt for source terms.\n`);
 console.log(JSON.stringify(manifest.form));
