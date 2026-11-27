@@ -1,0 +1,1 @@
+export default function Loading(){return <div className="studio-flows workflow-loading" role="status"><span className="workflow-wordmark">form.</span><h1>Opening your journal…</h1><p>Your daily practice is on its way.</p></div>;}
