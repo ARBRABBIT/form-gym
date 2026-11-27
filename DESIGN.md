@@ -475,3 +475,9 @@ glass popover contains Delete text. Monthly totals use 48px Roboto Condensed
 with the existing small Urbanist caption. Reserve 28px above the habit input
 and total row so both sit below the top-right menu without overlap. Delete opens the existing confirmation sheet
 with the habit name, Cancel and Delete habit. Cancellation preserves all data.
+
+
+Local account mode keeps the existing account form and glass styling. Its
+supporting text explicitly says accounts and journals are saved in this browser
+only and removed when browser data is cleared. Sharing copy describes same-browser
+accounts; save status and footer must not claim cross-device synchronization.

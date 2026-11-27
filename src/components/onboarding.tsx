@@ -1,4 +1,5 @@
 "use client";
+import { LOCAL_ACCOUNTS } from "@/lib/local-journal-api";
 
 import { useLayoutEffect, useRef, useState } from "react";
 import {
@@ -252,8 +253,9 @@ export function AccountEntry({
             </Button>
           </form>
           <p className="account-demo-note">
-            Create an account to save your journal across devices. Sample access
-            below stays separate from your saved records.
+            {LOCAL_ACCOUNTS
+              ? "Your account and journal are saved only in this browser. Clearing browser data removes them. Sample access stays separate."
+              : "Create an account to save your journal across devices. Sample access below stays separate from your saved records."}
           </p>
           <button className="text-link" onClick={() => onDemo(accountRole)}>
             Explore the sample journal <ArrowRight size={15} />

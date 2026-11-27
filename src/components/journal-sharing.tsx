@@ -1,4 +1,5 @@
 "use client";
+import { journalFetch, LOCAL_ACCOUNTS } from "@/lib/local-journal-api";
 import { useEffect, useState } from "react";
 import { Button, Field, Section } from "./ui";
 export default function JournalSharing() {
@@ -7,7 +8,7 @@ export default function JournalSharing() {
     [message, setMessage] = useState(""),
     [busy, setBusy] = useState(false);
   const load = () =>
-    fetch("/api/members", { cache: "no-store" })
+    journalFetch("/api/members", { cache: "no-store" })
       .then((r) => r.json())
       .then((b) => setTrainers(b.trainers || []));
   useEffect(() => {
@@ -16,8 +17,9 @@ export default function JournalSharing() {
   return (
     <Section title="Your trainer">
       <p className="section-description">
-        Share your health, journal, food and workouts with your trainer. Both of
-        you can edit your journal; saved changes appear in both accounts.
+        {LOCAL_ACCOUNTS
+          ? "Link a trainer account saved in this browser. Sharing stays on this device and does not sync across devices."
+          : "Share your health, journal, food and workouts with your trainer. Both of you can edit your journal; saved changes appear in both accounts."}
       </p>
       {trainers.map((t) => (
         <div className="sharing-row" key={t.id}>
@@ -25,7 +27,7 @@ export default function JournalSharing() {
           <Button
             variant="ghost"
             onClick={async () => {
-              const r = await fetch("/api/members", {
+              const r = await journalFetch("/api/members", {
                 method: "DELETE",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ trainerId: t.id }),
@@ -45,7 +47,7 @@ export default function JournalSharing() {
           e.preventDefault();
           setBusy(true);
           try {
-            const r = await fetch("/api/members", {
+            const r = await journalFetch("/api/members", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({ code }),

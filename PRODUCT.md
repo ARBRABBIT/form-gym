@@ -46,3 +46,14 @@ Journal and account data must not be stored in browser storage. Real accounts an
 The user explicitly expanded scope to real accounts and cross-device synchronization. The former session-only restriction now applies to sample access only. Real member/trainer accounts persist in server SQLite under FORM_DATA_DIR. Members explicitly share/revoke access with trainer codes; linked trainers and members edit the same journal with conflict checks and revision history. Do not populate real accounts with sample records. The trainer workspace reuses member health charts, composition, measurement comparisons, nutrition, water and journal forms. Assignments and submitted actuals remain separate linked records. Live WHOOP credentials belong to the signed-in owner, and trainers can query only linked members. A persistent Node server/volume and HTTPS are required for production; deployment, email verification and password recovery remain separate work.
 
 The trainer/member parity work is explicitly mobile-only per the user: optimize the phone workflow and one-handed access. Member details use a fixed bottom section menu with short labels, a persistent member name/date, compact context, and 46–48px actions. Avoid new desktop-specific product work.
+
+
+## Temporary local storage mode — 27 November 2026
+
+At the user's explicit request, account and journal storage now defaults to the
+browser, including on Vercel. This supersedes the earlier browser-storage ban
+for this temporary mode. Passwords use salted PBKDF2 hashes; local profiles are
+a browser prototype, not a server authentication boundary. Journals persist in
+localStorage; the active login is scoped to sessionStorage. No cross-device
+synchronization is claimed. NEXT_PUBLIC_ACCOUNT_MODE=server retains the previous
+persistent Node/SQLite backend for a compatible host.

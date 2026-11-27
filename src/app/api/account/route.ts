@@ -22,14 +22,14 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   if (!sameOrigin(request))
     return json({ error: "Invalid request origin." }, 403);
-  if (
-    !throttle(
-      `auth:${request.headers.get("x-forwarded-for")?.split(",")[0] || "local"}`,
-      50,
-    )
-  )
-    return json({ error: "Too many attempts. Try again in 15 minutes." }, 429);
   try {
+    if (
+      !throttle(
+        `auth:${request.headers.get("x-forwarded-for")?.split(",")[0] || "local"}`,
+        50,
+      )
+    )
+      return json({ error: "Too many attempts. Try again in 15 minutes." }, 429);
     const {
       email: rawEmail,
       password,

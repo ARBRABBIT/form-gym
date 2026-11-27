@@ -1,4 +1,5 @@
 "use client";
+import { journalFetch, LOCAL_ACCOUNTS } from "@/lib/local-journal-api";
 import {
   useCallback,
   useEffect,
@@ -140,7 +141,7 @@ export default function TrainerWorkspace(
     if (!p.account) return;
     let active = true;
     const load = () =>
-      fetch("/api/members", { cache: "no-store" })
+      journalFetch("/api/members", { cache: "no-store" })
         .then(async (r) => {
           const b = await r.json();
           if (!r.ok) throw new Error(b.error);
@@ -410,7 +411,7 @@ export default function TrainerWorkspace(
       {view === "overview" && (
         <p className="trainer-session-note">
           {p.account
-            ? "Shared journal · changes save automatically"
+            ? (LOCAL_ACCOUNTS ? "Saved in this browser only" : "Shared journal · changes save automatically")
             : "Sample journal · shared within this session"}
         </p>
       )}

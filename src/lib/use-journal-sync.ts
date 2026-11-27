@@ -1,4 +1,5 @@
 "use client";
+import { journalFetch, LOCAL_ACCOUNTS } from "@/lib/local-journal-api";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Store } from "./model";
 const pendingSaves = new Set<() => Promise<boolean>>();
@@ -59,7 +60,7 @@ export function useJournalSync(id?: string, enabled = true) {
                   after: snapshot[key as keyof Store] ?? null,
                 }))
             : [];
-        const response = await fetch(
+        const response = await journalFetch(
           endpoint,
           changes.length
             ? {
@@ -111,8 +112,8 @@ export function useJournalSync(id?: string, enabled = true) {
           encoded(current.current) !== encoded(base.current)
             ? "Saving changes…"
             : changes.length
-              ? "All changes saved"
-              : "Up to date",
+              ? (LOCAL_ACCOUNTS ? "Saved in this browser" : "All changes saved")
+              : (LOCAL_ACCOUNTS ? "Saved in this browser" : "Up to date"),
         );
       } catch (error) {
         if (active) {

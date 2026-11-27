@@ -1,4 +1,5 @@
 "use client";
+import { journalFetch, LOCAL_ACCOUNTS } from "@/lib/local-journal-api";
 import {
   useCallback,
   useEffect,
@@ -124,7 +125,7 @@ export default function JournalApp() {
   const sync = useJournalSync(account?.id, !!account);
   const data = account ? sync.data : demoData;
   useEffect(() => {
-    fetch("/api/account", { cache: "no-store" })
+    journalFetch("/api/account", { cache: "no-store" })
       .then((r) => r.json())
       .then((body) => {
         if (body.account) {
@@ -379,13 +380,13 @@ export default function JournalApp() {
           window.scrollTo({ top: 0, behavior: "instant" });
         }}
         onEnter={async (email, name, signup, password, role) => {
-          const response = await fetch("/api/account", {
+          const response = await journalFetch("/api/account", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, name, signup, password, role }),
           });
-          const body = await response.json();
-          if (!response.ok) throw new Error(body.error);
+          const body = await response.json().catch(() => null);
+          if (!response.ok || !body?.account) throw new Error(body?.error || "Unable to open your account. Please try again.");
           setAccount(body.account);
           setSignedIn(true);
           setDemoMode(false);
@@ -424,7 +425,7 @@ export default function JournalApp() {
       return;
     }
     if (account) {
-      const response = await fetch("/api/account", { method: "DELETE" });
+      const response = await journalFetch("/api/account", { method: "DELETE" });
       if (!response.ok) {
         setToast("Unable to log out. Try again.");
         return;
@@ -675,7 +676,7 @@ export default function JournalApp() {
                 <span className="status-dot" />
                 {account
                   ? trainer
-                    ? "Saved member journals"
+                    ? (LOCAL_ACCOUNTS ? "Saved in this browser" : "Saved member journals")
                     : sync.status
                   : "Sample session"}
               </span>
@@ -761,7 +762,7 @@ export default function JournalApp() {
               <span>Training, nutrition & the work between.</span>
               <span className="demo-note">
                 {account
-                  ? "Saved journal · shared edits sync automatically"
+                  ? (LOCAL_ACCOUNTS ? "Saved in this browser only · no cross-device sync" : "Saved journal · shared edits sync automatically")
                   : "Sample data · session only"}
               </span>
             </footer>
