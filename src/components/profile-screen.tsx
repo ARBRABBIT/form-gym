@@ -7,6 +7,8 @@ import { ArrowUpRight, Bell, BookOpen, Check, Flag, Scale, Settings2, ShieldChec
 import { Button, Field, PageHeading, Section, Sheet } from "./ui";
 import WearableConnect from "./wearable-connect";
 import { MorningReminders } from "./health-checkins";
+import {useUnsavedGuard} from "./workflow-ui";
+import {MeasurementSharing} from "./member-studio";
 
 const goals = ["Lose weight", "Maintain weight", "Gain weight"];
 
@@ -19,8 +21,10 @@ export default function ProfileScreen({ data, update, navigate, onSignOut }: Scr
   const latestWeight = [...data.weights].filter(entry => entry.date <= TODAY && Number(entry.weight) > 0).sort((a, b) => b.date.localeCompare(a.date))[0]?.weight || data.profile["Starting weight (kg)"];
   const workouts = Object.keys(data.logs).filter(key => key.startsWith("alex:") && key.slice(5) <= TODAY).length;
   const close = () => setDialog(null);
+  const unsavedProfile=useUnsavedGuard(dialog === "edit" && JSON.stringify(draft)!==JSON.stringify(data.profile));
 
   return <div className="profile-page">
+    {unsavedProfile}
     <PageHeading title="My profile" description="Your details, goals, and connected services." back={() => navigate("overview")} />
     <section className="profile-hero" aria-label="Your profile">
       <div className="profile-cover" aria-hidden="true" />
@@ -38,6 +42,17 @@ export default function ProfileScreen({ data, update, navigate, onSignOut }: Scr
       </dl>
     </section>
 
+    <Section title="Your studio">
+      <div className="studio-flows workflow-actions">
+        <button className="workflow-secondary" onClick={()=>navigate("membership")}>Membership & receipts</button>
+        <button className="workflow-secondary" onClick={()=>navigate("classes")}>Classes & bookings</button>
+        <button className="workflow-secondary" onClick={()=>navigate("attendance")}>Studio pass</button>
+        <button className="workflow-secondary" onClick={()=>navigate("meal-plan")}>Nutrition plan & sharing</button>
+        <button className="workflow-secondary" onClick={()=>navigate("feedback")}>Coach feedback</button>
+        <button className="workflow-secondary" onClick={()=>navigate("inbox")}>Notifications</button>
+      </div>
+    </Section>
+    <MeasurementSharing data={data} update={update} navigate={navigate} date={TODAY} setDate={()=>{}}/>
     <div className="profile-sections">
       <div>
         <Section title="Your practice" className="profile-practice">

@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, type ReactNode } from "react";
+import {requestWorkflowNavigation} from "@/lib/workflow-navigation";
 import { X, ArrowLeft, ArrowUpRight, Plus } from "./icons";
 import gsap from "gsap";
 import { createPortal } from "react-dom";
@@ -176,16 +177,19 @@ export function Sheet({
   children,
   onClose,
   className = "",
+  guardUnsaved = true,
 }: {
   title: string;
   children: ReactNode;
   onClose: () => void;
   className?: string;
+  guardUnsaved?: boolean;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef(onClose);
-  closeRef.current = onClose;
+  const requestClose=()=>guardUnsaved?requestWorkflowNavigation(onClose):onClose();
+  closeRef.current = requestClose;
   useModalViewport(ref, true);
   useEffect(() => {
     const prev = document.activeElement as HTMLElement;
@@ -201,6 +205,8 @@ export function Sheet({
         );
     }, ref);
     const key = (e: KeyboardEvent) => {
+      const stack=document.querySelectorAll('.sheet-backdrop');
+      if(stack[stack.length-1]!==ref.current)return;
       if (e.key === "Escape") {
         e.preventDefault();
         e.stopPropagation();
@@ -232,11 +238,11 @@ export function Sheet({
       ctx.revert();
       restoreBackground();
       document.removeEventListener("keydown", key);
-      prev?.focus({ preventScroll: true });
+      if(prev?.isConnected&&!prev.closest("[inert]"))prev.focus({ preventScroll: true });
     };
   }, []);
   return createPortal(
-    <div className="sheet-backdrop" ref={ref} tabIndex={-1} onClick={onClose}>
+    <div className="sheet-backdrop" ref={ref} tabIndex={-1} onClick={requestClose}>
       <div
         ref={dialogRef}
         tabIndex={-1}
@@ -249,7 +255,7 @@ export function Sheet({
         <div className="sheet-handle" />
         <header>
           <h2>{title}</h2>
-          <button aria-label="Close" className="icon-button" onClick={onClose}>
+          <button aria-label="Close" className="icon-button" onClick={requestClose}>
             <X size={20} />
           </button>
         </header>

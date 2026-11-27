@@ -1,3 +1,4 @@
+import type { MemberWorkspaceState } from "./studio-workflows";
 import type { BodyCompositionScan } from "./body-composition";
 
 export type SetCompletions = Record<string, boolean[]>;
@@ -105,6 +106,7 @@ export type WorkoutTemplate = {
 };
 export type SmartBottleProvider = "hidratespark-pro-2" | "larq-purevis-2" | "other";
 export type Store = {
+  studio?: MemberWorkspaceState;
   sampleData?: boolean;
   onboarded: boolean;
   account?: { email: string };

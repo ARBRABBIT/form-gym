@@ -1,4 +1,5 @@
 "use client";
+import {workspace} from "./member-studio";
 import { useState, useEffect } from "react";
 import {
   ArrowLeft,
@@ -803,7 +804,7 @@ export function NutritionScreen(p: ScreenProps) {
         </div>
         <div className="goal-comparison">
           <strong>Vs. Goal</strong>
-          <span>Target unavailable</span>
+          <span>{workspace(data).nutritionPlans.alex ? `${totals.calories} / ${workspace(data).nutritionPlans.alex.calories} kcal · ${totals.protein} / ${workspace(data).nutritionPlans.alex.protein} g protein` : "Target unavailable"}</span>
         </div>
       </Section>
       <Section title="Your daily check-in">

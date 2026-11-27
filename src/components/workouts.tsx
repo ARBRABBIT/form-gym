@@ -46,6 +46,9 @@ import {
 import WorkoutTemplatePicker from "./workout-template-picker";
 import { playFeedback, cancelFeedback } from "@/lib/interaction-feedback";
 import WorkoutMuscleModel from "./workout-muscle-model";
+import {NutritionPlanEditor,CoachingThread,workspace} from "./member-studio";
+import {useUnsavedGuard} from "./workflow-ui";
+import {requestWorkflowNavigation} from "@/lib/workflow-navigation";
 function newActual(plan?: Workout): Workout {
   return {
     ...emptyWorkout(),
@@ -79,6 +82,7 @@ export function WorkoutScreen(p: ScreenProps) {
   useEffect(() => {
     setDraft(saved ? structuredClone(saved) : newActual(plan));
   }, [date, saved]);
+  const unsavedWorkout=useUnsavedGuard(JSON.stringify(draft)!==JSON.stringify(saved??newActual(plan)));
   const toggleSet = (
     exerciseId: string,
     setIndex: number,
@@ -125,6 +129,7 @@ export function WorkoutScreen(p: ScreenProps) {
   };
   return (
     <>
+      {unsavedWorkout}
       <PageHeading
         title="Your workout"
         description="Review your coach’s plan and record your session."
@@ -135,7 +140,7 @@ export function WorkoutScreen(p: ScreenProps) {
           label="Workout date"
           type="date"
           value={date}
-          onChange={(v) => v && setDate(v)}
+          onChange={(v) => v && requestWorkflowNavigation(()=>setDate(v))}
         />
         <div className="segmented">
           <button
@@ -308,6 +313,7 @@ export function Trainer(p: ScreenProps) {
   const memberDates = Array.from(
     new Set([...memberPlanLogDates, ...memberNutritionDates, TODAY]),
   ).sort();
+  const unsavedTrainer=useUnsavedGuard(editing && JSON.stringify(draft)!==JSON.stringify(plan??emptyWorkout()));
   const beginEdit = () => {
     setDraft(plan ? structuredClone(plan) : emptyWorkout());
     setEditing(true);
@@ -434,6 +440,7 @@ export function Trainer(p: ScreenProps) {
     );
   return (
     <>
+      {unsavedTrainer}
       <button
         className="back-link"
         onClick={() => {
@@ -644,6 +651,10 @@ export function Trainer(p: ScreenProps) {
           update={update}
         />
       )}
+      <div className="studio-flows">
+        <NutritionPlanEditor key={`nutrition-${selected}`} {...p} date={date} memberId={selected} memberName={selected === "alex" ? data.profile.Name : member?.name || "Member"}/>
+        <CoachingThread key={`feedback-${selected}-${date}`} {...p} date={date} memberId={selected} memberName={selected === "alex" ? data.profile.Name : member?.name || "Member"} trainer/>
+      </div>
     </>
   );
 }
@@ -667,6 +678,8 @@ function TrainerNutritionView({
     (memberId === "alex" ? data.nutrition[date] : undefined) ||
     emptyNutrition();
   const totals = totalNutrition(n);
+  if(!workspace(data).mealSharing?.[memberId]) return <Section title="Meal entries are private"><p className="section-description">This member has not enabled sharing of detailed meal entries with their coach. Assigned nutrition targets can still be managed below.</p>{workspace(data).sharing[memberId]&&<p className="section-description">Shared daily totals: {totals.calories} kcal · {totals.protein} g protein.</p>}</Section>;
+
   const nutrients = ["calories", "protein", "carbs", "fat"] as const;
   const hasItems = Object.values(n.meals || {}).some(
     (items) => items && items.length > 0,

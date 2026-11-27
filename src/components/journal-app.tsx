@@ -8,6 +8,7 @@ import {
 } from "react";
 import {
   Activity,
+  Bell,
   ArrowUpRight,
   BookOpen,
   CalendarDays,
@@ -60,6 +61,9 @@ import MobileNavIcon from "./mobile-nav-icon";
 import WaterScreen from "./water-screen";
 import NavGlassOptics from "./nav-glass-optics";
 import ProfileScreen from "./profile-screen";
+import MemberStudio, {workspace} from "./member-studio";
+import {requestWorkflowNavigation} from "@/lib/workflow-navigation";
+import TrainerWorkspace from "./trainer-workspace";
 export type ScreenProps = {
   data: Store;
   update: (fn: (s: Store) => Store, message?: string) => void;
@@ -70,6 +74,12 @@ export type ScreenProps = {
 const nav = [
   { id: "overview", label: "Overview", icon: House },
   { id: "profile", label: "My profile", icon: User },
+  { id: "membership", label: "My membership", icon: ShieldCheck },
+  { id: "classes", label: "Classes & bookings", icon: CalendarDays },
+  { id: "attendance", label: "Studio pass & visits", icon: CheckCheck },
+  { id: "meal-plan", label: "My nutrition plan", icon: Leaf },
+  { id: "feedback", label: "Coach feedback", icon: Users },
+  { id: "inbox", label: "Notifications", icon: Bell },
   { id: "workout", label: "My workouts", icon: Dumbbell },
   { id: "library", label: "Workout library", icon: LibraryBig },
   { id: "nutrition", label: "Nutrition & wellness", icon: Leaf },
@@ -139,7 +149,7 @@ export default function JournalApp() {
       if (retiredHealthView) history.replaceState(null, "", "#overview");
       setView(v);
       setRole(
-        v === "trainer" || v === "trainer-library" ? "trainer" : "member",
+        v === "trainer" || v.startsWith("trainer-") ? "trainer" : "member",
       );
     };
     hash();
@@ -215,6 +225,7 @@ export default function JournalApp() {
     return () => ctx.revert();
   }, [view, role, !!data, signedIn, demoMode]);
   const navigate = useCallback((v: string) => {
+    requestWorkflowNavigation(()=>{
     setView(v);
     location.hash = v;
     setMenu(false);
@@ -225,6 +236,7 @@ export default function JournalApp() {
         inputMode.current === "keyboard"
           ? "instant"
           : "smooth",
+    });
     });
   }, []);
   useLayoutEffect(() => {
@@ -331,10 +343,9 @@ export default function JournalApp() {
       </>
     );
   const trainer = role === "trainer";
-  const switchRole = (r: string) => {
-    setRole(r);
-    navigate(r === "trainer" ? "trainer" : "overview");
-  };
+  const switchRole = (r: string) => requestWorkflowNavigation(()=>{
+    setRole(r);setView(r === "trainer" ? "trainer" : "overview");location.hash=r === "trainer" ? "trainer" : "overview";setMenu(false);
+  });
   const healthSection = view.startsWith("health-") && ["body", "blood", "lung"].includes(view.slice(7)) ? view.slice(7) as HealthSection : undefined;
   const active = nav.find((n) => n.id === view);
   const render = () => {
@@ -347,6 +358,9 @@ export default function JournalApp() {
     if (healthSection) return <HealthOverview {...props} detail={healthSection} />;
     if (view === "library" || view === "trainer-library")
       return <WorkoutLibrary {...props} />;
+    if (view === "trainer-nutrition") return <TrainerWorkspace {...props} mode="nutrition"/>;
+    if (view === "trainer-feedback") return <TrainerWorkspace {...props} mode="feedback"/>;
+    if (["membership","classes","attendance","meal-plan","feedback","inbox"].includes(view)) return <MemberStudio {...props} view={view}/>;
     if (trainer) return <Trainer {...props} />;
     switch (view) {
       case "planner":
@@ -407,6 +421,8 @@ export default function JournalApp() {
             {(trainer
               ? [
                   { id: "trainer", label: "My members", icon: Users },
+                  { id: "trainer-nutrition", label: "Nutrition planning", icon: Leaf },
+                  { id: "trainer-feedback", label: "Coaching inbox", icon: Users },
                   {
                     id: "trainer-library",
                     label: "Workout library",
@@ -493,6 +509,7 @@ export default function JournalApp() {
               </strong>
             </div>
             <div className="topbar-right">
+              {!trainer&&<button className="icon-button" aria-label="Open notifications" onClick={()=>navigate("inbox")}><Bell size={19}/>{workspace(data).notifications.some(n=>!n.read)&&<span className="workflow-notification-dot"/>}</button>}
               <span className="saved-state">
                 <span className="status-dot" />
                 Current session only
